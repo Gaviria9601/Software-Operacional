@@ -1,0 +1,107 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="/templates/templateContenido.xhtml">
+
+	<ui:define name="cuerpo">
+		<h:form prependId="false">
+
+			<h2 class="title-style-1">
+				Ingresar areas de la empresa<span class="title-under"></span>
+			</h2>
+
+			<p:panel id="basic" header="Datos" style="margin-bottom:20px"
+				toggleable="true" toggleSpeed="500">
+				<p:panelGrid id="paneldatos" columns="6" cellpadding="5"
+					styleClass="ui-noborder">
+
+					
+					<p:outputLabel for="tfcedula" id="lblCedula" value="Cedula:" />
+					<p:inputText id="tfcedula" value="#{pacienteControlador.cedula}" />
+					<p:message for="tfcedula" />
+					
+					
+					<p:outputLabel for="tfnombre" id="lblnombre" value="Nombre:" />
+					<p:inputText id="tfnombre" value="#{pacienteControlador.nombre}" />
+					<p:message for="tfnombre" />
+
+					<p:outputLabel for="tfapellido" id="lblapellido" value="Apellido:" />
+					<p:inputText id="tfapellido" value="#{pacienteControlador.apellido}" />
+					<p:message for="tfapellido" />
+
+					<p:outputLabel for="tfcorreo" id="lblcorreo" value="Correo:" />
+					<p:inputText id="tfcorreo" value="#{pacienteControlador.correo}" />
+					<p:message for="tfcorreo" />
+
+					<p:outputLabel for="tftel" id="lbltel" value="Telefono:" />
+					<p:inputText id="tftel" value="#{pacienteControlador.telefono}" 
+					  />
+					<p:message for="tftel" />
+
+					<p:outputLabel for="tfedad" id="lbledad" value="Edad:" />
+					<p:inputMask id="tfedad" value="#{pacienteControlador.edad}" 
+					 mask="99"/>
+					<p:message for="tfedad" />
+
+					<p:outputLabel for="tfnickname" id="lblnick" value="Nickname:" />
+					<p:inputText id="tfnickname" value="#{pacienteControlador.nickname}" />
+					<p:message for="tfnickname" />
+
+					<p:outputLabel for="tfcontra" id="lblcontra" value="Contraseña:" />
+					<p:inputText id="tfcontra" value="#{pacienteControlador.contrasenia}" />
+					<p:message for="tfcontra" />
+					
+					
+					<p:outputLabel for="estrato" id="lblestrato"
+						value="Estrato:" />
+					<h:selectOneMenu id="estrato"
+						value="#{pacienteControlador.estrato}">
+						
+						<f:selectItems value="#{pacienteControlador.tipos}"
+						     var="es">
+						</f:selectItems>
+					</h:selectOneMenu>
+					<p:message for="estrato" />
+
+					<p:outputLabel for="afiliacion" id="lblAfiliacion"
+						value="Afiliacion:" />
+
+					<h:selectOneMenu id="afiliacion"
+						value="#{pacienteControlador.afiliacionCodigo}">
+						<f:selectItems value="#{pacienteControlador.listaafiliaciones}"
+							var="afi" itemValue="#{afi.codigo}" itemLabel="#{afi.nombre}">
+						</f:selectItems>
+					</h:selectOneMenu>
+					<p:message for="afiliacion" />
+					
+					<p:outputLabel for="tftra" id="tftrab" value="Ocupación:" />
+					<p:inputText id="tftra" value="#{pacienteControlador.trabajo}" />
+					<p:message for="tftra" />
+					
+					
+				</p:panelGrid>
+			</p:panel>
+			<p:panel id="botones" header="Acciones" style="margin-bottom:20px"
+				toggleable="true" toggleSpeed="500">
+				<p:panelGrid id="panelbotones" columns="3" styleClass="ui-noborder">
+
+					<p:commandButton id="btncrear" value="Ingresar Paciente al sistema"
+						process="@this,paneldatos" update="paneldatos"
+						action="#{pacienteControlador.crearPaciente}" />
+
+					<p:commandButton id="btnlimpiar" value="Limpiar Campos"
+						process="@this" update="paneldatos"
+						 />
+
+
+
+				</p:panelGrid>
+
+			</p:panel>
+
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>
