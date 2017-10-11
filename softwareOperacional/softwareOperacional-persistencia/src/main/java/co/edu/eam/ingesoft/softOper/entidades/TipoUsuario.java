@@ -4,8 +4,11 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name="TipoUsuario")
@@ -14,6 +17,7 @@ public class TipoUsuario implements Serializable{
 	@Id
 	@Column(name="id", nullable=false)
 	private int id;
+	
 	
 	@Column(name="nombre", length=15)
 	private String nombre;
@@ -66,16 +70,11 @@ public class TipoUsuario implements Serializable{
 		this.id = id;
 	}
 
-	/**
-	 * @return the nombre
-	 */
+
 	public String getNombre() {
 		return nombre;
 	}
 
-	/**
-	 * @param nombre the nombre to set
-	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}

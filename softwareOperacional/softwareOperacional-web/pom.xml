@@ -16,13 +16,6 @@
 			<type>ejb</type>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>co.edu.eam.ingesoft.electiva</groupId>
-			<artifactId>softwareOperacional-web</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<type>war</type>
-			<scope>provided</scope>
-		</dependency>
 
 		<dependency>
 			<groupId>org.primefaces.extensions</groupId>
@@ -76,6 +69,12 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>co.edu.eam.ingesoft.electiva</groupId>
+			<artifactId>softwareOperacional-persistencia</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

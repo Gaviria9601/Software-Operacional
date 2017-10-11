@@ -7,27 +7,34 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Usuario")
+@NamedQueries({
+@NamedQuery(name=Usuario.LISTA_BUSQUEDA_USUARIO,query="select usu from Usuario usu where usu.nombre= ?1")
+})
 public class Usuario implements Serializable {
 	
-	@Id
-	@Column(name="id", nullable=false)
-	private int id;
-	
-	@Column(name="nombre", length=15)
-	private String nombre;
-	
-	@Column(name="contrasenia", length=8)
-	private String contrasenia;
-	
-	@ManyToOne
-	@JoinColumn(name = "tipo", nullable=false)
-	private TipoProducto tipoUsuario;
+	public static final String LISTA_BUSQUEDA_USUARIO = "Usuario.ListaBusquedaUsuario";
 
-	public Usuario(){
+	@Id
+	@Column(name = "id", nullable = false)
+	private int id;
+
+	@Column(name = "nombre", length = 15)
+	private String nombre;
+
+	@Column(name = "contrasenia", length = 8)
+	private String contrasenia;
+
+	@ManyToOne
+	@JoinColumn(name = "tipo", nullable = false)
+	private TipoUsuario tipoUsuario;
+
+	public Usuario() {
 	}
 
 	/**
@@ -38,7 +45,8 @@ public class Usuario implements Serializable {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(int id) {
 		this.id = id;
@@ -52,7 +60,8 @@ public class Usuario implements Serializable {
 	}
 
 	/**
-	 * @param nombre the nombre to set
+	 * @param nombre
+	 *            the nombre to set
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
@@ -66,13 +75,16 @@ public class Usuario implements Serializable {
 	}
 
 	/**
-	 * @param contrasenia the contrasenia to set
+	 * @param contrasenia
+	 *            the contrasenia to set
 	 */
 	public void setContrasenia(String contrasenia) {
 		this.contrasenia = contrasenia;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -83,7 +95,9 @@ public class Usuario implements Serializable {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -103,16 +117,16 @@ public class Usuario implements Serializable {
 	/**
 	 * @return the tipoUsuario
 	 */
-	public TipoProducto getTipoUsuario() {
+	public TipoUsuario getTipoUsuario() {
 		return tipoUsuario;
 	}
 
 	/**
-	 * @param tipoUsuario the tipoUsuario to set
+	 * @param tipoUsuario
+	 *            the tipoUsuario to set
 	 */
-	public void setTipoUsuario(TipoProducto tipoUsuario) {
+	public void setTipoUsuario(TipoUsuario tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
-	
-	
+
 }

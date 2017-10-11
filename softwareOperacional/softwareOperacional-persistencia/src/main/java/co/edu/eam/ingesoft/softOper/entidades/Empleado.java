@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -15,8 +17,13 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "Empleado")
+@NamedQueries({
+	@NamedQuery(name=Empleado.BUSQUEDA__POR_USUARIO,query="select emp from Empleado emp where emp.Usuario.id= ?1")
+})
 public class Empleado implements Serializable {
 
+	public static final String BUSQUEDA__POR_USUARIO = "Empleado.BusquedaPorUsuario";
+	
 	@Id
 	@Column(name="codigo", nullable=false)
 	private int codigo;

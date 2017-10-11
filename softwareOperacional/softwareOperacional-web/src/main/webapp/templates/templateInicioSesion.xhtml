@@ -3,7 +3,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
 	<meta charset="UTF-8" />
 	<title>Software Operacional</title>
@@ -50,18 +51,19 @@
 		href="#{request.contextPath}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"
 		rel="stylesheet" type="text/css" />
 
+	<link rel="icon" type="image/png"
+		href="#{request.contextPath}/Favicon.png" />
+
 </h:head>
 <h:body class="skin-blue sidebar-collapse sidebar-open">
 	<div class="wrapper">
 
 		<header class="main-header">
-		
-			<a href="#" class="logo">
-			
-			<img src="#{request.contextPath}/dist/img/logo.PNG"
-									 alt="User Image" /></a>
-									
-									
+
+			<a href="#" class="logo"> <img
+				src="#{request.contextPath}/dist/img/logo.PNG" alt="User Image" /></a>
+
+
 			<!-- Header Navbar: style can be found in header.less -->
 			<nav class="navbar navbar-static-top" role="navigation">
 
@@ -75,48 +77,54 @@
 
 		<!-- Right side column. Contains the navbar and content of the page -->
 		<div class="content-wrapper">
-
+			<p:messages id="messages" autoUpdate="true"
+				closable="true" />
 			<!-- Main content -->
 			<section class="content">
+
 				<div class="login-box">
-				
-				
-				
-				      <img src="#{request.contextPath}/dist/img/gnomee1.PNG"
-									 alt="User Image" />
-									
-									
-									
+
+
+
+					<img src="#{request.contextPath}/dist/img/gnomee1.PNG"
+						alt="User Image" />
+
+
+
 					<!-- /.login-logo -->
-					<div class="login-box-body">
-						<p class="login-box-msg">Inicie Sesion</p>
-						<form action="#{request.contextPath}/templates/templateContenido.xhtml" method="post">
+					<h:form>
+						<div class="login-box-body">
+							<p class="login-box-msg">Inicio Sesion</p>
+
 							<div class="form-group has-feedback">
-								<input type="text" class="form-control" placeholder="Nombre de Usuario" /> <span
-									class="glyphicon glyphicon-envelope form-control-feedback"></span>
+								<h:inputText value="#{sessionControl.user}" class="form-control"
+									a:placeholder="Nombre de Usuario" id="tfuser" />
+								<span class="glyphicon glyphicon-envelope form-control-feedback">
+								</span>
 							</div>
 							<div class="form-group has-feedback">
-								<input type="password" class="form-control"
-									placeholder="Contraseña" /> <span
-									class="glyphicon glyphicon-lock form-control-feedback"></span>
+
+								<h:inputSecret value="#{sessionControl.pass}"
+									class="form-control" a:placeholder="Contraseña" id="tfpass" />
+								<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 							</div>
 							<div class="row">
 								<div class="col-xs-8">
 									<div class="checkbox icheck">
-										<label> <input type="checkbox"/> Recuerdame </label>
+										<label> <input type="checkbox" /> Recuerdame
+										</label>
 									</div>
 								</div>
 								<!-- /.col -->
 								<div class="col-xs-4">
-									<button type="submit"
-										class="btn btn-primary btn-block btn-flat">Ingresar</button>
+									<p:commandButton value="Ingresar" ajax="false"
+										action="#{sessionControl.login}" />
 								</div>
 								<!-- /.col -->
 							</div>
-						</form>
 
-
-					</div>
+						</div>
+					</h:form>
 					<!-- /.login-box-body -->
 				</div>
 				<!-- /.login-box -->
@@ -142,8 +150,8 @@
 		type="text/javascript"></script>
 	<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 	<script>
-      $.widget.bridge('uibutton', $.ui.button);
-    </script>
+		$.widget.bridge('uibutton', $.ui.button);
+	</script>
 	<!-- Bootstrap 3.3.2 JS -->
 	<script src="#{request.contextPath}/bootstrap/js/bootstrap.min.js"
 		type="text/javascript"></script>
