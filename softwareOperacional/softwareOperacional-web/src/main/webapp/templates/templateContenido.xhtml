@@ -112,7 +112,8 @@
 
 								<li class="user-footer"><h:form>
 										<div class="pull-left">
-											<a href="#{request.contextPath}/paginas/privado/perfil.xhtml" class="btn btn-default btn-flat">Perfil</a>
+											<a href="#{request.contextPath}/paginas/privado/perfil.xhtml"
+												class="btn btn-default btn-flat">Perfil</a>
 										</div>
 										<div class="pull-right">
 											<h:commandLink value="Cerrar Sesión" ajax="false"
@@ -256,7 +257,7 @@
 								<li><a href="#"><i class="fa fa-circle-o"></i> Ver
 										Registro Auditoria</a></li>
 							</ul></li>
-						<li class="treeview"><a href="#"> <i class="fa fa-cogs"></i>
+						<li class="treeview"><a href="#{request.contextPath}/paginas/privado/conexion.xhtml"> <i class="fa fa-cogs"></i>
 								<span>Conexion</span></a></li>
 					</h:panelGroup>
 
@@ -273,7 +274,9 @@
 			<section class="content">
 				<p:messages id="messages" showDetail="true" autoUpdate="true"
 					closable="true" />
-				<ui:insert name="cuerpo" />
+				<!--  <div class="container">-->
+					<ui:insert name="cuerpo" />
+				<!--  </div>-->
 
 			</section>
 			<!-- /.content -->

@@ -7,31 +7,38 @@
 
 	<ui:define name="cuerpo">
 
-		<p:panelGrid columns="2">
-			<f:facet name="header">
-				<h:panelGroup rendered="#{sessionControl.sesionAdmin}">
-					<img src="#{request.contextPath}/dist/img/user2-160x160.jpg" />
-				</h:panelGroup>
-				<h:panelGroup rendered="#{sessionControl.sesionContadora}">
-					<img  src="#{request.contextPath}/dist/img/user7-128x128.jpg" />
-				</h:panelGroup>
-				<h:panelGroup rendered="#{sessionControl.sesionVendedora}">
-					<img src="#{request.contextPath}/dist/img/user4-128x128.jpg" />
-				</h:panelGroup>
-			</f:facet>
+		
+		<div class="row">
+			<div class="col-xs-4 col-md-4"></div>
+			<div class="col-xs-4 col-md-4 text-center">
+				<p:panelGrid columns="2">
+					<f:facet name="header">
+						<h:panelGroup rendered="#{sessionControl.sesionAdmin}">
+							<img src="#{request.contextPath}/dist/img/user2-160x160.jpg" />
+						</h:panelGroup>
+						<h:panelGroup rendered="#{sessionControl.sesionContadora}">
+							<img src="#{request.contextPath}/dist/img/user7-128x128.jpg" />
+						</h:panelGroup>
+						<h:panelGroup rendered="#{sessionControl.sesionVendedora}">
+							<img src="#{request.contextPath}/dist/img/user4-128x128.jpg" />
+						</h:panelGroup>
+					</f:facet>
 
-			<h:outputText value="Name:" />
-			<h:outputText value="Kobe Bryant" />
+					<h:outputText value="Name:" />
+					<h:outputText value="Kobe Bryant" />
 
-			<h:outputText value="Team:" />
-			<h:outputText value="Los Angeles Lakers" />
+					<h:outputText value="Team:" />
+					<h:outputText value="Los Angeles Lakers" />
 
-			<h:outputText value="Position:" />
-			<h:outputText value="Shooting Guard" />
+					<h:outputText value="Position:" />
+					<h:outputText value="Shooting Guard" />
 
-			<h:outputText value="Number:" />
-			<h:outputText value="24" />
-		</p:panelGrid>
+					<h:outputText value="Number:" />
+					<h:outputText value="24" />
+				</p:panelGrid>
+			</div>
+		</div>
+	
 
 	</ui:define>
 
