@@ -77,19 +77,20 @@
 
 		<!-- Right side column. Contains the navbar and content of the page -->
 		<div class="content-wrapper">
-			<p:messages id="messages" autoUpdate="true"
-				closable="true" />
+			<p:messages id="messages" autoUpdate="true" closable="true" />
 			<!-- Main content -->
 			<section class="content">
 
-				<div class="login-box">
-
-
+				<div class="col-xs-4 col-md-4"></div>
+				<div class="col-xs-4 col-md-4 text-center">
 
 					<img src="#{request.contextPath}/dist/img/gnomee1.PNG"
 						alt="User Image" />
-
-
+						
+						<br/>
+						<br/>
+						<br/>
+						
 
 					<!-- /.login-logo -->
 					<h:form>
@@ -109,14 +110,15 @@
 								<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 							</div>
 							<div class="row">
-								<div class="col-xs-8">
+								<div class="col-xs-4">
 									<div class="checkbox icheck">
 										<label> <input type="checkbox" /> Recuerdame
 										</label>
 									</div>
 								</div>
+								<div class="col-xs-4"></div>
 								<!-- /.col -->
-								<div class="col-xs-4">
+								<div class="col-xs-4 text-right" >
 									<p:commandButton value="Ingresar" ajax="false"
 										action="#{sessionControl.login}" />
 								</div>
@@ -126,20 +128,21 @@
 						</div>
 					</h:form>
 					<!-- /.login-box-body -->
+
 				</div>
-				<!-- /.login-box -->
-			</section>
-			<!-- /.content -->
+	
+		</section>
+		<!-- /.content -->
+	</div>
+
+
+	<!-- /.content-wrapper -->
+	<footer class="main-footer">
+		<div class="pull-right hidden-xs">
+			<b>Version</b> 1.0
 		</div>
-
-
-		<!-- /.content-wrapper -->
-		<footer class="main-footer">
-			<div class="pull-right hidden-xs">
-				<b>Version</b> 1.0
-			</div>
-			<strong>Software Operacional - </strong> Inteligencia de Negocios.
-		</footer>
+		<strong>Software Operacional - </strong> Inteligencia de Negocios.
+	</footer>
 	</div>
 	<!-- ./wrapper -->
 

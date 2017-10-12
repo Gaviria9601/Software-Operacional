@@ -24,17 +24,36 @@
 						</h:panelGroup>
 					</f:facet>
 
-					<h:outputText value="Name:" />
-					<h:outputText value="Kobe Bryant" />
+					<h:outputText value="Nombre:" />
+					<h:outputText value="#{sessionControl.empleado.nombre}" />
 
-					<h:outputText value="Team:" />
-					<h:outputText value="Los Angeles Lakers" />
+					<h:outputText value="Apellido:" />
+					<h:outputText value="#{sessionControl.empleado.apellido}" />
 
-					<h:outputText value="Position:" />
-					<h:outputText value="Shooting Guard" />
+					<h:outputText value="Fecha Nacimiento:" />
+					<h:outputText value="#{sessionControl.empleado.fechaNacimiento}" />
 
-					<h:outputText value="Number:" />
-					<h:outputText value="24" />
+					<h:outputText value="Fecha Ingreso Empresa:" />
+					<h:outputText value="#{sessionControl.empleado.fechaIngresoEmpresa}" />
+					
+					<h:outputText value="Cedula:" />
+					<h:outputText value="#{sessionControl.empleado.cedula}" />
+					
+					<h:outputText value="Municipio:" />
+					<h:outputText value="#{sessionControl.empleado.municipio.nombre}" />
+					
+					<h:outputText value="Departamento:" />
+					<h:outputText value="#{sessionControl.empleado.municipio.departamento.nombre}" />
+					
+					<h:outputText value="Cargo:" />
+					<h:outputText value="#{sessionControl.empleado.cargo.cargo}" />
+					
+					<h:outputText value="Area:" />
+					<h:outputText value="#{sessionControl.empleado.cargo.area.nombre}" />
+					
+					<h:outputText value="Usuario:" />
+					<h:outputText value="#{sessionControl.empleado.usuario.nombre}" />
+					
 				</p:panelGrid>
 			</div>
 		</div>

@@ -21,7 +21,7 @@ import co.edu.eam.ingesoft.softOper.web.controladores.SessionController;
 
 
 
-//@WebFilter(urlPatterns="/paginas/seguro/*")	
+//@WebFilter(urlPatterns="/paginas/privado/*")
 public class FiltroSession implements Filter {
 
 	@Inject
