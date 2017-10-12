@@ -87,6 +87,17 @@ public class SessionController implements Serializable {
 		return tipoUsuario.equals("Administrador") && usuario != null;
 	}
 
+	public boolean isSesionUsuario() {
+		return !tipoUsuario.equals("Administrador") && usuario != null;
+	}
+	
+	public boolean isSesionVendedora() {
+		return tipoUsuario.equals("Vendedor") && usuario != null;
+	} 
+	
+	public boolean isSesionContadora() {
+		return tipoUsuario.equals("Contador") && usuario != null;
+	} 
 	
 	public String getUser() {
 		return user;

@@ -60,7 +60,8 @@
 		<header class="main-header">
 
 			<!-- Logo -->
-			<a href="#" class="logo">#{sessionControl.empleado.cargo.cargo}</a>
+			<a href="#" class="logo">#{sessionControl.usuario.tipoUsuario.nombre}
+				(a)</a>
 			<!-- Header Navbar: style can be found in header.less -->
 
 			<nav class="navbar navbar-static-top" role="navigation">
@@ -74,20 +75,36 @@
 
 						<!-- User Account: style can be found in dropdown.less -->
 						<li class="dropdown user user-menu"><a href="#"
-							class="dropdown-toggle" data-toggle="dropdown"> <img
-								src="#{request.contextPath}/dist/img/user2-160x160.jpg"
-								class="user-image" alt="User Image" /> <span class="hidden-xs">#{sessionControl.empleado.nombre}
+							class="dropdown-toggle" data-toggle="dropdown"> <h:panelGroup
+									rendered="#{sessionControl.sesionAdmin}">
+									<img src="#{request.contextPath}/dist/img/user2-160x160.jpg"
+										class="user-image" alt="User Image" />
+								</h:panelGroup> <h:panelGroup rendered="#{sessionControl.sesionContadora}">
+									<img src="#{request.contextPath}/dist/img/user7-128x128.jpg"
+										class="user-image" alt="User Image" />
+								</h:panelGroup> <h:panelGroup rendered="#{sessionControl.sesionVendedora}">
+									<img src="#{request.contextPath}/dist/img/user4-128x128.jpg"
+										class="user-image" alt="User Image" />
+								</h:panelGroup> <span class="hidden-xs">#{sessionControl.empleado.nombre}
 									#{sessionControl.empleado.apellido}</span>
 						</a>
 							<ul class="dropdown-menu">
 								<!-- User image -->
-								<li class="user-header"><img
-									src="#{request.contextPath}/dist/img/user2-160x160.jpg"
-									class="img-circle" alt="User Image" />
+								<li class="user-header"><h:panelGroup
+										rendered="#{sessionControl.sesionAdmin}">
+										<img src="#{request.contextPath}/dist/img/user2-160x160.jpg"
+											class="img-circle" alt="User Image" />
+									</h:panelGroup> <h:panelGroup rendered="#{sessionControl.sesionContadora}">
+										<img src="#{request.contextPath}/dist/img/user7-128x128.jpg"
+											class="img-circle" alt="User Image" />
+									</h:panelGroup> <h:panelGroup rendered="#{sessionControl.sesionVendedora}">
+										<img src="#{request.contextPath}/dist/img/user4-128x128.jpg"
+											class="img-circle" alt="User Image" />
+									</h:panelGroup>
 									<p>
 										#{sessionControl.empleado.nombre}
 										#{sessionControl.empleado.apellido} -
-										#{sessionControl.empleado.cargo.cargo} <small>Miembro
+										#{sessionControl.usuario.tipoUsuario.nombre} (a) <small>Miembro
 											desde #{sessionControl.empleado.fechaIngresoEmpresa}</small>
 									</p></li>
 
@@ -95,7 +112,7 @@
 
 								<li class="user-footer"><h:form>
 										<div class="pull-left">
-											<a href="#" class="btn btn-default btn-flat">Perfil</a>
+											<a href="#{request.contextPath}/paginas/privado/perfil.xhtml" class="btn btn-default btn-flat">Perfil</a>
 										</div>
 										<div class="pull-right">
 											<h:commandLink value="Cerrar Sesión" ajax="false"
@@ -119,8 +136,20 @@
 				<!-- Sidebar user panel -->
 				<div class="user-panel">
 					<div class="pull-left image">
-						<img src="#{request.contextPath}/dist/img/user2-160x160.jpg"
-							class="img-circle" alt="User Image" />
+
+						<h:panelGroup rendered="#{sessionControl.sesionAdmin}">
+							<img src="#{request.contextPath}/dist/img/user2-160x160.jpg"
+								class="img-circle" alt="User Image" />
+						</h:panelGroup>
+						<h:panelGroup rendered="#{sessionControl.sesionContadora}">
+							<img src="#{request.contextPath}/dist/img/user7-128x128.jpg"
+								class="img-circle" alt="User Image" />
+						</h:panelGroup>
+						<h:panelGroup rendered="#{sessionControl.sesionVendedora}">
+							<img src="#{request.contextPath}/dist/img/user4-128x128.jpg"
+								class="img-circle" alt="User Image" />
+						</h:panelGroup>
+
 					</div>
 					<div class="pull-left info">
 						<p>#{sessionControl.empleado.nombre}
@@ -133,81 +162,104 @@
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu">
 					<li class="header">MENÚ NAVEGACIÓN</li>
-					<li class="active treeview"><a
-						href="#{request.contextPath}/paginas/privado/inicio.xhtml"> <i
-							class="fa fa-dashboard"></i> <span>Dashboard</span> <i
-							class="fa fa-angle-left pull-right"></i>
-					</a></li>
+					<h:panelGroup rendered="#{sessionControl.sesionUsuario}">
+						<li class="active treeview"><a
+							href="#{request.contextPath}/paginas/privado/inicio.xhtml"> <i
+								class="fa fa-dashboard"></i> <span>Dashboard</span>
+						</a></li>
 
+						<li class="treeview"><a href="#"> <i
+								class="fa fa-suitcase"></i> <span>Inventario</span> <i
+								class="fa fa-angle-left pull-right"></i>
+						</a>
+							<ul class="treeview-menu">
+								<li><a href="#"><i class="fa fa-circle-o"></i> Nuevo
+										Producto</a></li>
+								<li><a href="#"><i class="fa fa-circle-o"></i> Ver
+										Productos</a></li>
+								<li><a href="#"><i class="fa fa-circle-o"></i> Ver
+										Registro Auditoria</a></li>
+							</ul></li>
 
-					<li class="treeview"><a href="#"> <i
-							class="fa fa-pie-chart"></i> <span>Usuarios</span> <i
-							class="fa fa-angle-left pull-right"></i>
-					</a>
-						<ul class="treeview-menu">
-							<li><a href="#"><i class="fa fa-circle-o"></i> Nuevo
-									Usuario</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Ver
-									Usuarios</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Ver
-									Registro Auditoria</a></li>
-						</ul></li>
-					<li class="treeview"><a href="#"> <i class="fa fa-laptop"></i>
-							<span>Tipo de Usuario</span> <i
-							class="fa fa-angle-left pull-right"></i>
-					</a>
-						<ul class="treeview-menu">
-							<li><a href="#"><i class="fa fa-circle-o"></i> Nuevo
-									Tipo de Usuario</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Ver Tipo
-									de Usuarios</a></li>
-							<li><a href="#l"><i class="fa fa-circle-o"></i> Ver
-									Registro Auditoria</a></li>
-						</ul></li>
-					<li class="treeview"><a href="#"> <i class="fa fa-edit"></i>
-							<span>Areas Empresa</span> <i class="fa fa-angle-left pull-right"></i>
-					</a>
-						<ul class="treeview-menu">
-							<li><a href="#"><i class="fa fa-circle-o"></i> Nueva
-									Area</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Ver Areas</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Ver
-									Registro Auditoria</a></li>
-						</ul></li>
-					<li class="treeview"><a href="#"> <i class="fa fa-table"></i>
-							<span>Inventario</span> <i class="fa fa-angle-left pull-right"></i>
-					</a>
-						<ul class="treeview-menu">
-							<li><a href="#"><i class="fa fa-circle-o"></i> Nuevo
-									Producto</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Ver
-									Productos</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Ver
-									Registro Auditoria</a></li>
-						</ul></li>
+						<li class="treeview"><a href="#"><i class="fa fa-group"></i>
+								<span>Recursos Humanos</span><i
+								class="fa fa-angle-left pull-right"></i> </a>
+							<ul class="treeview-menu">
+								<li><a href="#"><i class="fa fa-circle-o"></i> Nuevo
+										Empleado</a></li>
+								<li><a href="#"><i class="fa fa-circle-o"></i> Ver
+										Empleados</a></li>
+								<li><a href="#"><i class="fa fa-circle-o"></i> Ver
+										Registro Auditoria</a></li>
+							</ul></li>
 
-					<li class="treeview"><a href="#"> <i class="fa fa-folder"></i>
-							<span>Ventas</span> <i class="fa fa-angle-left pull-right"></i>
-					</a>
-						<ul class="treeview-menu">
-							<li><a href="#"><i class="fa fa-circle-o"></i> Nueva
-									Venta</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Ver
-									Ventas</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Ver
-									Registro Auditoria</a></li>
-						</ul></li>
-					<li class="treeview"><a href="#"> <i class="fa fa-share"></i>
-							<span>CRM</span> <i class="fa fa-angle-left pull-right"></i>
-					</a>
-						<ul class="treeview-menu">
-							<li><a href="#"><i class="fa fa-circle-o"></i> Nuevo
-									Empleado</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Ver
-									Empleados</a></li>
-							<li><a href="#"><i class="fa fa-circle-o"></i> Ver
-									Registro Auditoria</a></li>
-						</ul></li>
+						<li class="treeview"><a href="#"> <i class="fa fa-truck"></i>
+								<span>Ventas</span> <i class="fa fa-angle-left pull-right"></i>
+						</a>
+							<ul class="treeview-menu">
+								<li><a href="#"><i class="fa fa-circle-o"></i> Nueva
+										Venta</a></li>
+								<li><a href="#"><i class="fa fa-circle-o"></i> Ver
+										Ventas</a></li>
+								<li><a href="#"><i class="fa fa-circle-o"></i> Ver
+										Registro Auditoria</a></li>
+							</ul></li>
+						<li class="treeview"><a href="#"> <i class="fa fa-laptop"></i>
+								<span>CRM</span> <i class="fa fa-angle-left pull-right"></i>
+						</a>
+							<ul class="treeview-menu">
+								<li><a href="#"><i class="fa fa-circle-o"></i> Nuevo
+										Cliente</a></li>
+								<li><a href="#"><i class="fa fa-circle-o"></i> Ver
+										Clientes</a></li>
+								<li><a href="#"><i class="fa fa-circle-o"></i> Ver
+										Registro Auditoria</a></li>
+							</ul></li>
+					</h:panelGroup>
+
+					<h:panelGroup rendered="#{sessionControl.sesionAdmin}">
+						<li class="treeview"><a
+							href="#{request.contextPath}/paginas/privado/inicio.xhtml"> <i
+								class="fa fa-home"></i> <span>Inicio</span></a></li>
+						<li class="treeview"><a href="#"> <i class="fa fa-users"></i>
+								<span>Usuarios</span> <i class="fa fa-angle-left pull-right"></i>
+						</a>
+							<ul class="treeview-menu">
+								<li><a href="#"><i class="fa fa-circle-o"></i> Nuevo
+										Usuario</a></li>
+								<li><a href="#"><i class="fa fa-circle-o"></i> Ver
+										Usuarios</a></li>
+								<li><a href="#"><i class="fa fa-circle-o"></i> Ver
+										Registro Auditoria</a></li>
+							</ul></li>
+						<li class="treeview"><a href="#"> <i class="fa fa-user"></i>
+								<span>Tipo de Usuario</span> <i
+								class="fa fa-angle-left pull-right"></i>
+						</a>
+							<ul class="treeview-menu">
+								<li><a href="#"><i class="fa fa-circle-o"></i> Nuevo
+										Tipo de Usuario</a></li>
+								<li><a href="#"><i class="fa fa-circle-o"></i> Ver Tipo
+										de Usuarios</a></li>
+								<li><a href="#l"><i class="fa fa-circle-o"></i> Ver
+										Registro Auditoria</a></li>
+							</ul></li>
+						<li class="treeview"><a href="#"> <i
+								class="fa fa-sitemap"></i> <span>Areas Empresa</span> <i
+								class="fa fa-angle-left pull-right"></i>
+						</a>
+							<ul class="treeview-menu">
+								<li><a href="#"><i class="fa fa-circle-o"></i> Nueva
+										Area</a></li>
+								<li><a href="#"><i class="fa fa-circle-o"></i> Ver
+										Areas</a></li>
+								<li><a href="#"><i class="fa fa-circle-o"></i> Ver
+										Registro Auditoria</a></li>
+							</ul></li>
+						<li class="treeview"><a href="#"> <i class="fa fa-cogs"></i>
+								<span>Conexion</span></a></li>
+					</h:panelGroup>
+
 				</ul>
 			</section>
 			<!-- /.sidebar -->
