@@ -28,7 +28,7 @@ public class AreaEJB {
 	if(p==null){
 			em.persist(a);
 	}else {
-		throw new ExcepcionNegocio("Ya esta esta cedula de usuario registrado");
+		throw new ExcepcionNegocio("El area ya se encuentra registrada");
 	}
 	}
 	

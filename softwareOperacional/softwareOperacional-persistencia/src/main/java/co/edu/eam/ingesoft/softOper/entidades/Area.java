@@ -16,19 +16,25 @@ public class Area implements Serializable{
 
 	@Id
 	@Column(name="id", nullable=false)
-private int id;
+    private Integer id;
 	
 	@Column(name="nombre", length=15)
-	
 	private String nombre;
 	
 	@Column(name="descripcion", length=2000)
-	
 	private String descripcion;
 	
 	
 
-	 public Area(String nombre, String descripcion) {
+	 public Area(int id, String nombre, String descripcion) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+	}
+
+
+	public Area(String nombre, String descripcion) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;

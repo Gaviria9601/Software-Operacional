@@ -4,11 +4,12 @@ import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.bean.ViewScoped;
+
 import javax.inject.Named;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
+import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Messages;
 
 import co.edu.eam.ingesoft.softOpe.negocio.beans.AreaEJB;
@@ -26,6 +27,8 @@ public class AreaController implements Serializable {
 	@Pattern(regexp="[A-Za-z ]*",message="solo Letras")
 	@Length(min=3,max=50,message="longitud entre 10 y 2000")
 	private String des;
+	
+	private Integer id;
 	
 	
 	public String getNombre() {
@@ -55,9 +58,10 @@ public class AreaController implements Serializable {
 	public void crearArea(){
 		try{
 			
-			Area a = new Area(nombre, des);
-			
+			Area a = new Area(id,nombre, des);
 			arEJB.crearArea(a);
+			
+			
 			//limpiar();
 			Messages.addFlashGlobalInfo("Area ingresada Correctamente");
 				
