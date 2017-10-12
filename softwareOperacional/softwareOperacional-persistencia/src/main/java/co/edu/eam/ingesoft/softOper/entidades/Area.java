@@ -6,6 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name="Area")
@@ -13,15 +16,26 @@ public class Area implements Serializable{
 
 	@Id
 	@Column(name="id", nullable=false)
-	private int id;
+private int id;
 	
 	@Column(name="nombre", length=15)
+	
 	private String nombre;
 	
 	@Column(name="descripcion", length=2000)
+	
 	private String descripcion;
+	
+	
 
-	 public Area() {
+	 public Area(String nombre, String descripcion) {
+		super();
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+	}
+
+
+	public Area() {
 		// TODO Auto-generated constructor stub
 	}
 	
