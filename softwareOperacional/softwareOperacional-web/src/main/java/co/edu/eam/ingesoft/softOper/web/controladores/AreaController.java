@@ -1,6 +1,8 @@
 package co.edu.eam.ingesoft.softOper.web.controladores;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -12,6 +14,7 @@ import org.hibernate.validator.constraints.Length;
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Messages;
 
+import co.edu.eam.ingesoft.hospital.entidades.Medicamento;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.AreaEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.softOper.entidades.Area;
@@ -29,6 +32,10 @@ public class AreaController implements Serializable {
 	private String des;
 	
 	private int id;
+	
+	private List<Area> areas;
+	
+	private ArrayList<Area> filtroArea = new ArrayList<Area>();
 	
 	
 	public String getNombre() {

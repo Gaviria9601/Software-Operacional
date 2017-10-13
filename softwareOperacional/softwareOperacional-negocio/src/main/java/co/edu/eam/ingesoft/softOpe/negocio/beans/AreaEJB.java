@@ -1,11 +1,14 @@
 package co.edu.eam.ingesoft.softOpe.negocio.beans;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 
 import co.edu.eam.ingesoft.softOpe.negocio.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.softOper.entidades.Area;
@@ -75,5 +78,12 @@ public class AreaEJB {
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void eliminarArea(Area pa){
 		em.remove(buscarArea(pa.getNombre()));
+	}
+	
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	public List<Area> listarArea(){
+		List<Area> lista;
+	       lista = em.createNamedQuery(Area.LISTAR_AREA).getResultList();
+	       return lista;	
 	}
 }
