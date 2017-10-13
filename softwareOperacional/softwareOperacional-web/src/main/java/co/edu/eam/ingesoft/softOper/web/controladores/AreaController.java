@@ -14,7 +14,7 @@ import org.hibernate.validator.constraints.Length;
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Messages;
 
-import co.edu.eam.ingesoft.hospital.entidades.Medicamento;
+
 import co.edu.eam.ingesoft.softOpe.negocio.beans.AreaEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.softOper.entidades.Area;
