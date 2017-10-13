@@ -28,7 +28,7 @@ public class AreaController implements Serializable {
 	@Length(min=3,max=50,message="longitud entre 10 y 2000")
 	private String des;
 	
-	private Integer id;
+	private int id;
 	
 	
 	public String getNombre() {
@@ -46,6 +46,26 @@ public class AreaController implements Serializable {
 	public void setDes(String des) {
 		this.des = des;
 	}
+	
+	
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public AreaEJB getArEJB() {
+		return arEJB;
+	}
+
+	public void setArEJB(AreaEJB arEJB) {
+		this.arEJB = arEJB;
+	}
+
+
 
 	@EJB
 	private AreaEJB arEJB;
@@ -55,11 +75,14 @@ public class AreaController implements Serializable {
 		
 	}
 	
-	public void crearArea(){
+	public void crear(){
 		try{
 			
-			Area a = new Area(id,nombre, des);
-			arEJB.crearArea(a);
+			Area a = new Area(nombre, des);
+			arEJB.crear(a);
+			System.out.println(id);
+			System.out.println(nombre);
+			System.out.println(des);
 			
 			
 			//limpiar();

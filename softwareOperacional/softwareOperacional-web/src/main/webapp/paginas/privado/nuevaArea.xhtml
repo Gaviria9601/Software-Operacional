@@ -6,7 +6,8 @@
 	template="/templates/templateContenido.xhtml">
 
 	<ui:define name="cuerpo">
-
+	
+    
 		<h2>
 			Areas Empresa <small> Nueva Area</small>
 		</h2>
@@ -19,33 +20,38 @@
 			</div>
 			<!-- /.box-header -->
 
-			<form role="form">
+			<h:form role="form" >
 				<div class="box-body">
 				
 					<div class="form-group">
 					
-						<label for="tfnombre">Nombre</label> <input
-							type="text" class="form-control" id="nombre"
+						<label for="tfnombre">Nombre</label> 
+						<h:inputText type="text" class="form-control" id="nombre"
 							value="#{areaControlador.nombre}"/>
 							
 					</div>
 					
+				
+					
 					<div class="form-group">
-						<label for="tfdes">Descripción</label> <input
-							type="text" class="form-control" id="des" value="#{areaControlador.des}" />
+						<label for="tfdes">Descripción</label> 
+						<h:inputText
+							type="text" class="form-control" id="des" 
+							value="#{areaControlador.des}" />
 							
 					</div>
 
 				</div>
 				<!-- /.box-body -->
 
-				<div class="box-footer">
-					<button type="submit" class="btn btn-primary">Registrar</button>
+				<div class="col-xs-4 text-right" >
+			       <p:commandButton value="Registrar Area" ajax="false"
+				       action="#{areaControlador.crearArea}" />
 				</div>
-			</form>
+			</h:form>
 
 		</div>
 
-
+   
 	</ui:define>
 </ui:composition>

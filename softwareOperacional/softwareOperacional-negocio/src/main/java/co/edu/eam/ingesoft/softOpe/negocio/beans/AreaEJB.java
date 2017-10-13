@@ -22,8 +22,16 @@ public class AreaEJB {
 	 * @param a
 	 */
 	
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	
+	
+	public void crear(Area a) {
+	     em.persist(a);
+		
+	}
+	
+	
 	public void crearArea(Area a) {
+		
 	Area p =buscarArea(a.getNombre());
 	if(p==null){
 			em.persist(a);
@@ -37,7 +45,7 @@ public class AreaEJB {
 	 * @param nombre
 	 * @return
 	 */
-	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+
 	public Area buscarArea(String nombre) {
 		Area pa = em.find(Area.class, nombre);
 		return pa;

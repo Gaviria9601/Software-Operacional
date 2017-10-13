@@ -16,7 +16,7 @@ public class Area implements Serializable{
 
 	@Id
 	@Column(name="id", nullable=false)
-    private Integer id;
+    private int id;
 	
 	@Column(name="nombre", length=15)
 	private String nombre;
@@ -56,7 +56,7 @@ public class Area implements Serializable{
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
