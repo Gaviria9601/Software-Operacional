@@ -159,67 +159,96 @@
 		<h:panelGroup rendered="#{sessionControl.sesionAdmin}">
 
 			<div class="row">
-				<div class="col-md-3 col-sm-6 col-xs-12">
-					<div class="info-box">
-						<span class="info-box-icon bg-aqua"><i
-							class="ion ion-ios-gear-outline"></i></span>
-						<div class="info-box-content">
-							<span class="info-box-text">Trafico de la CPU</span> <span
-								class="info-box-number">90<small>%</small></span>
-						</div>
-						<!-- /.info-box-content -->
-					</div>
-					<!-- /.info-box -->
-				</div>
-				<!-- /.col -->
-				<div class="col-md-3 col-sm-6 col-xs-12">
-					<div class="info-box">
-						<span class="info-box-icon bg-red"><i
-							class="fa fa-google-plus"></i></span>
-						<div class="info-box-content">
-							<span class="info-box-text">Likes</span> <span
-								class="info-box-number">41,410</span>
-						</div>
-						<!-- /.info-box-content -->
-					</div>
-					<!-- /.info-box -->
-				</div>
-				<!-- /.col -->
-
-				<!-- fix for small devices only -->
-				<div class="clearfix visible-sm-block"></div>
-
 
 				<div class="col-lg-3 col-xs-6">
 					<!-- small box -->
 					<div class="small-box bg-yellow">
 						<div class="inner">
-							<h3>65</h3>
+							<h3>#{sessionControl.numVisitas}</h3>
 							<p>Visitantes</p>
 						</div>
 						<div class="icon">
-							<i class="ion ion-pie-graph"></i>
+							<i class="icon ion-person-stalker"></i>
 						</div>
-						<a href="#" class="small-box-footer">More info <i
+						<a
+							href="#{request.contextPath}/paginas/privado/auditoriaIdentificacionUsuarios.xhtml"
+							class="small-box-footer">Mas Información<i
 							class="fa fa-arrow-circle-right"></i></a>
 					</div>
+
 				</div>
+
+
+
+				<!-- fix for small devices only -->
+				<div class="clearfix visible-sm-block"></div>
+
+
+
 				<div class="col-lg-3 col-xs-6">
 					<!-- small box -->
 					<div class="small-box bg-green">
 						<div class="inner">
 							<h3>
-								53<sup style="font-size: 20px">%</sup>
+								<sup style="font-size: 20px">#{sessionControl.os}</sup>
 							</h3>
-							<p>Porcentaje de Rebote</p>
+							<p>Sistema Operativo</p>
 						</div>
 						<div class="icon">
-							<i class="ion ion-stats-bars"></i>
+							<h:panelGroup rendered="#{sessionControl.sesionWindows}">
+								<i class="icon ion-laptop"></i>
+							</h:panelGroup>
+							<h:panelGroup rendered="#{!sessionControl.sesionWindows}">
+								<i class="icon ion-iphone"></i>
+							</h:panelGroup>
 						</div>
-						<a href="#" class="small-box-footer">More info <i
+						<a
+							href="#{request.contextPath}/paginas/privado/auditoriaIdentificacionUsuarios.xhtml"
+							class="small-box-footer">Mas Información<i
 							class="fa fa-arrow-circle-right"></i></a>
 					</div>
 				</div>
+
+				<!-- /.col -->
+				<div class="col-lg-3 col-xs-6">
+					<div class="small-box bg-red">
+						<div class="inner">
+							<h3>
+								<sup style="font-size: 20px">#{sessionControl.browser}</sup>
+							</h3>
+							<p>Navegador Web</p>
+						</div>
+						<div class="icon">
+							<i class="icon ion-earth"></i>
+						</div>
+						<a
+							href="#{request.contextPath}/paginas/privado/auditoriaIdentificacionUsuarios.xhtml"
+							class="small-box-footer">Mas Información<i
+							class="fa fa-arrow-circle-right"></i></a>
+					</div>
+					<!-- /.info-box-content -->
+				</div>
+
+				<div class="col-lg-3 col-xs-6">
+					<div class="small-box bg-blue">
+						<div class="inner">
+							<h3>
+								<sup style="font-size: 20px">Oracle</sup>
+							</h3>
+							<p>Conexión</p>
+						</div>
+						<div class="icon">
+							<i class="ion ion-ios-gear-outline"></i>
+						</div>
+						<!-- /.info-box-content -->
+						<a href="#{request.contextPath}/paginas/privado/conexion.xhtml"
+							class="small-box-footer">Mas Información<i
+							class="fa fa-arrow-circle-right"></i></a>
+					</div>
+					<!-- /.info-box -->
+				</div>
+				<!-- /.info-box -->
+				<!-- /.col -->
 				<!-- /.col -->
 			</div>
 			<!-- /.row -->
@@ -231,18 +260,7 @@
 					<!-- tools box -->
 					<div class="pull-right box-tools">
 						<!-- button with a dropdown -->
-						<div class="btn-group">
-							<button class="btn btn-success btn-sm dropdown-toggle"
-								data-toggle="dropdown">
-								<i class="fa fa-bars"></i>
-							</button>
-							<ul class="dropdown-menu pull-right" role="menu">
-								<li><a href="#">Add new event</a></li>
-								<li><a href="#">Clear events</a></li>
-								<li class="divider"></li>
-								<li><a href="#">View calendar</a></li>
-							</ul>
-						</div>
+
 						<button class="btn btn-success btn-sm" data-widget="collapse">
 							<i class="fa fa-minus"></i>
 						</button>
@@ -255,49 +273,11 @@
 				<!-- /.box-header -->
 				<div class="box-body no-padding">
 					<!--The calendar -->
-					<div id="calendar" style="width: 100%"></div>
+					<div id="calendar" style="width: 100%; height: 300px"></div>
 				</div>
 				<!-- /.box-body -->
-				<div class="box-footer text-black">
-					<div class="row">
-						<div class="col-sm-6">
-							<!-- Progress bars -->
-							<div class="clearfix">
-								<span class="pull-left">Task #1</span> <small class="pull-right">90%</small>
-							</div>
-							<div class="progress xs">
-								<div class="progress-bar progress-bar-green" style="width: 90%;"></div>
-							</div>
 
-							<div class="clearfix">
-								<span class="pull-left">Task #2</span> <small class="pull-right">70%</small>
-							</div>
-							<div class="progress xs">
-								<div class="progress-bar progress-bar-green" style="width: 70%;"></div>
-							</div>
-						</div>
-						<!-- /.col -->
-						<div class="col-sm-6">
-							<div class="clearfix">
-								<span class="pull-left">Task #3</span> <small class="pull-right">60%</small>
-							</div>
-							<div class="progress xs">
-								<div class="progress-bar progress-bar-green" style="width: 60%;"></div>
-							</div>
-
-							<div class="clearfix">
-								<span class="pull-left">Task #4</span> <small class="pull-right">40%</small>
-							</div>
-							<div class="progress xs">
-								<div class="progress-bar progress-bar-green" style="width: 40%;"></div>
-							</div>
-						</div>
-						<!-- /.col -->
-					</div>
-					<!-- /.row -->
-				</div>
 			</div>
-
 		</h:panelGroup>
 
 	</ui:define>

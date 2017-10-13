@@ -3,11 +3,12 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	template="/templates/templateContenido.xhtml">
+	template="/templates/templateContenido.xhtml"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 	<ui:define name="cuerpo">
-	
-    
+
+
 		<h2>
 			Areas Empresa <small> Nueva Area</small>
 		</h2>
@@ -20,38 +21,37 @@
 			</div>
 			<!-- /.box-header -->
 
-			<h:form role="form" >
+			<h:form role="form">
 				<div class="box-body">
-				
+
 					<div class="form-group">
-					
-						<label for="tfnombre">Nombre</label> 
-						<h:inputText type="text" class="form-control" id="nombre"
-							value="#{areaControlador.nombre}"/>
-							
+
+						<label for="tfnombre">Nombre</label>
+						<h:inputText type="text" class="form-control" id="nombre" a:placeholder="Nombre"
+							value="#{areaControlador.nombre}" />
+
 					</div>
-					
-				
-					
+
+
+
 					<div class="form-group">
-						<label for="tfdes">Descripción</label> 
-						<h:inputText
-							type="text" class="form-control" id="des" 
+						<label for="tfdes">Descripción</label>
+						<p:inputTextarea type="text" class="form-control" id="des" a:placeholder="Descripción"
 							value="#{areaControlador.des}" />
-							
+
+					</div>
+
+					<div class="box-footer">
+						<p:commandButton value="Registrar Area" ajax="false"
+							action="#{areaControlador.crear}" />
 					</div>
 
 				</div>
 				<!-- /.box-body -->
-
-				<div class="col-xs-4 text-right" >
-			       <p:commandButton value="Registrar Area" ajax="false"
-				       action="#{areaControlador.crearArea}" />
-				</div>
 			</h:form>
 
 		</div>
 
-   
+
 	</ui:define>
 </ui:composition>

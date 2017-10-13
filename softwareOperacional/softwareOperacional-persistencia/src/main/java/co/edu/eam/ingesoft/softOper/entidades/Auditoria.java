@@ -8,13 +8,20 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="Auditoria")
+@NamedQueries({
+	@NamedQuery(name=Auditoria.LISTAR_AUDITORIA_ID_USUARIOS,query="select aud from Auditoria aud where aud.ingreso = ?1 and aud.registroRealizoAccion = ?2")
+})
 public class Auditoria implements Serializable{
+	
+	public static final String LISTAR_AUDITORIA_ID_USUARIOS = "Auditoria.listarAuditoriaIdUsuarios";
 	
 	@Id
 	@Column(name="codigo", nullable=false)

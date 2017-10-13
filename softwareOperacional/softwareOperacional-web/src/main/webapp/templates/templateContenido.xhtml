@@ -250,15 +250,18 @@
 								class="fa fa-angle-left pull-right"></i>
 						</a>
 							<ul class="treeview-menu">
-								<li><a href="#"><i class="fa fa-circle-o"></i> Nueva
-										Area</a></li>
+								<li><a
+									href="#{request.contextPath}/paginas/privado/nuevaArea.xhtml"><i
+										class="fa fa-circle-o"></i> Nueva Area</a></li>
 								<li><a href="#"><i class="fa fa-circle-o"></i> Ver
 										Areas</a></li>
 								<li><a href="#"><i class="fa fa-circle-o"></i> Ver
 										Registro Auditoria</a></li>
 							</ul></li>
-						<li class="treeview"><a href="#{request.contextPath}/paginas/privado/conexion.xhtml"> <i class="fa fa-cogs"></i>
-								<span>Conexion</span></a></li>
+						<li class="treeview"><a
+							href="#{request.contextPath}/paginas/privado/conexion.xhtml">
+								<i class="fa fa-cogs"></i> <span>Conexion</span>
+						</a></li>
 					</h:panelGroup>
 
 				</ul>
@@ -272,10 +275,9 @@
 
 			<!-- Main content -->
 			<section class="content">
-				<p:messages id="messages" showDetail="true" autoUpdate="true"
-					closable="true" />
+				<p:messages id="messages" autoUpdate="true" closable="true" />
 				<!--  <div class="container">-->
-					<ui:insert name="cuerpo" />
+				<ui:insert name="cuerpo" />
 				<!--  </div>-->
 
 			</section>
