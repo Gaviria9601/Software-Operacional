@@ -33,7 +33,7 @@ public class AreaEJB {
 	}
 	
 	
-	public void crearArea(Area a) {
+	/**public void crearArea(Area a) {
 		
 	Area p =buscarArea(a.getNombre());
 	if(p==null){
@@ -41,7 +41,7 @@ public class AreaEJB {
 	}else {
 		throw new ExcepcionNegocio("El area ya se encuentra registrada");
 	}
-	}
+	}**/
 	
 	/**
 	 * 
@@ -49,8 +49,8 @@ public class AreaEJB {
 	 * @return
 	 */
 
-	public Area buscarArea(String nombre) {
-		Area pa = em.find(Area.class, nombre);
+	public Area buscarArea(int id) {
+		Area pa = em.find(Area.class, id);
 		return pa;
 	}
 	
@@ -59,7 +59,7 @@ public class AreaEJB {
 	 * @param a
 	 */
 	
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	/**@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void modificarArea(Area a){
 		Area p =buscarArea(a.getNombre());
 		if(p!=null){
@@ -68,7 +68,7 @@ public class AreaEJB {
 			throw new ExcepcionNegocio("Ya esta esta cedula de usuario registrado");
 		}
 		
-	}
+	}**/
 	
 	/**
 	 * 
@@ -77,7 +77,7 @@ public class AreaEJB {
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void eliminarArea(Area pa){
-		em.remove(buscarArea(pa.getNombre()));
+		em.remove(buscarArea(pa.getId()));
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)

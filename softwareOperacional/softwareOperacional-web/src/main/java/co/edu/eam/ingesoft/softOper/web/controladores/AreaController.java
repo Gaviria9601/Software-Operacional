@@ -13,6 +13,7 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Messages;
+import org.primefaces.context.RequestContext;
 
 
 import co.edu.eam.ingesoft.softOpe.negocio.beans.AreaEJB;
@@ -37,7 +38,50 @@ public class AreaController implements Serializable {
 	
 	private ArrayList<Area> filtroArea = new ArrayList<Area>();
 	
+	private boolean busco = false;
 	
+	private Area ar;
+	
+	
+	
+	
+	
+	public Area getAr() {
+		return ar;
+	}
+
+	public void setAr(Area ar) {
+		this.ar = ar;
+	}
+
+	public boolean isBusco() {
+		return busco;
+	}
+
+	public void setBusco(boolean busco) {
+		this.busco = busco;
+	}
+
+	public List<Area> getAreas() {
+		return areas;
+	}
+
+	public void setAreas(List<Area> areas) {
+		this.areas = areas;
+	}
+
+	public ArrayList<Area> getFiltroArea() {
+		return filtroArea;
+	}
+
+	public void setFiltroArea(ArrayList<Area> filtroArea) {
+		this.filtroArea = filtroArea;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -79,7 +123,7 @@ public class AreaController implements Serializable {
 	
 	@PostConstruct
 	public void inicializador(){
-		
+		areas = arEJB.listarArea();
 	}
 	
 	public void crear(){
@@ -99,5 +143,45 @@ public class AreaController implements Serializable {
 		       Messages.addGlobalError(e.getMessage());
 			   }
 		}
+	
+	public void resetearFitrosTabla(String id) {
+		RequestContext requestContext = RequestContext.getCurrentInstance();
+		requestContext.execute("PF('vtWidget').clearFilters()");
+	}
+	
+	public void modificar (Area audi) {
+		ar = audi;
+		nombre = audi.getNombre();
+		des = audi.getDescripcion();
+		busco = true;
+	}
+
+	public void editar() {
+		ar.setNombre(nombre);
+		ar.setDescripcion(des);
+		
+		//limpiar();
+		
+		Messages.addGlobalInfo("El area fue modificada con exito");
+		//limpiar();
+	}
+
+
+	/**
+	 * Metodo que elimina un farmaceutico
+	 */
+	/**public void eliminar(Area exa) {
+		try {
+			arEJB.eliminarArea(exa.getId());
+			
+			//limpiar();
+			Messages.addFlashGlobalInfo("Area eliminada correctamente");
+			areas = arEJB.listarArea();
+			resetearFitrosTabla("tablaExamenes");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}**/
+
 
 }

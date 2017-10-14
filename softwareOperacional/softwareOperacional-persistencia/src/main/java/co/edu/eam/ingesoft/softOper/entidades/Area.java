@@ -31,22 +31,17 @@ public class Area implements Serializable{
 	private String nombre;
 	
 	@Column(name="descripcion", length=2000)
-	private String descripcion;
+	private String des;
 	
 	
 
-	 public Area(int id, String nombre, String descripcion) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-	}
+	 
 
 
 	public Area(String nombre, String descripcion) {
 		super();
 		this.nombre = nombre;
-		this.descripcion = descripcion;
+		this.des = descripcion;
 	}
 
 
@@ -87,14 +82,14 @@ public class Area implements Serializable{
 	 * @return the descripcion
 	 */
 	public String getDescripcion() {
-		return descripcion;
+		return des;
 	}
 
 	/**
 	 * @param descripcion the descripcion to set
 	 */
 	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+		this.des = descripcion;
 	}
 
 
