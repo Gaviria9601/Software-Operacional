@@ -1,6 +1,7 @@
 package co.edu.eam.ingesoft.softOper.entidades;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -197,8 +198,7 @@ public class Auditoria implements Serializable{
 	public void setRegistroRealizoAccion(String registroRealizoAccion) {
 		this.registroRealizoAccion = registroRealizoAccion;
 	}
-	
-	
+
 	
 
 }

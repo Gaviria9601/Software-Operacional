@@ -1,6 +1,9 @@
 package co.edu.eam.ingesoft.softOper.web.controladores;
 
 import java.io.Serializable;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +19,7 @@ import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
 @Named("auditoriaControl")
 @ViewScoped
 public class AuditoriaController implements Serializable {
-	
+
 	@EJB
 	private AuditoriaEJB audEJB;
 
@@ -45,6 +48,7 @@ public class AuditoriaController implements Serializable {
 	@PostConstruct
 	public void inicializar() {
 		auditorias = audEJB.listarAuditoriasIdeUsuarios();
+
 	}
 
 	public List<Auditoria> getAuditorias() {
