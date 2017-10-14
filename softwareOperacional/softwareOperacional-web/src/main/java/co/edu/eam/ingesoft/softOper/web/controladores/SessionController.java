@@ -1,8 +1,10 @@
 package co.edu.eam.ingesoft.softOper.web.controladores;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -25,11 +27,11 @@ import co.edu.eam.ingesoft.softOper.entidades.Usuario;
 public class SessionController implements Serializable {
 
 	private String user;
-	
+
 	private String pass;
 
 	private Usuario usuario;
-	
+
 	private String tipoUsuario = "Administrador";
 
 	private Empleado empleado;
@@ -45,7 +47,7 @@ public class SessionController implements Serializable {
 	private String browser;
 
 	private String os;
-	
+
 	private int numVisitas;
 
 	@EJB
@@ -127,8 +129,8 @@ public class SessionController implements Serializable {
 	public boolean isSesionContadora() {
 		return tipoUsuario.equals("Contador") && usuario != null;
 	}
-	
-	public boolean isSesionWindows(){
+
+	public boolean isSesionWindows() {
 		return os.equals("Windows");
 	}
 
@@ -171,7 +173,6 @@ public class SessionController implements Serializable {
 	public void setEmpleado(Empleado empleado) {
 		this.empleado = empleado;
 	}
-	
 
 	public String getIngreso() {
 		return ingreso;
@@ -196,8 +197,7 @@ public class SessionController implements Serializable {
 	public void setOs(String os) {
 		this.os = os;
 	}
-	
-	
+
 	public int getNumVisitas() {
 		return numVisitas;
 	}
@@ -241,7 +241,7 @@ public class SessionController implements Serializable {
 	 * 
 	 */
 	public void identificarNavegadorPeticion() {
-		
+
 		if (userAgent.toLowerCase().indexOf("windows") >= 0) {
 			os = "Windows";
 		} else if (userAgent.toLowerCase().indexOf("mac") >= 0) {
@@ -285,7 +285,7 @@ public class SessionController implements Serializable {
 		} else {
 			browser = "UnKnown, More-Info: " + userAgent;
 		}
-		
+
 	}
 
 }

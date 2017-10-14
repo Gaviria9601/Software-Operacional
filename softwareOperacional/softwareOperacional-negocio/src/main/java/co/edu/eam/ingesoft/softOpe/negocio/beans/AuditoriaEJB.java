@@ -38,6 +38,15 @@ public class AuditoriaEJB {
 	}
 	
 	/**
+	 * 
+	 * @return
+	 */
+	public List<Auditoria> listarAuditoriasIdeUsuarios(){
+		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA_ID_USU).setParameter(1, "Identificacion Usuario")
+				.getResultList();
+	}
+	
+	/**
 	 * Genera la fecha actual del sistema
 	 * @return
 	 */
