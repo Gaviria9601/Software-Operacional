@@ -2,10 +2,12 @@ package co.edu.eam.ingesoft.softOpe.negocio.beans;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -15,9 +17,9 @@ import co.edu.eam.ingesoft.softOper.entidades.Empleado;
 @Stateless
 public class EmpleadoEJB {
 
-	@PersistenceContext
+	@PersistenceContext(unitName = Conexion.OPCION )
 	private EntityManager em;
-	
+
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public Empleado buscarEmpleado(int usuario) {
 		List<Empleado> empleado = em.createNamedQuery(Empleado.BUSQUEDA__POR_USUARIO).setParameter(1, usuario)
@@ -28,5 +30,5 @@ public class EmpleadoEJB {
 			return null;
 		}
 	}
-	
+
 }
