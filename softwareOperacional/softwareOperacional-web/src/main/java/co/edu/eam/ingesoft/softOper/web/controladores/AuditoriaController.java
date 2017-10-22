@@ -1,10 +1,11 @@
 package co.edu.eam.ingesoft.softOper.web.controladores;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -58,5 +59,7 @@ public class AuditoriaController implements Serializable {
 	public void setAuditorias(List<Auditoria> auditorias) {
 		this.auditorias = auditorias;
 	}
+	
+	
 
 }
