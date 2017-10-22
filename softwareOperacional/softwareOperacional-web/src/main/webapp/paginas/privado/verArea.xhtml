@@ -7,7 +7,7 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 	<ui:define name="cuerpo">
-		
+		<h:form prependId="false">
 
 			<h2 class="title-style-1">
 				Buscar Areas<span class="title-under"></span>
@@ -15,27 +15,24 @@
 			
 			<p:dataTable id="tablaIdUsuarios" var="audi"
 			value="#{areaControlador.areas}" widgetVar="audiTable"
-			
 			multiViewState="true" rows="10" paginator="true"
 			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-			rowsPerPageTemplate="10,30,50" selectionMode="single"
+			rowsPerPageTemplate="10,30,50" 
 			selection="#{areaControlador.ar}" rowKey="#{audi.nombre}"
 			emptyMessage="No se encontraron areas con estos criterios dados."
-			filteredValue="#{areaControlador.filtroArea}" border="1">
+			filterBy="#{areaControlador.filtroArea}" border="1">
 			
 			
 			<p:column>
-                <p:commandButton action="#{areaControlador.modificar(audi)}"
+                <p:commandButton action="#{areaControlador.modificar(audi)}" 
 							process="@this,datosExamen,tablaIdUsuarios" value="Modificar"
 							update="datosExamen,paneloculto,paneldatos1" />
 			</p:column>
-				  
-			<p:commandButton action="#{MedicamentosControlador.modificarMedicamento(exa)}"
-							process="@this,panelexamen" value="Modificar"
-							update="datosExamen,paneloculto" />
 			
-			<p:column selectionMode="multiple"
-				style="width:40px;text-align:center" />
+			<p:column>
+			<button type="button" class="btn btn-default"><img src="Favicon.png"/></button>
+            </p:column>
+			
 
 			<p:column headerText="Nombre" sortBy="#{audi.nombre}"
 				filterBy="#{audi.nombre}" filterMatchMode="contains">
@@ -90,6 +87,6 @@
 				</p:panelGrid>
 			</p:panel>
 				
-			
+			</h:form>
          </ui:define>
 </ui:composition>

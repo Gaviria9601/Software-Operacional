@@ -1,0 +1,73 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateContenido.xhtml">
+
+	<ui:define name="cuerpo">
+		<h:form prependId="false">
+			<h2>
+				Auditaria de area <small>Registro Auditoria realizada en areas</small>
+			</h2>
+
+			<p:dataTable id="tablaIdUsuarios" var="audi"
+				value="#{auditoriaControl.auditorias}" widgetVar="audiTable"
+				multiViewState="true" rows="10" paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="10,30,50"
+				selection="#{auditoriaControl.selectedAudi}" rowKey="#{audi.codigo}"
+				emptyMessage="No se encontraron identificación de usuarios con criterios dados."
+				filteredValue="#{auditoriaControl.filtroAuditoria}" border="1">
+				<f:facet name="header">
+					<p:outputPanel>
+						<h:outputText value="Buscar en todos los campos:" />
+						<p:inputText id="globalFilter" onkeyup="PF('audiTable').filter()"
+							style="width:180px" placeholder="Inserte palabra clave" />
+					</p:outputPanel>
+				</f:facet>
+
+				<p:column selectionMode="single"
+					style="width:40px;text-align:center" />
+
+				<p:column headerText="Fecha Hora" sortBy="#{audi.fechaHora}"
+					filterBy="#{audi.fechaHora}" filterMatchMode="contains">
+					<h:outputLabel value="#{audi.fechaHora}" />
+				</p:column>
+
+				<p:column headerText="Estado Ingreso" sortBy="#{audi.ingreso}"
+					filterBy="#{audi.ingreso}" filterMatchMode="exact">
+					<f:facet name="filter">
+						<h:selectOneMenu onchange="PF('audiTable').filter()">
+							<f:selectItem itemLabel="Seleccione Uno" itemValue="#{null}"
+								noSelectionOption="true" />
+							<f:selectItem itemLabel="Ingreso" itemValue="Ingreso"/>
+							<f:selectItem itemLabel="No ingreso - El Usuario no existe" itemValue="No ingreso - El Usuario no existe"/>
+							<f:selectItem itemLabel="No ingreso - Contraseña mal Ingresada" itemValue="No ingreso - Contraseña mal Ingresada"/>
+						</h:selectOneMenu>
+					</f:facet>
+					<h:outputLabel value="#{audi.ingreso}" />
+				</p:column>
+
+				<p:column headerText="Sistema Operativo" sortBy="#{audi.origen}"
+					filterBy="#{audi.origen}" filterMatchMode="contains">
+					<h:outputLabel value="#{audi.origen}" />
+				</p:column>
+
+				<p:column headerText="Navegador" sortBy="#{audi.navegador}"
+					filterBy="#{audi.navegador}" filterMatchMode="contains">
+					<h:outputLabel value="#{audi.navegador}" />
+				</p:column>
+
+				<p:column headerText="Usuario" sortBy="#{audi.usuario.nombre}"
+					filterBy="#{audi.usuario.nombre}" filterMatchMode="contains">
+					<h:outputLabel value="#{audi.usuario.nombre}" />
+					<h:outputLabel value="Nadie" rendered="#{audi.usuario == null}" />
+				</p:column>
+
+
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

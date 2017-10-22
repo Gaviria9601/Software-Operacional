@@ -19,7 +19,8 @@ import javax.persistence.TemporalType;
 @Table(name="Auditoria")
 @NamedQueries({
 	@NamedQuery(name=Auditoria.LISTAR_AUDITORIA_ID_USUARIOS,query="select aud from Auditoria aud where aud.ingreso = ?1 and aud.registroRealizoAccion = ?2"),
-	@NamedQuery(name=Auditoria.LISTAR_AUDITORIA_ID_USU,query="select aud from Auditoria aud where aud.registroRealizoAccion = ?1")
+	@NamedQuery(name=Auditoria.LISTAR_AUDITORIA_ID_USU,query="select aud from Auditoria aud where aud.registroRealizoAccion = ?1"),
+	@NamedQuery (name=Auditoria.LISTAR_AUDITORIA_AREA, query="select aud from Auditoria aud where aud.registroRealizoAccion = 'area' ")
 })
 public class Auditoria implements Serializable{
 	
@@ -27,6 +28,7 @@ public class Auditoria implements Serializable{
 	
 	public static final String LISTAR_AUDITORIA_ID_USU = "Auditoria.ListarAuditoriaIdUsu";
 	
+	public static final String LISTAR_AUDITORIA_AREA = "Auditoria.ListarArea";
 	@Id
 	@Column(name="codigo", nullable=false)
 	private int codigo;
@@ -58,6 +60,23 @@ public class Auditoria implements Serializable{
 	public Auditoria(){
 	}
 	
+	
+	
+	public Auditoria(int codigo, Date fechaHora, String ingreso, String origen, String navegador, String accion,
+			String registroRealizoAccion, Usuario usuario) {
+		super();
+		this.codigo = codigo;
+		this.fechaHora = fechaHora;
+		this.ingreso = ingreso;
+		this.origen = origen;
+		this.navegador = navegador;
+		this.accion = accion;
+		this.registroRealizoAccion = registroRealizoAccion;
+		this.usuario = usuario;
+	}
+
+
+
 	/**
 	 * @return the codigo
 	 */
