@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import org.omnifaces.cdi.ViewScoped;
@@ -15,12 +17,17 @@ import org.primefaces.model.DualListModel;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.AuditoriaEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.ClienteEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.ProductoEJB;
+import co.edu.eam.ingesoft.softOpe.negocio.beans.VentaEJB;
+import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
 import co.edu.eam.ingesoft.softOper.entidades.Cliente;
 import co.edu.eam.ingesoft.softOper.entidades.Producto;
+import co.edu.eam.ingesoft.softOper.entidades.Venta;
 
 @Named("ventaController")
 @ViewScoped
 public class VentaController implements Serializable {
+	
+	private Venta selectedVenta;
 
 	private Cliente cliente;
 
@@ -31,6 +38,10 @@ public class VentaController implements Serializable {
 	private Date fecha;
 
 	private int cantidadProducto;
+	
+	private List<Venta> ventas;
+	
+	private ArrayList<Venta> filtroVenta = new ArrayList<Venta>();
 
 	@EJB
 	private ClienteEJB cliEJB;
@@ -40,6 +51,34 @@ public class VentaController implements Serializable {
 
 	@EJB
 	private ProductoEJB proEJB;
+	
+	@EJB
+	private VentaEJB venEJB;
+	
+	
+	public ArrayList<Venta> getFiltroVenta() {
+		return filtroVenta;
+	}
+
+	public void setFiltroVenta(ArrayList<Venta> filtroVenta) {
+		this.filtroVenta = filtroVenta;
+	}
+
+	public Venta getSelectedVenta() {
+		return selectedVenta;
+	}
+
+	public void setSelectedVenta(Venta selectedVenta) {
+		this.selectedVenta = selectedVenta;
+	}
+
+	public List<Venta> getVentas() {
+		return ventas;
+	}
+
+	public void setVentas(List<Venta> ventas) {
+		this.ventas = ventas;
+	}
 
 	public List<Cliente> getClientes() {
 		return clientes;
@@ -84,6 +123,7 @@ public class VentaController implements Serializable {
 	@PostConstruct
 	public void inicializar() {
 		clientes = cliEJB.listarClientes();
+		ventas = venEJB.listarVentas();
 		List<Producto> productosSource = proEJB.listarProductos();
 		List<Producto> productosTarget = new ArrayList<Producto>();
 		productos = new DualListModel<Producto>(productosSource, productosTarget);
@@ -105,6 +145,14 @@ public class VentaController implements Serializable {
 	public Date generarFechaActual() {
 		return audEJB.generarFechaActual();
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String procederEditar(){
+		return "/paginas/privado/editarVenta.xhtml?faces-redirect=true";
+	}
 
 	/**
 	 * 
@@ -124,5 +172,5 @@ public class VentaController implements Serializable {
 
 		return filteredThemes;
 	}
-
+	
 }
