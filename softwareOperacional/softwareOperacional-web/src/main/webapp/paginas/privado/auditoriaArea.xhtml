@@ -1,0 +1,50 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateContenido.xhtml"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+	<ui:define name="cuerpo">
+		<h:form prependId="false">
+
+			<h2 class="title-style-1">
+				Buscar Areas<span class="title-under"></span>
+			</h2>
+			
+			<p:dataTable id="tablaIdUsuarios" var="audi"
+			value="#{areaControlador.areas}" widgetVar="audiTable"
+			multiViewState="true" rows="10" paginator="true"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="10,30,50" 
+			selection="#{areaControlador.ar}" rowKey="#{audi.nombre}"
+			emptyMessage="No se encontraron areas con estos criterios dados."
+			filterBy="#{areaControlador.filtroArea}" border="1">
+			
+			
+			<p:column style="width:60px;text-align:center">
+			<p:button action="#{areaControlador.procederEditar()}"  update="tablaIdUsuarios" 
+			icon="icon ui-icon-pencil" process="@this"> </p:button>
+			</p:column>
+			
+			<p:column headerText="Nombre" sortBy="#{audi.nombre}" 
+				filterBy="#{audi.nombre}" filterMatchMode="contains">
+				<h:outputLabel value="#{audi.nombre}" />
+			</p:column>
+
+			<p:column headerText="Descripción" >
+				<h:outputLabel value="#{audi.descripcion}" />
+			</p:column>
+			
+			
+          	<p:column style="width:60px;text-align:center">
+					<p:commandButton action="#{areaControlador.eliminarA(audi)}"
+							process="@this" update="tablaIdUsuarios"   icon="ui-icon-trash" />
+				</p:column>
+
+		</p:dataTable>
+				
+			</h:form>
+         </ui:define>
+</ui:composition>

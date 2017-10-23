@@ -196,7 +196,7 @@ public class TipoUsuarioController implements Serializable {
 		// limpiar();
 	}
 	
-	public void eliminar(){
+	public void eliminar(TipoUsuario tipo){
 		
 		tipousuejb.eliminarTipoUsuario(tipoUsu);
 		Messages.addGlobalInfo("El tipo de usuario fue eliminado con exito");
