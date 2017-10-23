@@ -94,108 +94,112 @@
 					<br />
 					<p:separator />
 					<div class="form-group">
-					
-							<p:pickList id="Producto" value="#{ventaEditController.productos}"
-								var="pro" effect="bounce" itemValue="#{pro}"
-								itemLabel="#{pro.nombre}" showSourceControls="true"
-								showTargetControls="true" showCheckbox="true" responsive="true"
-								showSourceFilter="true" showTargetFilter="true"
-								filterMatchMode="contains" converter="productoConverter">
 
-								<f:facet name="sourceCaption">Productos</f:facet>
-								<f:facet name="targetCaption">Productos en Lista</f:facet>
+						<p:pickList id="Producto" value="#{ventaEditController.productos}"
+							var="pro" effect="bounce" itemValue="#{pro}"
+							itemLabel="#{pro.nombre}" showSourceControls="true"
+							showTargetControls="true" showCheckbox="true" responsive="true"
+							showSourceFilter="true" showTargetFilter="true"
+							filterMatchMode="contains" converter="productoConverter">
 
-								<p:ajax event="transfer" process="@this,cant"
-									listener="#{ventaEditController.onTransfer}"
-									update="detalleVenta,totalVenta,cant,detalleProducto" />
-								<p:ajax event="select" listener="#{ventaEditController.onSelect}"
-									update="detalleProducto" />
-								<p:ajax event="unselect"
-									listener="#{ventaEditController.onUnselect}"
-									update="detalleProducto" />
+							<f:facet name="sourceCaption">Productos</f:facet>
+							<f:facet name="targetCaption">Productos en Lista</f:facet>
 
-								<p:column style="width:90%;">
-									<i class="fa fa-truck"></i>
-									<h:outputText value=" #{pro.nombre}" />
-								</p:column>
-							</p:pickList>
-							<div class="row">
-								<div class="col-xs-4 col-md-4"></div>
-								<div class="col-xs-4 col-md-4 text-center">
-									<label> Cantidad: </label>
-									<p:inputText id="cant"
-										value="#{ventaEditController.cantidadProducto}" cols="15"
-										style="width: 15%" />
-									<p:slider for="cant" />
-								</div>
+							<p:ajax event="transfer" process="@this,cant"
+								listener="#{ventaEditController.onTransfer}"
+								update="detalleVenta,totalVenta,cant,detalleProducto" />
+							<p:ajax event="select" listener="#{ventaEditController.onSelect}"
+								update="detalleProducto" />
+							<p:ajax event="unselect"
+								listener="#{ventaEditController.onUnselect}"
+								update="detalleProducto" />
+
+							<p:column style="width:90%;">
+								<i class="fa fa-truck"></i>
+								<h:outputText value=" #{pro.nombre}" />
+							</p:column>
+						</p:pickList>
+						<div class="row">
+							<div class="col-xs-4 col-md-4"></div>
+							<div class="col-xs-4 col-md-4 text-center">
+								<label> Cantidad: </label>
+								<p:inputText id="cant"
+									value="#{ventaEditController.cantidadProducto}" cols="15"
+									style="width: 15%" />
+								<p:slider for="cant" />
 							</div>
-							<div class="row">
+						</div>
+						<div class="row">
 
-								<div class="col-xs-3 col-md-3"></div>
-								<div class="col-xs-3 col-md-3 text-center">
+							<div class="col-xs-3 col-md-3"></div>
+							<div class="col-xs-3 col-md-3 text-center">
 
-									<br />
-									<p:fieldset id="detalleProducto" style="width:525px">
-										<legend>
-											<i class="icon ion-clipboard"> </i> Detalle Producto
-										</legend>
-										<div class="box-body">
-											<!-- Date dd/mm/yyyy -->
-											<div class="form-group">
-												<label>Información General</label>
-												<div class="input-group">
-													<div class="input-group-addon">
-														<i class="fa fa-tasks"></i>
-													</div>
-													<p:inputTextarea disabled="true"
-														value="#{ventaEditController.infoGeneral}"
-														class="form-control" rows="3" cols="13" />
+								<br />
+								<p:fieldset id="detalleProducto" style="width:525px">
+									<legend>
+										<i class="icon ion-clipboard"> </i> Detalle Producto
+									</legend>
+									<div class="box-body">
+										<!-- Date dd/mm/yyyy -->
+										<div class="form-group">
+											<label>Información General</label>
+											<div class="input-group">
+												<div class="input-group-addon">
+													<i class="fa fa-tasks"></i>
 												</div>
-												<!-- /.input group -->
+												<p:inputTextarea disabled="true"
+													value="#{ventaEditController.infoGeneral}"
+													class="form-control" rows="3" cols="13" />
 											</div>
-											<!-- /.form group -->
-
-											<!-- Date mm/dd/yyyy -->
-											<div class="form-group">
-												<label>Cantidad Sobrantes</label>
-												<div class="input-group">
-													<div class="input-group-addon">
-														<i class="fa fa-sort-amount-desc"></i>
-													</div>
-													<h:inputText disabled="true"
-														value="#{ventaEditController.cantSobrantes}"
-														class="form-control" />
-												</div>
-												<!-- /.input group -->
-											</div>
-											<!-- /.form group -->
-
-
-											<!-- phone mask -->
-											<div class="form-group">
-												<label>Valor</label>
-												<div class="input-group">
-													<div class="input-group-addon">
-														<i class="fa fa-money"></i>
-													</div>
-													<p:inputText disabled="true"
-														value="#{ventaEditController.valorProducto}"
-														class="form-control" />
-												</div>
-												<!-- /.input group -->
-											</div>
-											<!-- /.form group -->
+											<!-- /.input group -->
 										</div>
-									</p:fieldset>
-								</div>
-							</div>
-							<div class="box-footer">
-								<p:commandButton value="Editar Venta" ajax="false"
-									update="paneloculto,paneloculto2,detalleVenta,detalleProducto"
-									class="btn btn-primary" action="#{ventaEditController.editar}" />
+										<!-- /.form group -->
 
+										<!-- Date mm/dd/yyyy -->
+										<div class="form-group">
+											<label>Cantidad Sobrantes</label>
+											<div class="input-group">
+												<div class="input-group-addon">
+													<i class="fa fa-sort-amount-desc"></i>
+												</div>
+												<h:inputText disabled="true"
+													value="#{ventaEditController.cantSobrantes}"
+													class="form-control" />
+											</div>
+											<!-- /.input group -->
+										</div>
+										<!-- /.form group -->
+
+
+										<!-- phone mask -->
+										<div class="form-group">
+											<label>Valor</label>
+											<div class="input-group">
+												<div class="input-group-addon">
+													<i class="fa fa-money"></i>
+												</div>
+												<p:inputText disabled="true"
+													value="#{ventaEditController.valorProducto}"
+													class="form-control" />
+											</div>
+											<!-- /.input group -->
+										</div>
+										<!-- /.form group -->
+									</div>
+								</p:fieldset>
 							</div>
-						
+						</div>
+						<div class="box-footer">
+							<p:commandButton value="Editar Venta" ajax="false"
+								update="paneloculto,detalleVenta,detalleProducto"
+								class="btn btn-primary" action="#{ventaEditController.editar}" />
+
+							<p:commandButton value="Cancelar" ajax="false"
+								update="paneloculto,detalleVenta,detalleProducto"
+								class="btn btn-danger" action="#{ventaEditController.cancelar}" />
+
+						</div>
+
 					</div>
 				</div>
 				<!-- /.box-body -->

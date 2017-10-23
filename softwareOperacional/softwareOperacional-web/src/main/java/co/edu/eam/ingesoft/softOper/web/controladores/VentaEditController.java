@@ -247,6 +247,18 @@ public class VentaEditController implements Serializable {
 		return "/paginas/privado/verVenta.xhtml?faces-redirect=true";
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
+	public String cancelar(){
+		return "/paginas/privado/verVenta.xhtml?faces-redirect=true";
+	}
+	
+	/**
+	 * 
+	 * @param accion
+	 */
 	public void registrarAuditoria(String accion) {
 		try {
 			Auditoria audi = new Auditoria();

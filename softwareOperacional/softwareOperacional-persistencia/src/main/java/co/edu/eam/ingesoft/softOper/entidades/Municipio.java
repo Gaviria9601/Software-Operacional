@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Table(name = "Municipio")
 @NamedQueries({
     @NamedQuery (name=Municipio.LISTAR_MUNI, query="select a from Municipio a"),
-    @NamedQuery (name=Municipio.LISTAR_MUNIPorDepto, query="select a from Municipio a where a.departamento.id = ?1")
+    @NamedQuery (name=Municipio.LISTAR_MUNIPorDepto, query="select a from Municipio a where a.departamento.nombre = ?1")
   
 })
 public class Municipio implements Serializable{

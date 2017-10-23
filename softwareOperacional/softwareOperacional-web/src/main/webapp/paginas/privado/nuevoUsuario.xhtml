@@ -77,27 +77,34 @@
 						</div>
 
 						<div class="form-group">
-							<label for="tfdep">Departamento</label> <br></br>
-							<h:selectOneMenu id="dep"
-								value="#{usuarioController.departamento}">
-								<f:selectItems value="#{usuarioController.departamentos}"
-									var="f" itemValue="#{f}" itemLabel="#{f.nombre}"/>
-								<f:ajax event="change" execute="@this" render="muni"
-									listener="#{usuarioController.seleccionarDepto}"/>
+							<label for="cbdep">Departamento</label> <br></br>
+							
+							<h:selectOneMenu id="cbdep"
+								value="#{usuarioController.departamento}" style="width:150px">
+								<p:ajax listener="#{usuarioController.onDepartamentoChange}"
+									update="cbmuni" />
+								<f:selectItem itemLabel="Seleccione el Departamento"
+									itemValue="" noSelectionOption="true" />
+								<f:selectItems value="#{usuarioController.departamentos}" var="dep"
+							itemValue="#{dep.nombre}" itemLabel="#{dep.nombre}" />
 							</h:selectOneMenu>
-							<p:message for="dep"></p:message>
+
+							<p:message for="cbdep"></p:message>
 						</div>
 
 
 						<div class="form-group">
 							<label for="muni">Municipio</label> <br></br>
 
-							<h:selectOneMenu id="muni" value="#{usuarioController.municipio}">
+							<h:selectOneMenu id="cbmuni" value="#{usuarioController.municipio}"
+								style="width:150px">
 
-								<f:selectItems value="#{usuarioController.municipios}" var="m"
-								itemLabel="#{m.nombre}" itemValue="#{m}"
-								/>
-								</h:selectOneMenu>
+								<f:selectItem itemLabel="Seleccione Ciudad" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems value="#{usuarioController.municipios}" var="muni"
+							itemValue="#{muni.nombre}" itemLabel="#{muni.nombre}"/>
+
+							</h:selectOneMenu>
 						</div>
 
 						<div class="form-group">

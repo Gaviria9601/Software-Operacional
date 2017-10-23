@@ -67,8 +67,8 @@ public class EmpleadoEJB {
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
-	public List<Municipio> listarMuniporDepto(Departamento depto){
-		return em.createNamedQuery(Municipio.LISTAR_MUNIPorDepto).setParameter(1, depto.getId()).getResultList();
+	public List<Municipio> listarMuniporDepto(String depto){
+		return em.createNamedQuery(Municipio.LISTAR_MUNIPorDepto).setParameter(1, depto).getResultList();
 	}
 	
 }

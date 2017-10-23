@@ -3,6 +3,7 @@ package co.edu.eam.ingesoft.softOper.web.controladores;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -55,9 +56,9 @@ public class UsuarioController implements Serializable {
 
 	private int usuario;
 
-	private Municipio municipio;
+	private String municipio;
 
-	private Departamento departamento;
+	private String departamento;
 
 	private List<Empleado> empleados;
 
@@ -310,13 +311,12 @@ public class UsuarioController implements Serializable {
 		departamentos = empleadoejb.listardepartamentos();
 	}
 
-	public void seleccionarDepto() {
-		if (departamento != null) {
-			System.out.println(departamento.getNombre());
+	public void onDepartamentoChange() {
+		if (departamento != null && !departamento.equals(""))
 			municipios = empleadoejb.listarMuniporDepto(departamento);
-		}
 	}
 
+	
 	/**
 	 * @return the municipios
 	 */
@@ -362,34 +362,22 @@ public class UsuarioController implements Serializable {
 		this.departamentos = departamentos;
 	}
 
-	/**
-	 * @return the municipio
-	 */
-	public Municipio getMunicipio() {
+
+	public String getMunicipio() {
 		return municipio;
 	}
 
-	/**
-	 * @param municipio
-	 *            the municipio to set
-	 */
-	public void setMunicipio(Municipio municipio) {
+	public void setMunicipio(String municipio) {
 		this.municipio = municipio;
 	}
 
-	/**
-	 * @return the departamento
-	 */
-	public Departamento getDepartamento() {
+	public String getDepartamento() {
 		return departamento;
 	}
 
-	/**
-	 * @param departamento
-	 *            the departamento to set
-	 */
-	public void setDepartamento(Departamento departamento) {
+	public void setDepartamento(String departamento) {
 		this.departamento = departamento;
 	}
 
+	
 }
