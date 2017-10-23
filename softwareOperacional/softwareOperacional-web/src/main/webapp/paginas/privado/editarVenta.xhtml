@@ -87,14 +87,6 @@
 										</div>
 										<!-- /.form group -->
 									</div>
-									<h:panelGroup id="paneloculto2"
-										rendered="#{!ventaController.empezar}">
-										<div class="box-footer">
-											<p:commandButton value="Empezar Venta" ajax="false"
-												process="@this,detalleVenta" update="paneloculto"
-												action="#{ventaController.empezarVenta}" />
-										</div>
-									</h:panelGroup>
 								</p:fieldset>
 							</div>
 						</div>
@@ -102,10 +94,8 @@
 					<br />
 					<p:separator />
 					<div class="form-group">
-						<h:panelGroup id="paneloculto"
-							rendered="#{ventaController.empezar}">
-
-							<p:pickList id="Producto" value="#{ventaController.productos}"
+					
+							<p:pickList id="Producto" value="#{ventaEditController.productos}"
 								var="pro" effect="bounce" itemValue="#{pro}"
 								itemLabel="#{pro.nombre}" showSourceControls="true"
 								showTargetControls="true" showCheckbox="true" responsive="true"
@@ -116,12 +106,12 @@
 								<f:facet name="targetCaption">Productos en Lista</f:facet>
 
 								<p:ajax event="transfer" process="@this,cant"
-									listener="#{ventaController.onTransfer}"
+									listener="#{ventaEditController.onTransfer}"
 									update="detalleVenta,totalVenta,cant,detalleProducto" />
-								<p:ajax event="select" listener="#{ventaController.onSelect}"
+								<p:ajax event="select" listener="#{ventaEditController.onSelect}"
 									update="detalleProducto" />
 								<p:ajax event="unselect"
-									listener="#{ventaController.onUnselect}"
+									listener="#{ventaEditController.onUnselect}"
 									update="detalleProducto" />
 
 								<p:column style="width:90%;">
@@ -134,7 +124,7 @@
 								<div class="col-xs-4 col-md-4 text-center">
 									<label> Cantidad: </label>
 									<p:inputText id="cant"
-										value="#{ventaController.cantidadProducto}" cols="15"
+										value="#{ventaEditController.cantidadProducto}" cols="15"
 										style="width: 15%" />
 									<p:slider for="cant" />
 								</div>
@@ -158,7 +148,7 @@
 														<i class="fa fa-tasks"></i>
 													</div>
 													<p:inputTextarea disabled="true"
-														value="#{ventaController.infoGeneral}"
+														value="#{ventaEditController.infoGeneral}"
 														class="form-control" rows="3" cols="13" />
 												</div>
 												<!-- /.input group -->
@@ -173,7 +163,7 @@
 														<i class="fa fa-sort-amount-desc"></i>
 													</div>
 													<h:inputText disabled="true"
-														value="#{ventaController.cantSobrantes}"
+														value="#{ventaEditController.cantSobrantes}"
 														class="form-control" />
 												</div>
 												<!-- /.input group -->
@@ -189,7 +179,7 @@
 														<i class="fa fa-money"></i>
 													</div>
 													<p:inputText disabled="true"
-														value="#{ventaController.valorProducto}"
+														value="#{ventaEditController.valorProducto}"
 														class="form-control" />
 												</div>
 												<!-- /.input group -->
@@ -200,13 +190,12 @@
 								</div>
 							</div>
 							<div class="box-footer">
-								<p:commandButton value="Terminar Venta" ajax="false"
+								<p:commandButton value="Editar Venta" ajax="false"
 									update="paneloculto,paneloculto2,detalleVenta,detalleProducto"
-									class="btn btn-primary" action="#{ventaController.terminar}" />
+									class="btn btn-primary" action="#{ventaEditController.editar}" />
 
 							</div>
-						</h:panelGroup>
-
+						
 					</div>
 				</div>
 				<!-- /.box-body -->

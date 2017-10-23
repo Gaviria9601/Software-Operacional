@@ -17,11 +17,14 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "Producto")
 @NamedQueries({
-	@NamedQuery(name=Producto.LISTAR_PRODUCTOS,query="select pro from Producto pro")
+	@NamedQuery(name=Producto.LISTAR_PRODUCTOS,query="select pro from Producto pro"),
+	@NamedQuery(name=Producto.LISTAR_PRODUCTOS_DIF,query="select pro from Producto pro where pro.codigo<>?1")
 })
 public class Producto implements Serializable {
 	
 	public static final String LISTAR_PRODUCTOS = "ListarProductos";
+	
+	public static final String LISTAR_PRODUCTOS_DIF = "ListarProductosDif";
 	
 	
 	@Id

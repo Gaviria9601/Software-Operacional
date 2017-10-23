@@ -378,9 +378,9 @@ public class VentaController implements Serializable {
 		try {
 			venEJB.eliminarVenta(venta.getCodigo());
 			ventas = venEJB.listarVentas();
-			Messages.addFlashGlobalInfo("Se ha eliminado la venta correctamente");
 			resetearFitrosTabla();
 			registrarAuditoria("Eliminar");
+			Messages.addFlashGlobalInfo("Se ha eliminado la venta correctamente");
 		} catch (Exception e) {
 			Messages.addFlashGlobalError("Error al eliminar la venta");
 		}

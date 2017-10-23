@@ -68,7 +68,7 @@ public class ProductoVentaEJB {
 	 * @param codigo
 	 * @return
 	 */
-	public List<Producto> listarProductosVenta(int codigo){
+	public List<ProductoVenta> listarProductosVenta(int codigo){
 		return em.createNamedQuery(ProductoVenta.LISTAR_PRODUCTOS_VENTA).setParameter(1, codigo).getResultList();
 	}
 
