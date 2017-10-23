@@ -9,7 +9,7 @@ import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-
+import co.edu.eam.ingesoft.softOper.entidades.Area;
 import co.edu.eam.ingesoft.softOper.entidades.Cliente;
 import co.edu.eam.ingesoft.softOper.entidades.Municipio;
 
@@ -31,10 +31,19 @@ public class ClienteEJB {
 		return em.find(Cliente.class, codigo);
 	}
 	
+	public Municipio buscarMunicipio(int codigo){
+		return em.find(Municipio.class, codigo);
+	}
+	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void crearCliente(Cliente c){
 		 em.persist(c);
 		
+	}
+	
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void eliminar(Integer codigo){
+		em.remove(em.find(Cliente.class, codigo));
 	}
 	/**
 	 * 
@@ -43,6 +52,13 @@ public class ClienteEJB {
 	public List<Cliente> listarClientes() {
 		return em.createNamedQuery(Cliente.LISTAR_CLIENTES).getResultList();
 		
+	}
+	
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	public List<Cliente> listarCli() {
+		List<Cliente> lista;
+		lista = em.createNamedQuery(Cliente.LISTAR_CLIENTES).getResultList();
+		return lista;
 	}
 
 	

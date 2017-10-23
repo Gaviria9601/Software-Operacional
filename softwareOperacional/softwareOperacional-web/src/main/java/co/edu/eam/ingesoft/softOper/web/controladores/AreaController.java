@@ -305,19 +305,6 @@ public class AreaController implements Serializable {
 	
 	}
 
-	/*public void eliminar(Area audi) {
-		try {
-			arEJB.eliminarArea(audi.getNombre());
-			limpiar();
-			registrarAuditoria("Eliminar");
-			Messages.addFlashGlobalInfo("Se ha eliminado la area");			
-			areas = arEJB.listarArea();
-			resetearFitrosTabla("tablaIdUsuarios");
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-	}**/
 	public void resetearFitrosTabla() {
 		RequestContext requestContext = RequestContext.getCurrentInstance();
 		requestContext.execute("PF('audiTable').clearFilters()");

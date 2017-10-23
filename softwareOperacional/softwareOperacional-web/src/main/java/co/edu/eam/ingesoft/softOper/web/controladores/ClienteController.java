@@ -1,6 +1,7 @@
 package co.edu.eam.ingesoft.softOper.web.controladores;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import org.hibernate.validator.constraints.Length;
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
+import org.primefaces.context.RequestContext;
 
 import co.edu.eam.ingesoft.softOpe.negocio.beans.AuditoriaEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.ClienteEJB;
@@ -46,14 +48,46 @@ public class ClienteController implements Serializable {
 
 
 	private String genero;
+	
+	private Cliente clie;
 
 	private Municipio municipio;
 	
-	 private List<Municipio> muni;
+	private List<Cliente> cliente;
+	
+	private ArrayList<Cliente> filtroCliente = new ArrayList<Cliente>();
+	
+	private List<Municipio> muni;
 
 	// auditoria
+	
+	
 
 	private Usuario usuario;
+
+	public Cliente getClie() {
+		return clie;
+	}
+
+	public void setClie(Cliente clie) {
+		this.clie = clie;
+	}
+
+	public ArrayList<Cliente> getFiltroCliente() {
+		return filtroCliente;
+	}
+
+	public void setFiltroCliente(ArrayList<Cliente> filtroCliente) {
+		this.filtroCliente = filtroCliente;
+	}
+
+	public List<Cliente> getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(List<Cliente> cliente) {
+		this.cliente = cliente;
+	}
 
 	private Empleado empleado;
 
@@ -231,6 +265,7 @@ public class ClienteController implements Serializable {
 	@PostConstruct
 	public void inicializador() {
 		muni = cliEJB.listarMuni();
+	    cliente = cliEJB.listarCli();
 
 	}
 	
@@ -252,26 +287,54 @@ public class ClienteController implements Serializable {
 		this.sesion = sesion;
 	}
 
+	
 	public void crear() {
 		try {
+			Municipio m = cliEJB.buscarMunicipio(1);
 			Cliente c = new Cliente();
 			c.setNombre(nombre);
 			c.setApellido(apellido);
 			c.setFechaNacimiento(fechanaci);
 			c.setCedula(cedula);
 			c.setGenero(genero);
-			c.setMunicipioId(municipio);
+			c.setMunicipioId(m);
 
 			cliEJB.crearCliente(c);
 			registrarAuditoria("Crear");
-			// limpiar();
+			limpiar();
 			Messages.addFlashGlobalInfo("Cliente ingresado Correctamente");
 
 		} catch (ExcepcionNegocio e) {
 			Messages.addGlobalError(e.getMessage());
 		}
 	}
+	
+	public void resetearFitrosTabla() {
+		RequestContext requestContext = RequestContext.getCurrentInstance();
+		requestContext.execute("PF('audiTable').clearFilters()");
+	}
+	
+public void eliminar(Cliente venta) {
+		
+		try {
+			cliEJB.eliminar(venta.getCodigo());
+			cliente = cliEJB.listarClientes();
+			Messages.addFlashGlobalInfo("Se ha eliminado el cliente correctamente");
+			resetearFitrosTabla();
+			registrarAuditoria("Eliminar");
+		} catch (Exception e) {
+			Messages.addFlashGlobalError("Error al eliminar el cliente");
+		}
+	}
 
+	public void limpiar(){
+		nombre = "";
+		apellido = "";
+		fechanaci = null;
+		cedula = "";
+		genero  = "";
+		
+	}
 	public void registrarAuditoria(String accion) {
 		try {
 			Auditoria audi = new Auditoria();
