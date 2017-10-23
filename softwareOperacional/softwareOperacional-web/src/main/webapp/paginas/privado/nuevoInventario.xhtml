@@ -9,7 +9,7 @@
 	<ui:define name="cuerpo">
 
 		<h2>
-			Inventario <small> Nuevo Inventario</small>
+			Inventario <small> Nuevo Producto</small>
 		</h2>
 
 		<div class="box box-primary">
@@ -34,7 +34,9 @@
 						<label for="tftipoPro">Tipo de Producto</label> <br></br>
 						<h:selectOneMenu id="cbtipoProducto"
 							value="#{inventarioController.tipoProducto}"
-							converter="tipoProConverter">
+							converter="tipoProConverter" style="width:350px">
+							<f:selectItem itemLabel="Seleccione el Tipo de Producto"
+									itemValue="" noSelectionOption="true" />
 							<f:selectItems value="#{inventarioController.tipoproductos}"
 								var="tipoPro" itemValue="#{tipoPro}"
 								itemLabel="#{tipoPro.nombre}" />
@@ -61,10 +63,8 @@
 
 					<div class="form-group">
 						<label for="tfcant"> Cantidad: </label>
-						<p:inputText id="tfcant"
-							value="#{inventarioController.cantidadProducto}" cols="15"
-							style="width: 15%" />
-						<p:slider for="tfcant" />
+						<p:inputText id="tfcant" class="form-control"
+							value="#{inventarioController.cantidadProducto}"/>
 						<p:message for="tfcant" />
 					</div>
 
@@ -82,9 +82,7 @@
 
 					<div class="form-group">
 						<label for="tfpeso"> Peso: </label>
-						<p:inputText id="peso" value="#{inventarioController.peso}"
-							cols="15" style="width: 15%" />
-						<p:slider for="tfpeso" />
+						<p:inputText id="tfpeso" value="#{inventarioController.peso}" class="form-control"/>
 						<p:message for="tfpeso" />
 					</div>
 
@@ -122,8 +120,8 @@
 							<div class="input-group-addon">
 								<i class="fa fa-usd"></i>
 							</div>
-							<p:inputText disabled="true" id="totalVenta"
-								value="#{inventarioController.totalVenta}" class="form-control" />
+							<p:inputText id="totalVenta"
+								value="#{inventarioController.valor}" class="form-control" />
 						</div>
 						<p:message for="totalVenta" />
 						<!-- /.input group -->

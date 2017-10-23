@@ -47,6 +47,14 @@ public class ProductoEJB {
 		return em.createNamedQuery(Producto.LISTAR_PRODUCTOS).getResultList();
 
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<TipoProducto> listarTipoProducto(){
+		return em.createNamedQuery(TipoProducto.LISTAR_TIPO_PRODUCTOS).getResultList();
+	}
 
 	/**
 	 * 

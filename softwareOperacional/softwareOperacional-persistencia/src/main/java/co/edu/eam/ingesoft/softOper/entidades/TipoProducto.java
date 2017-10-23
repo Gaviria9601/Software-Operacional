@@ -5,12 +5,19 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="TipoProducto")
+@NamedQueries({
+	@NamedQuery(name=TipoProducto.LISTAR_TIPO_PRODUCTOS,query="select tipoPro from TipoProducto tipoPro")
+})
 public class TipoProducto implements Serializable{
 
+	public static final String LISTAR_TIPO_PRODUCTOS = "TipoProducto.listarTipoProducto";
+	
 	@Id
 	@Column(name="id", nullable=false)
 	private int id;

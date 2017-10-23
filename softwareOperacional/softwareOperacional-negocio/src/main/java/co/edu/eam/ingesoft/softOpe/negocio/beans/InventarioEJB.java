@@ -8,14 +8,23 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import co.edu.eam.ingesoft.softOper.entidades.Empleado;
+import co.edu.eam.ingesoft.softOper.entidades.Producto;
 
 @LocalBean
 @Stateless
-public class inventarioEJB {
+public class InventarioEJB {
 	
 	@PersistenceContext(unitName = Conexion.OPCION)
 	private EntityManager em;
 
+	
+	/**
+	 * 
+	 * @param pro
+	 */
+	public void crearProducto(Producto pro){
+		em.persist(pro);
+	}
 	
 	
 }
