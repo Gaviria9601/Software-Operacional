@@ -86,6 +86,23 @@ public class AuditoriaController implements Serializable {
 	public void setAuditorias(List<Auditoria> auditorias) {
 		this.auditorias = auditorias;
 	}
+
+	public AuditoriaEJB getAudEJB() {
+		return audEJB;
+	}
+
+	public void setAudEJB(AuditoriaEJB audEJB) {
+		this.audEJB = audEJB;
+	}
+
+	public List<Auditoria> getClientes() {
+		return clientes;
+	}
+
+	public void setClientes(List<Auditoria> clientes) {
+		this.clientes = clientes;
+	}
+	
 	
 	
 

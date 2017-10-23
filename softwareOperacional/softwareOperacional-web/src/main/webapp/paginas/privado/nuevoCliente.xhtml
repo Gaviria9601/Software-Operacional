@@ -43,12 +43,12 @@
 					
 					
 					<div class="form-group">
-						<label for="tffecha">Fecha de nacimiento</label>
-						<br></br>
-					 <p:calendar id="button" value="#{calendarView.fechanaci}" showOn="button" />
-					
-
-					</div>
+							<label for="tffecha">Fecha de nacimiento</label> <br></br>
+							<p:inputMask id="tffecha" placeholder="año-mes-dia"
+								value="#{clienteControlador.fechanaci}" mode="inline">
+								<f:convertDateTime pattern="yyyy-MM-dd" />
+							</p:inputMask>
+						</div>
 					
 					
 					<div class="form-group">
@@ -65,8 +65,8 @@
 						<label for="tfgen">Genero</label>
 						<br></br>
 						<h:selectOneMenu id="gen" value="#{clienteControlador.genero}">
-					     <f:selectItem itemValue="Femenino" itemLabel="Femenino" />
-						<f:selectItem itemValue="Masculino" itemLabel="Masculino" />
+					     <f:selectItem itemValue="F" itemLabel="Femenino" />
+						<f:selectItem itemValue="M" itemLabel="Masculino" />
 					  </h:selectOneMenu>
 
 					</div>
