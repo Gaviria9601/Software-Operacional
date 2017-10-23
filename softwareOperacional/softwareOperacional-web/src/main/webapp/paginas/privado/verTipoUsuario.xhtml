@@ -34,9 +34,9 @@
 
 
 				<p:column style="width:60px;text-align:center">
-					<p:button action="#{tipoUsuariocontrolador.procederEditar}"
+					<p:commandButton update="tablaIdUsuarios"  action="#{tipoUsuariocontrolador.procederEditar(audi)}"
 						icon="icon ui-icon-pencil" process="@this">
-					</p:button>
+					</p:commandButton>
 				</p:column>
 
 				<p:column headerText="Nombre" sortBy="#{audi.nombre}"
@@ -49,9 +49,9 @@
 				</p:column>
 
 				<p:column style="width:60px;text-align:center">
-					<p:button action="#{tipoUsuariocontrolador.eliminar(audi)}"
-						icon="icon ui-icon-trash">
-					</p:button>
+					<p:commandButton action="#{tipoUsuariocontrolador.eliminar(audi)}"
+					process="@this"	icon="icon ui-icon-trash" update="tablaIdUsuarios">
+					</p:commandButton>
 				</p:column>
 
 			</p:dataTable>

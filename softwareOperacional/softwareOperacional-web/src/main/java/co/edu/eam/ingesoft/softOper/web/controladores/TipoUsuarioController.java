@@ -16,6 +16,7 @@ import org.primefaces.context.RequestContext;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.TipoUsuarioEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.softOper.entidades.TipoUsuario;
+import co.edu.eam.ingesoft.softOper.entidades.Venta;
 
 @Named("tipoUsuariocontrolador")
 @ViewScoped
@@ -195,6 +196,11 @@ public class TipoUsuarioController implements Serializable {
 		Messages.addGlobalInfo("El tipo de usuario fue modificado con exito");
 		// limpiar();
 	
+	}
+	
+	public String procederEditar(TipoUsuario tip) {
+		DatosManager.setCodigoTipoUsuario(tip.getId());
+		return "/paginas/privado/editarTipoUsuario.xhtml?faces-redirect=true";
 	}
 	
 	public void resetearFitrosTabla() {

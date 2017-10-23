@@ -11,10 +11,12 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import co.edu.eam.ingesoft.softOper.entidades.Cargo;
 import co.edu.eam.ingesoft.softOper.entidades.Departamento;
 import co.edu.eam.ingesoft.softOper.entidades.Empleado;
 import co.edu.eam.ingesoft.softOper.entidades.Municipio;
 import co.edu.eam.ingesoft.softOper.entidades.TipoUsuario;
+import co.edu.eam.ingesoft.softOper.entidades.Usuario;
 import co.edu.eam.ingesoft.softOper.entidades.Venta;
 
 @LocalBean
@@ -34,7 +36,7 @@ public class EmpleadoEJB {
 			return null;
 		}
 	}
-
+	
 	
 	/**
 	 * 
@@ -44,6 +46,11 @@ public class EmpleadoEJB {
 	public void crear(Empleado e) {
 	     em.persist(e);
 		
+	}
+	
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void crearUsuario(Usuario usu){
+		em.persist(usu);
 	}
 	
 
@@ -69,6 +76,11 @@ public class EmpleadoEJB {
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public List<Municipio> listarMuniporDepto(String depto){
 		return em.createNamedQuery(Municipio.LISTAR_MUNIPorDepto).setParameter(1, depto).getResultList();
+	}
+	
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	public List<Cargo> listarCargos(){
+		return em.createNamedQuery(Cargo.LISTAR_CARGOS).getResultList();
 	}
 	
 }

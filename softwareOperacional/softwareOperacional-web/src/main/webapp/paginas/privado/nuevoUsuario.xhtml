@@ -78,15 +78,15 @@
 
 						<div class="form-group">
 							<label for="cbdep">Departamento</label> <br></br>
-							
+
 							<h:selectOneMenu id="cbdep"
 								value="#{usuarioController.departamento}" style="width:150px">
 								<p:ajax listener="#{usuarioController.onDepartamentoChange}"
 									update="cbmuni" />
 								<f:selectItem itemLabel="Seleccione el Departamento"
 									itemValue="" noSelectionOption="true" />
-								<f:selectItems value="#{usuarioController.departamentos}" var="dep"
-							itemValue="#{dep.nombre}" itemLabel="#{dep.nombre}" />
+								<f:selectItems value="#{usuarioController.departamentos}"
+									var="dep" itemValue="#{dep.nombre}" itemLabel="#{dep.nombre}" />
 							</h:selectOneMenu>
 
 							<p:message for="cbdep"></p:message>
@@ -96,13 +96,14 @@
 						<div class="form-group">
 							<label for="muni">Municipio</label> <br></br>
 
-							<h:selectOneMenu id="cbmuni" value="#{usuarioController.municipio}"
-								style="width:150px">
+							<h:selectOneMenu id="cbmuni"
+								value="#{usuarioController.municipio}" style="width:150px">
 
 								<f:selectItem itemLabel="Seleccione Ciudad" itemValue=""
 									noSelectionOption="true" />
-								<f:selectItems value="#{usuarioController.municipios}" var="muni"
-							itemValue="#{muni.nombre}" itemLabel="#{muni.nombre}"/>
+								<f:selectItems value="#{usuarioController.municipios}"
+									var="muni" itemValue="#{muni}"
+									itemLabel="#{muni.nombre}" />
 
 							</h:selectOneMenu>
 						</div>
@@ -113,12 +114,23 @@
 								value="#{usuarioController.tipoUsuario}">
 
 								<f:selectItems value="#{usuarioController.tipos}" var="t"
-									itemLabel="#{t.nombre}" itemValue="#{t.id}">
+									itemLabel="#{t.nombre}" itemValue="#{t}">
 								</f:selectItems>
 							</h:selectOneMenu>
 						</div>
 
 						<div class="form-group">
+
+							<div class="form-group">
+								<label for="tfmuni">Cargo</label> <br></br>
+								<h:selectOneMenu id="cargo"
+									value="#{usuarioController.cargo}">
+
+									<f:selectItems value="#{usuarioController.tipos}" var="t"
+										itemLabel="#{t.nombre}" itemValue="#{t}">
+									</f:selectItems>
+								</h:selectOneMenu>
+							</div>
 
 							<label for="usuario">Nombre de usuario</label>
 							<h:inputText type="text" class="form-control" id="usuario"
@@ -139,7 +151,7 @@
 						<div class="box-footer">
 							<p:commandButton value="Registrar Usuario" ajax="false"
 								class="btn btn-primary" process="@this,paneldatos"
-								update="paneldatos" action="#{tipoUsuariocontrolador.crear}" />
+								update="paneldatos" action="#{usuarioController.crear}" />
 						</div>
 
 					</div>

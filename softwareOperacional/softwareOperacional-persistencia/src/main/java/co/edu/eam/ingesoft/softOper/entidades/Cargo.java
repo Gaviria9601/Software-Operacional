@@ -7,11 +7,18 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Cargo")
+@NamedQueries({
+    @NamedQuery (name=Cargo.LISTAR_CARGOS, query="select a from Cargo a")
+})
 public class Cargo implements Serializable{
+	
+	public static final String LISTAR_CARGOS = "ListarCargos";
 
 	@Id
 	@Column(name="id", nullable=false)

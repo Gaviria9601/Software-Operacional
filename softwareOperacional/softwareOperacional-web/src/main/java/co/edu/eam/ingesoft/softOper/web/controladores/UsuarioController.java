@@ -13,13 +13,18 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 import org.omnifaces.cdi.ViewScoped;
+import org.omnifaces.util.Messages;
 
 import co.edu.eam.ingesoft.softOpe.negocio.beans.EmpleadoEJB;
+import co.edu.eam.ingesoft.softOpe.negocio.beans.SeguridadEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.TipoUsuarioEJB;
+import co.edu.eam.ingesoft.softOpe.negocio.excepciones.ExcepcionNegocio;
+import co.edu.eam.ingesoft.softOper.entidades.Cargo;
 import co.edu.eam.ingesoft.softOper.entidades.Departamento;
 import co.edu.eam.ingesoft.softOper.entidades.Empleado;
 import co.edu.eam.ingesoft.softOper.entidades.Municipio;
 import co.edu.eam.ingesoft.softOper.entidades.TipoUsuario;
+import co.edu.eam.ingesoft.softOper.entidades.Usuario;
 
 @Named("usuarioController")
 @ViewScoped
@@ -45,24 +50,26 @@ public class UsuarioController implements Serializable {
 	@Length(min = 1, max = 1, message = "longitud 1")
 	private String genero;
 
-	private int tipoUsuario;
+	private TipoUsuario tipoUsuario;
 
 	@Length(max = 20, message = "maximo 20 digitos")
 	private String nickname;
 
 	private String contrasenia;
 
-	private int cargo;
+	private Cargo cargo;
 
 	private int usuario;
 
-	private String municipio;
+	private Municipio municipio;
 
 	private String departamento;
 
 	private List<Empleado> empleados;
 
 	private List<Municipio> municipios;
+
+	private List<Cargo> cargos;
 
 	private List<Departamento> departamentos;
 
@@ -165,21 +172,6 @@ public class UsuarioController implements Serializable {
 	}
 
 	/**
-	 * @return the tipoUsuario
-	 */
-	public int getTipoUsuario() {
-		return tipoUsuario;
-	}
-
-	/**
-	 * @param tipoUsuario
-	 *            the tipoUsuario to set
-	 */
-	public void setTipoUsuario(int tipoUsuario) {
-		this.tipoUsuario = tipoUsuario;
-	}
-
-	/**
 	 * @return the nickname
 	 */
 	public String getNickname() {
@@ -207,21 +199,6 @@ public class UsuarioController implements Serializable {
 	 */
 	public void setContrasenia(String contrasenia) {
 		this.contrasenia = contrasenia;
-	}
-
-	/**
-	 * @return the cargo
-	 */
-	public int getCargo() {
-		return cargo;
-	}
-
-	/**
-	 * @param cargo
-	 *            the cargo to set
-	 */
-	public void setCargo(int cargo) {
-		this.cargo = cargo;
 	}
 
 	/**
@@ -305,10 +282,47 @@ public class UsuarioController implements Serializable {
 	@EJB
 	private TipoUsuarioEJB tiposejb;
 
+	@EJB
+	private SeguridadEJB seguridadejb;
+
+
 	@PostConstruct
 	public void inicializador() {
+
+		cargos = empleadoejb.listarCargos();
 		tipos = tiposejb.listarTipoUsuario();
 		departamentos = empleadoejb.listardepartamentos();
+	}
+
+	public void crear() {
+		try {
+			Usuario usucreado = crearUsuario();
+			if (usucreado != null) {
+				Usuario usu = seguridadejb.buscarUsuario(nickname);
+				Empleado empleado = new Empleado(nombre, apellido, fechaNacimiento, fechaIngreso, cedula, genero,
+						municipio, cargo, usucreado);
+				empleadoejb.crear(empleado);
+
+				Messages.addFlashGlobalInfo("Usuario creado correctamente");
+
+			} else {
+				Messages.addGlobalError("algo salio mal con la creacion de usuario");
+			}
+
+		} catch (ExcepcionNegocio e) {
+			Messages.addGlobalError(e.getMessage());
+		}
+	}
+
+	public Usuario crearUsuario() {
+		try {
+			Usuario usuariop = new Usuario(nickname, contrasenia, tipoUsuario);
+			empleadoejb.crearUsuario(usuariop);
+			return usuariop;
+		} catch (Exception e) {
+			Messages.addGlobalError(e.getMessage());
+			return null;
+		}
 	}
 
 	public void onDepartamentoChange() {
@@ -316,7 +330,6 @@ public class UsuarioController implements Serializable {
 			municipios = empleadoejb.listarMuniporDepto(departamento);
 	}
 
-	
 	/**
 	 * @return the municipios
 	 */
@@ -362,15 +375,6 @@ public class UsuarioController implements Serializable {
 		this.departamentos = departamentos;
 	}
 
-
-	public String getMunicipio() {
-		return municipio;
-	}
-
-	public void setMunicipio(String municipio) {
-		this.municipio = municipio;
-	}
-
 	public String getDepartamento() {
 		return departamento;
 	}
@@ -379,5 +383,64 @@ public class UsuarioController implements Serializable {
 		this.departamento = departamento;
 	}
 
-	
+	/**
+	 * @return the tipoUsuario
+	 */
+	public TipoUsuario getTipoUsuario() {
+		return tipoUsuario;
+	}
+
+	/**
+	 * @param tipoUsuario
+	 *            the tipoUsuario to set
+	 */
+	public void setTipoUsuario(TipoUsuario tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
+	}
+
+	/**
+	 * @param cargo
+	 *            the cargo to set
+	 */
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo;
+	}
+
+	/**
+	 * @return the municipio
+	 */
+	public Municipio getMunicipio() {
+		return municipio;
+	}
+
+	/**
+	 * @param municipio
+	 *            the municipio to set
+	 */
+	public void setMunicipio(Municipio municipio) {
+		this.municipio = municipio;
+	}
+
+	/**
+	 * @return the cargos
+	 */
+	public List<Cargo> getCargos() {
+		return cargos;
+	}
+
+	/**
+	 * @param cargos
+	 *            the cargos to set
+	 */
+	public void setCargos(List<Cargo> cargos) {
+		this.cargos = cargos;
+	}
+
+	/**
+	 * @return the cargo
+	 */
+	public Cargo getCargo() {
+		return cargo;
+	}
+
 }

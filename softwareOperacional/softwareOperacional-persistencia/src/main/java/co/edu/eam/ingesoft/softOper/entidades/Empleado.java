@@ -63,6 +63,23 @@ public class Empleado implements Serializable {
 	public Empleado(){
 	}
 	
+	public Empleado(String nombre, String apellido, Date fechaNacimiento, Date fechaIngresoEmpresa,
+			String cedula, String genero, Municipio municipio, Cargo cargo,
+			co.edu.eam.ingesoft.softOper.entidades.Usuario usuario) {
+		super();
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.fechaNacimiento = fechaNacimiento;
+		this.fechaIngresoEmpresa = fechaIngresoEmpresa;
+		this.cedula = cedula;
+		this.genero = genero;
+		this.municipio = municipio;
+		this.cargo = cargo;
+		Usuario = usuario;
+	}
+
+
+
 	/**
 	 * @return the codigo
 	 */
