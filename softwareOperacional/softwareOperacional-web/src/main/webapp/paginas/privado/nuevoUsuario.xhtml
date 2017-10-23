@@ -114,7 +114,7 @@
 								value="#{usuarioController.tipoUsuario}">
 
 								<f:selectItems value="#{usuarioController.tipos}" var="t"
-									itemLabel="#{t.nombre}" itemValue="#{t}">
+									itemLabel="#{t.nombre}" itemValue="#{t.id}">
 								</f:selectItems>
 							</h:selectOneMenu>
 						</div>
@@ -126,8 +126,8 @@
 								<h:selectOneMenu id="cargo"
 									value="#{usuarioController.cargo}">
 
-									<f:selectItems value="#{usuarioController.tipos}" var="t"
-										itemLabel="#{t.nombre}" itemValue="#{t.id}">
+									<f:selectItems value="#{usuarioController.cargos}" var="t"
+										itemLabel="#{t.cargo}" itemValue="#{t.id}">
 									</f:selectItems>
 								</h:selectOneMenu>
 							</div>

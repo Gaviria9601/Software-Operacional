@@ -91,4 +91,12 @@ public class EmpleadoEJB {
 		return em.createNamedQuery(Empleado.LISTAR_EMPLEADOS).getResultList();
 	}
 	
+	public Municipio buscarMunicipio(int id){
+		return em.find(Municipio.class, id);
+	}
+	
+	public Cargo buscarCargo(int id){
+		return em.find(Cargo.class, id);
+	}
+	
 }

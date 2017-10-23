@@ -50,7 +50,7 @@ public class UsuarioController implements Serializable {
 	@Length(min = 1, max = 1, message = "longitud 1")
 	private String genero;
 
-	private TipoUsuario tipoUsuario;
+	private int tipoUsuario;
 
 	@Length(max = 20, message = "maximo 20 digitos")
 	private String nickname;
@@ -300,7 +300,7 @@ public class UsuarioController implements Serializable {
 			if (usucreado != null) {
 				Usuario usu = seguridadejb.buscarUsuario(nickname);
 				Empleado empleado = new Empleado(nombre, apellido, fechaNacimiento, fechaIngreso, cedula, genero,
-						municipio, cargo, usucreado);
+						empleadoejb.buscarMunicipio(municipio), empleadoejb.buscarCargo(cargo), usucreado);
 				empleadoejb.crear(empleado);
 
 				Messages.addFlashGlobalInfo("Usuario creado correctamente");
@@ -316,7 +316,7 @@ public class UsuarioController implements Serializable {
 
 	public Usuario crearUsuario() {
 		try {
-			Usuario usuariop = new Usuario(nickname, contrasenia, tipoUsuario);
+			Usuario usuariop = new Usuario(nickname, contrasenia, tiposejb.buscarTipoUsuario(tipoUsuario));
 			empleadoejb.crearUsuario(usuariop);
 			return usuariop;
 		} catch (Exception e) {
@@ -383,22 +383,6 @@ public class UsuarioController implements Serializable {
 		this.departamento = departamento;
 	}
 
-	/**
-	 * @return the tipoUsuario
-	 */
-	public TipoUsuario getTipoUsuario() {
-		return tipoUsuario;
-	}
-
-	/**
-	 * @param tipoUsuario
-	 *            the tipoUsuario to set
-	 */
-	public void setTipoUsuario(TipoUsuario tipoUsuario) {
-		this.tipoUsuario = tipoUsuario;
-	}
-
-
 
 	/**
 	 * @return the cargos
@@ -441,6 +425,20 @@ public class UsuarioController implements Serializable {
 	 */
 	public void setMunicipio(int municipio) {
 		this.municipio = municipio;
+	}
+
+	/**
+	 * @return the tipoUsuario
+	 */
+	public int getTipoUsuario() {
+		return tipoUsuario;
+	}
+
+	/**
+	 * @param tipoUsuario the tipoUsuario to set
+	 */
+	public void setTipoUsuario(int tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
 	}
 
 }
