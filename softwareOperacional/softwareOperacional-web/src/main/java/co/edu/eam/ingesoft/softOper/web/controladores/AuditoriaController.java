@@ -29,6 +29,8 @@ public class AuditoriaController implements Serializable {
 	private List<Auditoria> areas;
 	
 	private List<Auditoria> ventas;
+	
+	private List<Auditoria> clientes;
 
 	private Auditoria selectedAudi;
 	
@@ -65,6 +67,7 @@ public class AuditoriaController implements Serializable {
 		auditorias = audEJB.listarAuditoriasIdeUsuarios();
 	    areas = audEJB.listarAuditoriasArea();
 	    ventas = audEJB.listarAuditoriaVentas();
+	    clientes = audEJB.listarAuditoriaClientes();
 
 	}
 	

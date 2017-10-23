@@ -44,10 +44,8 @@
 					
 					<div class="form-group">
 						<label for="tffecha">Fecha de nacimiento</label>
-						<p:inputMask id="tffecha" value="#{clienteControlador.fechanaci}" 
-					mode="inline">
-					<f:convertDateTime pattern = "yyyy-MM-dd" />
-					</p:inputMask>
+						<br></br>
+					 <p:calendar id="button" value="#{calendarView.fechanaci}" showOn="button" />
 					
 
 					</div>
@@ -55,6 +53,7 @@
 					
 					<div class="form-group">
 						<label for="tfcc">Cedula</label>
+						<br></br>
 						<p:inputText type="text" class="form-control" id="cc" a:placeholder="Cedula"
 							value="#{clienteControlador.cedula}" />
 
@@ -64,6 +63,7 @@
 					
 					<div class="form-group">
 						<label for="tfgen">Genero</label>
+						<br></br>
 						<h:selectOneMenu id="gen" value="#{clienteControlador.genero}">
 					     <f:selectItem itemValue="Femenino" itemLabel="Femenino" />
 						<f:selectItem itemValue="Masculino" itemLabel="Masculino" />

@@ -144,4 +144,8 @@ public class AuditoriaEJB {
 	}
 
 	
+	public List<Auditoria> listarAuditoriaClientes(){
+		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "Cliente").getResultList();
+	}
+	
 }
