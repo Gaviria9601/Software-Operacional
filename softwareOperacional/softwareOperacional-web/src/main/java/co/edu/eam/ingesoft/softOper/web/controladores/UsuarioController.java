@@ -57,11 +57,11 @@ public class UsuarioController implements Serializable {
 
 	private String contrasenia;
 
-	private Cargo cargo;
+	private int cargo;
 
 	private int usuario;
 
-	private Municipio municipio;
+	private int municipio;
 
 	private String departamento;
 
@@ -398,28 +398,7 @@ public class UsuarioController implements Serializable {
 		this.tipoUsuario = tipoUsuario;
 	}
 
-	/**
-	 * @param cargo
-	 *            the cargo to set
-	 */
-	public void setCargo(Cargo cargo) {
-		this.cargo = cargo;
-	}
 
-	/**
-	 * @return the municipio
-	 */
-	public Municipio getMunicipio() {
-		return municipio;
-	}
-
-	/**
-	 * @param municipio
-	 *            the municipio to set
-	 */
-	public void setMunicipio(Municipio municipio) {
-		this.municipio = municipio;
-	}
 
 	/**
 	 * @return the cargos
@@ -439,8 +418,29 @@ public class UsuarioController implements Serializable {
 	/**
 	 * @return the cargo
 	 */
-	public Cargo getCargo() {
+	public int getCargo() {
 		return cargo;
+	}
+
+	/**
+	 * @param cargo the cargo to set
+	 */
+	public void setCargo(int cargo) {
+		this.cargo = cargo;
+	}
+
+	/**
+	 * @return the municipio
+	 */
+	public int getMunicipio() {
+		return municipio;
+	}
+
+	/**
+	 * @param municipio the municipio to set
+	 */
+	public void setMunicipio(int municipio) {
+		this.municipio = municipio;
 	}
 
 }

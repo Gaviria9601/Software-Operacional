@@ -102,7 +102,7 @@
 								<f:selectItem itemLabel="Seleccione Ciudad" itemValue=""
 									noSelectionOption="true" />
 								<f:selectItems value="#{usuarioController.municipios}"
-									var="muni" itemValue="#{muni}"
+									var="muni" itemValue="#{muni.id}"
 									itemLabel="#{muni.nombre}" />
 
 							</h:selectOneMenu>
@@ -127,7 +127,7 @@
 									value="#{usuarioController.cargo}">
 
 									<f:selectItems value="#{usuarioController.tipos}" var="t"
-										itemLabel="#{t.nombre}" itemValue="#{t}">
+										itemLabel="#{t.nombre}" itemValue="#{t.id}">
 									</f:selectItems>
 								</h:selectOneMenu>
 							</div>
