@@ -315,6 +315,7 @@ public class AreaController implements Serializable {
 			Messages.addFlashGlobalInfo("Se ha eliminado la area");			
 			areas = arEJB.listarArea();
 			resetearFitrosTabla("tablaIdUsuarios");
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

@@ -25,8 +25,12 @@ public class AuditoriaController implements Serializable {
 	private AuditoriaEJB audEJB;
 
 	private List<Auditoria> auditorias;
+	
+	private List<Auditoria> auareas;
 
 	private Auditoria selectedAudi;
+	
+	
 
 	private ArrayList<Auditoria> filtroAuditoria = new ArrayList<Auditoria>();
 
@@ -49,7 +53,7 @@ public class AuditoriaController implements Serializable {
 	@PostConstruct
 	public void inicializar() {
 		auditorias = audEJB.listarAuditoriasIdeUsuarios();
-	
+	    auareas = audEJB.listarAuditoriasArea();
 
 	}
 

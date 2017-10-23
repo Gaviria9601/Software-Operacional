@@ -63,7 +63,7 @@ public class AreaEJB {
   */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void eliminarArea(String nombre){
-		em.remove(em.find(Area.class, nombre));
+		em.remove(nombre);
 	}
 	
 

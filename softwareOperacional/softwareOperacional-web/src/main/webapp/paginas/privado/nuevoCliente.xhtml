@@ -76,15 +76,13 @@
 						<h:selectOneMenu id="muni"
 						value="#{clienteControlador.municipio}">
 						
-						<f:selectItems value="#{MedicamentosControlador.tipos}"
+						<f:selectItems value="#{MedicamentosControlador.muni}"
 						     >
 						</f:selectItems>
 					</h:selectOneMenu>
 
 					</div>
 					
-					
-
 					<div class="box-footer">
 						<p:commandButton value="Registrar Cliente" ajax="false" class="btn btn-primary"
 							action="#{clienteControlador.crear}" />

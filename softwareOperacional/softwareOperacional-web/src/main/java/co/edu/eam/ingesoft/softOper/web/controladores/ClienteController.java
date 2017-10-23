@@ -2,6 +2,7 @@ package co.edu.eam.ingesoft.softOper.web.controladores;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -40,15 +41,15 @@ public class ClienteController implements Serializable {
 
 	private Date fechanaci;
 
-	@Pattern(regexp = "[A-Za-z ]*", message = "solo Letras")
-	@Length(min = 3, max = 50, message = "longitud entre 10 y 2000")
+
 	private String cedula;
 
-	@Pattern(regexp = "[A-Za-z ]*", message = "solo Letras")
-	@Length(min = 3, max = 50, message = "longitud entre 3 y 15")
+
 	private String genero;
 
 	private Municipio municipio;
+	
+	 private List<Municipio> muni;
 
 	// auditoria
 
@@ -229,7 +230,26 @@ public class ClienteController implements Serializable {
 
 	@PostConstruct
 	public void inicializador() {
+		muni = cliEJB.listarMuni();
 
+	}
+	
+	
+
+	public List<Municipio> getMuni() {
+		return muni;
+	}
+
+	public void setMuni(List<Municipio> muni) {
+		this.muni = muni;
+	}
+
+	public SessionController getSesion() {
+		return sesion;
+	}
+
+	public void setSesion(SessionController sesion) {
+		this.sesion = sesion;
 	}
 
 	public void crear() {
