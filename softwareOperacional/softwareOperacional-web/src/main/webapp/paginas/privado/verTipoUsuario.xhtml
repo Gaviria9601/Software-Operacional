@@ -17,7 +17,8 @@
 				multiViewState="true" rows="10" paginator="true"
 				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				rowsPerPageTemplate="10,30,50"
-				selection="#{tipoUsuariocontrolador.tipoUsu}" rowKey="#{audi.nombre}"
+				selection="#{tipoUsuariocontrolador.tipoUsu}"
+				rowKey="#{audi.nombre}"
 				emptyMessage="No se encontraron identificación de usuarios con criterios dados."
 				filteredBy="#{tipoUsuariocontrolador.filtroTipoUsu}" border="1">
 				<f:facet name="header">
@@ -27,38 +28,32 @@
 							style="width:180px" placeholder="Inserte palabra clave" />
 					</p:outputPanel>
 				</f:facet>
-				
+
 				<p:column selectionMode="single"
 					style="width:40px;text-align:center" />
-				
-					
-			<p:column style="width:60px;text-align:center">
-			<p:button action="#{tipoUsuariocontrolador.procederEditar}" 
-			icon="icon ui-icon-pencil" process="@this"> </p:button>
-			</p:column>
-				
-			<p:column headerText="Nombre" sortBy="#{audi.nombre}"
-				filterBy="#{audi.nombre}" filterMatchMode="contains">
-				<h:outputLabel value="#{audi.nombre}" />
-			</p:column>
 
-			<p:column headerText="Descripción" sortBy="audi.descripcion">
-				<h:outputLabel value="#{audi.descripcion}" />
-			</p:column>
-			
-			 <p:column style="width:60px;text-align:center">
-		  <p:button action="#{tipoUsuariocontrolador.eliminar}"   icon="icon ui-icon-trash"> </p:button>
-		  </p:column>
-			
-			<p:column headerText="ACCIONES">
-				<p:commandButton action="#{tipoUsuariocontrolador.modificar(audi)}"
-					process="@this,tablaIdUsuarios" value="Modificar"
-					update="tablaIdUsuarios" />
-				<p:commandButton action="#{tipoUsuariocontrolador.eliminar(audi)}" 
-				process="@this,tablaIdUsuarios" update="tablaIdUsuarios" value="Eliminar" />
-		
-			</p:column>
-		
+
+				<p:column style="width:60px;text-align:center">
+					<p:button action="#{tipoUsuariocontrolador.procederEditar}"
+						icon="icon ui-icon-pencil" process="@this">
+					</p:button>
+				</p:column>
+
+				<p:column headerText="Nombre" sortBy="#{audi.nombre}"
+					filterBy="#{audi.nombre}" filterMatchMode="contains">
+					<h:outputLabel value="#{audi.nombre}" />
+				</p:column>
+
+				<p:column headerText="Descripción" sortBy="audi.descripcion">
+					<h:outputLabel value="#{audi.descripcion}" />
+				</p:column>
+
+				<p:column style="width:60px;text-align:center">
+					<p:button action="#{tipoUsuariocontrolador.eliminar(audi)}"
+						icon="icon ui-icon-trash">
+					</p:button>
+				</p:column>
+
 			</p:dataTable>
 		</h:form>
 	</ui:define>
