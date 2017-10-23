@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+
 import co.edu.eam.ingesoft.softOpe.negocio.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.softOper.entidades.Area;
 
@@ -25,61 +26,46 @@ public class AreaEJB {
 	 * 
 	 * @param a
 	 */
-
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void crear(Area a) {
-		em.persist(a);
-
+		
+			em.persist(a);
+		
 	}
 
-	/**
-	 * public void crearArea(Area a) {
-	 * 
-	 * Area p =buscarArea(a.getNombre()); if(p==null){ em.persist(a); }else {
-	 * throw new ExcepcionNegocio("El area ya se encuentra registrada"); } }
-	 **/
+	
 
 	/**
 	 * 
 	 * @param nombre
 	 * @return
 	 */
-
-	public Area buscarArea(int id) {
-		Area pa = em.find(Area.class, id);
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public Area buscarArea(String nombre) {
+		Area pa = em.find(Area.class, nombre);
 		return pa;
 	}
-
-	/**
-	 * 
-	 * @param a
-	 */
-
-	/**
-	 * @TransactionAttribute(TransactionAttributeType.REQUIRED) public void
-	 *                                                          modificarArea(Area
-	 *                                                          a){ Area p
-	 *                                                          =buscarArea(a.getNombre());
-	 *                                                          if(p!=null){
-	 *                                                          em.merge(a);
-	 *                                                          }else { throw
-	 *                                                          new
-	 *                                                          ExcepcionNegocio("Ya
-	 *                                                          esta esta cedula
-	 *                                                          de usuario
-	 *                                                          registrado"); }
-	 * 
-	 *                                                          }
-	 **/
-
-	/**
-	 * 
-	 * @param pa
-	 */
-
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void eliminarArea(Area pa) {
-		em.remove(buscarArea(pa.getId()));
+	public Area buscarA(String nombre){
+		return em.find(Area.class, nombre);
 	}
+	/**
+	 * 
+	 * @param audi
+	 */
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void editarArea(Area audi){
+		em.merge(audi);
+	}
+ /**
+  * 
+  * @param codigo
+  */
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void eliminarArea(String nombre){
+		em.remove(em.find(Area.class, nombre));
+	}
+	
 
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public List<Area> listarArea() {

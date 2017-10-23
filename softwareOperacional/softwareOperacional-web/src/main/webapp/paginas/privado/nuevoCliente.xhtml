@@ -28,7 +28,7 @@
 
 						<label for="tfnombre">Nombre</label>
 						<h:inputText type="text" class="form-control" id="nombre" a:placeholder="Nombre"
-							value="#{areaControlador.nombre}" />
+							value="#{clienteControlador.nombre}" />
 
 					</div>
 
@@ -36,24 +36,24 @@
 
 					<div class="form-group">
 						<label for="tfape">Apellido</label>
-						<p:inputTextarea type="text" class="form-control" id="ape" a:placeholder="Apellido"
-							value="#{areaControlador.des}" />
+						<p:inputText type="text" class="form-control" id="ape" a:placeholder="Apellido"
+							value="#{clienteControlador.apellido}" />
 
 					</div>
 					
 					
 					<div class="form-group">
 						<label for="tffec">Fecha de nacimiento</label>
-						<p:inputTextarea type="text" class="form-control" id="fec" a:placeholder="Fecha de nacimiento"
-							value="#{areaControlador.des}" />
+						<p:inputText type="text" class="form-control" id="fec" a:placeholder="Fecha de nacimiento"
+							value="#{clienteControlador.fechanaci}" />
 
 					</div>
 					
 					
 					<div class="form-group">
 						<label for="tfcc">Cedula</label>
-						<p:inputTextarea type="text" class="form-control" id="cc" a:placeholder="Cedula"
-							value="#{areaControlador.des}" />
+						<p:inputText type="text" class="form-control" id="cc" a:placeholder="Cedula"
+							value="#{clienteControlador.cedula}" />
 
 					</div>
 					
@@ -61,15 +61,17 @@
 					
 					<div class="form-group">
 						<label for="tfgen">Genero</label>
-						<p:inputTextarea type="text" class="form-control" id="gen" a:placeholder="Genero"
-							value="#{areaControlador.des}" />
+						<p:selectOneMenu id="gen" value="#{clienteControlador.genero}">
+					     <f:selectItem itemValue="Femenino" itemLabel="Femenino" />
+						<f:selectItem itemValue="Masculino" itemLabel="Masculino" />
+					  </p:selectOneMenu>
 
 					</div>
 					
 					<div class="form-group">
 						<label for="tfmuni">Municipio</label>
 						<p:inputTextarea type="text" class="form-control" id="muni" a:placeholder="Municipio"
-							value="#{areaControlador.des}" />
+							value="#{clienteControlador.municipio}" />
 
 					</div>
 					
@@ -77,7 +79,7 @@
 
 					<div class="box-footer">
 						<p:commandButton value="Registrar Cliente" ajax="false" class="btn btn-primary"
-							action="#{areaControlador.crear}" />
+							action="#{clienteControlador.crear}" />
 					</div>
 
 				</div>

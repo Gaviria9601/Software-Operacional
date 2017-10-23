@@ -4,8 +4,11 @@ import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 
 import co.edu.eam.ingesoft.softOper.entidades.Cliente;
 
@@ -27,6 +30,11 @@ public class ClienteEJB {
 		return em.find(Cliente.class, codigo);
 	}
 	
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void crearCliente(Cliente c){
+		 em.persist(c);
+		
+	}
 	/**
 	 * 
 	 * @return

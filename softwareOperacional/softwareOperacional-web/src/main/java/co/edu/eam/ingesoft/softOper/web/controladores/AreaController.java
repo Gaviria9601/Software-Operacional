@@ -254,6 +254,10 @@ public class AreaController implements Serializable {
 	/**
 	 * Metodo para crear el area de la empresa
 	 */
+	
+	
+	
+	
 	public void crear(){
 		try{
 			
@@ -298,6 +302,10 @@ public class AreaController implements Serializable {
 		des = audi.getDescripcion();
 		busco = true;
 	}
+	
+	public String procederEditar(){
+		return "/paginas/privado/editarArea.xhtml?faces-redirect=true";
+	}
     /**
      * Metodo para editar
      */
@@ -305,26 +313,48 @@ public class AreaController implements Serializable {
 		ar.setNombre(nombre);
 		ar.setDescripcion(des);
 		limpiar();
+		Auditoria audi = new Auditoria();
+		browserDetails = Faces.getRequest().getHeader("User-Agent");
+		userAgent = browserDetails;
+		user2 = userAgent.toLowerCase();
+		identificarNavegador();
+		audi.setIngreso(ingreso);
+		audi.setOrigen(os);
+		audi.setNavegador(browser);
+		audi.setAccion("Editar");
+		audi.setRegistroRealizoAccion("Area");
+		audi.setUsuario(usuario);
+		audEJB.registrarAuditoria(audi);
 		Messages.addGlobalInfo("El area fue modificada con exito");
 	
 	}
 
-
-	/**
-	 * Metodo que elimina un farmaceutico
-	 */
-	/**public void eliminar(Area exa) {
+	public void eliminar(Area audi) {
 		try {
-			arEJB.eliminarArea(exa.getId());
+			arEJB.eliminarArea(audi.getNombre());
+			limpiar();
 			
-			//limpiar();
-			Messages.addFlashGlobalInfo("Area eliminada correctamente");
+			Auditoria audir = new Auditoria();
+			browserDetails = Faces.getRequest().getHeader("User-Agent");
+			userAgent = browserDetails;
+			user2 = userAgent.toLowerCase();
+			identificarNavegador();
+			audir.setIngreso(ingreso);
+			audir.setOrigen(os);
+			audir.setNavegador(browser);
+			audir.setAccion("Eliminar");
+			audir.setRegistroRealizoAccion("Area");
+			audir.setUsuario(usuario);
+			audEJB.registrarAuditoria(audir);
+			
+			Messages.addFlashGlobalInfo("Se ha eliminado la area");			
 			areas = arEJB.listarArea();
-			resetearFitrosTabla("tablaExamenes");
+			resetearFitrosTabla("tablaIdUsuarios");
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-	}**/
+	}
+	
 	/**
 	 * Metodo para identificar el navegador
 	 */

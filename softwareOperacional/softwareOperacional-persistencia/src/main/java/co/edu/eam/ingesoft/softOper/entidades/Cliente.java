@@ -51,6 +51,22 @@ public class Cliente implements Serializable {
 	public Cliente(){
 		
 	}
+	
+	
+
+	public Cliente(String nombre, String apellido, Date fechaNacimiento, String cedula, String genero,
+			Municipio municipioId) {
+		super();
+		
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.fechaNacimiento = fechaNacimiento;
+		this.cedula = cedula;
+		this.genero = genero;
+		this.municipioId = municipioId;
+	}
+
+
 
 	/**
 	 * @return the codigo

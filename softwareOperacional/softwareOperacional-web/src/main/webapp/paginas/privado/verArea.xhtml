@@ -24,7 +24,8 @@
 			
 			
 			<p:column style="width:60px;text-align:center">
-			<p:button action="#{areaControlador.modificar(audi)}"   icon="icon ui-icon-pencil"> </p:button>
+			<p:button action="#{areaControlador.procederEditar()}"  update="tablaIdUsuarios" 
+			icon="icon ui-icon-pencil" process="@this"> </p:button>
 			</p:column>
 			
 			<p:column headerText="Nombre" sortBy="#{audi.nombre}" 
@@ -38,14 +39,10 @@
 			
 			
           <p:column style="width:60px;text-align:center">
-		  <p:button action="#{areaControlador.modificar(audi)}"   icon="icon ui-icon-trash"> </p:button>
+		  <p:button action="#{areaControlador.eliminar(audi)}"   icon="icon ui-icon-trash"> </p:button>
 		  </p:column>
 
 		</p:dataTable>
-			
-           
-
-			
 				
 			</h:form>
          </ui:define>

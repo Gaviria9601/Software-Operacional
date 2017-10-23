@@ -37,8 +37,6 @@ public class Area implements Serializable{
 	
 	
 
-	 
-
 
 	public Area(String nombre, String descripcion) {
 		super();
