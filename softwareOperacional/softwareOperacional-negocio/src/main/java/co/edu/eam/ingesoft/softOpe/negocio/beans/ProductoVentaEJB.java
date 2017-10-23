@@ -37,9 +37,11 @@ public class ProductoVentaEJB {
 			proVen.setFecha(audiEJB.generarFechaActual());
 			int total = pro.getValor() * cantidad;
 			proVen.setTotal(total);
+			pro.setCantidad(pro.getCantidad() - cantidad);
+			em.merge(pro);
 			em.persist(proVen);
 		} else {
-			new ExcepcionNegocio("No Existe la cantidad de inventario del Producto a agregar");
+			throw new ExcepcionNegocio("No Existe la cantidad de inventario del Producto a agregar");
 		}
 	}
 
@@ -52,6 +54,8 @@ public class ProductoVentaEJB {
 		int totalElim;
 		ProductoVentaPK proVenPK = new ProductoVentaPK(producto, venta);
 		ProductoVenta proVen = em.find(ProductoVenta.class, proVenPK);
+		Producto pro = em.find(Producto.class, producto);
+		pro.setCantidad(pro.getCantidad() + proVen.getCantidad());
 		em.remove(proVen);
 		totalElim = proVen.getTotal();
 		return totalElim;

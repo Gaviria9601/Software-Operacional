@@ -15,6 +15,7 @@ import org.omnifaces.util.Messages;
 import org.primefaces.component.log.Log;
 
 import co.edu.eam.ingesoft.softOpe.negocio.beans.AuditoriaEJB;
+import co.edu.eam.ingesoft.softOpe.negocio.beans.Conexion;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.EmpleadoEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.SeguridadEJB;
 import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
@@ -49,6 +50,8 @@ public class SessionController implements Serializable {
 	private String os;
 
 	private int numVisitas;
+	
+	private String conexion;
 
 	@EJB
 	private SeguridadEJB segEJB;
@@ -58,6 +61,9 @@ public class SessionController implements Serializable {
 
 	@EJB
 	private AuditoriaEJB audEJB;
+	
+	@EJB
+	private Conexion conEJB;
 
 	/**
 	 * Logea un usuario al sistema
@@ -78,6 +84,7 @@ public class SessionController implements Serializable {
 						ingreso = "Ingreso";
 						registrarAuditoria();
 						numVisitas = audEJB.listarAuditoriasIdentificacionUsuarios().size();
+						conexion = conEJB.getConexion();
 						return "/paginas/privado/inicio.xhtml?faces-redirect=true";
 					} else {
 						Messages.addFlashGlobalError("Contraseña Incorrecta");
@@ -136,6 +143,15 @@ public class SessionController implements Serializable {
 
 	public String getUser() {
 		return user;
+	}
+	
+
+	public String getConexion() {
+		return conexion;
+	}
+
+	public void setConexion(String conexion) {
+		this.conexion = conexion;
 	}
 
 	public String getTipoUsuario() {
@@ -226,12 +242,10 @@ public class SessionController implements Serializable {
 			userAgent = browserDetails;
 			user2 = userAgent.toLowerCase();
 			identificarNavegadorPeticion();
-			audi.setOrigen(os);
-			audi.setNavegador(browser);
 			audi.setAccion("Ingresando al Sistema");
 			audi.setRegistroRealizoAccion("Identificacion Usuario");
 			audi.setUsuario(usuario);
-			audEJB.registrarAuditoria(audi);
+			audEJB.registrarAuditoria(audi,browserDetails);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

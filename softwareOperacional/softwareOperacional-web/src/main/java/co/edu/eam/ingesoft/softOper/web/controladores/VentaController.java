@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.omnifaces.cdi.ViewScoped;
+import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.TransferEvent;
@@ -62,6 +63,8 @@ public class VentaController implements Serializable {
 	private int totalVenta;
 
 	private List<Venta> ventas;
+	
+	private int ventasInfo;
 
 	private ArrayList<Venta> filtroVenta = new ArrayList<Venta>();
 
@@ -94,9 +97,18 @@ public class VentaController implements Serializable {
 	public int getCantProductos() {
 		return cantProductos;
 	}
-
+	
 	public void setCantProductos(int cantProductos) {
 		this.cantProductos = cantProductos;
+	}
+	
+	
+	public int getVentasInfo() {
+		return ventasInfo;
+	}
+
+	public void setVentasInfo(int ventasInfo) {
+		this.ventasInfo = ventasInfo;
 	}
 
 	public String getInfoGeneral() {
@@ -207,6 +219,7 @@ public class VentaController implements Serializable {
 	public void inicializar() {
 		clientes = cliEJB.listarClientes();
 		ventas = venEJB.listarVentas();
+		ventasInfo = venEJB.listarVentas().size();
 		List<Producto> productosSource = proEJB.listarProductos();
 		List<Producto> productosTarget = new ArrayList<Producto>();
 		productos = new DualListModel<Producto>(productosSource, productosTarget);
@@ -231,21 +244,26 @@ public class VentaController implements Serializable {
 		cliente = null;
 		empezar = false;
 		Messages.addFlashGlobalInfo("Venta Terminada con Exito");
+		registrarAuditoria("Crear");
 	}
 
 	/**
 	 * 
 	 */
 	public void empezarVenta() {
-		Venta venta = new Venta();
-		venta.setFecha(audEJB.generarFechaActual());
-		venta.setVendedor(sesion.buscarEmpleado(sesion.getUsuario().getId()));
-		venta.setCliente(cliente);
-		venta.setTotalVenta(totalVenta);
-		venEJB.crearVenta(venta);
-		ventaGeneral = venEJB.listarVentas().get(venEJB.listarVentas().size() - 1);
-		empezar = true;
-		Messages.addFlashGlobalInfo("Venta Empezada");
+		if (cliente != null) {
+			Venta venta = new Venta();
+			venta.setFecha(audEJB.generarFechaActual());
+			venta.setVendedor(sesion.buscarEmpleado(sesion.getUsuario().getId()));
+			venta.setCliente(cliente);
+			venta.setTotalVenta(totalVenta);
+			venEJB.crearVenta(venta);
+			ventaGeneral = venEJB.listarVentas().get(venEJB.listarVentas().size() - 1);
+			empezar = true;
+			Messages.addFlashGlobalInfo("Se ha iniciado la Venta");
+		} else {
+			Messages.addFlashGlobalWarn("Busque el Cliente para empezar la Venta");
+		}
 	}
 
 	/**
@@ -310,7 +328,6 @@ public class VentaController implements Serializable {
 	 * @param event
 	 */
 	public void onTransfer(TransferEvent event) {
-		cantProductos = productos.getTarget().size();
 		if (event.isAdd()) {
 			try {
 				if (cantidadProducto > 0) {
@@ -319,9 +336,11 @@ public class VentaController implements Serializable {
 						proVenEJB.agregarProductoVenta(pro, ventaGeneral, cantidadProducto);
 						int total = pro.getValor() * cantidadProducto;
 						totalVenta += total;
+						cantProductos = productos.getTarget().size();
 						Messages.addFlashGlobalInfo("Producto Agregado");
 					}
 				} else {
+					event.isRemove();
 					Messages.addFlashGlobalError("La Cantidad de productos a agregar debe ser mayor que 0");
 				}
 			} catch (Exception e) {
@@ -332,6 +351,7 @@ public class VentaController implements Serializable {
 			for (Object item : event.getItems()) {
 				Producto pro = (Producto) item;
 				totalVen = proVenEJB.eliminarProductoVenta(pro.getCodigo(), ventaGeneral.getCodigo());
+				cantProductos = productos.getTarget().size();
 				totalVenta -= totalVen;
 				Messages.addFlashGlobalInfo("Producto Eliminado");
 
@@ -342,5 +362,20 @@ public class VentaController implements Serializable {
 		cantSobrantes = 0;
 		valorProducto = 0;
 	}
+	
+	
+	public void registrarAuditoria(String accion) {
+		try {
+			Auditoria audi = new Auditoria();
+			String browserDetails = Faces.getRequest().getHeader("User-Agent");
+			audi.setAccion(accion);
+			audi.setRegistroRealizoAccion("Venta");
+			audi.setUsuario(sesion.getUsuario());
+			audEJB.registrarAuditoria(audi,browserDetails);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 
 }

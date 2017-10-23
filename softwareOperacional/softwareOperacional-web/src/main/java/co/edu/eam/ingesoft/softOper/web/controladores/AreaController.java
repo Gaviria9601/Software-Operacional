@@ -7,7 +7,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.Pattern;
 
@@ -79,7 +79,8 @@ public class AreaController implements Serializable {
 	@EJB
 	private AuditoriaEJB audEJB;
 
-
+	@Inject
+	private SessionController sesion;
 
 	public Usuario getUsuario() {
 		return usuario;
@@ -263,19 +264,7 @@ public class AreaController implements Serializable {
 			
 			Area a = new Area(nombre, des);
 			arEJB.crear(a);
-			 
-		    Auditoria audi = new Auditoria();
-			browserDetails = Faces.getRequest().getHeader("User-Agent");
-			userAgent = browserDetails;
-			user2 = userAgent.toLowerCase();
-			identificarNavegador();
-			audi.setIngreso(ingreso);
-			audi.setOrigen(os);
-			audi.setNavegador(browser);
-			audi.setAccion("Crear");
-			audi.setRegistroRealizoAccion("Area");
-			audi.setUsuario(usuario);
-			audEJB.registrarAuditoria(audi);
+			registrarAuditoria("Crear");
 			limpiar();
 			Messages.addFlashGlobalInfo("Area ingresada Correctamente");
 				
@@ -313,18 +302,7 @@ public class AreaController implements Serializable {
 		ar.setNombre(nombre);
 		ar.setDescripcion(des);
 		limpiar();
-		Auditoria audi = new Auditoria();
-		browserDetails = Faces.getRequest().getHeader("User-Agent");
-		userAgent = browserDetails;
-		user2 = userAgent.toLowerCase();
-		identificarNavegador();
-		audi.setIngreso(ingreso);
-		audi.setOrigen(os);
-		audi.setNavegador(browser);
-		audi.setAccion("Editar");
-		audi.setRegistroRealizoAccion("Area");
-		audi.setUsuario(usuario);
-		audEJB.registrarAuditoria(audi);
+		registrarAuditoria("Editar");
 		Messages.addGlobalInfo("El area fue modificada con exito");
 	
 	}
@@ -333,20 +311,7 @@ public class AreaController implements Serializable {
 		try {
 			arEJB.eliminarArea(audi.getNombre());
 			limpiar();
-			
-			Auditoria audir = new Auditoria();
-			browserDetails = Faces.getRequest().getHeader("User-Agent");
-			userAgent = browserDetails;
-			user2 = userAgent.toLowerCase();
-			identificarNavegador();
-			audir.setIngreso(ingreso);
-			audir.setOrigen(os);
-			audir.setNavegador(browser);
-			audir.setAccion("Eliminar");
-			audir.setRegistroRealizoAccion("Area");
-			audir.setUsuario(usuario);
-			audEJB.registrarAuditoria(audir);
-			
+			registrarAuditoria("Eliminar");
 			Messages.addFlashGlobalInfo("Se ha eliminado la area");			
 			areas = arEJB.listarArea();
 			resetearFitrosTabla("tablaIdUsuarios");
@@ -355,61 +320,26 @@ public class AreaController implements Serializable {
 		}
 	}
 	
-	/**
-	 * Metodo para identificar el navegador
-	 */
-	public void identificarNavegador() {
-
-		if (userAgent.toLowerCase().indexOf("windows") >= 0) {
-			os = "Windows";
-		} else if (userAgent.toLowerCase().indexOf("mac") >= 0) {
-			os = "Mac";
-		} else if (userAgent.toLowerCase().indexOf("x11") >= 0) {
-			os = "Unix";
-		} else if (userAgent.toLowerCase().indexOf("android") >= 0) {
-			os = "Android";
-		} else if (userAgent.toLowerCase().indexOf("iphone") >= 0) {
-			os = "IPhone";
-		} else {
-			os = "UnKnown, More-Info: " + userAgent;
-		}
-		// ===============Browser===========================
-		if (user2.contains("msie")) {
-			String substring = userAgent.substring(userAgent.indexOf("MSIE")).split(";")[0];
-			browser = substring.split(" ")[0].replace("MSIE", "IE") + "-" + substring.split(" ")[1];
-		} else if (user2.contains("safari") && user2.contains("version")) {
-			browser = (userAgent.substring(userAgent.indexOf("Safari")).split(" ")[0]).split("/")[0] + "-"
-					+ (userAgent.substring(userAgent.indexOf("Version")).split(" ")[0]).split("/")[1];
-		} else if (user2.contains("opr") || user2.contains("opera")) {
-			if (user2.contains("opera"))
-				browser = (userAgent.substring(userAgent.indexOf("Opera")).split(" ")[0]).split("/")[0] + "-"
-						+ (userAgent.substring(userAgent.indexOf("Version")).split(" ")[0]).split("/")[1];
-			else if (user2.contains("opr"))
-				browser = ((userAgent.substring(userAgent.indexOf("OPR")).split(" ")[0]).replace("/", "-"))
-						.replace("OPR", "Opera");
-		} else if (user2.contains("chrome")) {
-			browser = (userAgent.substring(userAgent.indexOf("Chrome")).split(" ")[0]).replace("/", "-");
-		} else if ((user2.indexOf("mozilla/7.0") > -1) || (user2.indexOf("netscape6") != -1)
-				|| (user2.indexOf("mozilla/4.7") != -1) || (user2.indexOf("mozilla/4.78") != -1)
-				|| (user2.indexOf("mozilla/4.08") != -1) || (user2.indexOf("mozilla/3") != -1)) {
-			
-			browser = "Netscape-?";
-
-		} else if (user2.contains("firefox")) {
-			browser = (userAgent.substring(userAgent.indexOf("Firefox")).split(" ")[0]).replace("/", "-");
-		} else if (user2.contains("rv")) {
-			browser = "IE-" + user2.substring(user2.indexOf("rv") + 3, user2.indexOf(")"));
-		} else {
-			browser = "UnKnown, More-Info: " + userAgent;
-		}
-
-	}
+	
 	/**
 	 * Metodo para limpiar los campos
 	 */
 	public void limpiar(){
 		nombre = "";
 		des = "";
+	}
+	
+	public void registrarAuditoria(String accion) {
+		try {
+			Auditoria audi = new Auditoria();
+			String browserDetails = Faces.getRequest().getHeader("User-Agent");
+			audi.setAccion(accion);
+			audi.setRegistroRealizoAccion("Area");
+			audi.setUsuario(sesion.getUsuario());
+			audEJB.registrarAuditoria(audi,browserDetails);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 
