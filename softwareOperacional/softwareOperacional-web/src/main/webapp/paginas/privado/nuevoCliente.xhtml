@@ -72,16 +72,34 @@
 					</div>
 					
 					<div class="form-group">
-						<label for="tfmuni">Municipio</label>
-						<h:selectOneMenu id="muni"
-						value="#{clienteControlador.municipio}">
-						
-						<f:selectItems value="#{MedicamentosControlador.muni}"
-						     >
-						</f:selectItems>
-					</h:selectOneMenu>
+							<label for="cbdep">Departamento</label> <br></br>
+							
+							<h:selectOneMenu id="cbdep"
+								value="#{usuarioController.departamento}" style="width:150px">
+								<p:ajax listener="#{usuarioController.onDepartamentoChange}"
+									update="cbmuni" />
+								<f:selectItem itemLabel="Seleccione el Departamento"
+									itemValue="" noSelectionOption="true" />
+								<f:selectItems value="#{usuarioController.departamentos}" var="dep"
+							itemValue="#{dep.nombre}" itemLabel="#{dep.nombre}" />
+							</h:selectOneMenu>
 
-					</div>
+							<p:message for="cbdep"></p:message>
+						</div>
+						
+						<div class="form-group">
+							<label for="muni">Municipio</label> <br></br>
+
+							<h:selectOneMenu id="cbmuni" value="#{usuarioController.municipio}"
+								style="width:150px">
+
+								<f:selectItem itemLabel="Seleccione Ciudad" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems value="#{usuarioController.municipios}" var="muni"
+							itemValue="#{muni.nombre}" itemLabel="#{muni.nombre}"/>
+
+							</h:selectOneMenu>
+						</div>
 					
 					<div class="box-footer">
 						<p:commandButton value="Registrar Cliente" ajax="false" class="btn btn-primary"

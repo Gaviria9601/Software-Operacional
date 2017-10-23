@@ -17,7 +17,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "Cliente")
 @NamedQueries({
-	@NamedQuery(name=Cliente.LISTAR_CLIENTES,query="select cli from Cliente cli")
+	@NamedQuery(name=Cliente.LISTAR_CLIENTES,query="select c from Cliente c"),
 })
 public class Cliente implements Serializable {
 	
@@ -53,6 +53,12 @@ public class Cliente implements Serializable {
 	}
 	
 	
+
+	public static String getListarClientes() {
+		return LISTAR_CLIENTES;
+	}
+
+
 
 	public Cliente(String nombre, String apellido, Date fechaNacimiento, String cedula, String genero,
 			Municipio municipioId) {

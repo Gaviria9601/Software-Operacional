@@ -12,9 +12,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 
-import co.edu.eam.ingesoft.softOpe.negocio.excepciones.ExcepcionNegocio;
+
 import co.edu.eam.ingesoft.softOper.entidades.Area;
-import co.edu.eam.ingesoft.softOper.entidades.Venta;
+
 
 @Stateless
 @LocalBean

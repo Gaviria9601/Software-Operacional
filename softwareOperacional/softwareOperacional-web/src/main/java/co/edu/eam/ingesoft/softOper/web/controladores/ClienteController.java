@@ -17,6 +17,7 @@ import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 import org.primefaces.context.RequestContext;
 
+import co.edu.eam.ingesoft.softOpe.negocio.beans.AreaEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.AuditoriaEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.ClienteEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.EmpleadoEJB;
@@ -25,6 +26,7 @@ import co.edu.eam.ingesoft.softOpe.negocio.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.softOper.entidades.Area;
 import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
 import co.edu.eam.ingesoft.softOper.entidades.Cliente;
+import co.edu.eam.ingesoft.softOper.entidades.Departamento;
 import co.edu.eam.ingesoft.softOper.entidades.Empleado;
 import co.edu.eam.ingesoft.softOper.entidades.Municipio;
 import co.edu.eam.ingesoft.softOper.entidades.Usuario;
@@ -53,11 +55,17 @@ public class ClienteController implements Serializable {
 
 	private Municipio municipio;
 	
+	private String departamento;
+	
 	private List<Cliente> cliente;
+	
+	private List<Area> areas;
 	
 	private ArrayList<Cliente> filtroCliente = new ArrayList<Cliente>();
 	
 	private List<Municipio> muni;
+	
+	private List<Departamento> departamentos;
 
 	// auditoria
 	
@@ -261,11 +269,16 @@ public class ClienteController implements Serializable {
 
 	@EJB
 	ClienteEJB cliEJB;
+	
+	@EJB
+	AreaEJB arEJB;
 
 	@PostConstruct
 	public void inicializador() {
-		muni = cliEJB.listarMuni();
-	    cliente = cliEJB.listarCli();
+		
+	    cliente = cliEJB.listarClientes();
+	    cliente = cliEJB.listarClientes();
+	    areas = arEJB.listarArea();
 
 	}
 	
