@@ -59,4 +59,8 @@ public class AuditoriaEJB {
 		return fecha;
 	}
 
+	public List<Auditoria> listarAuditoriasArea() {
+		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA_AREA).setParameter(1, "Ingreso")
+				.setParameter(2, "Area").getResultList();
+	}
 }

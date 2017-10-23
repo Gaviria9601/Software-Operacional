@@ -49,6 +49,7 @@ public class AuditoriaController implements Serializable {
 	@PostConstruct
 	public void inicializar() {
 		auditorias = audEJB.listarAuditoriasIdeUsuarios();
+	
 
 	}
 

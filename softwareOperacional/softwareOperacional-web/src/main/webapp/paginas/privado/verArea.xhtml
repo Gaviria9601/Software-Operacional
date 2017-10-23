@@ -23,18 +23,11 @@
 			filterBy="#{areaControlador.filtroArea}" border="1">
 			
 			
-			<p:column>
-                <p:commandButton action="#{areaControlador.modificar(audi)}" 
-							process="@this,datosExamen,tablaIdUsuarios" value="Modificar"
-							update="datosExamen,paneloculto,paneldatos1" />
+			<p:column style="width:60px;text-align:center">
+			<p:button action="#{areaControlador.modificar(audi)}"   icon="icon ui-icon-pencil"> </p:button>
 			</p:column>
 			
-			<p:column>
-			<button type="button" class="btn btn-default"><img src="Favicon.png"/></button>
-            </p:column>
-			
-
-			<p:column headerText="Nombre" sortBy="#{audi.nombre}"
+			<p:column headerText="Nombre" sortBy="#{audi.nombre}" 
 				filterBy="#{audi.nombre}" filterMatchMode="contains">
 				<h:outputLabel value="#{audi.nombre}" />
 			</p:column>
@@ -44,48 +37,15 @@
 			</p:column>
 			
 			
-          <p:column>
-                 <p:commandButton value="Elimina" />
-			</p:column>
+          <p:column style="width:60px;text-align:center">
+		  <p:button action="#{areaControlador.modificar(audi)}"   icon="icon ui-icon-trash"> </p:button>
+		  </p:column>
 
 		</p:dataTable>
 			
-           <br />
+           
 
-			<p:panel id="datosExamen" header="Modificación del area de la empresa"
-				style="margin-bottom:20px">
-
-				<p:panelGrid id="paneldatos1" columns="6" cellpadding="5"
-					styleClass="ui-noborder">
-
-					<h:panelGroup id="paneloculto" rendered="#{areaControlador.busco}">
-
-						<p:panelGrid id="paneldatos" columns="6" cellpadding="5"
-							styleClass="ui-noborder">
-
-							<p:outputLabel for="tfnombre" id="lblnombre" value="Nombre" />
-							<p:inputText id="tfnombre" cols="30" style="width: 100%;"
-								value="#{areaControlador.nombre}" />
-							<p:message for="tfnombre" />
-							
-							<p:outputLabel for="tfdes" id="lbldes" value="Descripción" />
-							<p:inputText id="tfdes" cols="30" style="width: 100%;"
-								value="#{areaControlador.des}" />
-							<p:message for="tfdes" />
-
-					      
-
-							<p:commandButton id="btnmodif" value="Modificar Area"
-								process="@this,paneldatos"
-								update="datosExamen,paneloculto,panelexamen"
-								action="#{areaControlador.editar}" />
-								
-
-
-						</p:panelGrid>
-					</h:panelGroup>
-				</p:panelGrid>
-			</p:panel>
+			
 				
 			</h:form>
          </ui:define>

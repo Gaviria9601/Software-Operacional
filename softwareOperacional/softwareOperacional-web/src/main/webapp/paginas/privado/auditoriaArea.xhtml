@@ -35,20 +35,6 @@
 					<h:outputLabel value="#{audi.fechaHora}" />
 				</p:column>
 
-				<p:column headerText="Estado Ingreso" sortBy="#{audi.ingreso}"
-					filterBy="#{audi.ingreso}" filterMatchMode="exact">
-					<f:facet name="filter">
-						<h:selectOneMenu onchange="PF('audiTable').filter()">
-							<f:selectItem itemLabel="Seleccione Uno" itemValue="#{null}"
-								noSelectionOption="true" />
-							<f:selectItem itemLabel="Ingreso" itemValue="Ingreso"/>
-							<f:selectItem itemLabel="No ingreso - El Usuario no existe" itemValue="No ingreso - El Usuario no existe"/>
-							<f:selectItem itemLabel="No ingreso - Contraseña mal Ingresada" itemValue="No ingreso - Contraseña mal Ingresada"/>
-						</h:selectOneMenu>
-					</f:facet>
-					<h:outputLabel value="#{audi.ingreso}" />
-				</p:column>
-
 				<p:column headerText="Sistema Operativo" sortBy="#{audi.origen}"
 					filterBy="#{audi.origen}" filterMatchMode="contains">
 					<h:outputLabel value="#{audi.origen}" />
@@ -57,6 +43,12 @@
 				<p:column headerText="Navegador" sortBy="#{audi.navegador}"
 					filterBy="#{audi.navegador}" filterMatchMode="contains">
 					<h:outputLabel value="#{audi.navegador}" />
+				</p:column>
+				
+				<p:column headerText="Accion" sortBy="#{audi.accion}"
+					filterBy="#{audi.accion}" filterMatchMode="contains">
+					<h:outputLabel value="#{audi.accion}" />
+					
 				</p:column>
 
 				<p:column headerText="Usuario" sortBy="#{audi.usuario.nombre}"
