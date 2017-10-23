@@ -325,6 +325,17 @@ public class ClienteController implements Serializable {
 		requestContext.execute("PF('audiTable').clearFilters()");
 	}
 	
+
+
+	public void limpiar(){
+		nombre = "";
+		apellido = "";
+		fechanaci = null;
+		cedula = "";
+		genero  = "";
+		
+	}
+	
 public void eliminar(Cliente venta) {
 		
 		try {
@@ -336,15 +347,6 @@ public void eliminar(Cliente venta) {
 		} catch (Exception e) {
 			Messages.addFlashGlobalError("Error al eliminar el cliente");
 		}
-	}
-
-	public void limpiar(){
-		nombre = "";
-		apellido = "";
-		fechanaci = null;
-		cedula = "";
-		genero  = "";
-		
 	}
 	public void registrarAuditoria(String accion) {
 		try {
