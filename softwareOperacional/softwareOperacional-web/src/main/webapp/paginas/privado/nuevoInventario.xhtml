@@ -8,41 +8,142 @@
 
 	<ui:define name="cuerpo">
 
-
 		<h2>
 			Inventario <small> Nuevo Inventario</small>
 		</h2>
 
-		<h:form>
-			<p:growl id="msgs" showDetail="true" />
+		<div class="box box-primary">
+			<div class="box-header">
+				<h3 class="box-title">Registro de Productos</h3>
+			</div>
+			<!-- /.box-header -->
 
-			<p:panel header="Select a Location" style="margin-bottom:10px;">
-				<h:panelGrid columns="2" cellpadding="5">
-					<p:outputLabel for="country" value="Country: " />
-					<h:selectOneMenu id="country" value="#{dropdownView.country}"
-						style="width:150px">
-						<p:ajax listener="#{dropdownView.onCountryChange}" update="city" />
-						<f:selectItem itemLabel="Select Country" itemValue=""
-							noSelectionOption="true" />
-						<f:selectItems value="#{dropdownView.countries}" />
-					</h:selectOneMenu>
+			<h:form role="form">
+				<div class="box-body">
 
-					<p:outputLabel for="city" value="City: " />
-					<h:selectOneMenu id="city" value="#{dropdownView.city}"
-						style="width:150px">
-						<f:selectItem itemLabel="Select City" itemValue=""
-							noSelectionOption="true" />
-						<f:selectItems value="#{dropdownView.cities}" />
-					</h:selectOneMenu>
-				</h:panelGrid>
+					<div class="form-group">
 
-				<p:separator />
+						<label for="tfnombre">Nombre Producto</label>
+						<h:inputText type="text" class="form-control" id="tfnombre"
+							a:placeholder="Nombre" value="#{inventarioController.nombre}" />
+						<p:message for="tfnombre" />
 
-				<p:commandButton value="Submit" update="msgs"
-					actionListener="#{dropdownView.displayLocation}"
-					icon="ui-icon-check" />
-			</p:panel>
-		</h:form>
+					</div>
+
+					<div class="form-group">
+						<label for="tftipoPro">Tipo de Producto</label> <br></br>
+						<h:selectOneMenu id="cbtipoProducto"
+							value="#{inventarioController.tipoProducto}"
+							converter="tipoProConverter">
+							<f:selectItems value="#{inventarioController.tipoproductos}"
+								var="tipoPro" itemValue="#{tipoPro}"
+								itemLabel="#{tipoPro.nombre}" />
+						</h:selectOneMenu>
+					</div>
+
+					<div class="form-group">
+						<label for="tffecha">Fecha de Ingreso</label> <br></br>
+						<p:inputMask id="tffecha" placeholder="año-mes-dia"
+							value="#{inventarioController.fechaIngreso}" mode="inline">
+							<f:convertDateTime pattern="yyyy-MM-dd" />
+						</p:inputMask>
+						<p:message for="tffecha" />
+					</div>
+
+
+					<div class="form-group">
+						<label for="tfdes">Descripción</label>
+						<p:inputTextarea type="text" class="form-control" id="tfdes"
+							a:placeholder="Descripción"
+							value="#{inventarioController.descripcion}" />
+						<p:message for="tfdes" />
+					</div>
+
+					<div class="form-group">
+						<label for="tfcant"> Cantidad: </label>
+						<p:inputText id="tfcant"
+							value="#{inventarioController.cantidadProducto}" cols="15"
+							style="width: 15%" />
+						<p:slider for="tfcant" />
+						<p:message for="tfcant" />
+					</div>
+
+
+
+					<div class="form-group">
+
+						<label for="tfcodigolote">Codigo Lote</label>
+						<h:inputText type="text" class="form-control" id="tfcodigolote"
+							a:placeholder="Codigo lote"
+							value="#{inventarioController.codigoLote}" />
+						<p:message for="tfcodigolote" />
+
+					</div>
+
+					<div class="form-group">
+						<label for="tfpeso"> Peso: </label>
+						<p:inputText id="peso" value="#{inventarioController.peso}"
+							cols="15" style="width: 15%" />
+						<p:slider for="tfpeso" />
+						<p:message for="tfpeso" />
+					</div>
+
+					<div class="form-group">
+
+						<label for="tfdimen">Dimensiones</label>
+						<h:inputText type="text" class="form-control" id="tfdimen"
+							a:placeholder="Dimensiones"
+							value="#{inventarioController.dimensiones}" />
+						<p:message for="tfdimen" />
+					</div>
+
+					<div class="form-group">
+						<i class="fa fa-user"></i> <label>Empleado: </label>
+						<p:autoComplete id="empleado"
+							value="#{inventarioController.empleado}"
+							completeMethod="#{inventarioController.completeTheme}" var="emp"
+							itemLabel="#{emp.nombre} #{emp.apellido}" itemValue="#{emp}"
+							converter="empleadoConverter" forceSelection="true">
+							<p:column>
+								<i class="icon ion-android-person"></i>
+							</p:column>
+							<p:column>
+								<h:outputText value="#{emp.nombre} #{emp.apellido}" />
+							</p:column>
+						</p:autoComplete>
+
+						<!-- /.input group -->
+					</div>
+
+
+					<div class="form-group">
+						<label for="totalVenta">Valor</label>
+						<div class="input-group">
+							<div class="input-group-addon">
+								<i class="fa fa-usd"></i>
+							</div>
+							<p:inputText disabled="true" id="totalVenta"
+								value="#{inventarioController.totalVenta}" class="form-control" />
+						</div>
+						<p:message for="totalVenta" />
+						<!-- /.input group -->
+					</div>
+
+
+					<div class="box-footer">
+						<p:commandButton value="Registrar Producto" ajax="false"
+							class="btn btn-primary" action="#{inventarioController.crear}" />
+
+						<p:commandButton value="Limpiar Campos" ajax="false"
+							class="btn btn-danger" action="#{inventarioController.limpiar}" />
+					</div>
+
+				</div>
+				<!-- /.box-body -->
+			</h:form>
+
+		</div>
+
 
 	</ui:define>
 

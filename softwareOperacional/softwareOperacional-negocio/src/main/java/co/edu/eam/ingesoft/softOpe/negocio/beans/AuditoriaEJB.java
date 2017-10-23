@@ -148,4 +148,20 @@ public class AuditoriaEJB {
 		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "Cliente").getResultList();
 	}
 	
+	public List<Auditoria> listarAuditoriaEmpleados(){
+		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "Empleado").getResultList();
+	}
+	
+	public List<Auditoria> listarAuditoriaInventarios(){
+		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "Inventario").getResultList();
+	}
+	
+	public List<Auditoria> listarAuditoriaTiposUsuarios(){
+		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "TipoUsuario").getResultList();
+	}
+	
+	public List<Auditoria> listarAuditoriaUsuarios(){
+		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "Usuario").getResultList();
+	}
+	
 }

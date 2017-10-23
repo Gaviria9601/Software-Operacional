@@ -31,13 +31,55 @@ public class AuditoriaController implements Serializable {
 	private List<Auditoria> ventas;
 	
 	private List<Auditoria> clientes;
+	
+	private List<Auditoria> empleados;
+	
+	private List<Auditoria> inventarios;
+	
+	private List<Auditoria> tipoUsuarios;
+	
+	private List<Auditoria> usuarios;
 
 	private Auditoria selectedAudi;
 	
 	
+	
+	public List<Auditoria> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(List<Auditoria> usuarios) {
+		this.usuarios = usuarios;
+	}
+
+	public List<Auditoria> getTipoUsuarios() {
+		return tipoUsuarios;
+	}
+
+	public void setTipoUsuarios(List<Auditoria> tipoUsuarios) {
+		this.tipoUsuarios = tipoUsuarios;
+	}
+
 	private ArrayList<Auditoria> filtroAuditoria = new ArrayList<Auditoria>();
 	
 	
+	
+	public List<Auditoria> getInventarios() {
+		return inventarios;
+	}
+
+	public void setInventarios(List<Auditoria> inventarios) {
+		this.inventarios = inventarios;
+	}
+
+	public List<Auditoria> getEmpleados() {
+		return empleados;
+	}
+
+	public void setEmpleados(List<Auditoria> empleados) {
+		this.empleados = empleados;
+	}
+
 	public List<Auditoria> getVentas() {
 		return ventas;
 	}
@@ -68,6 +110,11 @@ public class AuditoriaController implements Serializable {
 	    areas = audEJB.listarAuditoriasArea();
 	    ventas = audEJB.listarAuditoriaVentas();
 	    clientes = audEJB.listarAuditoriaClientes();
+	    empleados = audEJB.listarAuditoriaEmpleados();
+	    inventarios = audEJB.listarAuditoriaInventarios();
+	    tipoUsuarios = audEJB.listarAuditoriaTiposUsuarios();
+	    usuarios = audEJB.listarAuditoriaUsuarios();
+	    
 
 	}
 	

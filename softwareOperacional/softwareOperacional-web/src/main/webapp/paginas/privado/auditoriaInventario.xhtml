@@ -8,11 +8,11 @@
 	<ui:define name="cuerpo">
 		<h:form prependId="false">
 			<h2>
-				 CRM <small>Registro Auditoria</small>
+				Inventario <small>Registro Auditoria </small>
 			</h2>
 
-			<p:dataTable id="tablaIdUsuarios" var="audi"
-				value="#{auditoriaControl.clientes}" widgetVar="audiTable"
+			<p:dataTable id="tablaIdInventario" var="audi"
+				value="#{auditoriaControl.inventarios}" widgetVar="audiTable"
 				multiViewState="true" rows="10" paginator="true"
 				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				rowsPerPageTemplate="10,30,50"
@@ -44,14 +44,15 @@
 					filterBy="#{audi.navegador}" filterMatchMode="contains">
 					<h:outputLabel value="#{audi.navegador}" />
 				</p:column>
-				
+
 				<p:column headerText="Accion" sortBy="#{audi.accion}"
 					filterBy="#{audi.accion}" filterMatchMode="contains">
 					<h:outputLabel value="#{audi.accion}" />
-					
+
 				</p:column>
-				
-				<p:column headerText="Registro Tabla" sortBy="#{audi.registroRealizoAccion}"
+
+				<p:column headerText="Registro Tabla"
+					sortBy="#{audi.registroRealizoAccion}"
 					filterBy="#{audi.registroRealizoAccion}" filterMatchMode="contains">
 					<h:outputLabel value="#{audi.registroRealizoAccion}" />
 				</p:column>
@@ -64,7 +65,9 @@
 
 
 			</p:dataTable>
+
 		</h:form>
+
 	</ui:define>
 
 </ui:composition>

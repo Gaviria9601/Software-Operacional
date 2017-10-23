@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import co.edu.eam.ingesoft.softOper.entidades.Cliente;
 import co.edu.eam.ingesoft.softOper.entidades.Producto;
 import co.edu.eam.ingesoft.softOper.entidades.ProductoVenta;
+import co.edu.eam.ingesoft.softOper.entidades.TipoProducto;
 
 @LocalBean
 @Stateless
@@ -27,6 +28,15 @@ public class ProductoEJB {
 	 */
 	public Producto buscarProduto(int codigo) {
 		return em.find(Producto.class, codigo);
+	}
+	
+	/**
+	 * 
+	 * @param codigo
+	 * @return
+	 */
+	public TipoProducto buscarTipoProducto(int codigo){
+		return em.find(TipoProducto.class, codigo);
 	}
 
 	/**

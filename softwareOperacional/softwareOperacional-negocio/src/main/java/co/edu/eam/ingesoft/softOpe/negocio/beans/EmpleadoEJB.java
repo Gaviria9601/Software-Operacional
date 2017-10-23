@@ -83,4 +83,12 @@ public class EmpleadoEJB {
 		return em.createNamedQuery(Cargo.LISTAR_CARGOS).getResultList();
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<Empleado> listarEmpleados(){
+		return em.createNamedQuery(Empleado.LISTAR_EMPLEADOS).getResultList();
+	}
+	
 }
