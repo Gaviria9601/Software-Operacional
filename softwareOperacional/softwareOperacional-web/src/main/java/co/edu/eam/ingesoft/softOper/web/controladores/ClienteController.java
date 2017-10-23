@@ -74,18 +74,6 @@ public class ClienteController implements Serializable{
 
 		
 
-		public Municipio getMunicipio() {
-			return municipio;
-		}
-
-
-		public void setMunicipio(Municipio municipio) {
-			this.municipio = municipio;
-		}
-
-
-
-
 		@EJB
 		private SeguridadEJB segEJB;
 
