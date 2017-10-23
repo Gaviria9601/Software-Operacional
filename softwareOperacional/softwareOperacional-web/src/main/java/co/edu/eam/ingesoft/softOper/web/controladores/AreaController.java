@@ -27,6 +27,7 @@ import co.edu.eam.ingesoft.softOper.entidades.Area;
 import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
 import co.edu.eam.ingesoft.softOper.entidades.Empleado;
 import co.edu.eam.ingesoft.softOper.entidades.Usuario;
+import co.edu.eam.ingesoft.softOper.entidades.Venta;
 
 @Named("areaControlador")
 @ViewScoped
@@ -277,10 +278,7 @@ public class AreaController implements Serializable {
 	 * Metodo para filtar en la tabla
 	 * @param id
 	 */
-	public void resetearFitrosTabla(String id) {
-		RequestContext requestContext = RequestContext.getCurrentInstance();
-		requestContext.execute("PF('vtWidget').clearFilters()");
-	}
+	
 	/**
 	 * Metodo para modificar
 	 * @param audi
@@ -307,7 +305,7 @@ public class AreaController implements Serializable {
 	
 	}
 
-	public void eliminar(Area audi) {
+	/*public void eliminar(Area audi) {
 		try {
 			arEJB.eliminarArea(audi.getNombre());
 			limpiar();
@@ -319,8 +317,24 @@ public class AreaController implements Serializable {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+	}**/
+	public void resetearFitrosTabla() {
+		RequestContext requestContext = RequestContext.getCurrentInstance();
+		requestContext.execute("PF('audiTable').clearFilters()");
 	}
 	
+	public void eliminarA(Area venta) {
+		
+		try {
+			arEJB.eliminar(venta.getId());
+			areas = arEJB.listarArea();
+			Messages.addFlashGlobalInfo("Se ha eliminado el area correctamente");
+			resetearFitrosTabla();
+			registrarAuditoria("Eliminar");
+		} catch (Exception e) {
+			Messages.addFlashGlobalError("Error al eliminar la venta");
+		}
+	}
 	
 	/**
 	 * Metodo para limpiar los campos

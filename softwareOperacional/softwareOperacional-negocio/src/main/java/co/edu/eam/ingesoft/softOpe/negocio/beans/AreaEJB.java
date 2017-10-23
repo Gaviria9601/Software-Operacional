@@ -14,6 +14,7 @@ import javax.persistence.PersistenceContext;
 
 import co.edu.eam.ingesoft.softOpe.negocio.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.softOper.entidades.Area;
+import co.edu.eam.ingesoft.softOper.entidades.Venta;
 
 @Stateless
 @LocalBean
@@ -62,8 +63,8 @@ public class AreaEJB {
   * @param codigo
   */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void eliminarArea(String nombre){
-		em.remove(nombre);
+	public void eliminar(Integer id){
+		em.remove(em.find(Area.class, id));
 	}
 	
 

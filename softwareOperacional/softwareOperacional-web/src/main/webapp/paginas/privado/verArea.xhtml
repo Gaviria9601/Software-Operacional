@@ -38,9 +38,10 @@
 			</p:column>
 			
 			
-          <p:column style="width:60px;text-align:center">
-		  <p:button action="#{areaControlador.eliminar}"   icon="icon ui-icon-trash"> </p:button>
-		  </p:column>
+          	<p:column style="width:60px;text-align:center">
+					<p:commandButton action="#{areaControlador.eliminarA(audi)}"
+							process="@this" update="tablaIdUsuarios"   icon="ui-icon-trash" />
+				</p:column>
 
 		</p:dataTable>
 				
