@@ -269,14 +269,6 @@ public class ClienteController implements Serializable {
 
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-
 	public List<Municipio> getMuni() {
 		return muni;
 	}
