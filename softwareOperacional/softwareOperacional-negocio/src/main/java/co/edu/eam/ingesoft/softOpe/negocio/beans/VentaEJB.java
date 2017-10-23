@@ -27,6 +27,15 @@ public class VentaEJB {
 	
 	/**
 	 * 
+	 * @param codigo
+	 * @return
+	 */
+	public Venta buscarVenta(int codigo){
+		return em.find(Venta.class, codigo);
+	}
+	
+	/**
+	 * 
 	 * @param venta
 	 */
 	public void editarVenta(Venta venta){

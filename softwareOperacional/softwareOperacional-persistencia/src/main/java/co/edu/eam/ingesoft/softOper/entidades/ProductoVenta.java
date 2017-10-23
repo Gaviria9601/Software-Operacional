@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -16,7 +18,12 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name="ProductoVenta")
 @IdClass(ProductoVentaPK.class)
+@NamedQueries({
+	@NamedQuery(name=ProductoVenta.LISTAR_PRODUCTOS_VENTA,query="select proVen from ProductoVenta proVen where proVen.venta_codigo.codigo=?1")
+})
 public class ProductoVenta implements Serializable{
+	
+	public static final String LISTAR_PRODUCTOS_VENTA = "ListarProductosVenta";
 
 	@Id
 	@ManyToOne

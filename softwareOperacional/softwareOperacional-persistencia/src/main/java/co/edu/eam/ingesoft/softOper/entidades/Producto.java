@@ -23,6 +23,7 @@ public class Producto implements Serializable {
 	
 	public static final String LISTAR_PRODUCTOS = "ListarProductos";
 	
+	
 	@Id
 	@Column(name="codigo", nullable=false)
 	private int codigo;

@@ -26,11 +26,13 @@
 							style="width:180px" placeholder="Inserte palabra clave" />
 					</p:outputPanel>
 				</f:facet>
-				<p:ajax event="filter" update="tablaIdVentas" listener="#{ventaController.buscar}" />
+				<p:ajax event="filter" update="tablaIdVentas"
+					listener="#{ventaController.buscar}" />
 				<p:column style="width:60px;text-align:center">
 					<p:commandButton update="tablaIdVentas"
-						action="#{ventaController.procederEditar()}" process="@this"
-						icon="ui-icon-pencil" />
+						action="#{ventaController.procederEditar(ven)}" process="@this"
+						icon="ui-icon-pencil">
+					</p:commandButton>
 				</p:column>
 
 				<p:column headerText="Fecha Hora" sortBy="#{ven.fecha}"
@@ -58,7 +60,7 @@
 
 				<p:column style="width:55px;text-align:center">
 					<p:commandButton action="#{ventaController.eliminar(ven)}"
-							process="@this" update="tablaIdVentas"   icon="ui-icon-trash" />
+						process="@this" update="tablaIdVentas" icon="ui-icon-trash" />
 				</p:column>
 
 

@@ -34,5 +34,6 @@ public class ProductoEJB {
 		return em.createNamedQuery(Producto.LISTAR_PRODUCTOS).getResultList();
 		
 	}
-
+	
+	
 }

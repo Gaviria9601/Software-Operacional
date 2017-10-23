@@ -1,5 +1,7 @@
 package co.edu.eam.ingesoft.softOpe.negocio.beans;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -60,5 +62,15 @@ public class ProductoVentaEJB {
 		totalElim = proVen.getTotal();
 		return totalElim;
 	}
+	
+	/**
+	 * 
+	 * @param codigo
+	 * @return
+	 */
+	public List<Producto> listarProductosVenta(int codigo){
+		return em.createNamedQuery(ProductoVenta.LISTAR_PRODUCTOS_VENTA).setParameter(1, codigo).getResultList();
+	}
+
 
 }

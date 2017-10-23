@@ -41,7 +41,6 @@ public class VentaController implements Serializable {
 
 	private Venta ventaGeneral;
 
-	
 	private Cliente cliente;
 
 	private List<Cliente> clientes;
@@ -87,6 +86,9 @@ public class VentaController implements Serializable {
 
 	@Inject
 	private SessionController sesion;
+	
+	@Inject
+	private VentaEditController ventEdi;
 
 	public int getTotalVenta() {
 		return totalVenta;
@@ -279,9 +281,12 @@ public class VentaController implements Serializable {
 	 * 
 	 * @return
 	 */
-	public String procederEditar() {
+	public String procederEditar(Venta ven) {
+		DatosManager.setCodigoVenta(ven.getCodigo());
 		return "/paginas/privado/editarVenta.xhtml?faces-redirect=true";
 	}
+	
+
 
 	/**
 	 * 
