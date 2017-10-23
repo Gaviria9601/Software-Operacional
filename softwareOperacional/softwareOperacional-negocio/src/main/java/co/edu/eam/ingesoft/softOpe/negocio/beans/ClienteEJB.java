@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 
 
 import co.edu.eam.ingesoft.softOper.entidades.Cliente;
+import co.edu.eam.ingesoft.softOper.entidades.Municipio;
 
 
 @LocalBean
@@ -43,5 +44,10 @@ public class ClienteEJB {
 		return em.createNamedQuery(Cliente.LISTAR_CLIENTES).getResultList();
 		
 	}
+
 	
+	public List<Municipio> listarMuni() {
+		return em.createNamedQuery(Municipio.LISTAR_MUNI).getResultList();
+		
+	}
 }

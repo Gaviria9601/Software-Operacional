@@ -43,9 +43,12 @@
 					
 					
 					<div class="form-group">
-						<label for="tffec">Fecha de nacimiento</label>
-						<p:inputText type="text" class="form-control" id="fec" a:placeholder="Fecha de nacimiento"
-							value="#{clienteControlador.fechanaci}" />
+						<label for="tffecha">Fecha de nacimiento</label>
+						<p:inputMask id="tffecha" value="#{clienteControlador.fechanaci}" 
+					mode="inline">
+					<f:convertDateTime pattern = "yyyy-MM-dd" />
+					</p:inputMask>
+					
 
 					</div>
 					
@@ -61,17 +64,22 @@
 					
 					<div class="form-group">
 						<label for="tfgen">Genero</label>
-						<p:selectOneMenu id="gen" value="#{clienteControlador.genero}">
+						<h:selectOneMenu id="gen" value="#{clienteControlador.genero}">
 					     <f:selectItem itemValue="Femenino" itemLabel="Femenino" />
 						<f:selectItem itemValue="Masculino" itemLabel="Masculino" />
-					  </p:selectOneMenu>
+					  </h:selectOneMenu>
 
 					</div>
 					
 					<div class="form-group">
 						<label for="tfmuni">Municipio</label>
-						<p:inputTextarea type="text" class="form-control" id="muni" a:placeholder="Municipio"
-							value="#{clienteControlador.municipio}" />
+						<h:selectOneMenu id="muni"
+						value="#{clienteControlador.municipio}">
+						
+						<f:selectItems value="#{MedicamentosControlador.tipos}"
+						     >
+						</f:selectItems>
+					</h:selectOneMenu>
 
 					</div>
 					
