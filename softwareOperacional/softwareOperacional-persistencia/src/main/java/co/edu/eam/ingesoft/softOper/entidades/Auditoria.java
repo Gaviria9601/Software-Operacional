@@ -19,16 +19,15 @@ import javax.persistence.TemporalType;
 @Table(name="Auditoria")
 @NamedQueries({
 	@NamedQuery(name=Auditoria.LISTAR_AUDITORIA_ID_USUARIOS,query="select aud from Auditoria aud where aud.ingreso = ?1 and aud.registroRealizoAccion = ?2"),
-	@NamedQuery(name=Auditoria.LISTAR_AUDITORIA_ID_USU,query="select aud from Auditoria aud where aud.registroRealizoAccion = ?1"),
-	@NamedQuery (name=Auditoria.LISTAR_AUDITORIA_AREA, query="select aud from Auditoria aud where aud.registroRealizoAccion = 'area' ")
+	@NamedQuery(name=Auditoria.LISTAR_AUDITORIA,query="select aud from Auditoria aud where aud.registroRealizoAccion = ?1")
+	
 })
 public class Auditoria implements Serializable{
 	
 	public static final String LISTAR_AUDITORIA_ID_USUARIOS = "Auditoria.listarAuditoriaIdUsuarios";
 	
-	public static final String LISTAR_AUDITORIA_ID_USU = "Auditoria.ListarAuditoriaIdUsu";
+	public static final String LISTAR_AUDITORIA = "Auditoria.Listar";
 	
-	public static final String LISTAR_AUDITORIA_AREA = "Auditoria.ListarArea";
 	@Id
 	@Column(name="codigo", nullable=false)
 	private int codigo;

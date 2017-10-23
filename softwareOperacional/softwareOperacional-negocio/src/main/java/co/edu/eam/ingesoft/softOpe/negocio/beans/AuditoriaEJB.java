@@ -112,7 +112,7 @@ public class AuditoriaEJB {
 	 * @return
 	 */
 	public List<Auditoria> listarAuditoriasIdeUsuarios() {
-		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA_ID_USU).setParameter(1, "Identificacion Usuario")
+		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "Identificacion Usuario")
 				.getResultList();
 	}
 
@@ -127,8 +127,21 @@ public class AuditoriaEJB {
 		return fecha;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public List<Auditoria> listarAuditoriasArea() {
-		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA_AREA).setParameter(1, "Ingreso")
-				.setParameter(2, "Area").getResultList();
+		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "Area").getResultList();
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<Auditoria> listarAuditoriaVentas(){
+		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "Venta").getResultList();
+	}
+
+	
 }

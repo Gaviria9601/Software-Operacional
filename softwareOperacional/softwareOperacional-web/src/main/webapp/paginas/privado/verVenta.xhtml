@@ -16,9 +16,9 @@
 				multiViewState="true" rows="10" paginator="true"
 				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				rowsPerPageTemplate="10,30,50"
-				selection="#{ventaController.selectedVenta}" rowKey="#{ven.codigo}"
 				emptyMessage="No se encontraron Ventas con criterios dados."
-				filteredValue="#{ventaController.filtroVenta}" border="1">
+				selection="#{ventaController.selectedVenta}" rowKey="#{ven.codigo}"
+				filteredBy="#{ventaController.filtroVenta}" border="1">
 				<f:facet name="header">
 					<p:outputPanel>
 						<h:outputText value="Buscar en todos los campos:" />
@@ -26,7 +26,7 @@
 							style="width:180px" placeholder="Inserte palabra clave" />
 					</p:outputPanel>
 				</f:facet>
-
+				<p:ajax event="filter" update="tablaIdVentas" listener="#{ventaController.buscar}" />
 				<p:column style="width:60px;text-align:center">
 					<p:commandButton update="tablaIdVentas"
 						action="#{ventaController.procederEditar()}" process="@this"
@@ -57,7 +57,8 @@
 				</p:column>
 
 				<p:column style="width:55px;text-align:center">
-					<p:commandButton icon="ui-icon-trash" />
+					<p:commandButton action="#{ventaController.eliminar(ven)}"
+							process="@this" update="tablaIdVentas"   icon="ui-icon-trash" />
 				</p:column>
 
 

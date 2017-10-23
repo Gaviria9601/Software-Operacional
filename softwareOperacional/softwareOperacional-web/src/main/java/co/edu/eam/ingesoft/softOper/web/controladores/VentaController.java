@@ -16,6 +16,7 @@ import javax.inject.Named;
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.TransferEvent;
 import org.primefaces.event.UnselectEvent;
@@ -40,6 +41,7 @@ public class VentaController implements Serializable {
 
 	private Venta ventaGeneral;
 
+	
 	private Cliente cliente;
 
 	private List<Cliente> clientes;
@@ -63,7 +65,7 @@ public class VentaController implements Serializable {
 	private int totalVenta;
 
 	private List<Venta> ventas;
-	
+
 	private int ventasInfo;
 
 	private ArrayList<Venta> filtroVenta = new ArrayList<Venta>();
@@ -97,12 +99,11 @@ public class VentaController implements Serializable {
 	public int getCantProductos() {
 		return cantProductos;
 	}
-	
+
 	public void setCantProductos(int cantProductos) {
 		this.cantProductos = cantProductos;
 	}
-	
-	
+
 	public int getVentasInfo() {
 		return ventasInfo;
 	}
@@ -362,8 +363,40 @@ public class VentaController implements Serializable {
 		cantSobrantes = 0;
 		valorProducto = 0;
 	}
-	
-	
+
+	/**
+	 * 
+	 * @param venta
+	 */
+	public void eliminar(Venta venta) {
+		System.out.println(venta.getTotalVenta());
+		try {
+			venEJB.eliminarVenta(venta.getCodigo());
+			ventas = venEJB.listarVentas();
+			Messages.addFlashGlobalInfo("Se ha eliminado la venta correctamente");
+			resetearFitrosTabla();
+			registrarAuditoria("Eliminar");
+		} catch (Exception e) {
+			Messages.addFlashGlobalError("Error al eliminar la venta");
+		}
+	}
+
+	/**
+	 * 
+	 */
+	public void buscar() {
+		registrarAuditoria("Buscar");
+	}
+
+	/**
+	 * 
+	 * @param id
+	 */
+	public void resetearFitrosTabla() {
+		RequestContext requestContext = RequestContext.getCurrentInstance();
+		requestContext.execute("PF('ventaTable').clearFilters()");
+	}
+
 	public void registrarAuditoria(String accion) {
 		try {
 			Auditoria audi = new Auditoria();
@@ -371,11 +404,10 @@ public class VentaController implements Serializable {
 			audi.setAccion(accion);
 			audi.setRegistroRealizoAccion("Venta");
 			audi.setUsuario(sesion.getUsuario());
-			audEJB.registrarAuditoria(audi,browserDetails);
+			audEJB.registrarAuditoria(audi, browserDetails);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
 
 }

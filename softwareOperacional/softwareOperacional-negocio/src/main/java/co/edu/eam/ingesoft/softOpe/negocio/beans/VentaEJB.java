@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+
 import co.edu.eam.ingesoft.softOper.entidades.Venta;
 
 @LocalBean
@@ -30,6 +31,14 @@ public class VentaEJB {
 	 */
 	public void editarVenta(Venta venta){
 		em.merge(venta);
+	}
+	
+	/**
+	 * 
+	 * @param codigo
+	 */
+	public void eliminarVenta(Integer codigo){
+		em.remove(em.find(Venta.class, codigo));
 	}
 	
 	/**
