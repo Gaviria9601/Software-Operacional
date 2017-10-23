@@ -1,0 +1,147 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateContenido.xhtml"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+	<ui:define name="cuerpo">
+
+
+		<h2>
+			Usuario <small> Nuevo usuario</small>
+		</h2>
+
+		<br />
+
+		<div class="box box-primary">
+			<div class="box-header">
+				<h3 class="box-title">Registro de nuevo usuario</h3>
+			</div>
+			<!-- /.box-header -->
+
+			<h:form role="form">
+				<p:panelGrid id="paneldatos">
+
+					<div class="box-body">
+
+						<div class="form-group">
+
+							<label for="tfnombre">Nombre</label>
+							<h:inputText type="text" class="form-control" id="nombre"
+								a:placeholder="Nombre" value="#{usuarioController.nombre}" />
+							<p:message for="nombre" />
+						</div>
+
+						<div class="form-group">
+
+							<label for="apellido">Apellido</label>
+							<h:inputText type="text" class="form-control" id="apellido"
+								a:placeholder="apellido" value="#{usuarioController.apellido}" />
+							<p:message for="apellido" />
+						</div>
+
+						<div class="form-group">
+
+							<label for="tfnombre">Cedula</label>
+							<h:inputText type="text" class="form-control" id="cedula"
+								a:placeholder="cedula" value="#{usuarioController.cedula}" />
+							<p:message for="cedula" />
+						</div>
+
+						<div class="form-group">
+							<label for="tffecha">Fecha de nacimiento</label> <br></br>
+							<p:inputMask id="tffecha" placeholder="año-mes-dia"
+								value="#{usuarioController.fechaNacimiento}" mode="inline">
+								<f:convertDateTime pattern="yyyy-MM-dd" />
+							</p:inputMask>
+						</div>
+
+						<div class="form-group">
+							<label for="tffechaingreso">Fecha de ingreso en la
+								empresa</label> <br></br>
+							<p:inputMask id="tffechaingreso" placeholder="año-mes-dia"
+								value="#{usuarioController.fechaIngreso}" mode="inline">
+								<f:convertDateTime pattern="yyyy-MM-dd" />
+							</p:inputMask>
+						</div>
+
+						<div class="form-group">
+							<label for="tfgen">Genero</label> <br></br>
+							<h:selectOneMenu id="gen" value="#{usuarioController.genero}">
+								<f:selectItem itemValue="F" itemLabel="Femenino" />
+								<f:selectItem itemValue="M" itemLabel="Masculino" />
+							</h:selectOneMenu>
+
+						</div>
+
+						<div class="form-group">
+							<label for="tfdep">Departamento</label> <br></br>
+							<h:selectOneMenu id="dep"
+								value="#{usuarioController.departamento}">
+								<f:selectItems value="#{usuarioController.departamentos}"
+									var="f" itemValue="#{f}" itemLabel="#{f.nombre}"/>
+								<f:ajax event="change" execute="@this" render="muni"
+									listener="#{usuarioController.seleccionarDepto}"/>
+							</h:selectOneMenu>
+							<p:message for="dep"></p:message>
+						</div>
+
+
+						<div class="form-group">
+							<label for="muni">Municipio</label> <br></br>
+
+							<h:selectOneMenu id="muni" value="#{usuarioController.municipio}">
+
+								<f:selectItems value="#{usuarioController.municipios}" var="m"
+								itemLabel="#{m.nombre}" itemValue="#{m}"
+								/>
+								</h:selectOneMenu>
+						</div>
+
+						<div class="form-group">
+							<label for="tfmuni">Tipo de usuario</label> <br></br>
+							<h:selectOneMenu id="tipo"
+								value="#{usuarioController.tipoUsuario}">
+
+								<f:selectItems value="#{usuarioController.tipos}" var="t"
+									itemLabel="#{t.nombre}" itemValue="#{t.id}">
+								</f:selectItems>
+							</h:selectOneMenu>
+						</div>
+
+						<div class="form-group">
+
+							<label for="usuario">Nombre de usuario</label>
+							<h:inputText type="text" class="form-control" id="usuario"
+								a:placeholder="usuario" value="#{usuarioController.nickname}" />
+							<p:message for="usuario" />
+						</div>
+
+
+
+						<div class="form-group">
+							<label for="tfdes">Contraseña</label>
+							<p:inputText type="password" class="form-control" id="contra"
+								a:placeholder="contraseña"
+								value="#{usuarioController.contrasenia}" />
+							<p:message for="contra" />
+						</div>
+
+						<div class="box-footer">
+							<p:commandButton value="Registrar Usuario" ajax="false"
+								class="btn btn-primary" process="@this,paneldatos"
+								update="paneldatos" action="#{tipoUsuariocontrolador.crear}" />
+						</div>
+
+					</div>
+				</p:panelGrid>
+				<!-- /.box-body -->
+			</h:form>
+
+		</div>
+
+
+	</ui:define>
+</ui:composition>

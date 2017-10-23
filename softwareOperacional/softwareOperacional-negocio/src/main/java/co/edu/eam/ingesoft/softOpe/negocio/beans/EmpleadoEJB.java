@@ -11,7 +11,11 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import co.edu.eam.ingesoft.softOper.entidades.Departamento;
 import co.edu.eam.ingesoft.softOper.entidades.Empleado;
+import co.edu.eam.ingesoft.softOper.entidades.Municipio;
+import co.edu.eam.ingesoft.softOper.entidades.TipoUsuario;
+import co.edu.eam.ingesoft.softOper.entidades.Venta;
 
 @LocalBean
 @Stateless
@@ -31,4 +35,40 @@ public class EmpleadoEJB {
 		}
 	}
 
+	
+	/**
+	 * 
+	 * @param e
+	 */	
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void crear(Empleado e) {
+	     em.persist(e);
+		
+	}
+	
+
+	public Empleado buscarEmpleado2(int id) {
+		Empleado pa = em.find(Empleado.class, id);
+		return pa;
+	}
+	
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void eliminarEmpleado(Empleado pa){
+		em.remove(buscarEmpleado2(pa.getCodigo()));
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	public List<Departamento> listardepartamentos(){
+		return em.createNamedQuery(Departamento.LISTAR_DEPTOS).getResultList();
+	}
+	
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	public List<Municipio> listarMuniporDepto(Departamento depto){
+		return em.createNamedQuery(Municipio.LISTAR_MUNIPorDepto).setParameter(1, depto.getId()).getResultList();
+	}
+	
 }

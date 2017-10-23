@@ -15,12 +15,14 @@ import javax.persistence.Table;
 @Table(name = "Municipio")
 @NamedQueries({
     @NamedQuery (name=Municipio.LISTAR_MUNI, query="select a from Municipio a"),
+    @NamedQuery (name=Municipio.LISTAR_MUNIPorDepto, query="select a from Municipio a where a.departamento.id = ?1")
   
 })
 public class Municipio implements Serializable{
 	
 	
 	public static final String LISTAR_MUNI = "ListarMunici";
+	public static final String LISTAR_MUNIPorDepto = "listatMunixDepto";
 	
 	@Id
 	@Column(name="id", nullable=false)

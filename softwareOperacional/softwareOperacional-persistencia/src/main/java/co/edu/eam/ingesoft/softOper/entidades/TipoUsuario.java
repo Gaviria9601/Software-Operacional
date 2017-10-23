@@ -7,12 +7,20 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 
 @Entity
 @Table(name="TipoUsuario")
+@NamedQueries({
+@NamedQuery (name=TipoUsuario.listar_tipos, query="select a from TipoUsuario a")
+})
 public class TipoUsuario implements Serializable{
+	
+	
+	public static final String listar_tipos = "ListarTipoUsuario";
 	
 	@Id
 	@Column(name="id", nullable=false)
@@ -54,6 +62,12 @@ public class TipoUsuario implements Serializable{
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+	public TipoUsuario(String nombre, String descripcion) {
+		super();
+		this.nombre = nombre;
+		this.descripcion = descripcion;
 	}
 
 	/**
