@@ -194,12 +194,26 @@ public class TipoUsuarioController implements Serializable {
 
 		Messages.addGlobalInfo("El tipo de usuario fue modificado con exito");
 		// limpiar();
+	
+	}
+	
+	public void resetearFitrosTabla() {
+		RequestContext requestContext = RequestContext.getCurrentInstance();
+		requestContext.execute("PF('audiTable').clearFilters()");
 	}
 	
 	public void eliminar(TipoUsuario tipo){
+		try {
+			tipousuejb.eliminarTipoUsuario(tipo.getId());
+			tipos = tipousuejb.listarTipoUsuario();
+			resetearFitrosTabla();
+			Messages.addFlashGlobalInfo("Se ha eliminado el tipo de usuario correctamente");
+		} catch (Exception e){ 
+			Messages.addFlashGlobalError("Error al eliminar  el tipo de usuario ");
+		}
 		
-		tipousuejb.eliminarTipoUsuario(tipoUsu);
-		Messages.addGlobalInfo("El tipo de usuario fue eliminado con exito");
+		
+		
 		// limpiar();
 		
 	}

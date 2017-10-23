@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 
 import co.edu.eam.ingesoft.softOper.entidades.Area;
 import co.edu.eam.ingesoft.softOper.entidades.TipoUsuario;
+import co.edu.eam.ingesoft.softOper.entidades.Venta;
 
 @Stateless
 @LocalBean
@@ -38,8 +39,8 @@ public class TipoUsuarioEJB {
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void eliminarTipoUsuario(TipoUsuario pa){
-		em.remove(buscarTipoUsuario(pa.getId()));
+	public void eliminarTipoUsuario(Integer codigo){
+		em.remove(em.find(TipoUsuario.class, codigo));
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
