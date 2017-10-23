@@ -27,9 +27,8 @@
 					</p:outputPanel>
 				</f:facet>
 
-				<p:column selectionMode="single"
-					style="width:60px;text-align:center">
-					<p:commandButton update=""
+				<p:column style="width:60px;text-align:center">
+					<p:commandButton update="tablaIdVentas"
 						action="#{ventaController.procederEditar()}" process="@this"
 						icon="ui-icon-pencil" />
 				</p:column>
@@ -58,7 +57,7 @@
 				</p:column>
 
 				<p:column style="width:55px;text-align:center">
-					<p:commandButton icon="ui-icon-trash"/>
+					<p:commandButton icon="ui-icon-trash" />
 				</p:column>
 
 

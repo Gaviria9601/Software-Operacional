@@ -10,6 +10,16 @@ public class ProductoVentaPK implements Serializable{
 	
 	public ProductoVentaPK(){	
 	}
+	
+	
+
+	public ProductoVentaPK(int producto_codigo, int venta_codigo) {
+		super();
+		this.producto_codigo = producto_codigo;
+		this.venta_codigo = venta_codigo;
+	}
+
+
 
 	/**
 	 * @return the producto_codigo

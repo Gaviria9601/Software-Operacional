@@ -3,31 +3,41 @@ package co.edu.eam.ingesoft.softOper.web.controladores;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.omnifaces.cdi.ViewScoped;
+import org.omnifaces.util.Messages;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.event.TransferEvent;
+import org.primefaces.event.UnselectEvent;
 import org.primefaces.model.DualListModel;
 
 import co.edu.eam.ingesoft.softOpe.negocio.beans.AuditoriaEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.ClienteEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.ProductoEJB;
+import co.edu.eam.ingesoft.softOpe.negocio.beans.ProductoVentaEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.VentaEJB;
 import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
 import co.edu.eam.ingesoft.softOper.entidades.Cliente;
 import co.edu.eam.ingesoft.softOper.entidades.Producto;
+import co.edu.eam.ingesoft.softOper.entidades.ProductoVenta;
 import co.edu.eam.ingesoft.softOper.entidades.Venta;
 
 @Named("ventaController")
 @ViewScoped
 public class VentaController implements Serializable {
-	
+
 	private Venta selectedVenta;
+
+	private Venta ventaGeneral;
 
 	private Cliente cliente;
 
@@ -38,9 +48,21 @@ public class VentaController implements Serializable {
 	private Date fecha;
 
 	private int cantidadProducto;
-	
+
+	private String infoGeneral;
+
+	private int cantSobrantes;
+
+	private int valorProducto;
+
+	private int cantProductos;
+
+	private boolean empezar;
+
+	private int totalVenta;
+
 	private List<Venta> ventas;
-	
+
 	private ArrayList<Venta> filtroVenta = new ArrayList<Venta>();
 
 	@EJB
@@ -51,11 +73,64 @@ public class VentaController implements Serializable {
 
 	@EJB
 	private ProductoEJB proEJB;
-	
+
 	@EJB
 	private VentaEJB venEJB;
-	
-	
+
+	@EJB
+	private ProductoVentaEJB proVenEJB;
+
+	@Inject
+	private SessionController sesion;
+
+	public int getTotalVenta() {
+		return totalVenta;
+	}
+
+	public void setTotalVenta(int totalVenta) {
+		this.totalVenta = totalVenta;
+	}
+
+	public int getCantProductos() {
+		return cantProductos;
+	}
+
+	public void setCantProductos(int cantProductos) {
+		this.cantProductos = cantProductos;
+	}
+
+	public String getInfoGeneral() {
+		return infoGeneral;
+	}
+
+	public void setInfoGeneral(String infoGeneral) {
+		this.infoGeneral = infoGeneral;
+	}
+
+	public int getCantSobrantes() {
+		return cantSobrantes;
+	}
+
+	public void setCantSobrantes(int cantSobrantes) {
+		this.cantSobrantes = cantSobrantes;
+	}
+
+	public int getValorProducto() {
+		return valorProducto;
+	}
+
+	public void setValorProducto(int valorProducto) {
+		this.valorProducto = valorProducto;
+	}
+
+	public Venta getVentaGeneral() {
+		return ventaGeneral;
+	}
+
+	public void setVentaGeneral(Venta ventaGeneral) {
+		this.ventaGeneral = ventaGeneral;
+	}
+
 	public ArrayList<Venta> getFiltroVenta() {
 		return filtroVenta;
 	}
@@ -120,6 +195,14 @@ public class VentaController implements Serializable {
 		this.fecha = fecha;
 	}
 
+	public boolean isEmpezar() {
+		return empezar;
+	}
+
+	public void setEmpezar(boolean empezar) {
+		this.empezar = empezar;
+	}
+
 	@PostConstruct
 	public void inicializar() {
 		clientes = cliEJB.listarClientes();
@@ -130,12 +213,39 @@ public class VentaController implements Serializable {
 		fecha = generarFechaActual();
 	}
 
-	public void crear() {
-
+	/**
+	 * 
+	 */
+	public void terminar() {
+		List<Producto> produc = productos.getTarget();
+		for (int i = 0; i < produc.size(); i++) {
+			produc.remove(i);
+		}
+		ventaGeneral.setTotalVenta(totalVenta);
+		venEJB.editarVenta(ventaGeneral);
+		infoGeneral = "";
+		cantSobrantes = 0;
+		valorProducto = 0;
+		totalVenta = 0;
+		cantProductos = 0;
+		cliente = null;
+		empezar = false;
+		Messages.addFlashGlobalInfo("Venta Terminada con Exito");
 	}
 
-	public void limpiar() {
-
+	/**
+	 * 
+	 */
+	public void empezarVenta() {
+		Venta venta = new Venta();
+		venta.setFecha(audEJB.generarFechaActual());
+		venta.setVendedor(sesion.buscarEmpleado(sesion.getUsuario().getId()));
+		venta.setCliente(cliente);
+		venta.setTotalVenta(totalVenta);
+		venEJB.crearVenta(venta);
+		ventaGeneral = venEJB.listarVentas().get(venEJB.listarVentas().size() - 1);
+		empezar = true;
+		Messages.addFlashGlobalInfo("Venta Empezada");
 	}
 
 	/**
@@ -145,12 +255,12 @@ public class VentaController implements Serializable {
 	public Date generarFechaActual() {
 		return audEJB.generarFechaActual();
 	}
-	
+
 	/**
 	 * 
 	 * @return
 	 */
-	public String procederEditar(){
+	public String procederEditar() {
 		return "/paginas/privado/editarVenta.xhtml?faces-redirect=true";
 	}
 
@@ -172,5 +282,65 @@ public class VentaController implements Serializable {
 
 		return filteredThemes;
 	}
-	
+
+	/**
+	 * 
+	 * @param event
+	 */
+	public void onSelect(SelectEvent event) {
+		Producto pro = (Producto) event.getObject();
+		infoGeneral = "Descripción: " + pro.getDescripcion() + " Peso: " + pro.getPeso() + " Dimensiones: "
+				+ pro.getDimensiones();
+		cantSobrantes = pro.getCantidad();
+		valorProducto = pro.getValor();
+	}
+
+	/**
+	 * 
+	 * @param event
+	 */
+	public void onUnselect(UnselectEvent event) {
+		infoGeneral = null;
+		cantSobrantes = 0;
+		valorProducto = 0;
+	}
+
+	/**
+	 * 
+	 * @param event
+	 */
+	public void onTransfer(TransferEvent event) {
+		cantProductos = productos.getTarget().size();
+		if (event.isAdd()) {
+			try {
+				if (cantidadProducto > 0) {
+					for (Object item : event.getItems()) {
+						Producto pro = (Producto) item;
+						proVenEJB.agregarProductoVenta(pro, ventaGeneral, cantidadProducto);
+						int total = pro.getValor() * cantidadProducto;
+						totalVenta += total;
+						Messages.addFlashGlobalInfo("Producto Agregado");
+					}
+				} else {
+					Messages.addFlashGlobalError("La Cantidad de productos a agregar debe ser mayor que 0");
+				}
+			} catch (Exception e) {
+				Messages.addFlashGlobalError(e.getMessage());
+			}
+		} else if (event.isRemove()) {
+			int totalVen;
+			for (Object item : event.getItems()) {
+				Producto pro = (Producto) item;
+				totalVen = proVenEJB.eliminarProductoVenta(pro.getCodigo(), ventaGeneral.getCodigo());
+				totalVenta -= totalVen;
+				Messages.addFlashGlobalInfo("Producto Eliminado");
+
+			}
+		}
+		cantidadProducto = 0;
+		infoGeneral = null;
+		cantSobrantes = 0;
+		valorProducto = 0;
+	}
+
 }

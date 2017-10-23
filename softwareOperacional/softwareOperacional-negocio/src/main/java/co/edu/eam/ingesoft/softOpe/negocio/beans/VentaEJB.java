@@ -18,6 +18,22 @@ public class VentaEJB {
 	
 	/**
 	 * 
+	 * @param venta
+	 */
+	public void crearVenta(Venta venta){
+		em.persist(venta);
+	}
+	
+	/**
+	 * 
+	 * @param venta
+	 */
+	public void editarVenta(Venta venta){
+		em.merge(venta);
+	}
+	
+	/**
+	 * 
 	 * @return
 	 */
 	public List<Venta> listarVentas(){

@@ -28,6 +28,9 @@ public class ProductoVenta implements Serializable{
 	@JoinColumn(name="venta")
 	private Venta venta_codigo;
 	
+	@JoinColumn(name="cantidad")
+	private int cantidad;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="fecha",nullable = false)
 	private Date fecha;
@@ -37,6 +40,20 @@ public class ProductoVenta implements Serializable{
 
 	public ProductoVenta(){
 	}
+
+	
+	
+	public int getCantidad() {
+		return cantidad;
+	}
+
+
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
+
+
 
 	/**
 	 * @return the producto_codigo
