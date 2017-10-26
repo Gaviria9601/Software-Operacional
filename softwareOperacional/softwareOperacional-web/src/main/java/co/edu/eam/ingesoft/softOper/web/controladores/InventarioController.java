@@ -48,15 +48,13 @@ public class InventarioController implements Serializable {
 	@Length(min = 4, max = 2000, message = "Longitud entre 4 y 2000")
 	private String descripcion;
 
-	@Pattern(regexp="[0-9]*",message="solo numeros")
-	@Length(min=4,max=15,message="longitud entre 4 y 15")
+	
 	private int cantidadProducto;
 
 	@Length(min = 4, max = 20, message = "Longitud entre 4 y 20")
 	private String codigoLote;
 
-	@Pattern(regexp="[0-9]*",message="solo numeros")
-	@Length(min=4,max=20,message="longitud entre 4 y 20")
+	
 	private int peso;
 
 	@Length(min = 4, max = 30, message = "Longitud entre 4 y 30")
@@ -64,8 +62,7 @@ public class InventarioController implements Serializable {
 
 	private Empleado empleado;
 
-	@Pattern(regexp="[0-9]*",message="solo numeros")
-	@Length(min=4,max=15,message="longitud entre 4 y 15")
+	
 	private int valor;
 
 	private List<TipoProducto> tipoproductos;
@@ -220,7 +217,7 @@ public class InventarioController implements Serializable {
 			pro.setNombre(nombre);
 			pro.setFechaIngreso(fechaIngreso);
 			pro.setDescripcion(descripcion);
-			pro.setCantidad(cantidadProducto);
+			pro.setCantidad(10);
 			pro.setCodigoLote(codigoLote);
 			pro.setPeso(peso);
 			pro.setDimensiones(dimensiones);
