@@ -10,7 +10,7 @@ public class DatosManager {
 	
 	private static int codigoCliente;
 	
-	private static int codigoArea;
+	private static int IdArea;
 	
 
 	public static int getCodigoProducto() {
@@ -51,14 +51,14 @@ public class DatosManager {
 		DatosManager.codigoCliente = codigoCliente;
 	}
 
-	public static int getCodigoArea() {
-		return codigoArea;
+	public static int getIdArea() {
+		return IdArea;
 	}
 
-	public static void setCodigoArea(int codigoArea) {
-		DatosManager.codigoArea = codigoArea;
+	public static void setIdArea(int idArea) {
+		IdArea = idArea;
 	}
-	
+
 	
 
 }

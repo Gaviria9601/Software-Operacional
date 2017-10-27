@@ -359,6 +359,15 @@ public class ClienteController implements Serializable {
 			Messages.addGlobalError(e.getMessage());
 		}
 	}
+	
+	public void buscar() {
+		registrarAuditoria("Buscar");
+	}
+	
+	public String procederEditar(Cliente audi) {
+		DatosManager.setCodigoVenta(audi.getCodigo());
+		return "/paginas/privado/editarCliente.xhtml?faces-redirect=true";
+	}
 
 	public void resetearFitrosTabla() {
 		RequestContext requestContext = RequestContext.getCurrentInstance();

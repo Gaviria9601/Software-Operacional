@@ -23,10 +23,14 @@
 			filterBy="#{clienteControlador.filtroCliente}" border="1">
 			
 			
+			<p:ajax event="filter" update="tablaIdUsuarios"
+					listener="#{clienteControlador.buscar}" />
 			<p:column style="width:60px;text-align:center">
-			<p:button   update="tablaIdUsuarios" 
-			icon="icon ui-icon-pencil" process="@this"> </p:button>
-			</p:column>
+					<p:commandButton update="tablaIdUsuarios"
+						action="#{clienteControlador.procederEditar(audi)}" process="@this"
+						icon="ui-icon-pencil">
+					</p:commandButton>
+				</p:column>
 			
 			<p:column headerText="Nombre" sortBy="#{audi.nombre}" 
 				filterBy="#{audi.nombre}" filterMatchMode="contains">

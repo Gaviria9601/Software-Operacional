@@ -27,7 +27,7 @@ import co.edu.eam.ingesoft.softOper.entidades.Area;
 import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
 import co.edu.eam.ingesoft.softOper.entidades.Empleado;
 import co.edu.eam.ingesoft.softOper.entidades.Usuario;
-import co.edu.eam.ingesoft.softOper.entidades.Venta;
+
 
 @Named("areaControlador")
 @ViewScoped
