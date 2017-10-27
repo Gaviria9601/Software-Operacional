@@ -67,6 +67,23 @@ public class Producto implements Serializable {
 	public Producto(){
 		
 	}
+	
+	public Producto(int codigo, String nombre, String descripcion, Date fechaIngreso, int cantidad, String codigoLote,
+			int peso, String dimensiones, int valor, Empleado empleado, TipoProducto tipoProducto) {
+		super();
+		this.codigo = codigo;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.fechaIngreso = fechaIngreso;
+		this.cantidad = cantidad;
+		this.codigoLote = codigoLote;
+		this.peso = peso;
+		this.dimensiones = dimensiones;
+		this.valor = valor;
+		this.empleado = empleado;
+		this.tipoProducto = tipoProducto;
+	}
+
 
 	/**
 	 * @return the codigo

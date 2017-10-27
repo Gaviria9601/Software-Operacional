@@ -23,7 +23,7 @@ public class EmpleadoConverter implements Converter {
 		if (string == null || string.trim().length() == 0 || string.equals("Seleccione...")) {
 			return null;
 		}
-		return empleadoEJB.buscarEmpleado(((Integer.parseInt(string))));
+		return empleadoEJB.buscarEmpleado2(((Integer.parseInt(string))));
 	
 	}
 

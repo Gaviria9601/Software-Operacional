@@ -10,13 +10,14 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
+import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
@@ -54,16 +55,18 @@ public class InventarioController implements Serializable {
 	@Length(min = 4, max = 20, message = "Longitud entre 4 y 20")
 	private String codigoLote;
 
-	
-	private int peso;
+	@Pattern(regexp="[0-9]*",message="Solo numeros")
+	@Length(min=1,max=10,message="longitud entre 1 y 10")
+	private String peso;
 
 	@Length(min = 4, max = 30, message = "Longitud entre 4 y 30")
 	private String dimensiones;
 
 	private Empleado empleado;
 
-	
-	private int valor;
+	@Pattern(regexp="[0-9]*",message="Solo numeros")
+	@Length(min=1,max=10,message="longitud entre 1 y 10")
+	private String valor;
 
 	private List<TipoProducto> tipoproductos;
 	
@@ -135,11 +138,11 @@ public class InventarioController implements Serializable {
 		this.codigoLote = codigoLote;
 	}
 
-	public int getPeso() {
+	public String getPeso() {
 		return peso;
 	}
 
-	public void setPeso(int peso) {
+	public void setPeso(String peso) {
 		this.peso = peso;
 	}
 
@@ -159,11 +162,11 @@ public class InventarioController implements Serializable {
 		this.empleado = empleado;
 	}
 
-	public int getValor() {
+	public String getValor() {
 		return valor;
 	}
 
-	public void setValor(int valor) {
+	public void setValor(String valor) {
 		this.valor = valor;
 	}
 
@@ -219,9 +222,9 @@ public class InventarioController implements Serializable {
 			pro.setDescripcion(descripcion);
 			pro.setCantidad(10);
 			pro.setCodigoLote(codigoLote);
-			pro.setPeso(peso);
+			pro.setPeso(Integer.parseInt(peso));
 			pro.setDimensiones(dimensiones);
-			pro.setValor(valor);
+			pro.setValor(Integer.parseInt(valor));
 			pro.setTipoProducto(tipoProducto);
 			pro.setEmpleado(empleado);
 			invEJB.crearProducto(pro);
@@ -243,9 +246,9 @@ public class InventarioController implements Serializable {
 		descripcion = null;
 		cantidadProducto = 0;
 		codigoLote = null;
-		peso = 0;
+		peso = "0";
 		dimensiones = null;
-		valor = 0;
+		valor = "0";
 		tipoProducto = null;
 		empleado = null;
 	}

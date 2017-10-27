@@ -35,43 +35,39 @@ import co.edu.eam.ingesoft.softOper.entidades.Usuario;
 @ViewScoped
 public class ClienteController implements Serializable {
 
-	@Pattern(regexp = "[A-Za-z ]*", message = "solo Letras")
+	@Pattern(regexp = "[A-Za-z ]*", message = "Solo Letras")
 	@Length(min = 3, max = 50, message = "longitud entre 3 y 15")
 	private String nombre;
 
-	@Pattern(regexp = "[A-Za-z ]*", message = "solo Letras")
-	@Length(min = 3, max = 50, message = "longitud entre 10 y 2000")
+	@Pattern(regexp = "[A-Za-z ]*", message = "Solo Letras")
+	@Length(min = 3, max = 50, message = "longitud entre 3 y 2000")
 	private String apellido;
 
 	private Date fechanaci;
 
-
 	private String cedula;
 
-
 	private String genero;
-	
+
 	private Cliente clie;
 
 	private Municipio municipio;
-	
+
 	private int idMuni;
-	
+
 	private String departamento;
-	
+
 	private List<Cliente> cliente;
-	
+
 	private List<Area> areas;
-	
+
 	private ArrayList<Cliente> filtroCliente = new ArrayList<Cliente>();
-	
+
 	private List<Municipio> muni;
-	
+
 	private List<Departamento> departamentos;
 
 	// auditoria
-	
-	
 
 	private Usuario usuario;
 
@@ -169,7 +165,7 @@ public class ClienteController implements Serializable {
 
 	@EJB
 	private AuditoriaEJB audEJB;
-	
+
 	@Inject
 	private SessionController sesion;
 
@@ -311,22 +307,22 @@ public class ClienteController implements Serializable {
 
 	@EJB
 	ClienteEJB cliEJB;
-	
+
 	@EJB
 	AreaEJB arEJB;
-	
+
 	@EJB
 	private EmpleadoEJB empleadoejb;
 
 	@PostConstruct
 	public void inicializador() {
-		
-	    cliente = cliEJB.listarClientes();
-	    cliente = cliEJB.listarClientes();
-	    departamentos = empleadoejb.listardepartamentos();
-	    
+
+		cliente = cliEJB.listarClientes();
+		cliente = cliEJB.listarClientes();
+		departamentos = empleadoejb.listardepartamentos();
+
 	}
-	
+
 	public List<Municipio> getMuni() {
 		return muni;
 	}
@@ -343,7 +339,6 @@ public class ClienteController implements Serializable {
 		this.sesion = sesion;
 	}
 
-	
 	public void crear() {
 		try {
 			Municipio m = cliEJB.buscarMunicipio(idMuni);
@@ -364,30 +359,28 @@ public class ClienteController implements Serializable {
 			Messages.addGlobalError(e.getMessage());
 		}
 	}
-	
+
 	public void resetearFitrosTabla() {
 		RequestContext requestContext = RequestContext.getCurrentInstance();
 		requestContext.execute("PF('audiTable').clearFilters()");
 	}
-	
 
-
-	public void limpiar(){
+	public void limpiar() {
 		nombre = "";
 		apellido = "";
 		fechanaci = null;
 		cedula = "";
-		genero  = "";
-		
+		genero = "";
+
 	}
-	
+
 	public void onDepartamentoChange() {
 		if (departamento != null && !departamento.equals(""))
 			muni = empleadoejb.listarMuniporDepto(departamento);
 	}
-	
-public void eliminar(Cliente venta) {
-		
+
+	public void eliminar(Cliente venta) {
+
 		try {
 			cliEJB.eliminar(venta.getCodigo());
 			cliente = cliEJB.listarClientes();
@@ -398,6 +391,7 @@ public void eliminar(Cliente venta) {
 			Messages.addFlashGlobalError("Error al eliminar el cliente");
 		}
 	}
+
 	public void registrarAuditoria(String accion) {
 		try {
 			Auditoria audi = new Auditoria();

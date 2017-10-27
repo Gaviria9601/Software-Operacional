@@ -24,7 +24,7 @@
 					<div class="form-group">
 
 						<label for="tfnombre">Nombre Producto</label>
-						<h:inputText type="text" class="form-control" id="tfnombre"
+						<h:inputText for="tfnombre" class="form-control" id="tfnombre"
 							a:placeholder="Nombre" value="#{inventarioController.nombre}" />
 						<p:message for="tfnombre" />
 
@@ -45,10 +45,7 @@
 
 					<div class="form-group">
 						<label for="tffecha">Fecha de Ingreso</label> <br></br>
-						<p:inputMask id="tffecha" placeholder="año-mes-dia"
-							value="#{inventarioController.fechaIngreso}" mode="inline">
-							<f:convertDateTime pattern="yyyy-MM-dd" />
-						</p:inputMask>
+						<p:calendar id="tffecha" pattern="yyyy-MM-dd" mask="true" value="#{inventarioController.fechaIngreso}" showOn="button" />
 						<p:message for="tffecha" />
 					</div>
 
@@ -63,7 +60,7 @@
 
 					<div class="form-group">
 						<label for="tfcant"> Cantidad: </label>
-						<p:inputText id="tfcant" class="form-control"
+						<p:spinner min="0" id="tfcant"
 							value="#{inventarioController.cantidadProducto}"/>
 						<p:message for="tfcant" />
 					</div>
@@ -82,7 +79,7 @@
 
 					<div class="form-group">
 						<label for="tfpeso"> Peso: </label>
-						<p:inputText id="tfpeso" value="#{inventarioController.peso}" class="form-control"/>
+						<h:inputText id="tfpeso" value="#{inventarioController.peso}" class="form-control"/>
 						<p:message for="tfpeso" />
 					</div>
 
@@ -120,7 +117,7 @@
 							<div class="input-group-addon">
 								<i class="fa fa-usd"></i>
 							</div>
-							<p:inputText id="totalVenta"
+							<h:inputText id="totalVenta"
 								value="#{inventarioController.valor}" class="form-control" />
 						</div>
 						<p:message for="totalVenta" />
