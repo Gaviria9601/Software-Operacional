@@ -17,7 +17,7 @@ import co.edu.eam.ingesoft.softOper.entidades.Venta;
 @LocalBean
 public class TipoUsuarioEJB {
 	
-	@PersistenceContext
+	@PersistenceContext(unitName = Conexion.OPCION )
 	private EntityManager em;
 	
 	/**

@@ -13,4 +13,13 @@
 		</properties>
 	</persistence-unit>
 	
+	<persistence-unit name="secundary">
+		<jta-data-source>java:jboss/datasources/SoftwareOperacionalDS</jta-data-source>
+		<properties>
+			<!-- Properties for Hibernate -->
+			<property name="hibernate.hbm2ddl.auto" value="none" />
+			<property name="hibernate.show_sql" value="true" />
+		</properties>
+	</persistence-unit>
+	
 </persistence>
