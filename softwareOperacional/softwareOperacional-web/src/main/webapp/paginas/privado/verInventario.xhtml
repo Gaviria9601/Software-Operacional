@@ -8,7 +8,7 @@
 	<ui:define name="cuerpo">
 		<h:form prependId="false">
 			<h2>
-				Inventario<small> ver Productos</small>
+				Inventario<small> Ver Productos</small>
 			</h2>
 
 			<p:dataTable id="tablaIdInventario" var="pro"
@@ -29,8 +29,8 @@
 					listener="#{inventarioController.buscar}" />
 				<p:column style="width:60px;text-align:center">
 					<p:commandButton update="tablaIdInventario"
-						action="#{inventarioController.procederEditar(pro)}" process="@this"
-						icon="ui-icon-pencil">
+						action="#{inventarioController.procederEditar(pro)}"
+						process="@this" icon="ui-icon-pencil">
 					</p:commandButton>
 				</p:column>
 
@@ -38,29 +38,34 @@
 					filterBy="#{pro.nombre}" filterMatchMode="contains">
 					<h:outputLabel value="#{pro.nombre}" />
 				</p:column>
-				
-				<p:column headerText="Tipo Producto" sortBy="#{ven.vendedor.nombre}"
-					filterBy="#{ven.vendedor.nombre}" filterMatchMode="contains">
+
+				<p:column headerText="Tipo Producto" sortBy="#{pro.tipoproducto.nombre}"
+					filterBy="#{pro.tipoproducto.nombre}" filterMatchMode="contains">
 					<h:outputLabel
-						value="#{ven.vendedor.nombre} #{ven.vendedor.apellido}" />
+						value="#{pro.tipoproducto.nombre}" />
 				</p:column>
 
-				<p:column headerText="Fecha Ingreso" sortBy="#{ven.vendedor.nombre}"
-					filterBy="#{ven.vendedor.nombre}" filterMatchMode="contains">
+				<p:column headerText="Fecha Ingreso" sortBy="#{pro.fechaIngreso}"
+					filterBy="#{pro.fechaIngreso}" filterMatchMode="contains">
 					<h:outputLabel
-						value="#{ven.vendedor.nombre} #{ven.vendedor.apellido}" />
+						value="#{pro.fechaIngreso}" />
 				</p:column>
 
-				<p:column headerText="Cantidad" sortBy="#{ven.cliente.nombre}"
-					filterBy="#{ven.cliente.nombre}" filterMatchMode="contains">
+				<p:column headerText="Cantidad" sortBy="#{pro.cantidad}"
+					filterBy="#{pro.cantidad}" filterMatchMode="contains">
 					<h:outputLabel
-						value="#{ven.cliente.nombre} #{ven.cliente.apellido}" />
+						value="#{pro.cantidad}" />
 				</p:column>
 
+				<p:column headerText="Empleado" sortBy="#{pro.empleado.nombre}"
+					filterBy="#{pro.empleado.nombre}" filterMatchMode="contains">
+					<h:outputLabel
+						value="#{pro.empleado.nombre} #{pro.empleado.apellido}" />
+				</p:column>
 
-				<p:column headerText="Valor" sortBy="#{ven.totalVenta}"
-					filterBy="#{ven.totalVenta}" filterMatchMode="contains">
-					<h:outputLabel value="#{ven.totalVenta}" />
+				<p:column headerText="Valor" sortBy="#{pro.valor}"
+					filterBy="#{pro.valor}" filterMatchMode="contains">
+					<h:outputLabel value="#{pro.valor}" />
 				</p:column>
 
 				<p:column style="width:55px;text-align:center">

@@ -48,7 +48,7 @@ public class Producto implements Serializable {
 	private String codigoLote;
 	
 	@Column(name="peso")
-	private int peso;
+	private String peso;
 	
 	@Column(name="dimensiones", length=30)
 	private String dimensiones;
@@ -69,7 +69,7 @@ public class Producto implements Serializable {
 	}
 	
 	public Producto(int codigo, String nombre, String descripcion, Date fechaIngreso, int cantidad, String codigoLote,
-			int peso, String dimensiones, int valor, Empleado empleado, TipoProducto tipoProducto) {
+			String peso, String dimensiones, int valor, Empleado empleado, TipoProducto tipoProducto) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
@@ -172,14 +172,14 @@ public class Producto implements Serializable {
 	/**
 	 * @return the peso
 	 */
-	public int getPeso() {
+	public String getPeso() {
 		return peso;
 	}
 
 	/**
 	 * @param peso the peso to set
 	 */
-	public void setPeso(int peso) {
+	public void setPeso(String peso) {
 		this.peso = peso;
 	}
 

@@ -5,6 +5,17 @@ public class DatosManager {
 	private static int codigoVenta;
 	
 	private static int codigoTipoUsuario;
+	
+	private static int codigoProducto;
+	
+
+	public static int getCodigoProducto() {
+		return codigoProducto;
+	}
+
+	public static void setCodigoProducto(int codigoProducto) {
+		DatosManager.codigoProducto = codigoProducto;
+	}
 
 	public static int getCodigoVenta() {
 		return codigoVenta;

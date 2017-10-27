@@ -86,8 +86,14 @@
 
 					<div class="form-group">
 						<label for="tfpeso"> Peso </label>
-						<h:inputText id="tfpeso" value="#{inventarioController.peso}"
-							a:placeholder="Peso" class="form-control" />
+						<p:selectOneButton value="#{inventarioController.pesoOpcion}">
+							<h:inputText id="tfpeso" value="#{inventarioController.peso}"
+								a:placeholder="Peso" class="form-control" />
+							<f:selectItem itemValue="Libras" itemLabel="Libras" />
+							<f:selectItem itemValue="Gramos" itemLabel="Gramos" />
+							<f:selectItem itemValue="Kilogramos" itemLabel="Kilogramos" />
+							<f:selectItem itemValue="Toneladas" itemLabel="Toneladas" />
+						</p:selectOneButton>
 						<p:message for="tfpeso" />
 					</div>
 

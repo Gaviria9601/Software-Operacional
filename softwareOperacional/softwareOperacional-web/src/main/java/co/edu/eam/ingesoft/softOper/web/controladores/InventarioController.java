@@ -46,9 +46,11 @@ public class InventarioController implements Serializable {
 	@Length(min = 0, max = 20, message = "Longitud entre 0 y 20")
 	private String codigoLote;
 
-	@Pattern(regexp = "[0-9]*", message = "Solo numeros")
-	@Length(min = 0, max = 10, message = "longitud entre 0 y 10")
+	
+	@Length(min = 0, max = 20, message = "longitud entre 0 y 20")
 	private String peso="0";
+	
+	private String pesoOpcion;
 
 	@Length(min = 0, max = 30, message = "Longitud entre 0 y 30")
 	private String dimensiones;
@@ -64,6 +66,16 @@ public class InventarioController implements Serializable {
 	private List<Producto> productos;
 
 	private ArrayList<Producto> filtroProducto = new ArrayList<Producto>();
+	
+	
+
+	public String getPesoOpcion() {
+		return pesoOpcion;
+	}
+
+	public void setPesoOpcion(String pesoOpcion) {
+		this.pesoOpcion = pesoOpcion;
+	}
 
 	public List<Producto> getProductos() {
 		return productos;
@@ -216,7 +228,7 @@ public class InventarioController implements Serializable {
 				pro.setDescripcion(descripcion);
 				pro.setCantidad(cantidadProducto);
 				pro.setCodigoLote(codigoLote);
-				pro.setPeso(Integer.parseInt(peso));
+				pro.setPeso(peso + " " + pesoOpcion);
 				pro.setDimensiones(dimensiones);
 				pro.setValor(Integer.parseInt(valor));
 				pro.setTipoProducto(tipoProducto);
@@ -229,6 +241,13 @@ public class InventarioController implements Serializable {
 				Messages.addFlashGlobalError(e.getMessage());
 			}
 		}
+	}
+	
+	/**
+	 * 
+	 */
+	public void eliminar(){
+		
 	}
 
 	/**
@@ -245,6 +264,7 @@ public class InventarioController implements Serializable {
 		valor = "0";
 		tipoProducto = null;
 		empleado = null;
+		pesoOpcion = "";
 	}
 
 	public void registrarAuditoria(String accion) {
@@ -271,8 +291,8 @@ public class InventarioController implements Serializable {
 	 * 
 	 * @return
 	 */
-	public String procederEditar(Producto ven) {
-		DatosManager.setCodigoVenta(ven.getCodigo());
+	public String procederEditar(Producto pro) {
+		DatosManager.setCodigoProducto(pro.getCodigo());
 		return "/paginas/privado/editarInventario.xhtml?faces-redirect=true";
 	}
 
