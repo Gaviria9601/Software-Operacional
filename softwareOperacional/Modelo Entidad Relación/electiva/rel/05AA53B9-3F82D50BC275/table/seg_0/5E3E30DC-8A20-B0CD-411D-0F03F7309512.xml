@@ -1,0 +1,83 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="5E3E30DC-8A20-B0CD-411D-0F03F7309512" name="Usuario">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-05 19:36:07 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<ordsAlias>table_36</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="EEDEB744-6FBF-3FA9-3DC5-1B03982CCB28">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 00:42:40 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre" id="CC2ED062-433E-6A89-60B1-2E0435D0122A">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-05 19:36:55 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15</dataTypeSize>
+<ownDataTypeParameters>15,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="contrasenia" id="82F00858-A7BE-8AFE-3357-520780C4BEF3">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-05 19:36:55 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>8</dataTypeSize>
+<ownDataTypeParameters>8,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="tipo" id="B53FCDC3-2978-BFC5-EB5E-7F43BF734506">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:30:39 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="D51C2DEA-6B30-B55D-717A-3A4D25B66464" referredColumn="28200244-2E05-1C9F-92B4-14AF5D2FC5A4"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="2B9F2716-8726-0327-9D05-18D208A63674" name="Usuario_PK">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 00:43:40 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="EEDEB744-6FBF-3FA9-3DC5-1B03982CCB28"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="DB55EC83-512E-CE1B-A193-85350C1E9968" name="Usuario_TipoUsuario_FK">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:30:39 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B53FCDC3-2978-BFC5-EB5E-7F43BF734506"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

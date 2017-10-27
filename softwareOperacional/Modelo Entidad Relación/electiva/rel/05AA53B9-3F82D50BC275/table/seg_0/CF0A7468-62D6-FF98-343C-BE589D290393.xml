@@ -1,0 +1,59 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="CF0A7468-62D6-FF98-343C-BE589D290393" name="Area">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-05 19:43:06 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<ordsAlias>table_40</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="1C5035AF-A32B-50BD-869E-3000622DC293">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-05 19:44:06 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre" id="708C453F-DB1E-7D20-E8AB-E5BAF77140B3">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-05 19:44:06 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>30,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="decripcion" id="35C2CA57-5FD9-B33F-0BAA-B652B22F861C">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-05 19:44:06 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>2000</dataTypeSize>
+<ownDataTypeParameters>2000,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="19F2E318-48A5-68CA-8A84-6DFE8E8A6446" name="Area_PK">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-05 19:44:06 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1C5035AF-A32B-50BD-869E-3000622DC293"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

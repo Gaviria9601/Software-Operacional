@@ -1,0 +1,14 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="C61945F1-4C78-D117-DDAD-87D133A0FB4E" containerWithKeyObject="FC3C5B88-AEDF-4961-FFDF-44C2AA81B9B4" localFKIndex="0F9537AC-1026-4C64-D4B9-5E65236E53EF" name="Municipio_Departamento_FK">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:47:41 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>60848EE3-2F5F-BDA5-D038-6FD6DB66320C</referredTableID>
+<keyObject>73C7D837-B091-7347-8906-762917552D3C</keyObject>
+<referredKeyID>73C7D837-B091-7347-8906-762917552D3C</referredKeyID>
+<mandatory>true</mandatory>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

@@ -1,0 +1,130 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="0C61DD21-55F0-9AD0-32DE-EDEC9972460A" name="Auditoria">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:49:54 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<ordsAlias>table_13</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="codigo" id="7486D55C-06D2-7D23-8481-B8BCDE098F8D">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:54:12 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fechaHora" id="B1EFDA6B-06A1-F39C-8D9A-0B353D07F7D5">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:54:12 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ingreso" id="E62B68EB-058E-0E7C-C275-0F4AD87BE194">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:54:12 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="origen" id="1155201F-B58F-3992-0C48-E6D8173E68FD">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:54:12 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="navegador" id="7515796D-316D-B55B-0284-2C6889CF7DF4">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:54:12 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="accion" id="7A6FCA36-ED6E-1A38-6F73-6777922AAEAB">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:54:12 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="registroRealizoAccion" id="AF6A8924-B5E4-7281-A6F0-DD1F48C05C35">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:54:12 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="usuario" id="6CAFE0DB-B24D-9045-6239-53CB10B063C9">
+<createdBy>Santiago</createdBy>
+<createdTime>2017-10-09 03:47:57 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="DBD71328-766E-81B3-6E5E-08335BA211C3" referredColumn="EEDEB744-6FBF-3FA9-3DC5-1B03982CCB28"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="CC0EE3F1-CCD6-F9D2-E49A-8DB744C7ECDD" name="Auditorio_PK">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:54:12 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7486D55C-06D2-7D23-8481-B8BCDE098F8D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="2C0FDA56-D5C5-0441-BD30-E58568B2DF8B" name="Auditoria_Usuario_FK">
+<createdBy>Santiago</createdBy>
+<createdTime>2017-10-09 03:47:57 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6CAFE0DB-B24D-9045-6239-53CB10B063C9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

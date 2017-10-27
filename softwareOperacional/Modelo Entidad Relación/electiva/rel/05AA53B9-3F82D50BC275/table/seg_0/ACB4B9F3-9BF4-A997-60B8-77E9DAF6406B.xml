@@ -1,0 +1,118 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="ACB4B9F3-9BF4-A997-60B8-77E9DAF6406B" name="Cliente">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:14:36 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<ordsAlias>table_9</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="codigo" id="FF581967-748A-9FB9-0376-399ADD15BA91">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:17:37 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre" id="FD3B4604-F3D8-1F23-E519-EFEE4BA41153">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:17:37 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>30,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="apellido" id="185470EC-346C-0E1C-0F4B-F987C8C15E47">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:17:37 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>30,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fechaNacimiento" id="B1968D86-C1AF-7478-9620-1350A192B1D7">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:17:37 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="cedula" id="B050084B-26E8-13D4-C97E-C19D8C9BF23C">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:17:37 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="genero" id="53B2B825-9CC1-F3F5-A09D-64011C075549">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:17:37 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="municipioNacimiento" id="FAED5954-19ED-0C13-AE1E-29947913BAEB">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:48:32 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="90E1A5B9-6041-2787-74A0-EF59CC8DAC87" referredColumn="F2266699-6AC9-8156-F803-F0251E962B8A"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="3430F7CC-89DF-6F9B-2F9A-33DD5B1B83FD" name="Cliente_PK">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:17:37 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="FF581967-748A-9FB9-0376-399ADD15BA91"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5B0723A8-B4AF-8002-3521-DFEB5DABEC64" name="Cliente_Municipio_FK">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:48:32 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="FAED5954-19ED-0C13-AE1E-29947913BAEB"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

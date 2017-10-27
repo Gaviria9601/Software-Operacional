@@ -1,0 +1,105 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="BDF96C0A-2748-1E5F-983E-25D3B982BC45" name="Venta">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:18:59 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<ordsAlias>table_11</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="codigo" id="31401ABD-74E9-2100-B7C5-7B0F775512F8">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:21:24 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="fecha" id="2A0D1B58-81F4-E56E-20B2-F17E1FC42B71">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:21:24 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="totalVenta" id="638AF45C-0465-CE54-079A-079E5F166F2B">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:21:24 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="vendedor" id="AF7B6F4D-E741-CC84-EADD-3AB448480548">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:45:40 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="7D2D3C95-13FC-5792-3023-7A253AF6ECC4" referredColumn="1A934809-8C70-7FCF-E4E4-A28042BB276F"/>
+</associations>
+</Column>
+<Column name="cliente" id="886F8EFB-F3D4-2A8F-7063-EA088DA035D6">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:45:21 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="28A3BA61-8CD9-D424-5FB6-0004EFB296EE" referredColumn="FF581967-748A-9FB9-0376-399ADD15BA91"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="592E2F32-6D00-A13D-A7CF-81E88C0A7B54" name="Venta_PK">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:21:24 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="31401ABD-74E9-2100-B7C5-7B0F775512F8"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="1C3ECE92-4917-E957-6BE4-459A76C8A119" name="Venta_Cliente_FK">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:45:21 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="886F8EFB-F3D4-2A8F-7063-EA088DA035D6"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="0DA6EBC6-1486-7C24-A4B1-FF0F923E7CB1" name="Venta_Empleado_FK">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:45:40 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="AF7B6F4D-E741-CC84-EADD-3AB448480548"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

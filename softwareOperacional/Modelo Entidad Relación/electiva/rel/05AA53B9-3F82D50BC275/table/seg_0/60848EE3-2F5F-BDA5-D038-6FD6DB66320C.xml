@@ -1,0 +1,47 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="60848EE3-2F5F-BDA5-D038-6FD6DB66320C" name="Departamento">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-05 19:39:50 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<ordsAlias>table_38</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="3A9CB0AB-9024-48AF-8BCD-0755B86245C3">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-05 19:40:19 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre" id="B35ADF1C-63A5-277F-9D55-E6B6BDC45BE9">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-05 19:40:19 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="73C7D837-B091-7347-8906-762917552D3C" name="Departamento_PK">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-05 19:40:26 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3A9CB0AB-9024-48AF-8BCD-0755B86245C3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

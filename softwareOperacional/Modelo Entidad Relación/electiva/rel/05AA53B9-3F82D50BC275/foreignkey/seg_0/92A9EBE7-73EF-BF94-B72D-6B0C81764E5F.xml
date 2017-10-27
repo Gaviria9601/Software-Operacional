@@ -1,0 +1,14 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="92A9EBE7-73EF-BF94-B72D-6B0C81764E5F" containerWithKeyObject="DE08D766-4C59-8AFC-9925-4A52E9B55544" localFKIndex="C8CDD634-71C8-411F-F53C-F5D04AD8AD25" name="ProductoVenta_Venta_FK">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:44:30 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>BDF96C0A-2748-1E5F-983E-25D3B982BC45</referredTableID>
+<keyObject>592E2F32-6D00-A13D-A7CF-81E88C0A7B54</keyObject>
+<referredKeyID>592E2F32-6D00-A13D-A7CF-81E88C0A7B54</referredKeyID>
+<mandatory>true</mandatory>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

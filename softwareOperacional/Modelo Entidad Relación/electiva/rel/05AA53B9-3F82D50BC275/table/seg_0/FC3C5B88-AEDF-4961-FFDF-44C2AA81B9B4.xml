@@ -1,0 +1,71 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="FC3C5B88-AEDF-4961-FFDF-44C2AA81B9B4" name="Municipio">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-05 19:40:32 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<ordsAlias>table_39</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="F2266699-6AC9-8156-F803-F0251E962B8A">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-05 19:41:21 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre" id="571AA5EB-F893-10EF-C39D-A6F92643AABE">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-05 19:41:21 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="departamento" id="53FD8A19-3261-5F8E-2F29-D5D44AF06749">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:47:42 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="C61945F1-4C78-D117-DDAD-87D133A0FB4E" referredColumn="3A9CB0AB-9024-48AF-8BCD-0755B86245C3"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="8742D1D1-071A-21DF-8872-4CDC1AF83364" name="Municipio_PK">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-05 19:41:21 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F2266699-6AC9-8156-F803-F0251E962B8A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="0F9537AC-1026-4C64-D4B9-5E65236E53EF" name="Municipio_Departamento_FK">
+<createdBy>Paula CA</createdBy>
+<createdTime>2017-10-06 15:47:41 UTC</createdTime>
+<ownerDesignName>electiva</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="53FD8A19-3261-5F8E-2F29-D5D44AF06749"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
