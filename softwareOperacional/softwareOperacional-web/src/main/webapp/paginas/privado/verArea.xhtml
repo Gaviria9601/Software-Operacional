@@ -22,11 +22,14 @@
 			emptyMessage="No se encontraron areas con estos criterios dados."
 			filterBy="#{areaControlador.filtroArea}" border="1">
 			
-			
+			<p:ajax event="filter" update="tablaIdUsuarios"
+					listener="#{areaControlador.buscar}" />
 			<p:column style="width:60px;text-align:center">
-			<p:button action="#{areaControlador.procederEditar()}"  update="tablaIdUsuarios" 
-			icon="icon ui-icon-pencil" process="@this"> </p:button>
-			</p:column>
+					<p:commandButton update="tablaIdUsuarios"
+						action="#{areaControlador.procederEditar(audi)}" process="@this"
+						icon="ui-icon-pencil">
+					</p:commandButton>
+				</p:column>
 			
 			<p:column headerText="Nombre" sortBy="#{audi.nombre}" 
 				filterBy="#{audi.nombre}" filterMatchMode="contains">

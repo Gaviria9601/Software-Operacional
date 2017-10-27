@@ -290,9 +290,15 @@ public class AreaController implements Serializable {
 		busco = true;
 	}
 	
-	public String procederEditar(){
+	public void buscar() {
+		registrarAuditoria("Buscar");
+	}
+	
+	public String procederEditar(Area audi) {
+		DatosManager.setCodigoVenta(audi.getId());
 		return "/paginas/privado/editarArea.xhtml?faces-redirect=true";
 	}
+	
     /**
      * Metodo para editar
      */

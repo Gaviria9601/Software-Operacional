@@ -3,139 +3,55 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	template="/templates/templateContenido.xhtml">
+	template="/templates/templateContenido.xhtml"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 	<ui:define name="cuerpo">
+
+
 		<h2>
-			Clientes <small>Edición Clientes</small>
+			Areas Empresa <small> Editar Area</small>
 		</h2>
 
 		<br />
 
 		<div class="box box-primary">
-			
+			<div class="box-header">
+				<h3 class="box-title">Edición de areas</h3>
+			</div>
 			<!-- /.box-header -->
 
 			<h:form role="form">
-
 				<div class="box-body">
-					
 
-						<div class="row">
+					<div class="form-group">
 
-							<div class="col-xs-3 col-md-3"></div>
-							<div class="col-xs-3 col-md-3 text-center">
-
-								<br />
-								<p:fieldset id="detalleProducto" style="width:525px">
-									<legend>
-										<i class="icon ion-clipboard"> </i> Detalle Producto
-									</legend>
-									
-									
-									
-										<!-- Date dd/mm/yyyy -->
-										<div class="form-group">
-											<label>Nombre</label>
-											<div class="input-group">
-												<div class="input-group-addon">
-													<i class="fa fa-tasks"></i>
-												</div>
-												<p:inputTextarea disabled="true"
-													value="#{clienteControlador.nombre}"
-													class="form-control" rows="3" cols="13" />
-											</div>
-											<!-- /.input group -->
-										</div>
-										<!-- /.form group -->
-
-										<!-- Date mm/dd/yyyy -->
-										<div class="form-group">
-											<label>Apellido</label>
-											<div class="input-group">
-												<div class="input-group-addon">
-													<i class="fa fa-sort-amount-desc"></i>
-												</div>
-												<h:inputText disabled="true"
-													value="#{clienteControlador.apellido}"
-													class="form-control" />
-											</div>
-											<!-- /.input group -->
-										</div>
-										<!-- /.form group -->
-
-
-										<!-- phone mask -->
-										<div class="form-group">
-											<label>Fecha de nacimiento</label>
-											<div class="input-group">
-												<div class="input-group-addon">
-													<i class="fa fa-money"></i>
-												</div>
-												<p:inputText disabled="true"
-													value="#{clienteControlador.fechanaci}"
-													class="form-control" />
-											</div>
-											<!-- /.input group -->
-										</div>
-										
-										<div class="form-group">
-											<label>Cedula</label>
-											<div class="input-group">
-												<div class="input-group-addon">
-													<i class="fa fa-money"></i>
-												</div>
-												<p:inputText disabled="true"
-													value="#{clienteControlador.cedula}"
-													class="form-control" />
-											</div>
-											<!-- /.input group -->
-										</div>
-										
-										<div class="form-group">
-											<label>Genero</label>
-											<div class="input-group">
-												<div class="input-group-addon">
-													<i class="fa fa-money"></i>
-												</div>
-												<p:inputText disabled="true"
-													value="#{clienteControlador.genero}"
-													class="form-control" />
-											</div>
-											
-											<div class="form-group">
-											<label>Municipio</label>
-											<div class="input-group">
-												<div class="input-group-addon">
-													<i class="fa fa-money"></i>
-												</div>
-												<p:inputText disabled="true"
-													value="#{clienteControlador.muni}"
-													class="form-control" />
-											</div>
-											<!-- /.input group -->
-										</div>
-										<!-- /.form group -->
-									</div>
-								</p:fieldset>
-							</div>
-						</div>
-						<div class="box-footer">
-							<p:commandButton value="Editar cliente" ajax="false"
-								update="paneloculto,detalleVenta,detalleProducto"
-								class="btn btn-primary" action="#{ventaEditController.editar}" />
-
-							<p:commandButton value="Cancelar" ajax="false"
-								update="paneloculto,detalleVenta,detalleProducto"
-								class="btn btn-danger" action="#{ventaEditController.cancelar}" />
-
-						</div>
+						<label for="tfnombre">Nombre</label>
+						<h:inputText type="text" class="form-control" id="nombre" a:placeholder="Nombre"
+							value="#{areaControlador.nombre}" />
 
 					</div>
-					</h:form>
+
+
+
+					<div class="form-group">
+						<label for="tfdes">Descripción</label>
+						<p:inputTextarea type="text" class="form-control" id="des" a:placeholder="Descripción"
+							value="#{areaControlador.des}" />
+
+					</div>
+
+					<div class="box-footer">
+						<p:commandButton value="Registrar Area" ajax="false" class="btn btn-primary"
+							action="#{areaControlador.crear}" />
+					</div>
+
 				</div>
 				<!-- /.box-body -->
-			
+			</h:form>
+
+		</div>
+
 
 	</ui:define>
 </ui:composition>

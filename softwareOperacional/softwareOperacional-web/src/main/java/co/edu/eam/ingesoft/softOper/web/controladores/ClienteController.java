@@ -370,7 +370,9 @@ public class ClienteController implements Serializable {
 		apellido = "";
 		fechanaci = null;
 		cedula = "";
-		genero = "";
+		genero = null;
+		muni = null;
+		departamento = null;
 
 	}
 
