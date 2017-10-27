@@ -1,28 +1,23 @@
 package co.edu.eam.ingesoft.softOper.web.controladores;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 import org.omnifaces.cdi.ViewScoped;
-import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
-import co.edu.eam.ingesoft.softOpe.negocio.beans.AuditoriaEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.EmpleadoEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.SeguridadEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.TipoUsuarioEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.excepciones.ExcepcionNegocio;
-import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
 import co.edu.eam.ingesoft.softOper.entidades.Cargo;
 import co.edu.eam.ingesoft.softOper.entidades.Departamento;
 import co.edu.eam.ingesoft.softOper.entidades.Empleado;
@@ -249,13 +244,6 @@ public class UsuarioController implements Serializable {
 	public void setFiltroEmpleados(ArrayList<Empleado> filtroEmpleados) {
 		this.filtroEmpleados = filtroEmpleados;
 	}
-	
-	@Inject
-	private SessionController sesion;
-	
-	@EJB
-	private AuditoriaEJB audEJB;
-
 
 	/**
 	 * @return the busco
@@ -296,7 +284,6 @@ public class UsuarioController implements Serializable {
 	@EJB
 	private SeguridadEJB seguridadejb;
 
-
 	@PostConstruct
 	public void inicializador() {
 
@@ -307,46 +294,37 @@ public class UsuarioController implements Serializable {
 
 	public void crear() {
 		try {
-			Usuario usucreado = crearUsuario();
-			if (usucreado != null) {
-				Usuario usu = seguridadejb.buscarUsuario(nickname);
-				Empleado empleado = new Empleado(nombre, apellido, fechaNacimiento, fechaIngreso, cedula, genero,
-						empleadoejb.buscarMunicipio(municipio), empleadoejb.buscarCargo(cargo), usucreado);
-				empleadoejb.crear(empleado);
-
-				Messages.addFlashGlobalInfo("Usuario creado correctamente");
-
-			} else {
-				Messages.addGlobalError("algo salio mal con la creacion de usuario");
-			}
-
+			Cargo c = empleadoejb.buscarCargo(cargo);
+			Municipio m = empleadoejb.buscarMunicipio(municipio);
+			Empleado empleado = new Empleado();
+			empleado.setApellido(apellido);
+			empleado.setCargo(c);
+			empleado.setCedula(cedula);
+			empleado.setFechaIngresoEmpresa(fechaIngreso);
+			empleado.setFechaNacimiento(fechaNacimiento);
+			empleado.setGenero(genero);
+			empleado.setMunicipio(m);
+			empleado.setNombre(nombre);
+			System.out.println(c.getId()+"************"+m.getId());
+			
+			empleadoejb.crear(empleado, nickname);
+			Messages.addFlashGlobalInfo("Usuario creado correctamente");
 		} catch (ExcepcionNegocio e) {
 			Messages.addGlobalError(e.getMessage());
 		}
 	}
 
-	public Usuario crearUsuario() {
+	public void crearUsuario() {
 		try {
-			Usuario usuariop = new Usuario(nickname, contrasenia, tiposejb.buscarTipoUsuario(tipoUsuario));
-			empleadoejb.crearUsuario(usuariop);
-			registrarAuditoria("Crear");
-			return usuariop;
+			if (seguridadejb.buscarUsuario(nickname) == null) {
+				Usuario usuariop = new Usuario(nickname, contrasenia, tiposejb.buscarTipoUsuario(tipoUsuario));
+				empleadoejb.crearUsuario(usuariop);
+				Messages.addFlashGlobalInfo("Nickname verificado");
+			} else {
+				Messages.addFlashGlobalInfo("Este nickname ya existe");
+			}
 		} catch (Exception e) {
 			Messages.addGlobalError(e.getMessage());
-			return null;
-		}
-	}
-	
-	public void registrarAuditoria(String accion) {
-		try {
-			Auditoria audi = new Auditoria();
-			String browserDetails = Faces.getRequest().getHeader("User-Agent");
-			audi.setAccion(accion);
-			audi.setRegistroRealizoAccion("Empleado");
-			audi.setUsuario(sesion.getUsuario());
-			audEJB.registrarAuditoria(audi, browserDetails);
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 
@@ -408,7 +386,6 @@ public class UsuarioController implements Serializable {
 		this.departamento = departamento;
 	}
 
-
 	/**
 	 * @return the cargos
 	 */
@@ -432,7 +409,8 @@ public class UsuarioController implements Serializable {
 	}
 
 	/**
-	 * @param cargo the cargo to set
+	 * @param cargo
+	 *            the cargo to set
 	 */
 	public void setCargo(int cargo) {
 		this.cargo = cargo;
@@ -446,7 +424,8 @@ public class UsuarioController implements Serializable {
 	}
 
 	/**
-	 * @param municipio the municipio to set
+	 * @param municipio
+	 *            the municipio to set
 	 */
 	public void setMunicipio(int municipio) {
 		this.municipio = municipio;
@@ -460,7 +439,8 @@ public class UsuarioController implements Serializable {
 	}
 
 	/**
-	 * @param tipoUsuario the tipoUsuario to set
+	 * @param tipoUsuario
+	 *            the tipoUsuario to set
 	 */
 	public void setTipoUsuario(int tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;

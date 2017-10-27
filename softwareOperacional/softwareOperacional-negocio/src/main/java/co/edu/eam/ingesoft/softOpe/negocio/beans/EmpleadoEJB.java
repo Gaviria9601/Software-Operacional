@@ -43,9 +43,16 @@ public class EmpleadoEJB {
 	 * @param e
 	 */	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void crear(Empleado e) {
-	     em.persist(e);
-		
+	public void crear(Empleado e, String nickname) {
+		List<Usuario> usuario = em.createNamedQuery(Usuario.LISTA_BUSQUEDA_USUARIO).setParameter(1, nickname)
+				.getResultList();
+		if(usuario.get(0)!=null){
+			e.setUsuario(usuario.get(0));
+			System.out.println(usuario.get(0).getNombre()+"************************************");
+			em.persist(e);
+		}else{
+			System.out.println("error");
+		}
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -53,7 +60,7 @@ public class EmpleadoEJB {
 		em.persist(usu);
 	}
 	
-
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public Empleado buscarEmpleado2(int id) {
 		Empleado pa = em.find(Empleado.class, id);
 		return pa;
@@ -91,10 +98,12 @@ public class EmpleadoEJB {
 		return em.createNamedQuery(Empleado.LISTAR_EMPLEADOS).getResultList();
 	}
 	
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public Municipio buscarMunicipio(int id){
 		return em.find(Municipio.class, id);
 	}
 	
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public Cargo buscarCargo(int id){
 		return em.find(Cargo.class, id);
 	}

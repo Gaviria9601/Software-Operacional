@@ -10,14 +10,14 @@
 
 
 		<h2>
-			Usuario <small> Nuevo usuario</small>
+			Empleado <small> Nuevo usuario al sistema</small>
 		</h2>
 
 		<br />
 
 		<div class="box box-primary">
 			<div class="box-header">
-				<h3 class="box-title">Registro de nuevo usuario</h3>
+				<h3 class="box-title">Registro de nuevo empleado</h3>
 			</div>
 			<!-- /.box-header -->
 
@@ -102,8 +102,7 @@
 								<f:selectItem itemLabel="Seleccione Ciudad" itemValue=""
 									noSelectionOption="true" />
 								<f:selectItems value="#{usuarioController.municipios}"
-									var="muni" itemValue="#{muni.id}"
-									itemLabel="#{muni.nombre}" />
+									var="muni" itemValue="#{muni.id}" itemLabel="#{muni.nombre}" />
 
 							</h:selectOneMenu>
 						</div>
@@ -120,40 +119,44 @@
 						</div>
 
 						<div class="form-group">
+							<label for="tfmuni">Cargo</label> <br></br>
+							<h:selectOneMenu id="cargo" value="#{usuarioController.cargo}">
 
+								<f:selectItems value="#{usuarioController.cargos}" var="t"
+									itemLabel="#{t.cargo}" itemValue="#{t.id}">
+								</f:selectItems>
+							</h:selectOneMenu>
+						</div>
+
+						<p:panel id="basic" header="Usuario" style="margin-bottom:20px">
 							<div class="form-group">
-								<label for="tfmuni">Cargo</label> <br></br>
-								<h:selectOneMenu id="cargo"
-									value="#{usuarioController.cargo}">
+								<label for="usuario">Nombre de usuario</label>
+								<h:inputText type="text" class="form-control" id="usuario"
+									a:placeholder="usuario" value="#{usuarioController.nickname}" />
+								<p:message for="usuario" />
 
-									<f:selectItems value="#{usuarioController.cargos}" var="t"
-										itemLabel="#{t.cargo}" itemValue="#{t.id}">
-									</f:selectItems>
-								</h:selectOneMenu>
 							</div>
 
-							<label for="usuario">Nombre de usuario</label>
-							<h:inputText type="text" class="form-control" id="usuario"
-								a:placeholder="usuario" value="#{usuarioController.nickname}" />
-							<p:message for="usuario" />
-						</div>
 
 
+							<div class="form-group">
+								<label for="tfdes">Contraseña</label>
+								<p:inputText type="password" class="form-control" id="contra"
+									a:placeholder="contraseña"
+									value="#{usuarioController.contrasenia}" />
+								<p:message for="contra" />
+							</div>
+							<p:commandButton value="Verificar nickname" ajax="false"
+								class="btn btn-primary" process="@this,paneldatos"
+								update="paneldatos" action="#{usuarioController.crearUsuario}" />
+						</p:panel>
 
-						<div class="form-group">
-							<label for="tfdes">Contraseña</label>
-							<p:inputText type="password" class="form-control" id="contra"
-								a:placeholder="contraseña"
-								value="#{usuarioController.contrasenia}" />
-							<p:message for="contra" />
-						</div>
 
 						<div class="box-footer">
 							<p:commandButton value="Registrar Usuario" ajax="false"
 								class="btn btn-primary" process="@this,paneldatos"
 								update="paneldatos" action="#{usuarioController.crear}" />
 						</div>
-
 					</div>
 				</p:panelGrid>
 				<!-- /.box-body -->
