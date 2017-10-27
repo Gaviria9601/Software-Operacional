@@ -26,17 +26,38 @@ public class ProductoEJB {
 	 * 
 	 * @return
 	 */
+
+	public void crearProducto(Producto pro) {
+		em.persist(pro);
+	}
+
+	/**
+	 * 
+	 * @param pro
+	 */
+	public void editarProducto(Producto pro) {
+		em.merge(pro);
+	}
+
 	public Producto buscarProduto(int codigo) {
 		return em.find(Producto.class, codigo);
 	}
-	
+
 	/**
 	 * 
 	 * @param codigo
 	 * @return
 	 */
-	public TipoProducto buscarTipoProducto(int codigo){
+	public TipoProducto buscarTipoProducto(int codigo) {
 		return em.find(TipoProducto.class, codigo);
+	}
+
+	/**
+	 * 
+	 * @param codigo
+	 */
+	public void eliminarProducto(int codigo) {
+		em.remove(em.find(Producto.class, codigo));
 	}
 
 	/**
@@ -47,12 +68,12 @@ public class ProductoEJB {
 		return em.createNamedQuery(Producto.LISTAR_PRODUCTOS).getResultList();
 
 	}
-	
+
 	/**
 	 * 
 	 * @return
 	 */
-	public List<TipoProducto> listarTipoProducto(){
+	public List<TipoProducto> listarTipoProducto() {
 		return em.createNamedQuery(TipoProducto.LISTAR_TIPO_PRODUCTOS).getResultList();
 	}
 
@@ -66,7 +87,7 @@ public class ProductoEJB {
 		List<Producto> productosIn = listarProductos();
 		for (int i = 0; i < productosIn.size(); i++) {
 			for (int j = 0; j < productosVenta.size(); j++) {
-				if (productosIn.get(i).getCodigo()!=productosVenta.get(j).getCodigo()) {
+				if (productosIn.get(i).getCodigo() != productosVenta.get(j).getCodigo()) {
 					productos.add(productosIn.get(i));
 				}
 			}

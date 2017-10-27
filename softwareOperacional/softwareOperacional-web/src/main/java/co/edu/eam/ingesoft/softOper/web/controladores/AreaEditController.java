@@ -234,7 +234,7 @@ public class AreaEditController implements Serializable{
 
 	@PostConstruct
 	public void inicializar() {
-		ar = arEJB.buscarArea(DatosManager.getCodigoArea());
+		ar = arEJB.buscarArea(DatosManager.getIdArea());
 
 	}
 }

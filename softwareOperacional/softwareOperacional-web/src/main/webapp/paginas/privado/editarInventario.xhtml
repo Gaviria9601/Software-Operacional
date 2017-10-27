@@ -3,12 +3,157 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	template="/templates/templateContenido.xhtml">
+	template="/templates/templateContenido.xhtml"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 	<ui:define name="cuerpo">
 		<h2>
-			Inventario <small>Edición Inventario</small>
+			Inventario <small>Edición Produto</small>
 		</h2>
+
+		<div class="box box-primary">
+			<div class="box-header">
+				<h3 class="box-title">Información Producto</h3>
+			</div>
+			<br />
+			<!-- /.box-header -->
+
+			<h:form role="form">
+				<div class="box-body">
+
+					<div class="form-group">
+
+						<label for="tfnombre">Nombre Producto (*)</label>
+						<h:inputText for="tfnombre" class="form-control" id="tfnombre"
+							a:placeholder="Nombre" value="#{inventarioEditController.nombre}" />
+						<p:message for="tfnombre" />
+
+					</div>
+
+					<div class="form-group">
+						<label for="tftipoPro">Tipo de Producto (*)</label> <br></br>
+						<h:selectOneMenu id="cbtipoProducto"
+							value="#{inventarioEditController.tipoProducto}"
+							converter="tipoProConverter" style="width:240px">
+							<f:selectItems value="#{inventarioController.tipoproductos}"
+								var="tipoPro" itemValue="#{tipoPro}"
+								itemLabel="#{tipoPro.nombre}" />
+						</h:selectOneMenu>
+					</div>
+
+					<div class="form-group">
+						<label for="tffecha">Fecha de Ingreso (*)</label>
+						<div class="input-group">
+							<div class="input-group-addon">
+								<i class="fa fa-calendar"></i>
+							</div>
+							<p:inputMask id="tffecha" placeholder="Año-Mes-Dia"
+								value="#{inventarioEditController.fechaIngreso}">
+								<f:convertDateTime pattern="yyyy-MM-dd" />
+							</p:inputMask>
+						</div>
+						<p:message for="tffecha" />
+					</div>
+
+
+					<div class="form-group">
+						<label for="tfdes">Descripción</label>
+						<p:inputTextarea type="text" class="form-control" id="tfdes"
+							a:placeholder="Descripción"
+							value="#{inventarioEditController.descripcion}" />
+						<p:message for="tfdes" />
+					</div>
+
+					<div class="form-group">
+						<label for="tfcant"> Cantidad (*)</label><br />
+						<p:spinner min="0" id="tfcant"
+							value="#{inventarioEditController.cantidadProducto}"
+							style="width:240px" />
+						<p:message for="tfcant" />
+					</div>
+
+
+
+					<div class="form-group">
+
+						<label for="tfcodigolote">Codigo Lote (*)</label><br />
+						<h:inputText type="text" class="form-control" id="tfcodigolote"
+							a:placeholder="Codigo lote"
+							value="#{inventarioEditController.codigoLote}" />
+						<p:message for="tfcodigolote" />
+
+					</div>
+
+					<div class="form-group">
+						<label for="tfpeso"> Peso </label>
+						<p:selectOneButton value="#{inventarioEditController.pesoOpcion}">
+							<h:inputText id="tfpeso" value="#{inventarioEditController.peso}"
+								a:placeholder="Peso" class="form-control" />
+							<f:selectItem itemValue="Libras" itemLabel="Libras" />
+							<f:selectItem itemValue="Gramos" itemLabel="Gramos" />
+							<f:selectItem itemValue="Kilogramos" itemLabel="Kilogramos" />
+							<f:selectItem itemValue="Toneladas" itemLabel="Toneladas" />
+						</p:selectOneButton>
+						<p:message for="tfpeso" />
+					</div>
+
+					<div class="form-group">
+
+						<label for="tfdimen">Dimensiones</label>
+						<h:inputText type="text" class="form-control" id="tfdimen"
+							a:placeholder="Dimensiones"
+							value="#{inventarioEditController.dimensiones}" />
+						<p:message for="tfdimen" />
+					</div>
+
+					<div class="form-group">
+						<i class="fa fa-user"></i> <label>Empleado (*) </label><br />
+						<p:autoComplete id="empleado"
+							value="#{inventarioEditController.empleado}"
+							completeMethod="#{inventarioController.completeTheme}" var="emp"
+							itemLabel="#{emp.nombre} #{emp.apellido}" itemValue="#{emp}"
+							converter="empleadoConverter" forceSelection="true">
+							<p:column>
+								<i class="icon ion-android-person"></i>
+							</p:column>
+							<p:column>
+								<h:outputText value="#{emp.nombre} #{emp.apellido}" />
+							</p:column>
+						</p:autoComplete>
+
+						<!-- /.input group -->
+					</div>
+
+
+					<div class="form-group">
+						<label for="totalVenta">Valor (*)</label>
+						<div class="input-group">
+							<div class="input-group-addon">
+								<i class="fa fa-usd"></i>
+							</div>
+							<h:inputText id="totalVenta" a:placeholder="Valor"
+								value="#{inventarioEditController.valor}" class="form-control" />
+						</div>
+						<p:message for="totalVenta" />
+						<!-- /.input group -->
+					</div>
+
+
+					<div class="box-footer">
+						<p:commandButton value="Editar Producto" ajax="false"
+							update=""
+							class="btn btn-primary" action="#{inventarioEditController.editar}" />
+
+						<p:commandButton value="Cancelar" ajax="false"
+							update=""
+							class="btn btn-danger" action="#{inventarioEditController.cancelar}" />
+					</div>
+
+				</div>
+				<!-- /.box-body -->
+			</h:form>
+
+		</div>
 
 		<br />
 

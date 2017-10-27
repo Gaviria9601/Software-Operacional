@@ -1,13 +1,10 @@
 package co.edu.eam.ingesoft.softOper.web.controladores;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.Pattern;
@@ -16,7 +13,6 @@ import org.hibernate.validator.constraints.Length;
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
-import org.primefaces.context.RequestContext;
 
 import co.edu.eam.ingesoft.softOpe.negocio.beans.AuditoriaEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.EmpleadoEJB;
@@ -25,11 +21,10 @@ import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
 import co.edu.eam.ingesoft.softOper.entidades.Empleado;
 import co.edu.eam.ingesoft.softOper.entidades.Producto;
 import co.edu.eam.ingesoft.softOper.entidades.TipoProducto;
-import co.edu.eam.ingesoft.softOper.entidades.Venta;
 
-@Named("inventarioController")
+@Named("inventarioEditController")
 @ViewScoped
-public class InventarioController implements Serializable {
+public class InventarioEditController implements Serializable {
 
 	@Pattern(regexp = "[A-Za-z ]*", message = "Solo Letras")
 	@Length(min = 0, max = 30, message = "Longitud entre 0 y 30")
@@ -47,10 +42,9 @@ public class InventarioController implements Serializable {
 	@Length(min = 0, max = 20, message = "Longitud entre 0 y 20")
 	private String codigoLote;
 
-	
 	@Length(min = 0, max = 20, message = "longitud entre 0 y 20")
-	private String peso="0";
-	
+	private String peso = "0";
+
 	private String pesoOpcion;
 
 	@Length(min = 0, max = 30, message = "Longitud entre 0 y 30")
@@ -60,50 +54,9 @@ public class InventarioController implements Serializable {
 
 	@Pattern(regexp = "[0-9]*", message = "Solo numeros")
 	@Length(min = 0, max = 10, message = "longitud entre 0 y 10")
-	private String valor="0";
+	private String valor = "0";
 
-	private List<TipoProducto> tipoproductos;
-
-	private List<Producto> productos;
-
-	private ArrayList<Producto> filtroProducto = new ArrayList<Producto>();
-	
-	private int productosInfo;
-	
-	
-	
-
-	public int getProductosInfo() {
-		return productosInfo;
-	}
-
-	public void setProductosInfo(int productosInfo) {
-		this.productosInfo = productosInfo;
-	}
-
-	public String getPesoOpcion() {
-		return pesoOpcion;
-	}
-
-	public void setPesoOpcion(String pesoOpcion) {
-		this.pesoOpcion = pesoOpcion;
-	}
-
-	public List<Producto> getProductos() {
-		return productos;
-	}
-
-	public void setProductos(List<Producto> productos) {
-		this.productos = productos;
-	}
-
-	public List<TipoProducto> getTipoproductos() {
-		return tipoproductos;
-	}
-
-	public void setTipoproductos(List<TipoProducto> tipoproductos) {
-		this.tipoproductos = tipoproductos;
-	}
+	private Producto pro;
 
 	public String getNombre() {
 		return nombre;
@@ -161,6 +114,14 @@ public class InventarioController implements Serializable {
 		this.peso = peso;
 	}
 
+	public String getPesoOpcion() {
+		return pesoOpcion;
+	}
+
+	public void setPesoOpcion(String pesoOpcion) {
+		this.pesoOpcion = pesoOpcion;
+	}
+
 	public String getDimensiones() {
 		return dimensiones;
 	}
@@ -185,6 +146,14 @@ public class InventarioController implements Serializable {
 		this.valor = valor;
 	}
 
+	public Producto getPro() {
+		return pro;
+	}
+
+	public void setPro(Producto pro) {
+		this.pro = pro;
+	}
+
 	@EJB
 	private EmpleadoEJB empEJB;
 
@@ -198,42 +167,40 @@ public class InventarioController implements Serializable {
 	@Inject
 	private SessionController sesion;
 
-	/**
-	 * 
-	 * @param query
-	 * @return
-	 */
-	public List<Empleado> completeTheme(String query) {
-		List<Empleado> allThemes = empEJB.listarEmpleados();
-		List<Empleado> filteredThemes = new ArrayList<Empleado>();
-
-		for (int i = 0; i < allThemes.size(); i++) {
-			Empleado skin = allThemes.get(i);
-			if (skin.getNombre().toLowerCase().contains(query) || skin.getApellido().toLowerCase().contains(query)) {
-				filteredThemes.add(skin);
-			}
-		}
-
-		return filteredThemes;
-	}
-
 	@PostConstruct
 	public void inicializar() {
-		tipoproductos = proEJB.listarTipoProducto();
-		productos = proEJB.listarProductos();
-		productosInfo = proEJB.listarProductos().size();
+		pro = proEJB.buscarProduto(DatosManager.getCodigoProducto());
+		nombre = pro.getNombre();
+		tipoProducto = pro.getTipoProducto();
+		fechaIngreso = pro.getFechaIngreso();
+		descripcion = pro.getDescripcion();
+		cantidadProducto = pro.getCantidad();
+		codigoLote = pro.getCodigoLote();
+		String[] datos = pro.getPeso().split(" ");
+		peso = datos[0];
+		pesoOpcion = datos[1];
+		dimensiones = pro.getDimensiones();
+		empleado = pro.getEmpleado();
+		valor = pro.getValor() + "";
+
+	}
+	
+	/**
+	 * 
+	 */
+	public void buscar() {
+		registrarAuditoria("Buscar");
 	}
 
 	/**
 	 * 
 	 */
-	public void crear() {
+	public String editar() {
 		if (nombre.isEmpty() || fechaIngreso == null || cantidadProducto == 0 || codigoLote.isEmpty()
 				|| empleado == null || valor.isEmpty()) {
 			Messages.addFlashGlobalWarn("Digite los campos Obligatorios");
 		} else {
 			try {
-				Producto pro = new Producto();
 				pro.setNombre(nombre);
 				pro.setFechaIngreso(fechaIngreso);
 				pro.setDescripcion(descripcion);
@@ -244,39 +211,17 @@ public class InventarioController implements Serializable {
 				pro.setValor(Integer.parseInt(valor));
 				pro.setTipoProducto(tipoProducto);
 				pro.setEmpleado(empleado);
-				proEJB.crearProducto(pro);
-				Messages.addFlashGlobalInfo("Producto ingresando Correctamente");
-				registrarAuditoria("Crear");
+				proEJB.editarProducto(pro);
+				Messages.addFlashGlobalInfo("Producto Editado Correctamente");
+				registrarAuditoria("Editar");
 				limpiar();
+				return "/paginas/privado/verInventario.xhtml?faces-redirect=true";
 			} catch (Exception e) {
 				Messages.addFlashGlobalError(e.getMessage());
 			}
+
 		}
-	}
-	
-	/**
-	 * 
-	 * @param venta
-	 */
-	public void eliminar(Producto pro) {
-		try {
-			Messages.addFlashGlobalInfo("Se ha eliminado el Producto correctamente");
-			proEJB.eliminarProducto(pro.getCodigo());
-			productos = proEJB.listarProductos();
-			resetearFitrosTabla();
-			registrarAuditoria("Eliminar");
-		} catch (Exception e) {
-			Messages.addFlashGlobalError("Error al eliminar el Producto");
-		}
-	}
-	
-	/**
-	 * 
-	 * @param id
-	 */
-	public void resetearFitrosTabla() {
-		RequestContext requestContext = RequestContext.getCurrentInstance();
-		requestContext.execute("PF('inveTable').clearFilters()");
+		return null;
 	}
 
 	/**
@@ -296,6 +241,11 @@ public class InventarioController implements Serializable {
 		pesoOpcion = "";
 	}
 
+	public String cancelar() {
+		limpiar();
+		return "/paginas/privado/verInventario.xhtml?faces-redirect=true";
+	}
+
 	public void registrarAuditoria(String accion) {
 		try {
 			Auditoria audi = new Auditoria();
@@ -307,22 +257,6 @@ public class InventarioController implements Serializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * 
-	 */
-	public void buscar() {
-		registrarAuditoria("Buscar");
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public String procederEditar(Producto pro) {
-		DatosManager.setCodigoProducto(pro.getCodigo());
-		return "/paginas/privado/editarInventario.xhtml?faces-redirect=true";
 	}
 
 }
