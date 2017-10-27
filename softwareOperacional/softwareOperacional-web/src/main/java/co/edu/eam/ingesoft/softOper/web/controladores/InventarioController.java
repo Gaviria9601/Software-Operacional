@@ -3,15 +3,11 @@ package co.edu.eam.ingesoft.softOper.web.controladores;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
 
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.Pattern;
@@ -22,58 +18,53 @@ import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
 import co.edu.eam.ingesoft.softOpe.negocio.beans.AuditoriaEJB;
-import co.edu.eam.ingesoft.softOpe.negocio.beans.ClienteEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.EmpleadoEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.ProductoEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.InventarioEJB;
-import co.edu.eam.ingesoft.softOper.entidades.Area;
 import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
-import co.edu.eam.ingesoft.softOper.entidades.Cliente;
 import co.edu.eam.ingesoft.softOper.entidades.Empleado;
 import co.edu.eam.ingesoft.softOper.entidades.Producto;
 import co.edu.eam.ingesoft.softOper.entidades.TipoProducto;
-import co.edu.eam.ingesoft.softOper.entidades.Venta;
 
 @Named("inventarioController")
 @ViewScoped
 public class InventarioController implements Serializable {
 
 	@Pattern(regexp = "[A-Za-z ]*", message = "Solo Letras")
-	@Length(min = 4, max = 30, message = "Longitud entre 4 y 30")
+	@Length(min = 0, max = 30, message = "Longitud entre 0 y 30")
 	private String nombre;
 
 	private TipoProducto tipoProducto;
 
 	private Date fechaIngreso;
 
-	@Length(min = 4, max = 2000, message = "Longitud entre 4 y 2000")
+	@Length(min = 0, max = 2000, message = "Longitud entre 0 y 2000")
 	private String descripcion;
 
-	
 	private int cantidadProducto;
 
-	@Length(min = 4, max = 20, message = "Longitud entre 4 y 20")
+	@Length(min = 0, max = 20, message = "Longitud entre 0 y 20")
 	private String codigoLote;
 
-	@Pattern(regexp="[0-9]*",message="Solo numeros")
-	@Length(min=1,max=10,message="longitud entre 1 y 10")
-	private String peso;
+	@Pattern(regexp = "[0-9]*", message = "Solo numeros")
+	@Length(min = 0, max = 10, message = "longitud entre 0 y 10")
+	private String peso="0";
 
-	@Length(min = 4, max = 30, message = "Longitud entre 4 y 30")
+	@Length(min = 0, max = 30, message = "Longitud entre 0 y 30")
 	private String dimensiones;
 
 	private Empleado empleado;
 
-	@Pattern(regexp="[0-9]*",message="Solo numeros")
-	@Length(min=1,max=10,message="longitud entre 1 y 10")
-	private String valor;
+	@Pattern(regexp = "[0-9]*", message = "Solo numeros")
+	@Length(min = 0, max = 10, message = "longitud entre 0 y 10")
+	private String valor="0";
 
 	private List<TipoProducto> tipoproductos;
-	
+
 	private List<Producto> productos;
-	
+
 	private ArrayList<Producto> filtroProducto = new ArrayList<Producto>();
-	
+
 	public List<Producto> getProductos() {
 		return productos;
 	}
@@ -175,13 +166,13 @@ public class InventarioController implements Serializable {
 
 	@EJB
 	private InventarioEJB invEJB;
-	
+
 	@EJB
 	private AuditoriaEJB audEJB;
-	
+
 	@EJB
 	private ProductoEJB proEJB;
-	
+
 	@Inject
 	private SessionController sesion;
 
@@ -203,8 +194,7 @@ public class InventarioController implements Serializable {
 
 		return filteredThemes;
 	}
-	
-	
+
 	@PostConstruct
 	public void inicializar() {
 		tipoproductos = proEJB.listarTipoProducto();
@@ -215,26 +205,30 @@ public class InventarioController implements Serializable {
 	 * 
 	 */
 	public void crear() {
-		try{
-			Producto pro = new Producto();
-			pro.setNombre(nombre);
-			pro.setFechaIngreso(fechaIngreso);
-			pro.setDescripcion(descripcion);
-			pro.setCantidad(10);
-			pro.setCodigoLote(codigoLote);
-			pro.setPeso(Integer.parseInt(peso));
-			pro.setDimensiones(dimensiones);
-			pro.setValor(Integer.parseInt(valor));
-			pro.setTipoProducto(tipoProducto);
-			pro.setEmpleado(empleado);
-			invEJB.crearProducto(pro);
-			Messages.addFlashGlobalInfo("Producto ingresando Correctamente");
-			registrarAuditoria("Crear");
-			limpiar();
-		}catch (Exception e) {
-			
+		if (nombre.isEmpty() || fechaIngreso == null || cantidadProducto == 0 || codigoLote.isEmpty()
+				|| empleado == null || valor.isEmpty()) {
+			Messages.addFlashGlobalWarn("Digite los campos Obligatorios");
+		} else {
+			try {
+				Producto pro = new Producto();
+				pro.setNombre(nombre);
+				pro.setFechaIngreso(fechaIngreso);
+				pro.setDescripcion(descripcion);
+				pro.setCantidad(cantidadProducto);
+				pro.setCodigoLote(codigoLote);
+				pro.setPeso(Integer.parseInt(peso));
+				pro.setDimensiones(dimensiones);
+				pro.setValor(Integer.parseInt(valor));
+				pro.setTipoProducto(tipoProducto);
+				pro.setEmpleado(empleado);
+				invEJB.crearProducto(pro);
+				Messages.addFlashGlobalInfo("Producto ingresando Correctamente");
+				registrarAuditoria("Crear");
+				limpiar();
+			} catch (Exception e) {
+				Messages.addFlashGlobalError(e.getMessage());
+			}
 		}
-		
 	}
 
 	/**
@@ -252,7 +246,7 @@ public class InventarioController implements Serializable {
 		tipoProducto = null;
 		empleado = null;
 	}
-	
+
 	public void registrarAuditoria(String accion) {
 		try {
 			Auditoria audi = new Auditoria();
@@ -265,14 +259,14 @@ public class InventarioController implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 
 	 */
 	public void buscar() {
 		registrarAuditoria("Buscar");
 	}
-	
+
 	/**
 	 * 
 	 * @return
@@ -281,6 +275,5 @@ public class InventarioController implements Serializable {
 		DatosManager.setCodigoVenta(ven.getCodigo());
 		return "/paginas/privado/editarInventario.xhtml?faces-redirect=true";
 	}
-
 
 }

@@ -23,7 +23,7 @@
 
 					<div class="form-group">
 
-						<label for="tfnombre">Nombre Producto</label>
+						<label for="tfnombre">Nombre Producto (*)</label>
 						<h:inputText for="tfnombre" class="form-control" id="tfnombre"
 							a:placeholder="Nombre" value="#{inventarioController.nombre}" />
 						<p:message for="tfnombre" />
@@ -31,12 +31,10 @@
 					</div>
 
 					<div class="form-group">
-						<label for="tftipoPro">Tipo de Producto</label> <br></br>
+						<label for="tftipoPro">Tipo de Producto (*)</label> <br></br>
 						<h:selectOneMenu id="cbtipoProducto"
 							value="#{inventarioController.tipoProducto}"
-							converter="tipoProConverter" style="width:350px">
-							<f:selectItem itemLabel="Seleccione el Tipo de Producto"
-									itemValue="" noSelectionOption="true" />
+							converter="tipoProConverter" style="width:240px">
 							<f:selectItems value="#{inventarioController.tipoproductos}"
 								var="tipoPro" itemValue="#{tipoPro}"
 								itemLabel="#{tipoPro.nombre}" />
@@ -44,8 +42,16 @@
 					</div>
 
 					<div class="form-group">
-						<label for="tffecha">Fecha de Ingreso</label> <br></br>
-						<p:calendar id="tffecha" pattern="yyyy-MM-dd" mask="true" value="#{inventarioController.fechaIngreso}" showOn="button" />
+						<label for="tffecha">Fecha de Ingreso (*)</label>
+						<div class="input-group">
+							<div class="input-group-addon">
+								<i class="fa fa-calendar"></i>
+							</div>
+							<p:inputMask id="tffecha" placeholder="Año-Mes-Dia"
+								value="#{inventarioController.fechaIngreso}">
+								<f:convertDateTime pattern="yyyy-MM-dd" />
+							</p:inputMask>
+						</div>
 						<p:message for="tffecha" />
 					</div>
 
@@ -59,9 +65,10 @@
 					</div>
 
 					<div class="form-group">
-						<label for="tfcant"> Cantidad: </label>
+						<label for="tfcant"> Cantidad (*)</label><br />
 						<p:spinner min="0" id="tfcant"
-							value="#{inventarioController.cantidadProducto}"/>
+							value="#{inventarioController.cantidadProducto}"
+							style="width:240px" />
 						<p:message for="tfcant" />
 					</div>
 
@@ -69,7 +76,7 @@
 
 					<div class="form-group">
 
-						<label for="tfcodigolote">Codigo Lote</label>
+						<label for="tfcodigolote">Codigo Lote (*)</label><br />
 						<h:inputText type="text" class="form-control" id="tfcodigolote"
 							a:placeholder="Codigo lote"
 							value="#{inventarioController.codigoLote}" />
@@ -78,8 +85,9 @@
 					</div>
 
 					<div class="form-group">
-						<label for="tfpeso"> Peso: </label>
-						<h:inputText id="tfpeso" value="#{inventarioController.peso}" class="form-control"/>
+						<label for="tfpeso"> Peso </label>
+						<h:inputText id="tfpeso" value="#{inventarioController.peso}"
+							a:placeholder="Peso" class="form-control" />
 						<p:message for="tfpeso" />
 					</div>
 
@@ -93,7 +101,7 @@
 					</div>
 
 					<div class="form-group">
-						<i class="fa fa-user"></i> <label>Empleado: </label>
+						<i class="fa fa-user"></i> <label>Empleado (*) </label><br />
 						<p:autoComplete id="empleado"
 							value="#{inventarioController.empleado}"
 							completeMethod="#{inventarioController.completeTheme}" var="emp"
@@ -112,12 +120,12 @@
 
 
 					<div class="form-group">
-						<label for="totalVenta">Valor</label>
+						<label for="totalVenta">Valor (*)</label>
 						<div class="input-group">
 							<div class="input-group-addon">
 								<i class="fa fa-usd"></i>
 							</div>
-							<h:inputText id="totalVenta"
+							<h:inputText id="totalVenta" a:placeholder="Valor"
 								value="#{inventarioController.valor}" class="form-control" />
 						</div>
 						<p:message for="totalVenta" />
