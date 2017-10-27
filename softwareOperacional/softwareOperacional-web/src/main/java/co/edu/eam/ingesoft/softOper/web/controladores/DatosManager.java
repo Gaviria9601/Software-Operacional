@@ -8,6 +8,10 @@ public class DatosManager {
 	
 	private static int codigoProducto;
 	
+	private static int codigoCliente;
+	
+	private static int codigoArea;
+	
 
 	public static int getCodigoProducto() {
 		return codigoProducto;
@@ -37,6 +41,22 @@ public class DatosManager {
 	 */
 	public static void setCodigoTipoUsuario(int codigoTipoUsuario) {
 		DatosManager.codigoTipoUsuario = codigoTipoUsuario;
+	}
+
+	public static int getCodigoCliente() {
+		return codigoCliente;
+	}
+
+	public static void setCodigoCliente(int codigoCliente) {
+		DatosManager.codigoCliente = codigoCliente;
+	}
+
+	public static int getCodigoArea() {
+		return codigoArea;
+	}
+
+	public static void setCodigoArea(int codigoArea) {
+		DatosManager.codigoArea = codigoArea;
 	}
 	
 	
