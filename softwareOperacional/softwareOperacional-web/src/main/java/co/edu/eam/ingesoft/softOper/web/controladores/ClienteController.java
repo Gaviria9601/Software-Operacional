@@ -55,6 +55,8 @@ public class ClienteController implements Serializable {
 
 	private Municipio municipio;
 	
+	private int idMuni;
+	
 	private String departamento;
 	
 	private List<Cliente> cliente;
@@ -72,6 +74,46 @@ public class ClienteController implements Serializable {
 	
 
 	private Usuario usuario;
+
+	public int getIdMuni() {
+		return idMuni;
+	}
+
+	public void setIdMuni(int idMuni) {
+		this.idMuni = idMuni;
+	}
+
+	public String getDepartamento() {
+		return departamento;
+	}
+
+	public void setDepartamento(String departamento) {
+		this.departamento = departamento;
+	}
+
+	public List<Area> getAreas() {
+		return areas;
+	}
+
+	public void setAreas(List<Area> areas) {
+		this.areas = areas;
+	}
+
+	public List<Departamento> getDepartamentos() {
+		return departamentos;
+	}
+
+	public void setDepartamentos(List<Departamento> departamentos) {
+		this.departamentos = departamentos;
+	}
+
+	public AreaEJB getArEJB() {
+		return arEJB;
+	}
+
+	public void setArEJB(AreaEJB arEJB) {
+		this.arEJB = arEJB;
+	}
 
 	public Cliente getClie() {
 		return clie;
@@ -272,14 +314,17 @@ public class ClienteController implements Serializable {
 	
 	@EJB
 	AreaEJB arEJB;
+	
+	@EJB
+	private EmpleadoEJB empleadoejb;
 
 	@PostConstruct
 	public void inicializador() {
 		
 	    cliente = cliEJB.listarClientes();
 	    cliente = cliEJB.listarClientes();
-	    areas = arEJB.listarArea();
-
+	    departamentos = empleadoejb.listardepartamentos();
+	    
 	}
 	
 	public List<Municipio> getMuni() {
@@ -301,7 +346,7 @@ public class ClienteController implements Serializable {
 	
 	public void crear() {
 		try {
-			Municipio m = cliEJB.buscarMunicipio(1);
+			Municipio m = cliEJB.buscarMunicipio(idMuni);
 			Cliente c = new Cliente();
 			c.setNombre(nombre);
 			c.setApellido(apellido);
@@ -334,6 +379,11 @@ public class ClienteController implements Serializable {
 		cedula = "";
 		genero  = "";
 		
+	}
+	
+	public void onDepartamentoChange() {
+		if (departamento != null && !departamento.equals(""))
+			muni = empleadoejb.listarMuniporDepto(departamento);
 	}
 	
 public void eliminar(Cliente venta) {

@@ -29,9 +29,7 @@ public class AreaEJB {
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void crear(Area a) {
-		
-			em.persist(a);
-		
+		em.persist(a);
 	}
 
 	
@@ -63,7 +61,7 @@ public class AreaEJB {
   * @param codigo
   */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void eliminar(Integer id){
+	public void eliminar(int id){
 		em.remove(em.find(Area.class, id));
 	}
 	

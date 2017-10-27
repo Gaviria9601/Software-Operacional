@@ -31,8 +31,8 @@ public class ClienteEJB {
 		return em.find(Cliente.class, codigo);
 	}
 	
-	public Municipio buscarMunicipio(int codigo){
-		return em.find(Municipio.class, codigo);
+	public Municipio buscarMunicipio(int id){
+		return em.find(Municipio.class, id);
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)

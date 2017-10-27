@@ -64,7 +64,7 @@
 					<div class="form-group">
 						<label for="tfgen">Genero</label>
 						<br></br>
-						<h:selectOneMenu id="gen" value="#{clienteControlador.genero}">
+						<h:selectOneMenu  itemLabel="Seleccione una opción" id="gen" value="#{clienteControlador.genero}">
 					     <f:selectItem itemValue="F" itemLabel="Femenino" />
 						<f:selectItem itemValue="M" itemLabel="Masculino" />
 					  </h:selectOneMenu>
@@ -72,15 +72,15 @@
 					</div>
 					
 					<div class="form-group">
-							<label for="cbdep">Departamento</label> <br></br>
+							<label for="cbdep">Departamento de nacimiento</label> <br></br>
 							
 							<h:selectOneMenu id="cbdep"
-								value="#{usuarioController.departamento}" style="width:150px">
-								<p:ajax listener="#{usuarioController.onDepartamentoChange}"
+								value="#{clienteControlador.departamento}" style="width:150px">
+								<p:ajax listener="#{clienteControlador.onDepartamentoChange}"
 									update="cbmuni" />
-								<f:selectItem itemLabel="Seleccione el Departamento"
+								<f:selectItem itemLabel="Seleccione una opción"
 									itemValue="" noSelectionOption="true" />
-								<f:selectItems value="#{usuarioController.departamentos}" var="dep"
+								<f:selectItems value="#{clienteControlador.departamentos}" var="dep"
 							itemValue="#{dep.nombre}" itemLabel="#{dep.nombre}" />
 							</h:selectOneMenu>
 
@@ -88,17 +88,18 @@
 						</div>
 						
 						<div class="form-group">
-							<label for="muni">Municipio</label> <br></br>
+							<label for="muni">Municipio de nacimiento</label> <br></br>
 
-							<h:selectOneMenu id="cbmuni" value="#{usuarioController.municipio}"
+							<h:selectOneMenu id="cbmuni" value="#{clienteControlador.idMuni}"
 								style="width:150px">
 
-								<f:selectItem itemLabel="Seleccione Ciudad" itemValue=""
+								<f:selectItem itemLabel="Seleccione una opción" itemValue=""
 									noSelectionOption="true" />
-								<f:selectItems value="#{usuarioController.municipios}" var="muni"
-							itemValue="#{muni.nombre}" itemLabel="#{muni.nombre}"/>
+								<f:selectItems value="#{clienteControlador.muni}" var="mu"
+							itemValue="#{mu.nombre}" itemLabel="#{mu.nombre}"/>
 
 							</h:selectOneMenu>
+							<p:message for="cbmuni"></p:message>
 						</div>
 					
 					<div class="box-footer">
