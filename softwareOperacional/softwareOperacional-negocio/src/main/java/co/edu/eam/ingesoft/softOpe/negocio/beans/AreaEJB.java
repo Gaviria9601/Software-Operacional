@@ -56,8 +56,8 @@ public class AreaEJB {
 		return em.find(Area.class, id);
 	}
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void editarArea(Area audi){
-		em.merge(audi);
+	public void editarArea(Area ar){
+		em.merge(ar);
 	}
  /**
   * 

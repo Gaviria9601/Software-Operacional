@@ -295,21 +295,11 @@ public class AreaController implements Serializable {
 	}
 	
 	public String procederEditar(Area audi) {
-		DatosManager.setCodigoVenta(audi.getId());
+		DatosManager.setIdArea(audi.getId());
 		return "/paginas/privado/editarArea.xhtml?faces-redirect=true";
 	}
 	
-    /**
-     * Metodo para editar
-     */
-	public void editar() {
-		ar.setNombre(nombre);
-		ar.setDescripcion(des);
-		limpiar();
-		registrarAuditoria("Editar");
-		Messages.addGlobalInfo("El area fue modificada con exito");
-	
-	}
+    
 
 	public void resetearFitrosTabla() {
 		RequestContext requestContext = RequestContext.getCurrentInstance();

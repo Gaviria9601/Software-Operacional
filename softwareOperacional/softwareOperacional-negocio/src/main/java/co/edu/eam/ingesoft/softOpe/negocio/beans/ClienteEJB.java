@@ -41,6 +41,11 @@ public class ClienteEJB {
 		
 	}
 	
+	
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void editar(Cliente clie){
+		em.merge(clie);
+	}
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void eliminar(Integer codigo){
 		em.remove(em.find(Cliente.class, codigo));

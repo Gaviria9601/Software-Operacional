@@ -12,13 +12,16 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 import org.omnifaces.cdi.ViewScoped;
-
+import org.omnifaces.util.Faces;
+import org.omnifaces.util.Messages;
+import org.primefaces.context.RequestContext;
 
 import co.edu.eam.ingesoft.softOpe.negocio.beans.AreaEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.AuditoriaEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.EmpleadoEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.SeguridadEJB;
 import co.edu.eam.ingesoft.softOper.entidades.Area;
+import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
 import co.edu.eam.ingesoft.softOper.entidades.Empleado;
 
 import co.edu.eam.ingesoft.softOper.entidades.Usuario;
@@ -45,9 +48,7 @@ public class AreaEditController implements Serializable{
 	
 	private Area ar;
 	
-	//auditoria
-	
-	private Usuario usuario;
+    private Usuario usuario;
 
 	private Empleado empleado;
 
@@ -235,6 +236,67 @@ public class AreaEditController implements Serializable{
 	@PostConstruct
 	public void inicializar() {
 		ar = arEJB.buscarArea(DatosManager.getIdArea());
+		nombre = ar.getNombre();
+		des = ar.getDescripcion();
 
 	}
-}
+
+	
+	public String editar() {
+		if (nombre.isEmpty()) {
+			Messages.addFlashGlobalWarn("Digite los campos Obligatorios");
+		} else {
+			try {
+				
+				ar.setDescripcion(des);
+				ar.setNombre(nombre);
+				arEJB.editarArea(ar);
+				Messages.addFlashGlobalInfo("El Area ha sido Editada Correctamente");
+				registrarAuditoria("Editar");
+				limpiar();
+				return "/paginas/privado/verArea.xhtml?faces-redirect=true";
+			} catch (Exception e) {
+				Messages.addFlashGlobalError(e.getMessage());
+			}
+
+		}
+		return null;
+	}
+
+	/**
+	 * 
+	 */
+	public void limpiar() {
+		nombre = "";
+		des = "";
+	}
+
+	public String cancelar() {
+		limpiar();
+		return "/paginas/privado/verArea.xhtml?faces-redirect=true";
+	}
+	
+
+	public void registrarAuditoria(String accion) {
+		try {
+			Auditoria audi = new Auditoria();
+			String browserDetails = Faces.getRequest().getHeader("User-Agent");
+			audi.setAccion(accion);
+			audi.setRegistroRealizoAccion("Area");
+			audi.setUsuario(sesion.getUsuario());
+			audEJB.registrarAuditoria(audi, browserDetails);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+
+	public void resetearFitrosTabla() {
+		RequestContext requestContext = RequestContext.getCurrentInstance();
+		requestContext.execute("PF('audiTable').clearFilters()");
+	}
+	
+	}
+
+

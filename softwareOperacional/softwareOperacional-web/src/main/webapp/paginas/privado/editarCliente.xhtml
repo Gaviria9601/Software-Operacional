@@ -28,7 +28,7 @@
 
 						<label for="tfnombre">Nombre</label>
 						<h:inputText type="text" class="form-control" id="nombre"
-							a:placeholder="Nombre" value="#{clienteControlador.nombre}" />
+							a:placeholder="Nombre" value="#{clienteEditController.nombre}" />
 
 					</div>
 
@@ -37,24 +37,30 @@
 					<div class="form-group">
 						<label for="tfape">Apellido</label>
 						<p:inputText type="text" class="form-control" id="ape"
-							a:placeholder="Apellido" value="#{clienteControlador.apellido}" />
+							a:placeholder="Apellido" value="#{clienteEditController.apellido}" />
 
 					</div>
 
-
+					
 					<div class="form-group">
-						<label for="tffecha">Fecha de nacimiento</label> <br></br>
-						<p:inputMask id="tffecha" placeholder="año-mes-dia"
-							value="#{clienteControlador.fechanaci}" mode="inline">
-							<f:convertDateTime pattern="yyyy-MM-dd" />
-						</p:inputMask>
+						<label for="tffecha">Fecha de nacimiento </label>
+						<div class="input-group">
+							<div class="input-group-addon">
+								<i class="fa fa-calendar"></i>
+							</div>
+							<p:inputMask id="tffecha" placeholder="Año-Mes-Dia"
+								value="#{clienteEditController.fechanaci}">
+								<f:convertDateTime pattern="yyyy-MM-dd" />
+							</p:inputMask>
+						</div>
+						<p:message for="tffecha" />
 					</div>
 
 
 					<div class="form-group">
 						<label for="tfcc">Cedula</label> <br></br>
 						<p:inputText type="text" class="form-control" id="cc"
-							a:placeholder="Cedula" value="#{clienteControlador.cedula}" />
+							a:placeholder="Cedula" value="#{clienteEditController.cedula}" />
 
 					</div>
 
@@ -63,7 +69,7 @@
 					<div class="form-group">
 						<label for="tfgen">Genero</label> <br></br>
 						<h:selectOneMenu itemLabel="Seleccione una opción" id="gen"
-							value="#{clienteControlador.genero}" style="width:250px">
+							value="#{clienteEditControllerr.genero}" style="width:250px">
 							<f:selectItem itemValue="F" itemLabel="Femenino" />
 							<f:selectItem itemValue="M" itemLabel="Masculino" />
 						</h:selectOneMenu>
@@ -74,15 +80,15 @@
 						<label for="cbdep">Departamento de nacimiento</label> <br></br>
 
 						<h:selectOneMenu id="cbdep"
-							value="#{clienteControlador.departamento}" style="width:250px">
+							value="#{clienteEditController.departamento}" style="width:250px">
 							
 							<f:selectItem itemLabel="Seleccione una opción" itemValue=""
 								noSelectionOption="true" />
-							<f:selectItems value="#{clienteControlador.departamentos}"
+							<f:selectItems value="#{clienteEditController.departamentos}"
 								var="dep" itemValue="#{dep.nombre}" itemLabel="#{dep.nombre}" />
 
 							<f:ajax event="change" execute="@this" render="cbmuni"
-								listener="#{clienteControlador.onDepartamentoChange}" />
+								listener="#{clienteEditController.onDepartamentoChange}" />
 
 						</h:selectOneMenu>
 
@@ -97,7 +103,7 @@
 
 							<f:selectItem itemLabel="Seleccione una opción" itemValue=""
 								noSelectionOption="true" />
-							<f:selectItems value="#{clienteControlador.muni}" var="mu"
+							<f:selectItems value="#{clienteEditController.muni}" var="mu"
 								itemValue="#{mu.id}" itemLabel="#{mu.nombre}" />
 
 						</h:selectOneMenu>
@@ -106,7 +112,7 @@
 
 					<div class="box-footer">
 						<p:commandButton value="Registrar Cliente" ajax="false"
-							class="btn btn-primary" action="#{clienteControlador.crear}" />
+							class="btn btn-primary" action="#{clienteEditController.editar}" />
 					</div>
 
 				</div>

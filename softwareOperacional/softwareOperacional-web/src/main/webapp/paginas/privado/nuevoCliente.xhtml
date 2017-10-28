@@ -42,12 +42,19 @@
 					</div>
 
 
+					
 					<div class="form-group">
-						<label for="tffecha">Fecha de nacimiento</label> <br></br>
-						<p:inputMask id="tffecha" placeholder="año-mes-dia"
-							value="#{clienteControlador.fechanaci}" mode="inline">
-							<f:convertDateTime pattern="yyyy-MM-dd" />
-						</p:inputMask>
+						<label for="tffecha">Fecha de nacimiento </label>
+						<div class="input-group">
+							<div class="input-group-addon">
+								<i class="fa fa-calendar"></i>
+							</div>
+							<p:inputMask id="tffecha" placeholder="Año-Mes-Dia"
+								value="#{clienteControlador.fechanaci}">
+								<f:convertDateTime pattern="yyyy-MM-dd" />
+							</p:inputMask>
+						</div>
+						<p:message for="tffecha" />
 					</div>
 
 
