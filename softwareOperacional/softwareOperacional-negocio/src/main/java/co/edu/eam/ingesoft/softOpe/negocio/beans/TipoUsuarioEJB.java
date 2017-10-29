@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import co.edu.eam.ingesoft.softOper.entidades.Area;
+import co.edu.eam.ingesoft.softOper.entidades.Producto;
 import co.edu.eam.ingesoft.softOper.entidades.TipoUsuario;
 import co.edu.eam.ingesoft.softOper.entidades.Venta;
 
@@ -30,6 +31,11 @@ public class TipoUsuarioEJB {
 	public void crear(TipoUsuario t) {
 	     em.persist(t);
 		
+	}
+	
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void editar(TipoUsuario t) {
+		em.merge(t);
 	}
 	
 

@@ -6,15 +6,20 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 import org.omnifaces.cdi.ViewScoped;
+import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 import org.primefaces.context.RequestContext;
+
+import co.edu.eam.ingesoft.softOpe.negocio.beans.AuditoriaEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.TipoUsuarioEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.excepciones.ExcepcionNegocio;
+import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
 import co.edu.eam.ingesoft.softOper.entidades.TipoUsuario;
 import co.edu.eam.ingesoft.softOper.entidades.Venta;
 
@@ -27,7 +32,7 @@ public class TipoUsuarioController implements Serializable {
 	private String nombre;
 
 	@Pattern(regexp = "[A-Za-z ]*", message = "solo Letras")
-	@Length(min = 3, max = 50, message = "longitud entre 10 y 2000")
+	@Length(min = 10, max = 2000, message = "longitud entre 10 y 2000")
 	private String des;
 
 	private int id;
@@ -148,6 +153,12 @@ public class TipoUsuarioController implements Serializable {
 	@EJB
 	private TipoUsuarioEJB tipousuejb;
 
+	@EJB
+	private AuditoriaEJB audEJB;
+
+	@Inject
+	private SessionController sesion;
+
 	@PostConstruct
 	public void inicializador() {
 		tipos = tipousuejb.listarTipoUsuario();
@@ -161,8 +172,8 @@ public class TipoUsuarioController implements Serializable {
 			System.out.println(id);
 			System.out.println(nombre);
 			System.out.println(des);
-
-			// limpiar();
+			registrarAuditoria("Guardar");
+			limpiar();
 			Messages.addFlashGlobalInfo("Tipo de usuario ingresado Correctamente");
 
 		} catch (ExcepcionNegocio e) {
@@ -170,58 +181,50 @@ public class TipoUsuarioController implements Serializable {
 		}
 	}
 
-	public void resetearFitrosTabla(String id) {
-		RequestContext requestContext = RequestContext.getCurrentInstance();
-		requestContext.execute("PF('vtWidget').clearFilters()");
-	}
-	
-	public String procederEditar() {
-		return "/paginas/privado/editarTipoUsuario.xhtml?faces-redirect=true";
-	}
-
-
-	public void modificar(TipoUsuario audi) {
-		tipoUsu = audi;
-		nombre = audi.getNombre();
-		des = audi.getDescripcion();
-		busco = true;
-	}
-
-	public void editar() {
-		tipoUsu.setNombre(nombre);
-		tipoUsu.setDescripcion(des);
-
-		// limpiar();
-
-		Messages.addGlobalInfo("El tipo de usuario fue modificado con exito");
-		// limpiar();
-	
-	}
-	
-	public String procederEditar(TipoUsuario tip) {
-		DatosManager.setCodigoTipoUsuario(tip.getId());
-		return "/paginas/privado/editarTipoUsuario.xhtml?faces-redirect=true";
-	}
-	
-	public void resetearFitrosTabla() {
-		RequestContext requestContext = RequestContext.getCurrentInstance();
-		requestContext.execute("PF('audiTable').clearFilters()");
-	}
-	
-	public void eliminar(TipoUsuario tipo){
+	public void eliminar(TipoUsuario tipo) {
 		try {
 			tipousuejb.eliminarTipoUsuario(tipo.getId());
 			tipos = tipousuejb.listarTipoUsuario();
 			resetearFitrosTabla();
+			registrarAuditoria("Eliminar");
 			Messages.addFlashGlobalInfo("Se ha eliminado el tipo de usuario correctamente");
-		} catch (Exception e){ 
+		} catch (Exception e) {
 			Messages.addFlashGlobalError("Error al eliminar  el tipo de usuario ");
 		}
-		
-		
-		
-		// limpiar();
-		
+
+	}
+
+	public void resetearFitrosTabla(String id) {
+		RequestContext requestContext = RequestContext.getCurrentInstance();
+		requestContext.execute("PF('vtWidget').clearFilters()");
+	}
+
+	public String procederEditar(TipoUsuario tip) {
+		DatosManager.setCodigoTipoUsuario(tip.getId());
+		return "/paginas/privado/editarTipoUsuario.xhtml?faces-redirect=true";
+	}
+
+	public void resetearFitrosTabla() {
+		RequestContext requestContext = RequestContext.getCurrentInstance();
+		requestContext.execute("PF('audiTable').clearFilters()");
+	}
+
+	public void registrarAuditoria(String accion) {
+		try {
+			Auditoria audi = new Auditoria();
+			String browserDetails = Faces.getRequest().getHeader("User-Agent");
+			audi.setAccion(accion);
+			audi.setRegistroRealizoAccion("TipoUsuario");
+			audi.setUsuario(sesion.getUsuario());
+			audEJB.registrarAuditoria(audi, browserDetails);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void limpiar() {
+		nombre = null;
+		des = null;
 	}
 
 }
