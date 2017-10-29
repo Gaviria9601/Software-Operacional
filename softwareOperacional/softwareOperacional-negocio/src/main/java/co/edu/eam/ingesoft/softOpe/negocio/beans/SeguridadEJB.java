@@ -14,7 +14,7 @@ import co.edu.eam.ingesoft.softOper.entidades.Usuario;
 
 @LocalBean
 @Stateless
-public class SeguridadEJB {
+public class SeguridadEJB{
 
 	@PersistenceContext(unitName = Conexion.OPCION )
 	private EntityManager em;
