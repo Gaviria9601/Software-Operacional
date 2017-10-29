@@ -29,6 +29,7 @@ import co.edu.eam.ingesoft.softOper.entidades.Cliente;
 import co.edu.eam.ingesoft.softOper.entidades.Departamento;
 import co.edu.eam.ingesoft.softOper.entidades.Empleado;
 import co.edu.eam.ingesoft.softOper.entidades.Municipio;
+import co.edu.eam.ingesoft.softOper.entidades.Producto;
 import co.edu.eam.ingesoft.softOper.entidades.Usuario;
 
 @Named("clienteControlador")
@@ -340,24 +341,27 @@ public class ClienteController implements Serializable {
 	}
 
 	public void crear() {
-		try {
-			Municipio m = cliEJB.buscarMunicipio(idMuni);
-			Cliente c = new Cliente();
-			c.setNombre(nombre);
-			c.setApellido(apellido);
-			c.setFechaNacimiento(fechanaci);
-			c.setCedula(cedula);
-			c.setGenero(genero);
-			c.setMunicipioId(m);
-
-			cliEJB.crearCliente(c);
-			registrarAuditoria("Crear");
-			limpiar();
-			Messages.addFlashGlobalInfo("Cliente ingresado Correctamente");
-
-		} catch (ExcepcionNegocio e) {
-			Messages.addGlobalError(e.getMessage());
+		
+		if (nombre.isEmpty() || fechanaci == null || cedula.isEmpty() || apellido.isEmpty()) {
+			Messages.addFlashGlobalWarn("Digite los campos Obligatorios");
+		} else {
+			try {
+				Municipio m = cliEJB.buscarMunicipio(idMuni);
+				Cliente c = new Cliente();
+				c.setNombre(nombre);
+				c.setFechaNacimiento(fechanaci);
+				c.setApellido(apellido);
+				c.setGenero(genero);
+				c.setMunicipioId(m);
+			    cliEJB.crearCliente(clie);
+				Messages.addFlashGlobalInfo("Cliente ingresando Correctamente");
+				registrarAuditoria("Crear");
+				limpiar();
+			} catch (Exception e) {
+				Messages.addFlashGlobalError(e.getMessage());
+			}
 		}
+		
 	}
 	
 	public void buscar() {

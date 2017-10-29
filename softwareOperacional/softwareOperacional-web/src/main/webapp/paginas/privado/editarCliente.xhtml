@@ -10,14 +10,14 @@
 
 
 		<h2>
-			Clientes <small> Nuevo cliente</small>
+			Clientes <small> Editar cliente</small>
 		</h2>
 
 		<br />
 
 		<div class="box box-primary">
 			<div class="box-header">
-				<h3 class="box-title">Registro de clientes</h3>
+				<h3 class="box-title">Edición de clientes</h3>
 			</div>
 			<!-- /.box-header -->
 
@@ -114,6 +114,10 @@
 						<p:commandButton value="Registrar Cliente" ajax="false"
 							class="btn btn-primary" action="#{clienteEditController.editar}" />
 					</div>
+					
+					<p:commandButton value="Cancelar" ajax="false"
+							update=""
+							class="btn btn-danger" action="#{clienteEditController.cancelar}" />
 
 				</div>
 				<!-- /.box-body -->

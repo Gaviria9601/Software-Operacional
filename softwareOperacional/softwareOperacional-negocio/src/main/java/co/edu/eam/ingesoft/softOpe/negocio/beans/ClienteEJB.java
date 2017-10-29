@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 
 import co.edu.eam.ingesoft.softOper.entidades.Area;
 import co.edu.eam.ingesoft.softOper.entidades.Cliente;
+import co.edu.eam.ingesoft.softOper.entidades.Empleado;
 import co.edu.eam.ingesoft.softOper.entidades.Municipio;
 
 
@@ -41,7 +42,11 @@ public class ClienteEJB {
 		
 	}
 	
-	
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	public Cliente buscar(int  codigo) {
+		Cliente pa = em.find(Cliente.class,codigo);
+		return pa;
+	}
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void editar(Cliente clie){
 		em.merge(clie);

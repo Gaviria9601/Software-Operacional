@@ -26,6 +26,7 @@ import co.edu.eam.ingesoft.softOpe.negocio.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.softOper.entidades.Area;
 import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
 import co.edu.eam.ingesoft.softOper.entidades.Empleado;
+import co.edu.eam.ingesoft.softOper.entidades.Producto;
 import co.edu.eam.ingesoft.softOper.entidades.Usuario;
 
 
@@ -261,17 +262,21 @@ public class AreaController implements Serializable {
 	
 	
 	public void crear(){
-		try{
-			
-			Area a = new Area(nombre, des);
-			arEJB.crear(a);
-			registrarAuditoria("Crear");
-			limpiar();
-			Messages.addFlashGlobalInfo("Area ingresada Correctamente");
-				
-		} catch (ExcepcionNegocio e) {
-		       Messages.addGlobalError(e.getMessage());
-			   }
+		if (nombre.isEmpty()) {
+			Messages.addFlashGlobalWarn("Digite los campos Obligatorios");
+		} else {
+			try {
+				Area ar = new Area();
+				ar.getDescripcion();
+				ar.getNombre();
+				arEJB.crear(ar);
+				Messages.addFlashGlobalInfo("El area a sido ingresanda Correctamente");
+				registrarAuditoria("Crear");
+				limpiar();
+			} catch (Exception e) {
+				Messages.addFlashGlobalError(e.getMessage());
+			}
+		}
 		}
 	
 	/**

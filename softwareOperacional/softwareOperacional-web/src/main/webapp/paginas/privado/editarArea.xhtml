@@ -42,9 +42,13 @@
 					</div>
 
 					<div class="box-footer">
-						<p:commandButton value="Registrar Area" ajax="false" class="btn btn-primary"
+						<p:commandButton value="Editar Area" ajax="false" class="btn btn-primary"
 							action="#{areaEditController.editar}" />
 					</div>
+					
+					<p:commandButton value="Cancelar" ajax="false"
+							update=""
+							class="btn btn-danger" action="#{areaEditController.cancelar}" />
 
 				</div>
 				<!-- /.box-body -->
