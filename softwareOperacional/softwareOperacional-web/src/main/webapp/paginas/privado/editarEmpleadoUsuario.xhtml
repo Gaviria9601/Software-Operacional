@@ -22,100 +22,130 @@
 			<!-- /.box-header -->
 
 			<h:form role="form">
-				<div class="box-body">
+				<p:panelGrid id="paneldatos">
 
-					<div class="form-group">
+					<div class="box-body">
 
-						<label for="tfnombre">Nombre</label>
-						<h:inputText type="text" class="form-control" id="nombre"
-							a:placeholder="Nombre" value="#{clienteEditController.nombre}" />
+						<div class="form-group">
 
-					</div>
+							<label for="tfnombre">Nombre</label>
+							<h:inputText type="text" class="form-control" id="nombre"
+								a:placeholder="Nombre" value="#{usuarioeditController.nombre}" />
+							<p:message for="nombre" />
+						</div>
 
+						<div class="form-group">
 
+							<label for="apellido">Apellido</label>
+							<h:inputText type="text" class="form-control" id="apellido"
+								a:placeholder="apellido" value="#{usuarioeditController.apellido}" />
+							<p:message for="apellido" />
+						</div>
 
-					<div class="form-group">
-						<label for="tfape">Apellido</label>
-						<p:inputText type="text" class="form-control" id="ape"
-							a:placeholder="Apellido" value="#{clienteEditController.apellido}" />
+						<div class="form-group">
 
-					</div>
+							<label for="tfnombre">Cedula</label>
+							<h:inputText type="text" class="form-control" id="cedula"
+								a:placeholder="cedula" value="#{usuarioeditController.cedula}" />
+							<p:message for="cedula" />
+						</div>
 
-					
-					<div class="form-group">
-						<label for="tffecha">Fecha de nacimiento </label>
-						<div class="input-group">
-							<div class="input-group-addon">
-								<i class="fa fa-calendar"></i>
-							</div>
-							<p:inputMask id="tffecha" placeholder="Año-Mes-Dia"
-								value="#{clienteEditController.fechanaci}">
+						<div class="form-group">
+							<label for="tffecha">Fecha de nacimiento</label> <br></br>
+							<p:inputMask id="tffecha" placeholder="año-mes-dia"
+								value="#{usuarioeditController.fechaNacimiento}" mode="inline">
 								<f:convertDateTime pattern="yyyy-MM-dd" />
 							</p:inputMask>
 						</div>
-						<p:message for="tffecha" />
+
+						<div class="form-group">
+							<label for="tffechaingreso">Fecha de ingreso en la
+								empresa</label> <br></br>
+							<p:inputMask id="tffechaingreso" placeholder="año-mes-dia"
+								value="#{usuarioeditController.fechaIngreso}" mode="inline">
+								<f:convertDateTime pattern="yyyy-MM-dd" />
+							</p:inputMask>
+						</div>
+
+						<div class="form-group">
+							<label for="tfgen">Genero</label> <br></br>
+							<h:selectOneMenu id="gen" value="#{usuarioeditController.genero}">
+								<f:selectItem itemValue="F" itemLabel="Femenino" />
+								<f:selectItem itemValue="M" itemLabel="Masculino" />
+							</h:selectOneMenu>
+
+						</div>
+
+						<div class="form-group">
+							<label for="cbdep">Departamento</label> <br></br>
+
+							<h:selectOneMenu id="cbdep"
+								value="#{usuarioeditController.departamento}" style="width:150px">
+								<p:ajax listener="#{usuarioeditController.onDepartamentoChange}"
+									update="cbmuni" />
+								<f:selectItem itemLabel="Seleccione el Departamento"
+									itemValue="" noSelectionOption="true" />
+								<f:selectItems value="#{usuarioeditController.departamentos}"
+									var="dep" itemValue="#{dep.nombre}" itemLabel="#{dep.nombre}" />
+							</h:selectOneMenu>
+
+							<p:message for="cbdep"></p:message>
+						</div>
+
+
+						<div class="form-group">
+							<label for="muni">Municipio</label> <br></br>
+
+							<h:selectOneMenu id="cbmuni"
+								value="#{usuarioeditController.municipio}" style="width:150px">
+
+								<f:selectItem itemLabel="Seleccione Ciudad" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems value="#{usuarioeditController.municipios}"
+									var="muni" itemValue="#{muni.id}" itemLabel="#{muni.nombre}" />
+
+							</h:selectOneMenu>
+						</div>
+
+						<div class="form-group">
+							<label for="tfmuni">Tipo de usuario</label> <br></br>
+							<h:selectOneMenu id="tipo"
+								value="#{usuarioeditController.tipoUsuario}">
+
+								<f:selectItems value="#{usuarioeditController.tipos}" var="t"
+									itemLabel="#{t.nombre}" itemValue="#{t.id}">
+								</f:selectItems>
+							</h:selectOneMenu>
+						</div>
+
+						<div class="form-group">
+							<label for="tfmuni">Cargo</label> <br></br>
+							<h:selectOneMenu id="cargo" value="#{usuarioeditController.cargo}">
+
+								<f:selectItems value="#{usuarioeditController.cargos}" var="t"
+									itemLabel="#{t.cargo}" itemValue="#{t.id}">
+								</f:selectItems>
+							</h:selectOneMenu>
+						</div>
+
+						<p:panel id="basic" header="Usuario" style="margin-bottom:20px">
+							<div class="form-group">
+								<label for="tfdes">Contraseña</label>
+								<p:inputText type="password" class="form-control" id="contra"
+									a:placeholder="contraseña"
+									value="#{usuarioeditController.contrasenia}" />
+								<p:message for="contra" />
+							</div>
+						</p:panel>
+
+
+						<div class="box-footer">
+							<p:commandButton value="Editar usuario" ajax="false"
+								class="btn btn-primary" process="@this,paneldatos"
+								update="paneldatos" action="#{usuarioeditController.editar}" />
+						</div>
 					</div>
-
-
-					<div class="form-group">
-						<label for="tfcc">Cedula</label> <br></br>
-						<p:inputText type="text" class="form-control" id="cc"
-							a:placeholder="Cedula" value="#{clienteEditController.cedula}" />
-
-					</div>
-
-
-
-					<div class="form-group">
-						<label for="tfgen">Genero</label> <br></br>
-						<h:selectOneMenu itemLabel="Seleccione una opción" id="gen"
-							value="#{clienteEditControllerr.genero}" style="width:250px">
-							<f:selectItem itemValue="F" itemLabel="Femenino" />
-							<f:selectItem itemValue="M" itemLabel="Masculino" />
-						</h:selectOneMenu>
-
-					</div>
-
-					<div class="form-group">
-						<label for="cbdep">Departamento de nacimiento</label> <br></br>
-
-						<h:selectOneMenu id="cbdep"
-							value="#{clienteEditController.departamento}" style="width:250px">
-							
-							<f:selectItem itemLabel="Seleccione una opción" itemValue=""
-								noSelectionOption="true" />
-							<f:selectItems value="#{clienteEditController.departamentos}"
-								var="dep" itemValue="#{dep.nombre}" itemLabel="#{dep.nombre}" />
-
-							<f:ajax event="change" execute="@this" render="cbmuni"
-								listener="#{clienteEditController.onDepartamentoChange}" />
-
-						</h:selectOneMenu>
-
-						<p:message for="cbdep"></p:message>
-					</div>
-
-					<div class="form-group">
-						<label for="muni">Municipio de nacimiento</label> <br></br>
-
-						<h:selectOneMenu id="cbmuni" value="#{clienteControlador.idMuni}"
-							style="width:250px">
-
-							<f:selectItem itemLabel="Seleccione una opción" itemValue=""
-								noSelectionOption="true" />
-							<f:selectItems value="#{clienteEditController.muni}" var="mu"
-								itemValue="#{mu.id}" itemLabel="#{mu.nombre}" />
-
-						</h:selectOneMenu>
-						<p:message for="cbmuni"></p:message>
-					</div>
-
-					<div class="box-footer">
-						<p:commandButton value="Registrar Cliente" ajax="false"
-							class="btn btn-primary" action="#{clienteEditController.editar}" />
-					</div>
-
-				</div>
+				</p:panelGrid>
 				<!-- /.box-body -->
 			</h:form>
 

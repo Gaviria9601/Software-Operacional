@@ -321,8 +321,9 @@ public class UsuarioController implements Serializable {
 			empleado.setMunicipio(m);
 			empleado.setNombre(nombre);
 			System.out.println(c.getId()+"************"+m.getId());
-			
+			registrarAuditoriaEmpleado("Guardar");
 			empleadoejb.crear(empleado, nickname);
+			limpiar();
 			Messages.addFlashGlobalInfo("Usuario creado correctamente");
 		} catch (ExcepcionNegocio e) {
 			Messages.addGlobalError(e.getMessage());
@@ -330,7 +331,8 @@ public class UsuarioController implements Serializable {
 	}
 	
 	public void buscar() {
-		registrarAuditoria("Buscar");
+		registrarAuditoriaUsuario("Buscar");
+		registrarAuditoriaEmpleado("Buscar");
 	}
 
 	public void crearUsuario() {
@@ -338,6 +340,7 @@ public class UsuarioController implements Serializable {
 			if (seguridadejb.buscarUsuario(nickname) == null) {
 				Usuario usuariop = new Usuario(nickname, contrasenia, tiposejb.buscarTipoUsuario(tipoUsuario));
 				empleadoejb.crearUsuario(usuariop);
+				registrarAuditoriaUsuario("Guardar");
 				Messages.addFlashGlobalInfo("Nickname verificado");
 			} else {
 				Messages.addFlashGlobalInfo("Este nickname ya existe");
@@ -366,26 +369,54 @@ public class UsuarioController implements Serializable {
 
 		try {
 			empleadoejb.eliminarEmpleado(emp);
+			empleadoejb.eliminarUsuario(emp.getUsuario());
 			empleados = empleadoejb.listarEmpleados();
 			Messages.addFlashGlobalInfo("Se ha eliminado el empleado correctamente");
 			resetearFitrosTabla();
-			registrarAuditoria("Eliminar");
+			registrarAuditoriaEmpleado("Eliminar");
+			registrarAuditoriaUsuario("Eliminar");
 		} catch (Exception e) {
 			Messages.addFlashGlobalError("Error al eliminar el empleado");
 		}
 	}
 
-	public void registrarAuditoria(String accion) {
+	public void registrarAuditoriaEmpleado(String accion) {
 		try {
 			Auditoria audi = new Auditoria();
 			String browserDetails = Faces.getRequest().getHeader("User-Agent");
 			audi.setAccion(accion);
-			audi.setRegistroRealizoAccion("Cliente");
+			audi.setRegistroRealizoAccion("Empleado");
 			audi.setUsuario(sesion.getUsuario());
 			audEJB.registrarAuditoria(audi, browserDetails);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void registrarAuditoriaUsuario(String accion) {
+		try {
+			Auditoria audi = new Auditoria();
+			String browserDetails = Faces.getRequest().getHeader("User-Agent");
+			audi.setAccion(accion);
+			audi.setRegistroRealizoAccion("Usuario");
+			audi.setUsuario(sesion.getUsuario());
+			audEJB.registrarAuditoria(audi, browserDetails);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void limpiar() {
+		nombre = null;
+		apellido = null;
+		cedula = null;
+		fechaIngreso = null;
+		fechaNacimiento = null;
+		municipio = -1;
+		tipoUsuario = -1;
+		cargo = -1;
+		contrasenia= null;
+		nickname = null;
 	}
 
 	/**
