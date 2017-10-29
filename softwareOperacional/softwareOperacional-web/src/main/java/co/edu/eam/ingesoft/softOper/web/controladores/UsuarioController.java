@@ -7,18 +7,24 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 import org.omnifaces.cdi.ViewScoped;
+import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
+import org.primefaces.context.RequestContext;
 
+import co.edu.eam.ingesoft.softOpe.negocio.beans.AuditoriaEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.EmpleadoEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.SeguridadEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.TipoUsuarioEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.excepciones.ExcepcionNegocio;
+import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
 import co.edu.eam.ingesoft.softOper.entidades.Cargo;
+import co.edu.eam.ingesoft.softOper.entidades.Cliente;
 import co.edu.eam.ingesoft.softOper.entidades.Departamento;
 import co.edu.eam.ingesoft.softOper.entidades.Empleado;
 import co.edu.eam.ingesoft.softOper.entidades.Municipio;
@@ -261,6 +267,7 @@ public class UsuarioController implements Serializable {
 	}
 
 	/**
+	 * 
 	 * @return the empleado
 	 */
 	public Empleado getEmpleado() {
@@ -283,6 +290,13 @@ public class UsuarioController implements Serializable {
 
 	@EJB
 	private SeguridadEJB seguridadejb;
+	
+	@EJB
+	private AuditoriaEJB audEJB;
+
+	@Inject
+	private SessionController sesion;
+
 
 	@PostConstruct
 	public void inicializador() {
@@ -290,6 +304,7 @@ public class UsuarioController implements Serializable {
 		cargos = empleadoejb.listarCargos();
 		tipos = tiposejb.listarTipoUsuario();
 		departamentos = empleadoejb.listardepartamentos();
+		empleados = empleadoejb.listarEmpleados();
 	}
 
 	public void crear() {
@@ -313,6 +328,10 @@ public class UsuarioController implements Serializable {
 			Messages.addGlobalError(e.getMessage());
 		}
 	}
+	
+	public void buscar() {
+		registrarAuditoria("Buscar");
+	}
 
 	public void crearUsuario() {
 		try {
@@ -331,6 +350,42 @@ public class UsuarioController implements Serializable {
 	public void onDepartamentoChange() {
 		if (departamento != null && !departamento.equals(""))
 			municipios = empleadoejb.listarMuniporDepto(departamento);
+	}
+	
+	public String procederEditar(Empleado audi) {
+		DatosManager.setCodigoEmpleado(audi.getCodigo());
+		return "/paginas/privado/editarEmpleadoUsuario.xhtml?faces-redirect=true";
+	}
+	
+	public void resetearFitrosTabla() {
+		RequestContext requestContext = RequestContext.getCurrentInstance();
+		requestContext.execute("PF('audiTable').clearFilters()");
+	}
+	
+	public void eliminar(Empleado emp) {
+
+		try {
+			empleadoejb.eliminarEmpleado(emp);
+			empleados = empleadoejb.listarEmpleados();
+			Messages.addFlashGlobalInfo("Se ha eliminado el empleado correctamente");
+			resetearFitrosTabla();
+			registrarAuditoria("Eliminar");
+		} catch (Exception e) {
+			Messages.addFlashGlobalError("Error al eliminar el empleado");
+		}
+	}
+
+	public void registrarAuditoria(String accion) {
+		try {
+			Auditoria audi = new Auditoria();
+			String browserDetails = Faces.getRequest().getHeader("User-Agent");
+			audi.setAccion(accion);
+			audi.setRegistroRealizoAccion("Cliente");
+			audi.setUsuario(sesion.getUsuario());
+			audEJB.registrarAuditoria(audi, browserDetails);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

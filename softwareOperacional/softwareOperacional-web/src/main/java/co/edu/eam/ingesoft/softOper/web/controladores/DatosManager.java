@@ -12,6 +12,8 @@ public class DatosManager {
 	
 	private static int IdArea;
 	
+	private static int codigoEmpleado;
+	
 
 	public static int getCodigoProducto() {
 		return codigoProducto;
@@ -57,6 +59,20 @@ public class DatosManager {
 
 	public static void setIdArea(int idArea) {
 		IdArea = idArea;
+	}
+
+	/**
+	 * @return the codigoEmpleado
+	 */
+	public static int getCodigoEmpleado() {
+		return codigoEmpleado;
+	}
+
+	/**
+	 * @param codigoEmpleado the codigoEmpleado to set
+	 */
+	public static void setCodigoEmpleado(int codigoEmpleado) {
+		DatosManager.codigoEmpleado = codigoEmpleado;
 	}
 
 	

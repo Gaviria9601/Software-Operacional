@@ -84,7 +84,7 @@ public class TipoUsuarioEditController implements Serializable {
 			Auditoria audi = new Auditoria();
 			String browserDetails = Faces.getRequest().getHeader("User-Agent");
 			audi.setAccion(accion);
-			audi.setRegistroRealizoAccion("Inventario");
+			audi.setRegistroRealizoAccion("TipoUsuario");
 			audi.setUsuario(sesion.getUsuario());
 			audEJB.registrarAuditoria(audi, browserDetails);
 		} catch (Exception e) {
