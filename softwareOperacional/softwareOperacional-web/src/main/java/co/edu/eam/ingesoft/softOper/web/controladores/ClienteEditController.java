@@ -202,20 +202,20 @@ public class ClienteEditController implements Serializable {
 	private AuditoriaEJB audEJB;
 	
 	
-
 	@Inject
 	private SessionController sesion;
     
 	@PostConstruct
 	public void inicializar() {
 		clie = cliEJB.buscarCliente(DatosManager.getCodigoCliente());
+	
 		nombre = clie.getNombre();
-		//apellido = clie.getApellido();
-	//	fechanaci = clie.getFechaNacimiento();
-		//cedula = clie.getCedula();
-	    //genero = clie.getGenero();
-		//departamentos = empleadoejb.listardepartamentos();
-		//municipio = clie.getMunicipioId().getId();
+		apellido = clie.getApellido();
+	    fechanaci = clie.getFechaNacimiento();
+		cedula = clie.getCedula();
+	    genero = clie.getGenero();
+		departamentos = empleadoejb.listardepartamentos();
+	    idMuni = clie.getMunicipioId().getId();
 	}
 	public void onDepartamentoChange() {
 		if (departamento != null && !departamento.equals(""))
@@ -223,7 +223,7 @@ public class ClienteEditController implements Serializable {
 	}
 	
 	public String editar() {
-		if (nombre.isEmpty()) {
+		if (nombre.isEmpty() || cedula.isEmpty() || apellido.isEmpty()) {
 			Messages.addFlashGlobalWarn("Digite los campos Obligatorios");
 		} else {
 			try {
@@ -232,7 +232,7 @@ public class ClienteEditController implements Serializable {
 				clie.setNombre(nombre);
 				clie.setCedula(cedula);
 		        clie.setFechaNacimiento(fechanaci);
-		       clie.setGenero(genero);
+		        clie.setGenero(genero);
 		        clie.setMunicipioId(municipio);
 				cliEJB.editar(clie);
 				Messages.addFlashGlobalInfo("El cliente ha sido Editado Correctamente");
@@ -285,6 +285,9 @@ public class ClienteEditController implements Serializable {
 		RequestContext requestContext = RequestContext.getCurrentInstance();
 		requestContext.execute("PF('audiTable').clearFilters()");
 	}
+	
+	
+
 	
 
 }

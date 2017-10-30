@@ -32,10 +32,10 @@ public class ClienteEJB {
 		return em.find(Cliente.class, codigo);
 	}
 	
+
 	public Municipio buscarMunicipio(int id){
 		return em.find(Municipio.class, id);
 	}
-	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void crearCliente(Cliente c){
 		 em.persist(c);

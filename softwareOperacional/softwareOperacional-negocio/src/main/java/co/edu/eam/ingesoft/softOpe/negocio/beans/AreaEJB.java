@@ -47,14 +47,11 @@ public class AreaEJB {
 	public Area buscarA(String nombre){
 		return em.find(Area.class, nombre);
 	}
-	/**
-	 * 
-	 * @param audi
-	 */
 	
 	public Area buscarArea(int id){
 		return em.find(Area.class, id);
 	}
+	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void editarArea(Area ar){
 		em.merge(ar);

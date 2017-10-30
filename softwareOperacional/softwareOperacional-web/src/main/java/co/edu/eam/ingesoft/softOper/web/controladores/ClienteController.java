@@ -369,7 +369,7 @@ public class ClienteController implements Serializable {
 	}
 	
 	public String procederEditar(Cliente audi) {
-		DatosManager.setCodigoVenta(audi.getCodigo());
+		DatosManager.setCodigoCliente(audi.getCodigo());
 		return "/paginas/privado/editarCliente.xhtml?faces-redirect=true";
 	}
 

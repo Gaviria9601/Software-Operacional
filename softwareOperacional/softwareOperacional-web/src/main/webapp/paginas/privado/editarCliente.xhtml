@@ -69,7 +69,7 @@
 					<div class="form-group">
 						<label for="tfgen">Genero</label> <br></br>
 						<h:selectOneMenu itemLabel="Seleccione una opción" id="gen"
-							value="#{clienteEditControllerr.genero}" style="width:250px">
+							value="#{clienteEditController.genero}" style="width:250px">
 							<f:selectItem itemValue="F" itemLabel="Femenino" />
 							<f:selectItem itemValue="M" itemLabel="Masculino" />
 						</h:selectOneMenu>
@@ -110,14 +110,16 @@
 						<p:message for="cbmuni"></p:message>
 					</div>
 
+
 					<div class="box-footer">
-						<p:commandButton value="Registrar Cliente" ajax="false"
+						<p:commandButton value="Editar Cliente" ajax="false"
 							class="btn btn-primary" action="#{clienteEditController.editar}" />
-					</div>
+					
 					
 					<p:commandButton value="Cancelar" ajax="false"
 							update=""
 							class="btn btn-danger" action="#{clienteEditController.cancelar}" />
+				</div>
 
 				</div>
 				<!-- /.box-body -->
