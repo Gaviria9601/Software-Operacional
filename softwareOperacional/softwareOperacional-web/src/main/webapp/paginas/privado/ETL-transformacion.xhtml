@@ -9,9 +9,18 @@
 	<ui:define name="cuerpo">
 		<h:form prependId="false">
 			<h2>
-				Buscar tipos de usuarios<small></small>
+				ETL - Transformación<small></small>
 			</h2>
+			<br></br>
+			<p:panel id="basic" header="Usuario" style="margin-bottom:20px">
+				<div class="form-group">
+					<p:commandButton action="#{tipoUsuariocontrolador.eliminar(audi)}"
+				process="@this" update="tablaIdUsuarios" value="Aplicar regla de negocio">
+			</p:commandButton>
 
+				</div>
+			</p:panel>
+			
 			<p:dataTable id="tablaIdUsuarios" var="audi"
 				value="#{tipoUsuariocontrolador.tipos}" widgetVar="audiTable"
 				multiViewState="true" rows="10" paginator="true"
@@ -28,6 +37,11 @@
 							style="width:180px" placeholder="Inserte palabra clave" />
 					</p:outputPanel>
 				</f:facet>
+
+				<p:column selectionMode="single"
+					style="width:40px;text-align:center" />
+
+
 				<p:column style="width:60px;text-align:center">
 					<p:commandButton update="tablaIdUsuarios"
 						action="#{tipoUsuariocontrolador.procederEditar(audi)}"

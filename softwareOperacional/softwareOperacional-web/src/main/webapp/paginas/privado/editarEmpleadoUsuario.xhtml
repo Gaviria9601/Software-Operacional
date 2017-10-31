@@ -38,7 +38,8 @@
 
 							<label for="apellido">Apellido</label>
 							<h:inputText type="text" class="form-control" id="apellido"
-								a:placeholder="apellido" value="#{usuarioeditController.apellido}" />
+								a:placeholder="apellido"
+								value="#{usuarioeditController.apellido}" />
 							<p:message for="apellido" />
 						</div>
 
@@ -80,7 +81,8 @@
 							<label for="cbdep">Departamento</label> <br></br>
 
 							<h:selectOneMenu id="cbdep"
-								value="#{usuarioeditController.departamento}" style="width:150px">
+								value="#{usuarioeditController.departamento}"
+								style="width:150px">
 								<p:ajax listener="#{usuarioeditController.onDepartamentoChange}"
 									update="cbmuni" />
 								<f:selectItem itemLabel="Seleccione el Departamento"
@@ -120,7 +122,8 @@
 
 						<div class="form-group">
 							<label for="tfmuni">Cargo</label> <br></br>
-							<h:selectOneMenu id="cargo" value="#{usuarioeditController.cargo}">
+							<h:selectOneMenu id="cargo"
+								value="#{usuarioeditController.cargo}">
 
 								<f:selectItems value="#{usuarioeditController.cargos}" var="t"
 									itemLabel="#{t.cargo}" itemValue="#{t.id}">
@@ -143,6 +146,10 @@
 							<p:commandButton value="Editar usuario" ajax="false"
 								class="btn btn-primary" process="@this,paneldatos"
 								update="paneldatos" action="#{usuarioeditController.editar}" />
+
+							<p:commandButton value="Cancelar" ajax="false" update=""
+								class="btn btn-danger"
+								action="#{usuarioeditController.cancelar}" />
 						</div>
 					</div>
 				</p:panelGrid>

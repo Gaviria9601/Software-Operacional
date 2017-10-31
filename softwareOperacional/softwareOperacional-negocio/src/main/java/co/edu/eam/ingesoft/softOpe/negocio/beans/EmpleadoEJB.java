@@ -55,6 +55,11 @@ public class EmpleadoEJB {
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void crearEmpleadosinUsuario(Empleado e) {
+		em.persist(e);
+	}
+
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void editarEmpleado(Empleado e) {
 		em.merge(e);
 	}

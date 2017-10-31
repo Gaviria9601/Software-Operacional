@@ -10,7 +10,7 @@
 
 
 		<h2>
-			Empleado <small> Nuevo usuario al sistema</small>
+			Empleado <small> Nuevo empleado al sistema</small>
 		</h2>
 
 		<br />
@@ -30,7 +30,7 @@
 
 							<label for="tfnombre">Nombre</label>
 							<h:inputText type="text" class="form-control" id="nombre"
-								a:placeholder="Nombre" value="#{usuarioController.nombre}" />
+								a:placeholder="Nombre" value="#{empleadoController.nombre}" />
 							<p:message for="nombre" />
 						</div>
 
@@ -38,7 +38,7 @@
 
 							<label for="apellido">Apellido</label>
 							<h:inputText type="text" class="form-control" id="apellido"
-								a:placeholder="apellido" value="#{usuarioController.apellido}" />
+								a:placeholder="apellido" value="#{empleadoController.apellido}" />
 							<p:message for="apellido" />
 						</div>
 
@@ -46,7 +46,7 @@
 
 							<label for="tfnombre">Cedula</label>
 							<h:inputText type="text" class="form-control" id="cedula"
-								a:placeholder="cedula" value="#{usuarioController.cedula}" />
+								a:placeholder="cedula" value="#{empleadoController.cedula}" />
 							<p:message for="cedula" />
 						</div>
 
@@ -57,7 +57,7 @@
 									<i class="fa fa-calendar"></i>
 								</div>
 								<p:inputMask id="tffecha" placeholder="año-mes-dia"
-									value="#{usuarioController.fechaNacimiento}" mode="inline">
+									value="#{empleadoController.fechaNacimiento}" mode="inline">
 									<f:convertDateTime pattern="yyyy-MM-dd" />
 								</p:inputMask>
 							</div>
@@ -71,7 +71,7 @@
 									<i class="fa fa-calendar"></i>
 								</div>
 								<p:inputMask id="tffechaingreso" placeholder="año-mes-dia"
-									value="#{usuarioController.fechaIngreso}" mode="inline">
+									value="#{empleadoController.fechaIngreso}" mode="inline">
 									<f:convertDateTime pattern="yyyy-MM-dd" />
 								</p:inputMask>
 							</div>
@@ -79,7 +79,7 @@
 
 						<div class="form-group">
 							<label for="tfgen">Genero</label> <br></br>
-							<h:selectOneMenu id="gen" value="#{usuarioController.genero}">
+							<h:selectOneMenu id="gen" value="#{empleadoController.genero}">
 								<f:selectItem itemValue="F" itemLabel="Femenino" />
 								<f:selectItem itemValue="M" itemLabel="Masculino" />
 							</h:selectOneMenu>
@@ -90,12 +90,12 @@
 							<label for="cbdep">Departamento</label> <br></br>
 
 							<h:selectOneMenu id="cbdep"
-								value="#{usuarioController.departamento}" style="width:150px">
-								<p:ajax listener="#{usuarioController.onDepartamentoChange}"
+								value="#{empleadoController.departamento}" style="width:150px">
+								<p:ajax listener="#{empleadoController.onDepartamentoChange}"
 									update="cbmuni" />
 								<f:selectItem itemLabel="Seleccione el Departamento"
 									itemValue="" noSelectionOption="true" />
-								<f:selectItems value="#{usuarioController.departamentos}"
+								<f:selectItems value="#{empleadoController.departamentos}"
 									var="dep" itemValue="#{dep.nombre}" itemLabel="#{dep.nombre}" />
 							</h:selectOneMenu>
 
@@ -107,68 +107,34 @@
 							<label for="muni">Municipio</label> <br></br>
 
 							<h:selectOneMenu id="cbmuni"
-								value="#{usuarioController.municipio}" style="width:150px">
+								value="#{empleadoController.municipio}" style="width:150px">
 
 								<f:selectItem itemLabel="Seleccione Ciudad" itemValue=""
 									noSelectionOption="true" />
-								<f:selectItems value="#{usuarioController.municipios}"
+								<f:selectItems value="#{empleadoController.municipios}"
 									var="muni" itemValue="#{muni.id}" itemLabel="#{muni.nombre}" />
 
 							</h:selectOneMenu>
 						</div>
 
-						<div class="form-group">
-							<label for="tfmuni">Tipo de usuario</label> <br></br>
-							<h:selectOneMenu id="tipo"
-								value="#{usuarioController.tipoUsuario}">
-
-								<f:selectItems value="#{usuarioController.tipos}" var="t"
-									itemLabel="#{t.nombre}" itemValue="#{t.id}">
-								</f:selectItems>
-							</h:selectOneMenu>
-						</div>
 
 						<div class="form-group">
 							<label for="tfmuni">Cargo</label> <br></br>
-							<h:selectOneMenu id="cargo" value="#{usuarioController.cargo}">
+							<h:selectOneMenu id="cargo" value="#{empleadoController.cargo}">
 
-								<f:selectItems value="#{usuarioController.cargos}" var="t"
+								<f:selectItems value="#{empleadoController.cargos}" var="t"
 									itemLabel="#{t.cargo}" itemValue="#{t.id}">
 								</f:selectItems>
 							</h:selectOneMenu>
 						</div>
 
-						<p:panel id="basic" header="Usuario" style="margin-bottom:20px">
-							<div class="form-group">
-								<label for="usuario">Nombre de usuario</label>
-								<h:inputText type="text" class="form-control" id="usuario"
-									a:placeholder="usuario" value="#{usuarioController.nickname}" />
-								<p:message for="usuario" />
-
-							</div>
-
-
-
-							<div class="form-group">
-								<label for="tfdes">Contraseña</label>
-								<p:inputText type="password" class="form-control" id="contra"
-									a:placeholder="contraseña"
-									value="#{usuarioController.contrasenia}" />
-								<p:message for="contra" />
-							</div>
-							<p:commandButton value="Verificar nickname" ajax="false"
-								class="btn btn-primary" process="@this,paneldatos"
-								update="paneldatos" action="#{usuarioController.crearUsuario}" />
-						</p:panel>
-
-
 						<div class="box-footer">
 							<p:commandButton value="Registrar Usuario" ajax="false"
 								class="btn btn-primary" process="@this,paneldatos"
-								update="paneldatos" action="#{usuarioController.crear}" />
+								update="paneldatos" action="#{empleadoController.crear}" />
 
 							<p:commandButton value="Limpiar Campos" ajax="false"
-								class="btn btn-danger" action="#{usuarioController.limpiar}" />
+								class="btn btn-danger" action="#{empleadoController.limpiar}" />
 						</div>
 					</div>
 				</p:panelGrid>
