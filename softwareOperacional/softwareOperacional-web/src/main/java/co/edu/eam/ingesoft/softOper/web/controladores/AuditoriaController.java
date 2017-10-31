@@ -39,11 +39,21 @@ public class AuditoriaController implements Serializable {
 	private List<Auditoria> tipoUsuarios;
 	
 	private List<Auditoria> usuarios;
+	
+	private List<Auditoria> procesosETL;
 
 	private Auditoria selectedAudi;
 	
 	
 	
+	public List<Auditoria> getProcesosETL() {
+		return procesosETL;
+	}
+
+	public void setProcesosETL(List<Auditoria> procesosETL) {
+		this.procesosETL = procesosETL;
+	}
+
 	public List<Auditoria> getUsuarios() {
 		return usuarios;
 	}
@@ -114,7 +124,7 @@ public class AuditoriaController implements Serializable {
 	    inventarios = audEJB.listarAuditoriaInventarios();
 	    tipoUsuarios = audEJB.listarAuditoriaTiposUsuarios();
 	    usuarios = audEJB.listarAuditoriaUsuarios();
-	    
+	    procesosETL = audEJB.listarAuditoriaProcesosETL();
 
 	}
 	

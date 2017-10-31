@@ -18,10 +18,9 @@ import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Messages;
 
 
-@Named("etlController")
+@Named("ETLExtraccionController")
 @ViewScoped
-public class ETLController implements Serializable {
-	
+public class ETLExtraccionController implements Serializable {
 
 	/**
 	 * 
@@ -37,22 +36,23 @@ public class ETLController implements Serializable {
 			Statement st = con.createStatement();
 			Messages.addFlashGlobalInfo("Se ha realizado con exito la conexión a Postgres");
 			// el resultSet es el encargado de traer los datos de la consulta
-			ResultSet rs = st.executeQuery("select * from Usuario");
+			ResultSet rs = st.executeQuery("select * from cliente_dimension");
 			while (rs.next()) {
 				System.out.println(" " + rs.getString(1) + " " + rs.getString(2));
 			}
 		} catch (SQLException ex) {
-			Logger.getLogger(ETLController.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(ETLExtraccionController.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (NamingException ex) {
-			Logger.getLogger(ETLController.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(ETLExtraccionController.class.getName()).log(Level.SEVERE, null, ex);
 		} finally {
 			try {
 				con.close();
 				System.out.println("Conexion Cerrada con Exito...");
 			} catch (SQLException ex) {
-				Logger.getLogger(ETLController.class.getName()).log(Level.SEVERE, null, ex);
+				Logger.getLogger(ETLExtraccionController.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}
 	}
+
 
 }
