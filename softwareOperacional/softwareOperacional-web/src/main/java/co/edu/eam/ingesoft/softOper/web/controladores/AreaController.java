@@ -267,8 +267,9 @@ public class AreaController implements Serializable {
 		} else {
 			try {
 				Area ar = new Area();
-				ar.getDescripcion();
-				ar.getNombre();
+				ar.setNombre(nombre);
+				ar.setDescripcion(des);
+				
 				arEJB.crear(ar);
 				Messages.addFlashGlobalInfo("El area a sido ingresanda Correctamente");
 				registrarAuditoria("Crear");

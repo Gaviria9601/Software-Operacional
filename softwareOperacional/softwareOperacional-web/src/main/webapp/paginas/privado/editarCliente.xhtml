@@ -29,6 +29,7 @@
 						<label for="tfnombre">Nombre</label>
 						<h:inputText type="text" class="form-control" id="nombre"
 							a:placeholder="Nombre" value="#{clienteEditController.nombre}" />
+							<p:message for="nombre" />
 
 					</div>
 
@@ -38,6 +39,7 @@
 						<label for="tfape">Apellido</label>
 						<p:inputText type="text" class="form-control" id="ape"
 							a:placeholder="Apellido" value="#{clienteEditController.apellido}" />
+							<p:message for="ape" />
 
 					</div>
 
@@ -61,6 +63,7 @@
 						<label for="tfcc">Cedula</label> <br></br>
 						<p:inputText type="text" class="form-control" id="cc"
 							a:placeholder="Cedula" value="#{clienteEditController.cedula}" />
+							<p:message for="cc" />
 
 					</div>
 
@@ -73,6 +76,7 @@
 							<f:selectItem itemValue="F" itemLabel="Femenino" />
 							<f:selectItem itemValue="M" itemLabel="Masculino" />
 						</h:selectOneMenu>
+						<p:message for="gen" />
 
 					</div>
 
@@ -89,10 +93,8 @@
 
 							<f:ajax event="change" execute="@this" render="cbmuni"
 								listener="#{clienteEditController.onDepartamentoChange}" />
-
-						</h:selectOneMenu>
-
-						<p:message for="cbdep"></p:message>
+                       </h:selectOneMenu>
+                       <p:message for="cbdep"></p:message>
 					</div>
 
 					<div class="form-group">
@@ -105,8 +107,7 @@
 								noSelectionOption="true" />
 							<f:selectItems value="#{clienteEditController.muni}" var="mu"
 								itemValue="#{mu.id}" itemLabel="#{mu.nombre}" />
-
-						</h:selectOneMenu>
+                         </h:selectOneMenu>
 						<p:message for="cbmuni"></p:message>
 					</div>
 

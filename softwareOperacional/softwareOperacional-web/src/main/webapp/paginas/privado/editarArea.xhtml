@@ -26,9 +26,10 @@
 
 					<div class="form-group">
 
-						<label for="tfnombre">Nombre</label>
+						<label for="tfnombre">Nombre (*)</label>
 						<h:inputText type="text" class="form-control" id="nombre" a:placeholder="Nombre"
 							value="#{areaEditController.nombre}" />
+							<p:message for="nombre" />
 
 					</div>
 
@@ -38,18 +39,19 @@
 						<label for="tfdes">Descripción</label>
 						<p:inputTextarea type="text" class="form-control" id="des" a:placeholder="Descripción"
 							value="#{areaEditController.des}" />
+							<p:message for="des" />
 
 					</div>
 
 					<div class="box-footer">
 						<p:commandButton value="Editar Area" ajax="false" class="btn btn-primary"
 							action="#{areaEditController.editar}" />
-					</div>
+					
 					
 					<p:commandButton value="Cancelar" ajax="false"
 							update=""
 							class="btn btn-danger" action="#{areaEditController.cancelar}" />
-
+                    </div>
 				</div>
 				<!-- /.box-body -->
 			</h:form>

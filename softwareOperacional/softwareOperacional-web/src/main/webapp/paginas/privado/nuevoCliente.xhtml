@@ -29,6 +29,7 @@
 						<label for="tfnombre">Nombre</label>
 						<h:inputText type="text" class="form-control" id="nombre"
 							a:placeholder="Nombre" value="#{clienteControlador.nombre}" />
+							<p:message for="nombre" />
 
 					</div>
 
@@ -38,6 +39,7 @@
 						<label for="tfape">Apellido</label>
 						<p:inputText type="text" class="form-control" id="ape"
 							a:placeholder="Apellido" value="#{clienteControlador.apellido}" />
+							<p:message for="ape" />
 
 					</div>
 
@@ -62,8 +64,7 @@
 						<label for="tfcc">Cedula</label> <br></br>
 						<p:inputText type="text" class="form-control" id="cc"
 							a:placeholder="Cedula" value="#{clienteControlador.cedula}" />
-
-					</div>
+					 </div>
 
 
 
@@ -74,6 +75,7 @@
 							<f:selectItem itemValue="F" itemLabel="Femenino" />
 							<f:selectItem itemValue="M" itemLabel="Masculino" />
 						</h:selectOneMenu>
+						<p:message for="gen" />
 
 					</div>
 
@@ -90,10 +92,8 @@
 
 							<f:ajax event="change" execute="@this" render="cbmuni"
 								listener="#{clienteControlador.onDepartamentoChange}" />
-
-						</h:selectOneMenu>
-
-						<p:message for="cbdep"></p:message>
+                       </h:selectOneMenu>
+                       <p:message for="cbdep"></p:message>
 					</div>
 
 					<div class="form-group">
@@ -114,6 +114,9 @@
 					<div class="box-footer">
 						<p:commandButton value="Registrar Cliente" ajax="false"
 							class="btn btn-primary" action="#{clienteControlador.crear}" />
+							
+							<p:commandButton value="Limpiar Campos" ajax="false"
+							class="btn btn-danger" action="#{clienteControlador.limpiar}" />
 					</div>
 
 				</div>

@@ -223,6 +223,7 @@ public class ClienteEditController implements Serializable {
 	}
 	
 	public String editar() {
+		
 		if (nombre.isEmpty() || cedula.isEmpty() || apellido.isEmpty()) {
 			Messages.addFlashGlobalWarn("Digite los campos Obligatorios");
 		} else {
@@ -276,12 +277,7 @@ public class ClienteEditController implements Serializable {
 		return "/paginas/privado/verCliente.xhtml?faces-redirect=true";
 	}
 	
-
-	
-	
-	
-
-	public void resetearFitrosTabla() {
+    public void resetearFitrosTabla() {
 		RequestContext requestContext = RequestContext.getCurrentInstance();
 		requestContext.execute("PF('audiTable').clearFilters()");
 	}

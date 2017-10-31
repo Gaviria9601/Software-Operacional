@@ -46,6 +46,8 @@ public class ClienteController implements Serializable {
 
 	private Date fechanaci;
 
+	@Pattern(regexp = "[0-9 ]*", message = "Solo números")
+	@Length(min = 6, max = 10, message = "longitud entre 6 y 10")
 	private String cedula;
 
 	private String genero;
@@ -342,7 +344,7 @@ public class ClienteController implements Serializable {
 
 	public void crear() {
 		
-		if (nombre.isEmpty() || fechanaci == null || cedula.isEmpty() || apellido.isEmpty()) {
+		if (nombre.isEmpty() || cedula.isEmpty() || apellido.isEmpty()) {
 			Messages.addFlashGlobalWarn("Digite los campos Obligatorios");
 		} else {
 			try {
