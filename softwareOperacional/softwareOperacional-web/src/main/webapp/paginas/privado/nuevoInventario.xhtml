@@ -25,7 +25,7 @@
 					<div class="form-group">
 
 						<label for="tfnombre">Nombre Producto (*)</label>
-						<h:inputText for="tfnombre" class="form-control" id="tfnombre"
+						<p:inputText for="tfnombre" class="form-control" id="tfnombre"
 							a:placeholder="Nombre" value="#{inventarioController.nombre}" />
 						<p:message for="tfnombre" />
 
@@ -78,7 +78,7 @@
 					<div class="form-group">
 
 						<label for="tfcodigolote">Codigo Lote (*)</label><br />
-						<h:inputText type="text" class="form-control" id="tfcodigolote"
+						<p:inputText type="text" class="form-control" id="tfcodigolote"
 							a:placeholder="Codigo lote"
 							value="#{inventarioController.codigoLote}" />
 						<p:message for="tfcodigolote" />
@@ -88,7 +88,7 @@
 					<div class="form-group">
 						<label for="tfpeso"> Peso </label>
 						<p:selectOneButton value="#{inventarioController.pesoOpcion}">
-							<h:inputText id="tfpeso" value="#{inventarioController.peso}"
+							<p:inputText id="tfpeso" value="#{inventarioController.peso}"
 								a:placeholder="Peso" class="form-control" />
 							<f:selectItem itemValue="Libras" itemLabel="Libras" />
 							<f:selectItem itemValue="Gramos" itemLabel="Gramos" />
@@ -101,7 +101,7 @@
 					<div class="form-group">
 
 						<label for="tfdimen">Dimensiones</label>
-						<h:inputText type="text" class="form-control" id="tfdimen"
+						<p:inputText type="text" class="form-control" id="tfdimen"
 							a:placeholder="Dimensiones"
 							value="#{inventarioController.dimensiones}" />
 						<p:message for="tfdimen" />
@@ -132,7 +132,7 @@
 							<div class="input-group-addon">
 								<i class="fa fa-usd"></i>
 							</div>
-							<h:inputText id="totalVenta" a:placeholder="Valor"
+							<p:inputText id="totalVenta" a:placeholder="Valor"
 								value="#{inventarioController.valor}" class="form-control" />
 						</div>
 						<p:message for="totalVenta" />

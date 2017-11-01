@@ -5,11 +5,18 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "dimension_dimension")
+@NamedQueries({
+	@NamedQuery(name=navegador_dimension.LISTAR_NAVEGADOR_DIMENSION,query="select nav from navegador_dimension nav")
+})
 public class navegador_dimension implements Serializable {
+	
+	public static final String LISTAR_NAVEGADOR_DIMENSION = "Navegador.ListarNavegadorDimension";
 
 	@Id
 	@Column(name="codigo", nullable=false)

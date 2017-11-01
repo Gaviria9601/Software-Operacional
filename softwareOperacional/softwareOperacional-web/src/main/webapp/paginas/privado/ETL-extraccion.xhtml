@@ -1,0 +1,127 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateContenido.xhtml">
+
+	<ui:define name="cuerpo">
+		<h2>
+			Proceso ETL<small> - Extracción de Datos</small>
+		</h2>
+
+		<br />
+
+		<div class="box box-primary">
+			<div class="box-header">
+				<h3 class="box-title">ETL - Software Operacional Gnome</h3>
+				<div class="pull-right hidden-xs">
+					<b>Fecha: </b>
+					<p:clock />
+				</div>
+			</div>
+			<!-- /.box-header -->
+
+			<h:form role="form">
+
+				<div class="login-logo">
+					<p:commandButton value="Extraer Datos" ajax="false" update="tablaIdAuditorias"
+						class="btn btn-primary" action="#{ETLExtraccionController.extraer}" />
+					<img src="#{request.contextPath}/dist/img/credit/etl.png"
+						alt="User Image" />
+
+				</div>
+
+				<div class="row">
+					<!-- Left col -->
+					<section class="col-lg-6 connectedSortable">
+
+						<p:dataTable id="tablaIdAuditorias" var="audi"
+							value="#{ETLExtraccionController.auditorias}"
+							widgetVar="audiTable" multiViewState="true" rows="10"
+							paginator="true"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="10,30,50"
+							emptyMessage="No se han extraido datos" border="1">
+							<f:facet name="header">
+							Tabla Hecho Auditoria
+							</f:facet>
+
+							<p:column headerText="Accion">
+								<h:outputLabel value="#{audi.accion}" />
+
+							</p:column>
+
+							<p:column headerText="Fecha Hora">
+								<h:outputLabel value="#{audi.fechaauditoria}" />
+							</p:column>
+
+							<p:column headerText="Registro Tabla">
+								<h:outputLabel value="#{audi.tablaaccion}" />
+							</p:column>
+
+							<p:column headerText="Navegador">
+								<h:outputLabel value="#{audi.navegador}" />
+							</p:column>
+
+							<p:column headerText="Sistema Operativo">
+								<h:outputLabel value="#{audi.origen}" />
+							</p:column>
+						</p:dataTable>
+					</section>
+
+					<section class="col-lg-6 connectedSortable">
+						<p:dataTable id="tablaIdVentas" var="ven"
+							value="#{ETLExtraccionController.ventas}" widgetVar="audiTable"
+							multiViewState="true" rows="10" paginator="true"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="10,30,50"
+							emptyMessage="No se han extraido datos" border="1">
+							<f:facet name="header">
+							Tabla Hecho Detalle Venta
+							</f:facet>
+
+							<p:column headerText="Venta">
+								<h:outputLabel value="#{ven.venta.codigo}" />
+
+							</p:column>
+
+							<p:column headerText="Fecha">
+								<h:outputLabel value="#{ven.fechaventa}" />
+
+							</p:column>
+
+							<p:column headerText="Cantidad">
+								<h:outputLabel value="#{ven.cantidad}" />
+							</p:column>
+
+							<p:column headerText="Producto">
+								<h:outputLabel value="#{ven.producto}" />
+							</p:column>
+
+							<p:column headerText="Cliente">
+								<h:outputLabel value="#{ven.cliente}" />
+							</p:column>
+
+							<p:column headerText="Empleado">
+								<h:outputLabel value="#{ven.empleado}" />
+							</p:column>
+							
+							<p:column headerText="Total">
+								<h:outputLabel value="#{ven.totaldetalle}" />
+							</p:column>
+						</p:dataTable>
+
+					</section>
+
+				</div>
+
+
+			</h:form>
+		</div>
+
+
+	</ui:define>
+
+</ui:composition>
+

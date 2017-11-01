@@ -8,13 +8,20 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.ManyToAny;
 
 @Entity
 @Table(name = "venta_hecho")
+@NamedQueries({
+	@NamedQuery(name=venta_hecho.LISTAR_VENTA_HECHO,query="select ven from venta_hecho ven")
+})
 public class venta_hecho implements Serializable{
+	
+	public static final String LISTAR_VENTA_HECHO = "venta_hecho.listarVentaHecho";
 
 	@Id
 	@Column(name="codigo", nullable=false)

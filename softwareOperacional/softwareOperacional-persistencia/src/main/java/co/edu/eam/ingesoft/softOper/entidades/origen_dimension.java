@@ -5,11 +5,18 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "origen_dimension")
+@NamedQueries({
+	@NamedQuery(name=origen_dimension.LISTAR_ORIGEN_DIMENSION,query="select ori from origen_dimension ori")
+})
 public class origen_dimension implements Serializable{
+	
+	public static final String LISTAR_ORIGEN_DIMENSION = "Origen.ListarDimension";
 
 	@Id
 	@Column(name="codigo", nullable=false)
