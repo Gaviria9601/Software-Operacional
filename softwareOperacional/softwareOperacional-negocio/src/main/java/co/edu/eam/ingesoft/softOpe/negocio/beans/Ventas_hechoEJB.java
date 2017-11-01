@@ -144,7 +144,9 @@ public class Ventas_hechoEJB {
 	
 	public boolean borrarMenores0() {
 		try{
-	em.createNamedQuery(venta_hecho.borrar_productos_menores_0);
+			System.out.println("entre aqui al metodo antes de la consulta");
+	em.createQuery("delete from producto_dimension p where p.precio<0").executeUpdate();
+	System.out.println("entre aqui, ejecute la consulta!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	return true;
 		}catch (Exception e) {
 			// TODO: handle exception
@@ -154,7 +156,9 @@ public class Ventas_hechoEJB {
 	
 	public boolean borrarMenores20() {
 		try{
-	em.createNamedQuery(venta_hecho.borrar_productos_menores_20);
+			System.out.println("entre aqui al metodo antes de la consulta(20)");
+	em.createQuery("delete from producto_dimension p where p.precio<20000").executeUpdate();
+	System.out.println("entre aqui, ejecute la consulta(20)!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	return true;
 		}catch (Exception e) {
 			// TODO: handle exception
