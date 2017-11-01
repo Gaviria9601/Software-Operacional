@@ -10,7 +10,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "dimension_dimension")
+@Table(name = "navegador_dimension")
 @NamedQueries({
 	@NamedQuery(name=navegador_dimension.LISTAR_NAVEGADOR_DIMENSION,query="select nav from navegador_dimension nav")
 })

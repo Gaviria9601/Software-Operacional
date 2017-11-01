@@ -22,7 +22,7 @@ public class origen_dimension implements Serializable{
 	@Column(name="codigo", nullable=false)
 	private int codigo;
 	
-	@Column(name="dispotivo")
+	@Column(name="dispositivo")
 	private String dispositivo;
 	
 	public origen_dimension() {

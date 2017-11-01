@@ -77,9 +77,9 @@ public class ETLExtraccionController implements Serializable {
 	public void extraer() {
 		try{
 		extrarTablaAuditoriaHecho();
-		Messages.addFlashGlobalInfo("Se ha exportado correctamente los Datos");
+		Messages.addFlashGlobalInfo("Se ha extraido correctamente los Datos");
 		}catch (Exception e) {
-			Messages.addFlashGlobalError("Se ha generado un error exportando los Datos");
+			Messages.addFlashGlobalError("Ya se han extraido el total de los Datos");
 		}
 	}
 
@@ -133,6 +133,7 @@ public class ETLExtraccionController implements Serializable {
 		
 		for (Auditoria auditoria : auditorias) {
 			auditoria_hecho audiHecho = new auditoria_hecho();
+			audiHecho.setCodigo(auditoria.getCodigo());
 			audiHecho.setAccion(auditoria.getAccion());
 			audiHecho.setFechaauditoria(auditoria.getFechaHora());
 			audiHecho.setTablaaccion(auditoria.getRegistroRealizoAccion());
@@ -143,9 +144,9 @@ public class ETLExtraccionController implements Serializable {
 			audiHecho.setNavegador(navIng);
 			origen_dimension oriDim = new origen_dimension();
 			oriDim.setDispositivo(auditoria.getOrigen());
+			audHecEJB.ingresarOrigenDimension(oriDim);
 			origen_dimension oriIng = audHecEJB.listarOrigenDimension().get(audHecEJB.listarOrigenDimension().size()-1);
-			audHecEJB.ingresarOrigenDimension(oriIng);
-			
+			audiHecho.setOrigen(oriIng);
 			audHecEJB.ingresarAuditoriaHecho(audiHecho);
 		}
 		this.auditorias = audHecEJB.listarAuditoriasHecho();
