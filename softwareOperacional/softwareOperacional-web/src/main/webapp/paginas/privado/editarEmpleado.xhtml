@@ -82,7 +82,7 @@
 
 							<h:selectOneMenu id="cbdep"
 								value="#{empleadoeditController.departamento}"
-								style="width:150px">
+								style="width:250px">
 								<p:ajax listener="#{empleadoeditController.onDepartamentoChange}"
 									update="cbmuni" />
 								<f:selectItem itemLabel="Seleccione el Departamento"
@@ -99,7 +99,7 @@
 							<label for="muni">Municipio</label> <br></br>
 
 							<h:selectOneMenu id="cbmuni"
-								value="#{empleadoeditController.municipio}" style="width:150px">
+								value="#{empleadoeditController.municipio}" style="width:250px">
 
 								<f:selectItem itemLabel="Seleccione Ciudad" itemValue=""
 									noSelectionOption="true" />
