@@ -17,12 +17,18 @@ import org.hibernate.annotations.ManyToAny;
 @Entity
 @Table(name = "venta_hecho")
 @NamedQueries({
-	@NamedQuery(name=venta_hecho.LISTAR_VENTA_HECHO,query="select ven from venta_hecho ven")
+	@NamedQuery(name=venta_hecho.LISTAR_VENTA_HECHO,query="select ven from venta_hecho ven"),
+	@NamedQuery(name=venta_hecho.borrar_productos_menores_0,query="delete from producto_dimension p where p.precio<0"),
+	@NamedQuery(name=venta_hecho.borrar_productos_menores_20,query="delete from producto_dimension p where p.precio<20000")
+	
+	
+	
 })
 public class venta_hecho implements Serializable{
 	
 	public static final String LISTAR_VENTA_HECHO = "venta_hecho.listarVentaHecho";
-
+	public static final String borrar_productos_menores_0 = "borrar_productos_menores_0";
+	public static final String borrar_productos_menores_20 = "borrar_productos_menores_20";
 	@Id
 	@Column(name="codigo", nullable=false)
 	private int codigo;

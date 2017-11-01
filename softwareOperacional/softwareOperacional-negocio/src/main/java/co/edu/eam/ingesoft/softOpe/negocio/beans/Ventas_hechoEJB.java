@@ -141,5 +141,25 @@ public class Ventas_hechoEJB {
 	public List<cliente_dimension> listarClientes() {
 		return em.createNamedQuery(cliente_dimension.LISTAR_CLIENTE_DIMENSION).getResultList();
 	}
+	
+	public boolean borrarMenores0() {
+		try{
+	em.createNamedQuery(venta_hecho.borrar_productos_menores_0);
+	return true;
+		}catch (Exception e) {
+			// TODO: handle exception
+		return false;
+		}
+	}
+	
+	public boolean borrarMenores20() {
+		try{
+	em.createNamedQuery(venta_hecho.borrar_productos_menores_20);
+	return true;
+		}catch (Exception e) {
+			// TODO: handle exception
+		return false;
+		}
+	}
 
 }

@@ -12,58 +12,66 @@
 				ETL - Transformación<small></small>
 			</h2>
 			<br></br>
-			<p:panel id="basic" header="Usuario" style="margin-bottom:20px">
+			<p:panel id="basic" header="Reglas de negocio"
+				style="margin-bottom:20px">
 				<div class="form-group">
-					<p:commandButton action="#{tipoUsuariocontrolador.eliminar(audi)}"
-				process="@this" update="tablaIdUsuarios" value="Aplicar regla de negocio">
-			</p:commandButton>
+					<label>descartar productos con valores negativos:</label>
+					<p:commandButton action="#{ETLtransformacionController.borrarMenores0}"
+						process="@this" value="Aplicar regla de negocio" update="tablaIdVentas"> 
+					</p:commandButton>
 
 				</div>
+
+				<div class="form-group">
+					<label>descartar productos con valores menores a $20.000:</label>
+					<p:commandButton action="#{ETLtransformacionController.borrarMenores20}"
+						process="@this" update="tablaIdVentas" value="Aplicar regla de negocio">
+					</p:commandButton>
+
+				</div>
+
+
 			</p:panel>
-			
-			<p:dataTable id="tablaIdUsuarios" var="audi"
-				value="#{tipoUsuariocontrolador.tipos}" widgetVar="audiTable"
+
+			<p:dataTable id="tablaIdVentas" var="ven"
+				value="#{ETLtransformacionController.ventas}" widgetVar="venTable"
 				multiViewState="true" rows="10" paginator="true"
 				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				rowsPerPageTemplate="10,30,50"
-				selection="#{tipoUsuariocontrolador.tipoUsu}"
-				rowKey="#{audi.nombre}"
-				emptyMessage="No se encontraron identificación de usuarios con criterios dados."
-				filteredBy="#{tipoUsuariocontrolador.filtroTipoUsu}" border="1">
+				emptyMessage="No se han extraido datos" border="1">
 				<f:facet name="header">
-					<p:outputPanel>
-						<h:outputText value="Buscar en todos los campos:" />
-						<p:inputText id="globalFilter" onkeyup="PF('audiTable').filter()"
-							style="width:180px" placeholder="Inserte palabra clave" />
-					</p:outputPanel>
-				</f:facet>
+							Tabla Hecho Detalle Venta
+							</f:facet>
 
-				<p:column selectionMode="single"
-					style="width:40px;text-align:center" />
+				<p:column headerText="Venta">
+					<h:outputLabel value="#{ven.venta.codigo}" />
 
-
-				<p:column style="width:60px;text-align:center">
-					<p:commandButton update="tablaIdUsuarios"
-						action="#{tipoUsuariocontrolador.procederEditar(audi)}"
-						icon="icon ui-icon-pencil" process="@this">
-					</p:commandButton>
 				</p:column>
 
-				<p:column headerText="Nombre" sortBy="#{audi.nombre}"
-					filterBy="#{audi.nombre}" filterMatchMode="contains">
-					<h:outputLabel value="#{audi.nombre}" />
+				<p:column headerText="Fecha">
+					<h:outputLabel value="#{ven.fechaventa}" />
+
 				</p:column>
 
-				<p:column headerText="Descripción" sortBy="audi.descripcion">
-					<h:outputLabel value="#{audi.descripcion}" />
+				<p:column headerText="Cantidad">
+					<h:outputLabel value="#{ven.cantidad}" />
 				</p:column>
 
-				<p:column style="width:60px;text-align:center">
-					<p:commandButton action="#{tipoUsuariocontrolador.eliminar(audi)}"
-						process="@this" icon="icon ui-icon-trash" update="tablaIdUsuarios">
-					</p:commandButton>
+				<p:column headerText="Producto">
+					<h:outputLabel value="#{ven.producto.nombre}" />
 				</p:column>
 
+				<p:column headerText="Cliente">
+					<h:outputLabel value="#{ven.cliente.nombre}" />
+				</p:column>
+
+				<p:column headerText="Empleado">
+					<h:outputLabel value="#{ven.empleado.nombre}" />
+				</p:column>
+
+				<p:column headerText="Total">
+					<h:outputLabel value="#{ven.totaldetalle}" />
+				</p:column>
 			</p:dataTable>
 		</h:form>
 	</ui:define>
