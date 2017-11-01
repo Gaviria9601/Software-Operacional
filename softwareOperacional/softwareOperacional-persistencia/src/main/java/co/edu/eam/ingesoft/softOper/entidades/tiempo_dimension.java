@@ -5,11 +5,18 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tiempo_dimension")
+@NamedQueries({
+	@NamedQuery(name=tiempo_dimension.LISTAR_TIEMPO,query="select t from tiempo_dimension t")
+})
 public class tiempo_dimension implements Serializable{
+	
+	public static final String LISTAR_TIEMPO = "tiempo_dimension.listarTiempo";
 
 	@Id
 	@Column(name="codigo", nullable=false)
