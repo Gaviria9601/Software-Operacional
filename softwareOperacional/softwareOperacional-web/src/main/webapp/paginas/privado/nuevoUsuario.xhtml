@@ -90,7 +90,7 @@
 							<label for="cbdep">Departamento</label> <br></br>
 
 							<h:selectOneMenu id="cbdep"
-								value="#{usuarioController.departamento}" style="width:150px">
+								value="#{usuarioController.departamento}" style="width:250px">
 								<p:ajax listener="#{usuarioController.onDepartamentoChange}"
 									update="cbmuni" />
 								<f:selectItem itemLabel="Seleccione el Departamento"
@@ -107,7 +107,7 @@
 							<label for="muni">Municipio</label> <br></br>
 
 							<h:selectOneMenu id="cbmuni"
-								value="#{usuarioController.municipio}" style="width:150px">
+								value="#{usuarioController.municipio}" style="width:250px">
 
 								<f:selectItem itemLabel="Seleccione Ciudad" itemValue=""
 									noSelectionOption="true" />

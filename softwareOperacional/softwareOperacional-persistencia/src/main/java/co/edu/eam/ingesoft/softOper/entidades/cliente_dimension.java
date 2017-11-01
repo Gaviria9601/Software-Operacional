@@ -12,11 +12,14 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "cliente_dimension")
 @NamedQueries({
+	@NamedQuery(name=cliente_dimension.BUSCAR_NOMBRE_CLIENTE,query="select cli from cliente_dimension cli where cli.nombre=?1"),
 	@NamedQuery(name=cliente_dimension.LISTAR_CLIENTE_DIMENSION,query="select cli from cliente_dimension cli")
 })
 public class cliente_dimension implements Serializable{
 	
 	public static final String LISTAR_CLIENTE_DIMENSION = "ListarClienteDimension";
+	
+	public static final String BUSCAR_NOMBRE_CLIENTE = "BuscarNombreCliente";
 
 	@Id
 	@Column(name="codigo", nullable=false)

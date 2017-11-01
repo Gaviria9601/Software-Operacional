@@ -27,16 +27,7 @@ public class Ventas_hechoEJB {
 	 * @param venHecho
 	 */
 	public void ingresarVentaHecho(venta_hecho venHecho) {
-		List<venta_hecho> ventaHecho = listarVentasHecho();
-		for (venta_hecho venta_hecho : ventaHecho) {
-			if (!venta_hecho.getProducto().equals(venHecho.getProducto())
-					&& !venta_hecho.getVenta().equals(venHecho.getVenta())) {
-				em.persist(venHecho);
-			} else {
-				throw new ExcepcionNegocio("Ya se han extraido el total de los Datos");
-			}
-		}
-
+		em.persist(venHecho);
 	}
 
 	/**
@@ -46,6 +37,16 @@ public class Ventas_hechoEJB {
 	public void ingresarProductoDimension(producto_dimension proDim) {
 		em.persist(proDim);
 	}
+	
+	/**
+	 * 
+	 * @param codigo
+	 * @return
+	 */
+	public producto_dimension buscarProductoDimension(int codigo){
+		return em.find(producto_dimension.class, codigo);
+	}
+
 
 	/**
 	 * 
@@ -53,6 +54,15 @@ public class Ventas_hechoEJB {
 	 */
 	public void ingresarventaDimension(venta_dimension venDim) {
 		em.persist(venDim);
+	}
+	
+	/**
+	 * 
+	 * @param codigo
+	 * @return
+	 */
+	public venta_dimension buscarVentaDimension(int codigo){
+		return em.find(venta_dimension.class, codigo);
 	}
 
 	/**
@@ -62,6 +72,16 @@ public class Ventas_hechoEJB {
 	public void ingresarempleadoDimension(empleado_dimension empDim) {
 		em.persist(empDim);
 	}
+	
+	/**
+	 * 
+	 * @param nombre
+	 * @return
+	 */
+	public empleado_dimension buscarEmpleadoDimension (String nombre){
+		List<empleado_dimension> empDimen = em.createNamedQuery(empleado_dimension.BUSCAR_NOMBRE_EMPLEADO).setParameter(1, nombre).getResultList();
+		return empDimen.get(0);
+	}
 
 	/**
 	 * 
@@ -70,6 +90,17 @@ public class Ventas_hechoEJB {
 	public void ingresarclienteDimension(cliente_dimension cliDim) {
 		em.persist(cliDim);
 	}
+	
+	/**
+	 * 
+	 * @param nombre
+	 * @return
+	 */
+	public cliente_dimension buscarClienteDimension (String nombre){
+		List<cliente_dimension> cliDimen = em.createNamedQuery(cliente_dimension.BUSCAR_NOMBRE_CLIENTE).setParameter(1, nombre).getResultList();
+		return cliDimen.get(0);
+	}
+	
 
 	/**
 	 * 

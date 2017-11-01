@@ -13,12 +13,14 @@ import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import org.omnifaces.cdi.ViewScoped;
+import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
 import co.edu.eam.ingesoft.softOpe.negocio.beans.AuditoriaEJB;
@@ -73,6 +75,9 @@ public class ETLExtraccionController implements Serializable {
 	@EJB
 	private AuditoriaEJB audEJB;
 
+	@Inject
+	private SessionController sesion;
+
 	@PostConstruct
 	public void inicializador() {
 		auditorias = audHecEJB.listarAuditoriasHecho();
@@ -86,7 +91,8 @@ public class ETLExtraccionController implements Serializable {
 	public void extraerAuditoria() {
 		try {
 			extraerTablaAuditoriaHecho();
-			Messages.addFlashGlobalInfo("Se ha extraido correctamente los Datos");
+			registrarAuditoria("Extracción de Auditoria Hecho");
+			Messages.addFlashGlobalInfo("Se ha extraido correctamente los Datos hasta la fecha");
 		} catch (Exception e) {
 			Messages.addFlashGlobalError("Ya se han extraido el total de los Datos");
 		}
@@ -98,7 +104,8 @@ public class ETLExtraccionController implements Serializable {
 	public void extraerVenta() {
 		try {
 			extraerTablaVentaHecho();
-			Messages.addFlashGlobalInfo("Se ha extraido correctamente los Datos");
+			registrarAuditoria("Extracción de Venta Hecho");
+			Messages.addFlashGlobalInfo("Se ha extraido correctamente los Datos hasta la fecha");
 		} catch (Exception e) {
 			Messages.addFlashGlobalError("Ya se han extraido el total de los Datos");
 		}
@@ -170,7 +177,10 @@ public class ETLExtraccionController implements Serializable {
 			origen_dimension oriIng = audHecEJB.listarOrigenDimension()
 					.get(audHecEJB.listarOrigenDimension().size() - 1);
 			audiHecho.setOrigen(oriIng);
-			audHecEJB.ingresarAuditoriaHecho(audiHecho);
+			if (verificarIngresoAuditoria(audiHecho)) {
+				audHecEJB.ingresarAuditoriaHecho(audiHecho);
+			}
+
 		}
 		this.auditorias = audHecEJB.listarAuditoriasHecho();
 
@@ -181,53 +191,171 @@ public class ETLExtraccionController implements Serializable {
 	 */
 	public void extraerTablaVentaHecho() {
 		List<ProductoVenta> productoVentas = proVenEJB.listarProductoVenta();
-		
+
 		for (ProductoVenta productoVenta : productoVentas) {
 			venta_hecho venHec = new venta_hecho();
 			venHec.setTotaldetalle(productoVenta.getTotal());
 			venHec.setCantidad(productoVenta.getCantidad());
 			venHec.setFechaventa(productoVenta.getFecha());
 
-			venta_dimension venDim = new venta_dimension();
-			venDim.setCodigo(productoVenta.getVenta_codigo().getCodigo());
-			venDim.setFecha(productoVenta.getVenta_codigo().getFecha());
-			venDim.setTotal(productoVenta.getVenta_codigo().getTotalVenta());
-			venDim.setNombrevendedor(productoVenta.getVenta_codigo().getVendedor().getNombre());
-			venDim.setNombrecliente(productoVenta.getVenta_codigo().getCliente().getNombre());
-			venHecEJB.ingresarventaDimension(venDim);
-			venta_dimension venDimIng = venHecEJB.listarVentas().get(venHecEJB.listarVentas().size() - 1);
-			venHec.setVenta(venDimIng);
+			if (verificaringresoVentaDimension(productoVenta.getVenta_codigo().getCodigo()) == 0) {
+				venta_dimension venDim = new venta_dimension();
+				venDim.setCodigo(productoVenta.getVenta_codigo().getCodigo());
+				venDim.setFecha(productoVenta.getVenta_codigo().getFecha());
+				venDim.setTotal(productoVenta.getVenta_codigo().getTotalVenta());
+				venDim.setNombrevendedor(productoVenta.getVenta_codigo().getVendedor().getNombre());
+				venDim.setNombrecliente(productoVenta.getVenta_codigo().getCliente().getNombre());
 
-			producto_dimension proDim = new producto_dimension();
-			proDim.setCodigo(productoVenta.getProducto_codigo().getCodigo());
-			proDim.setNombre(productoVenta.getProducto_codigo().getNombre());
-			proDim.setNombre(productoVenta.getProducto_codigo().getNombre());
-			proDim.setPrecio(productoVenta.getProducto_codigo().getValor());
-			proDim.setFechaingreso(productoVenta.getProducto_codigo().getFechaIngreso());
-			proDim.setCantidad(productoVenta.getProducto_codigo().getCantidad());
-			venHecEJB.ingresarProductoDimension(proDim);
-			producto_dimension proDimIng = venHecEJB.listarProductos().get(venHecEJB.listarProductos().size() - 1);
-			venHec.setProducto(proDimIng);
+				venHecEJB.ingresarventaDimension(venDim);
+				venta_dimension venDimIng = venHecEJB.listarVentas().get(venHecEJB.listarVentas().size() - 1);
+				venHec.setVenta(venDimIng);
+			} else {
+				venHec.setVenta(venHecEJB.buscarVentaDimension(productoVenta.getVenta_codigo().getCodigo()));
+			}
 
-			empleado_dimension empDim = new empleado_dimension();
-			empDim.setNombre(productoVenta.getVenta_codigo().getVendedor().getNombre());
-			empDim.setGenero(productoVenta.getVenta_codigo().getVendedor().getGenero());
-			empDim.setNombrecargo(productoVenta.getVenta_codigo().getVendedor().getCargo().getCargo());
-			venHecEJB.ingresarempleadoDimension(empDim);
-			empleado_dimension empDimIng = venHecEJB.listarEmpleados().get(venHecEJB.listarEmpleados().size() - 1);
-			venHec.setEmpleado(empDimIng);
+			if (verificaringresoProductoDimension(productoVenta.getProducto_codigo().getCodigo()) == 0) {
+				producto_dimension proDim = new producto_dimension();
+				proDim.setCodigo(productoVenta.getProducto_codigo().getCodigo());
+				proDim.setNombre(productoVenta.getProducto_codigo().getNombre());
+				proDim.setNombre(productoVenta.getProducto_codigo().getNombre());
+				proDim.setPrecio(productoVenta.getProducto_codigo().getValor());
+				proDim.setFechaingreso(productoVenta.getProducto_codigo().getFechaIngreso());
+				proDim.setCantidad(productoVenta.getProducto_codigo().getCantidad());
 
-			cliente_dimension cliDim = new cliente_dimension();
-			cliDim.setNombre(productoVenta.getVenta_codigo().getCliente().getNombre());
-			cliDim.setGenero(productoVenta.getVenta_codigo().getCliente().getGenero());
-			venHecEJB.ingresarclienteDimension(cliDim);
-			cliente_dimension cliDimIng = venHecEJB.listarClientes().get(venHecEJB.listarClientes().size() - 1);
-			venHec.setCliente(cliDimIng);
+				venHecEJB.ingresarProductoDimension(proDim);
+				producto_dimension proDimIng = venHecEJB.listarProductos().get(venHecEJB.listarProductos().size() - 1);
+				venHec.setProducto(proDimIng);
+			} else {
+				venHec.setProducto(venHecEJB.buscarProductoDimension(productoVenta.getProducto_codigo().getCodigo()));
+			}
 
-			venHecEJB.ingresarVentaHecho(venHec);
+			if (verificaringresoEmpleadoDimension(productoVenta.getVenta_codigo().getCliente().getNombre()) == 0) {
+				empleado_dimension empDim = new empleado_dimension();
+				empDim.setNombre(productoVenta.getVenta_codigo().getVendedor().getNombre());
+				empDim.setGenero(productoVenta.getVenta_codigo().getVendedor().getGenero());
+				empDim.setNombrecargo(productoVenta.getVenta_codigo().getVendedor().getCargo().getCargo());
+				venHecEJB.ingresarempleadoDimension(empDim);
+				empleado_dimension empDimIng = venHecEJB.listarEmpleados().get(venHecEJB.listarEmpleados().size() - 1);
+				venHec.setEmpleado(empDimIng);
+			} else {
+				venHec.setEmpleado(
+						venHecEJB.buscarEmpleadoDimension(productoVenta.getVenta_codigo().getVendedor().getNombre()));
+			}
+
+			if (verificaringresoClienteDimension(productoVenta.getVenta_codigo().getCliente().getNombre()) == 0) {
+				cliente_dimension cliDim = new cliente_dimension();
+				cliDim.setNombre(productoVenta.getVenta_codigo().getCliente().getNombre());
+				cliDim.setGenero(productoVenta.getVenta_codigo().getCliente().getGenero());
+				venHecEJB.ingresarclienteDimension(cliDim);
+				cliente_dimension cliDimIng = venHecEJB.listarClientes().get(venHecEJB.listarClientes().size() - 1);
+				venHec.setCliente(cliDimIng);
+			} else {
+				venHec.setCliente(
+						venHecEJB.buscarClienteDimension(productoVenta.getVenta_codigo().getCliente().getNombre()));
+			}
+
+			if (verificarIngresoVenta(venHec)) {
+				venHecEJB.ingresarVentaHecho(venHec);
+			}
+
 		}
 		this.ventas = venHecEJB.listarVentasHecho();
 
+	}
+
+	/**
+	 * 
+	 * @param venHe
+	 * @return
+	 */
+	public boolean verificarIngresoVenta(venta_hecho venHe) {
+		List<venta_hecho> ven = venHecEJB.listarVentasHecho();
+		for (int i = 0; i < ven.size(); i++) {
+			if (ven.get(i).getProducto().equals(venHe.getProducto())
+					&& ven.get(i).getVenta().equals(venHe.getVenta())) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * 
+	 * @param venHe
+	 * @return
+	 */
+	public boolean verificarIngresoAuditoria(auditoria_hecho audHe) {
+		List<auditoria_hecho> ven = audHecEJB.listarAuditoriasHecho();
+		for (int i = 0; i < ven.size(); i++) {
+			if (ven.get(i).getCodigo() == audHe.getCodigo()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * 
+	 * @param nombre
+	 * @return
+	 */
+	public int verificaringresoEmpleadoDimension(String nombre) {
+		List<empleado_dimension> empDimension = venHecEJB.listarEmpleados();
+		int co = 0;
+		for (int i = 0; i < empDimension.size(); i++) {
+			if (empDimension.get(i).getNombre().equalsIgnoreCase(nombre)) {
+				co++;
+			}
+		}
+		return co;
+	}
+
+	/**
+	 * 
+	 * @param nombre
+	 * @return
+	 */
+	public int verificaringresoClienteDimension(String nombre) {
+		List<cliente_dimension> cliDimension = venHecEJB.listarClientes();
+		int co = 0;
+		for (int i = 0; i < cliDimension.size(); i++) {
+			if (cliDimension.get(i).getNombre().equalsIgnoreCase(nombre)) {
+				co++;
+			}
+		}
+		return co;
+	}
+
+	/**
+	 * 
+	 * @param venHecho
+	 * @return
+	 */
+	public int verificaringresoProductoDimension(int proDim) {
+		List<producto_dimension> proDimensiones = venHecEJB.listarProductos();
+		int co = 0;
+		for (int i = 0; i < proDimensiones.size(); i++) {
+			if (proDimensiones.get(i).getCodigo() == proDim) {
+				co++;
+			}
+		}
+		return co;
+	}
+
+	/**
+	 * 
+	 * @param venHecho
+	 * @return
+	 */
+	public int verificaringresoVentaDimension(int venDim) {
+		List<venta_dimension> venDimensiones = venHecEJB.listarVentas();
+		int co = 0;
+		for (venta_dimension ven_Dime : venDimensiones) {
+			if (ven_Dime.getCodigo() == venDim) {
+				co++;
+			}
+		}
+		return co;
 	}
 
 	public void conectar() {
@@ -256,6 +384,23 @@ public class ETLExtraccionController implements Serializable {
 			} catch (SQLException ex) {
 				Logger.getLogger(ETLExtraccionController.class.getName()).log(Level.SEVERE, null, ex);
 			}
+		}
+	}
+
+	/**
+	 * 
+	 * @param accion
+	 */
+	public void registrarAuditoria(String accion) {
+		try {
+			Auditoria audi = new Auditoria();
+			String browserDetails = Faces.getRequest().getHeader("User-Agent");
+			audi.setAccion(accion);
+			audi.setRegistroRealizoAccion("ETL");
+			audi.setUsuario(sesion.getUsuario());
+			audEJB.registrarAuditoria(audi, browserDetails);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
