@@ -27,7 +27,6 @@ import co.edu.eam.ingesoft.softOper.entidades.Cargo;
 import co.edu.eam.ingesoft.softOper.entidades.Departamento;
 import co.edu.eam.ingesoft.softOper.entidades.Empleado;
 import co.edu.eam.ingesoft.softOper.entidades.Municipio;
-import co.edu.eam.ingesoft.softOper.entidades.TipoUsuario;
 
 @Named("empleadoController")
 @ViewScoped
@@ -55,8 +54,6 @@ public class EmpleadoController implements Serializable {
 
 	private int cargo;
 
-	private int usuario;
-
 	private int municipio;
 
 	private String departamento;
@@ -68,8 +65,6 @@ public class EmpleadoController implements Serializable {
 	private List<Cargo> cargos;
 
 	private List<Departamento> departamentos;
-
-	private List<TipoUsuario> tipos;
 
 	private ArrayList<Empleado> filtroEmpleados = new ArrayList<Empleado>();
 
@@ -168,25 +163,6 @@ public class EmpleadoController implements Serializable {
 	}
 
 	/**
-	 * @return the nickname
-	 */
-
-	/**
-	 * @return the usuario
-	 */
-	public int getUsuario() {
-		return usuario;
-	}
-
-	/**
-	 * @param usuario
-	 *            the usuario to set
-	 */
-	public void setUsuario(int usuario) {
-		this.usuario = usuario;
-	}
-
-	/**
 	 * @return the empleados
 	 */
 	public List<Empleado> getEmpleados() {
@@ -251,9 +227,6 @@ public class EmpleadoController implements Serializable {
 	private EmpleadoEJB empleadoejb;
 
 	@EJB
-	private TipoUsuarioEJB tiposejb;
-
-	@EJB
 	private SeguridadEJB seguridadejb;
 
 	@EJB
@@ -266,7 +239,6 @@ public class EmpleadoController implements Serializable {
 	public void inicializador() {
 
 		cargos = empleadoejb.listarCargos();
-		tipos = tiposejb.listarTipoUsuario();
 		departamentos = empleadoejb.listardepartamentos();
 		empleados = empleadoejb.listarEmpleados();
 	}
@@ -293,6 +265,10 @@ public class EmpleadoController implements Serializable {
 			Messages.addGlobalError(e.getMessage());
 		}
 	}
+	
+	public void buscar() {
+		registrarAuditoriaEmpleado("Buscar");
+	}
 
 	public void onDepartamentoChange() {
 		if (departamento != null && !departamento.equals(""))
@@ -300,15 +276,14 @@ public class EmpleadoController implements Serializable {
 	}
 
 	public String procederEditar(Empleado audi) {
-		DatosManager.setCodigoEmpleado(audi.getCodigo());
-		return "/paginas/privado/editarEmpleadoUsuario.xhtml?faces-redirect=true";
+		DatosManager.setCodigoEmpleado2(audi.getCodigo());
+		return "/paginas/privado/editarEmpleado.xhtml?faces-redirect=true";
 	}
 
 	public void resetearFitrosTabla() {
 		RequestContext requestContext = RequestContext.getCurrentInstance();
 		requestContext.execute("PF('audiTable').clearFilters()");
 	}
-
 
 	public void registrarAuditoriaEmpleado(String accion) {
 		try {
@@ -322,7 +297,6 @@ public class EmpleadoController implements Serializable {
 			e.printStackTrace();
 		}
 	}
-
 
 	public void limpiar() {
 		nombre = null;
@@ -347,21 +321,6 @@ public class EmpleadoController implements Serializable {
 	 */
 	public void setMunicipios(List<Municipio> municipios) {
 		this.municipios = municipios;
-	}
-
-	/**
-	 * @return the tipos
-	 */
-	public List<TipoUsuario> getTipos() {
-		return tipos;
-	}
-
-	/**
-	 * @param tipos
-	 *            the tipos to set
-	 */
-	public void setTipos(List<TipoUsuario> tipos) {
-		this.tipos = tipos;
 	}
 
 	/**

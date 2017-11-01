@@ -1,0 +1,78 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateContenido.xhtml"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+	<ui:define name="cuerpo">
+		<h:form prependId="false">
+
+			<h2 class="title-style-1">
+				Buscar empleados<span class="title-under"></span>
+			</h2>
+			
+			<p:dataTable id="tablaIdUsuarios" var="audi"
+			value="#{empleadoController.empleados}" widgetVar="audiTable"
+			multiViewState="true" rows="10" paginator="true"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="10,30,50" 
+			selection="#{empleadoController.empleado}" rowKey="#{audi.nombre}"
+			emptyMessage="No se encontraron empleados con estos criterios dados."
+			filterBy="#{empleadoController.filtroEmpleados}" border="1">
+			
+			
+			<p:ajax event="filter" update="tablaIdUsuarios"
+					listener="#{empleadoController.buscar}" />
+			<p:column style="width:60px;text-align:center">
+					<p:commandButton update="tablaIdUsuarios"
+						action="#{empleadoController.procederEditar(audi)}" process="@this"
+						icon="ui-icon-pencil">
+					</p:commandButton>
+				</p:column>
+			
+			<p:column headerText="Nombre" sortBy="#{audi.nombre}" 
+				filterBy="#{audi.nombre}" filterMatchMode="contains">
+				<h:outputLabel value="#{audi.nombre}" />
+			</p:column>
+
+			<p:column headerText="Apellido" >
+				<h:outputLabel value="#{audi.apellido}" />
+			</p:column>
+			
+			<p:column headerText="Cedula" >
+				<h:outputLabel value="#{audi.cedula}" />
+			</p:column>
+			
+			<p:column headerText="Fecha de nacimiento" >
+				<h:outputLabel value="#{audi.fechaNacimiento}" />
+			</p:column>
+			
+			<p:column headerText="Fecha de ingreso en la empresa" >
+				<h:outputLabel value="#{audi.fechaIngresoEmpresa}" />
+			</p:column>
+			
+			
+			<p:column headerText="Genero" >
+				<h:outputLabel value="#{audi.genero}" />
+			</p:column>
+			
+			<p:column headerText="Municipio" >
+				<h:outputLabel value="#{audi.municipio.nombre}" />
+			</p:column>
+						
+				<p:column headerText="Cargo" >
+				<h:outputLabel value="#{audi.cargo.cargo}" />
+			</p:column>
+					
+          	<p:column style="width:60px;text-align:center">
+					<p:commandButton action="#{empleadoController.eliminar(audi)}"
+							process="@this" update="tablaIdUsuarios"   icon="ui-icon-trash" />
+				</p:column>
+
+		</p:dataTable>
+				
+			</h:form>
+         </ui:define>
+</ui:composition>

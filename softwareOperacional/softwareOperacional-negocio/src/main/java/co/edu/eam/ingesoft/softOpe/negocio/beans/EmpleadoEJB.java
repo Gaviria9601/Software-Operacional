@@ -76,7 +76,9 @@ public class EmpleadoEJB {
 
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public Empleado buscarEmpleado2(int id) {
+		System.out.println(id+"*****************************");
 		Empleado pa = em.find(Empleado.class, id);
+		System.out.println(pa.getApellido() + "************"+ pa.getNombre());
 		return pa;
 	}
 
