@@ -12,11 +12,14 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "navegador_dimension")
 @NamedQueries({
-	@NamedQuery(name=navegador_dimension.LISTAR_NAVEGADOR_DIMENSION,query="select nav from navegador_dimension nav")
+	@NamedQuery(name=navegador_dimension.LISTAR_NAVEGADOR_DIMENSION,query="select nav from navegador_dimension nav"),
+	@NamedQuery(name=navegador_dimension.BUSCAR_NOMBRE,query="select nav from navegador_dimension nav where nav.navegador=?1")
 })
 public class navegador_dimension implements Serializable {
 	
 	public static final String LISTAR_NAVEGADOR_DIMENSION = "Navegador.ListarNavegadorDimension";
+	
+	public static final String BUSCAR_NOMBRE = "BuscarNombreNavegador";
 
 	@Id
 	@Column(name="codigo", nullable=false)

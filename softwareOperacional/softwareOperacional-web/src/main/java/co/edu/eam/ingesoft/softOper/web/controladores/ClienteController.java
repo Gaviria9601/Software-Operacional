@@ -151,6 +151,18 @@ public class ClienteController implements Serializable {
 	private String browser;
 
 	private String os;
+	
+	private int clientesInfo;
+	
+	
+
+	public int getClientesInfo() {
+		return clientesInfo;
+	}
+
+	public void setClientesInfo(int clientesInfo) {
+		this.clientesInfo = clientesInfo;
+	}
 
 	public Municipio getMunicipio() {
 		return municipio;
@@ -319,7 +331,7 @@ public class ClienteController implements Serializable {
 
 	@PostConstruct
 	public void inicializador() {
-
+		clientesInfo = cliEJB.listarClientes().size();
 		cliente = cliEJB.listarClientes();
 		cliente = cliEJB.listarClientes();
 		departamentos = empleadoejb.listardepartamentos();

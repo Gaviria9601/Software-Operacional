@@ -71,6 +71,18 @@ public class EmpleadoController implements Serializable {
 	private boolean busco = false;
 
 	private Empleado empleado;
+	
+	private int empleadosInfo;
+	
+	
+
+	public int getEmpleadosInfo() {
+		return empleadosInfo;
+	}
+
+	public void setEmpleadosInfo(int empleadosInfo) {
+		this.empleadosInfo = empleadosInfo;
+	}
 
 	/**
 	 * @return the nombre
@@ -237,7 +249,7 @@ public class EmpleadoController implements Serializable {
 
 	@PostConstruct
 	public void inicializador() {
-
+		empleadosInfo = empleadoejb.listarEmpleados().size();
 		cargos = empleadoejb.listarCargos();
 		departamentos = empleadoejb.listardepartamentos();
 		empleados = empleadoejb.listarEmpleados();

@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+
 import co.edu.eam.ingesoft.softOper.entidades.auditoria_hecho;
 import co.edu.eam.ingesoft.softOper.entidades.navegador_dimension;
 import co.edu.eam.ingesoft.softOper.entidades.origen_dimension;
@@ -36,10 +37,26 @@ public class Auditoria_hechoEJB {
 	
 	/**
 	 * 
+	 * @param dispositivo
+	 */
+	public origen_dimension buscarOrigenDimension(String dispositivo){
+		return (origen_dimension)em.createNamedQuery(origen_dimension.BUSCAR_NOMBRE).setParameter(1, dispositivo).getSingleResult();
+	}
+	
+	/**
+	 * 
 	 * @param navDim
 	 */
 	public void ingresarNavegadorDimension(navegador_dimension navDim){
 		em.persist(navDim);
+	}
+	
+	/**
+	 * 
+	 * @param dispositivo
+	 */
+	public navegador_dimension buscarNavegadorDimension(String navegador){
+		return (navegador_dimension)em.createNamedQuery(navegador_dimension.BUSCAR_NOMBRE).setParameter(1, navegador).getSingleResult();
 	}
 
 	/**
