@@ -6,11 +6,18 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "venta_dimension")
+@NamedQueries({
+	@NamedQuery(name=venta_dimension.LISTAR_VENTA_DIMENSION,query="select ven from venta_dimension ven")
+})
 public class venta_dimension implements Serializable{
+	
+	public static final String LISTAR_VENTA_DIMENSION = "ListarVentaDimension";
 
 	@Id
 	@Column(name="codigo", nullable=false)

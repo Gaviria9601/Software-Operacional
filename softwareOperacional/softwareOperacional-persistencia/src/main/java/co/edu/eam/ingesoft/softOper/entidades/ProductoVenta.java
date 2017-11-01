@@ -19,11 +19,14 @@ import javax.persistence.TemporalType;
 @Table(name="ProductoVenta")
 @IdClass(ProductoVentaPK.class)
 @NamedQueries({
-	@NamedQuery(name=ProductoVenta.LISTAR_PRODUCTOS_VENTA,query="select proVen from ProductoVenta proVen where proVen.venta_codigo.codigo=?1")
+	@NamedQuery(name=ProductoVenta.LISTAR_PRODUCTOS_VENTA,query="select proVen from ProductoVenta proVen where proVen.venta_codigo.codigo=?1"),
+	@NamedQuery(name=ProductoVenta.LISTAR_PRODUCTOS_VENTA_FULL,query="select proVen from ProductoVenta proVen")
 })
 public class ProductoVenta implements Serializable{
 	
 	public static final String LISTAR_PRODUCTOS_VENTA = "ListarProductosVenta";
+	
+	public static final String LISTAR_PRODUCTOS_VENTA_FULL = "ListarProdcutosVentaFull";
 
 	@Id
 	@ManyToOne

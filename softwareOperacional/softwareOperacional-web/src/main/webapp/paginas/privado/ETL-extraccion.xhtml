@@ -25,10 +25,17 @@
 			<h:form role="form">
 
 				<div class="login-logo">
-					<p:commandButton value="Extraer Datos" ajax="false" update="tablaIdAuditorias"
-						class="btn btn-primary" action="#{ETLExtraccionController.extraer}" />
+					<p:commandButton value="Extraer Datos Auditoria" ajax="false"
+						update="tablaIdAuditorias,tablaIdVentas" class="btn btn-primary"
+						action="#{ETLExtraccionController.extraerAuditoria}" />
+						
 					<img src="#{request.contextPath}/dist/img/credit/etl.png"
 						alt="User Image" />
+						
+						
+					<p:commandButton value="Extraer Datos Ventas" ajax="false"
+						update="tablaIdAuditorias,tablaIdVentas" class="btn btn-primary"
+						action="#{ETLExtraccionController.extraerVenta}" />
 
 				</div>
 
@@ -72,7 +79,7 @@
 
 					<section class="col-lg-6 connectedSortable">
 						<p:dataTable id="tablaIdVentas" var="ven"
-							value="#{ETLExtraccionController.ventas}" widgetVar="audiTable"
+							value="#{ETLExtraccionController.ventas}" widgetVar="venTable"
 							multiViewState="true" rows="10" paginator="true"
 							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 							rowsPerPageTemplate="10,30,50"
@@ -96,17 +103,17 @@
 							</p:column>
 
 							<p:column headerText="Producto">
-								<h:outputLabel value="#{ven.producto}" />
+								<h:outputLabel value="#{ven.producto.nombre}" />
 							</p:column>
 
 							<p:column headerText="Cliente">
-								<h:outputLabel value="#{ven.cliente}" />
+								<h:outputLabel value="#{ven.cliente.nombre}" />
 							</p:column>
 
 							<p:column headerText="Empleado">
-								<h:outputLabel value="#{ven.empleado}" />
+								<h:outputLabel value="#{ven.empleado.nombre}" />
 							</p:column>
-							
+
 							<p:column headerText="Total">
 								<h:outputLabel value="#{ven.totaldetalle}" />
 							</p:column>

@@ -71,6 +71,14 @@ public class ProductoVentaEJB {
 	public List<ProductoVenta> listarProductosVenta(int codigo){
 		return em.createNamedQuery(ProductoVenta.LISTAR_PRODUCTOS_VENTA).setParameter(1, codigo).getResultList();
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<ProductoVenta> listarProductoVenta(){
+		return em.createNamedQuery(ProductoVenta.LISTAR_PRODUCTOS_VENTA_FULL).getResultList();
+	}
 
 
 }
