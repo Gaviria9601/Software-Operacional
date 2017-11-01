@@ -100,7 +100,7 @@ public class ETLExtraccionController implements Serializable {
 			extraerTablaVentaHecho();
 			Messages.addFlashGlobalInfo("Se ha extraido correctamente los Datos");
 		} catch (Exception e) {
-			Messages.addFlashGlobalError("Ya se han extraido el total de los Datos");
+			Messages.addFlashGlobalError("Ya se han extraido el total de loss Datos");
 		}
 	}
 
