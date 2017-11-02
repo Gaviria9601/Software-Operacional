@@ -101,6 +101,8 @@ public class EtlEJB extends ConexionETL{
 	                + audi.getTablaaccion() + audi.getNavegador() + "','" + audi.getTiempo() + "')";
 	       super.ejecutar(consulta);
 	    }
+	 
+	 
      /**
       * 
       * @param ve
