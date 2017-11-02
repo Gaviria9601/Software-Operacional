@@ -60,8 +60,7 @@ public class ETLCargaController implements Serializable {
 	 */
 	public void insertarOrigen(int codigo,String navegador){
 		origen_dimension o = new origen_dimension(codigo, navegador);
-		for (int i=0; i < o.hashCode(); i++);
-        etljb.insertarOrigen(o);
+		etljb.insertarOrigen(o);
      }
 	
 	/**
@@ -130,8 +129,9 @@ public class ETLCargaController implements Serializable {
 	 * @param tiempo
 	 */
 	
-	public void insertaAditoria(int codigo, Date fechaauditoria, String tablaaccion, String accion,
-			navegador_dimension navegador, origen_dimension origen, tiempo_dimension tiempo) {
+	public void insertaAditoria(int codigo, Date fechaauditoria, String tablaaccion, String accion, navegador_dimension navegador, 
+			origen_dimension origen, tiempo_dimension tiempo) {
+		
 		auditoria_hecho a = new auditoria_hecho(codigo, fechaauditoria, tablaaccion, accion, navegador, origen, tiempo);
        etljb.insertarAuditoria(a);
      }
@@ -194,50 +194,57 @@ public class ETLCargaController implements Serializable {
 		for (tiempo_dimension tiem : ti) {
 			tiempos.add(tiem);
 			insertaTiempo(tiem.getCodigo(), tiem.getTrimestre(), tiem.getMes());
-			
+		}
 	  
 	   //CLIENTE
 		List<cliente_dimension> cli = etljb.listarCliente();
 		for(cliente_dimension c: cli){
 			clientes.add(c);
 			insertaCliente(c.getCodigo(), c.getNombre(), c.getGenero());
-			
+		}
 	  //NAVEGADOR
 		List<navegador_dimension> na = etljb.listarNavegador();
 			for(navegador_dimension d: na){
 				navegador.add(d);
 				insertaNavegador(d.getCodigo(), d.getNavegador());
-			
+			}
        //PRODUCTO
 		List<producto_dimension> po = etljb.listarProducto();
 				for(producto_dimension p: po){
 					productos.add(p);
 					insertaProducto(p.getCodigo(), p.getNombre(), p.getPrecio(), p.getFechaingreso(), p.getCantidad());
-					
+				}		
 	   //VENTA DIMENSION
 		List<venta_dimension> ve = etljb.listarVentaD();
 				for(venta_dimension v: ve){
 					ventasD.add(v);
 					insertaVentaD(v.getCodigo(), v.getFecha(), v.getTotal(), v.getNombrevendedor(), v.getNombrecliente());
-				
+				}	
 		//EMPLEADO
 		 List<empleado_dimension> em = etljb.listarEmpleado();
 				for(empleado_dimension e: em){
 					empleados.add(e);
 					insertaEmpleado(e.getCodigo(), e.getNombre(), e.getGenero(), e.getNombrecargo());
-								
+				}					
 					 
 		//ORIGEN
 		List <origen_dimension> ori = etljb.listarOrigen();
 				for(origen_dimension og: ori){
 					origenes.add(og);
 					insertarOrigen(og.getCodigo(), og.getDispositivo());
-								
+				}				
 		//AUDITORIA
+				List <auditoria_hecho> audi = etljb.listarAuditoria();
+				for(auditoria_hecho a: audi){
+				auditorias.add(a);
+				//insertaAditoria(a.getCodigo(), a.getFechaauditoria(), a.getTablaaccion(), a.getAccion(), 
+									//a.getNavegador().getCodigo(), a.getOrigen().getCodigo(), a.getTiempo().getCodigo());
+				}
 								
 	   //VENTA HECHO
 		List <venta_hecho> vh = etljb.listarVentaH();
 				for(venta_hecho g: vh){
+					ventasH.add(g);
 					
 										venta_hecho w = new venta_hecho();
 										w.setCodigo(g.getCodigo());
@@ -256,19 +263,7 @@ public class ETLCargaController implements Serializable {
 							
 							
 								
-									}
-						    	}
-							}
-								
-							}
-		
-		
-	}
-			
-			
-		}
-    }
-    }
+}
 
 
 

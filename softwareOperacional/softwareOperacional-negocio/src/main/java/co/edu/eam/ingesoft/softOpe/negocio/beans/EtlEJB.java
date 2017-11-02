@@ -7,8 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import co.edu.eam.ingesoft.softOper.entidades.Area;
-import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
+
 import co.edu.eam.ingesoft.softOper.entidades.auditoria_hecho;
 import co.edu.eam.ingesoft.softOper.entidades.cliente_dimension;
 import co.edu.eam.ingesoft.softOper.entidades.empleado_dimension;
@@ -66,8 +65,9 @@ public class EtlEJB extends ConexionETL{
 	  */
 	 public void insertarVentaD(venta_dimension ven) {
 	        String consulta = "insert into venta_dimension(codigo,fecha,total,nombrevendedor,nombrecliente)"
-	                + "values('" + ven.getCodigo() + "','" + ven.getFecha() + "','" + ven.getNombrevendedor() + "','"
-	                + ven.getNombrecliente() + "')";
+	                + "values('" + ven.getCodigo() + "','" + ven.getFecha() + "','" + ven.getTotal() + "','" 
+	        		+ ven.getNombrevendedor() + "','" + ven.getNombrecliente() + "')";
+	        System.out.println(consulta);
 	       super.ejecutar(consulta);
 	    }
 	 
@@ -77,7 +77,7 @@ public class EtlEJB extends ConexionETL{
 	 */
 	 public void insertarCliente(cliente_dimension cli) {
 	        String consulta = "insert into cliente_dimension(codigo,nombre,genero)"
-	                + "values('" + cli.getCodigo() + "','" + cli.getNombre() + "','" + cli.getGenero()  + "')";
+	                + "values('" + cli.getCodigo() + "','" + cli.getNombre() + "','" + cli.getGenero() + "')";
 	         super.ejecutar(consulta);
 	    }
     /**
@@ -103,10 +103,6 @@ public class EtlEJB extends ConexionETL{
 	    }
 	 
 	 
-	 
-	 
-	 
-	 
      /**
       * 
       * @param ve
@@ -117,6 +113,7 @@ public class EtlEJB extends ConexionETL{
 	                + "values('" + ve.getCodigo() + "','" + ve.getTotaldetalle() + "','" + ve.getCantidad() + "','"
 	                + ve.getFechaventa() + "'," + ve.getVenta().getCodigo() + "," + ve.getTiempo().getCodigo() + ","
 	                + ve.getProducto().getCodigo() + "," + ve.getCliente().getCodigo() + "," + ve.getEmpleado().getCodigo() + ")";
+	        System.out.println(consulta);
 	       super.ejecutar(consulta);
 	    }
 	 
