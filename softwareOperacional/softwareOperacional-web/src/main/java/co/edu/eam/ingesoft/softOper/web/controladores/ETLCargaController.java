@@ -34,85 +34,26 @@ import co.edu.eam.ingesoft.softOper.entidades.venta_hecho;
 @ViewScoped
 public class ETLCargaController implements Serializable {
 	
-	private List<origen_dimension> origenes;
 	
-	private List <navegador_dimension> navegadores;
+	List<origen_dimension> origenes = new ArrayList<origen_dimension>();
 	
-	private List <producto_dimension> productos;
+	List<navegador_dimension> navegador = new ArrayList<navegador_dimension>();
 	
-	private List <auditoria_hecho> auditorias;
+	List<producto_dimension> productos = new ArrayList<producto_dimension>();
 	
-
-	private List <cliente_dimension> clientes;
+	List<auditoria_hecho> auditorias = new ArrayList<auditoria_hecho>();
 	
-	private List <empleado_dimension> empleados;
+	List<cliente_dimension> clientes = new ArrayList<cliente_dimension>();
 	
-	//private List <tiempo_dimension> tiempo;
+	List<empleado_dimension> empleados = new ArrayList<empleado_dimension>();
+	
 	List<tiempo_dimension> tiempos = new ArrayList<tiempo_dimension>();
 	
-	private List <venta_dimension> ventasD;
+	List<venta_dimension> ventasD = new ArrayList<venta_dimension>();
 	
-	private List <venta_hecho> ventasH;
+	List<venta_hecho> ventasH = new ArrayList<venta_hecho>();
 	
-	public List<origen_dimension> getOrigenes() {
-		return origenes;
-	}
-	public void setOrigenes(List<origen_dimension> origenes) {
-		this.origenes = origenes;
-	}
-	public List<navegador_dimension> getNavegadores() {
-		return navegadores;
-	}
-	public void setNavegadores(List<navegador_dimension> navegadores) {
-		this.navegadores = navegadores;
-	}
-	public List<producto_dimension> getProductos() {
-		return productos;
-	}
-	public void setProductos(List<producto_dimension> productos) {
-		this.productos = productos;
-	}
-	public List<auditoria_hecho> getAuditorias() {
-		return auditorias;
-	}
-	public void setAuditorias(List<auditoria_hecho> auditorias) {
-		this.auditorias = auditorias;
-	}
-	public List<cliente_dimension> getClientes() {
-		return clientes;
-	}
-	public void setClientes(List<cliente_dimension> clientes) {
-		this.clientes = clientes;
-	}
-	public List<empleado_dimension> getEmpleados() {
-		return empleados;
-	}
-	public void setEmpleados(List<empleado_dimension> empleados) {
-		this.empleados = empleados;
-	}
-	
-	public List<venta_dimension> getVentasD() {
-		return ventasD;
-	}
-	public void setVentasD(List<venta_dimension> ventasD) {
-		this.ventasD = ventasD;
-	}
-	public List<venta_hecho> getVentasH() {
-		return ventasH;
-	}
-	public void setVentasH(List<venta_hecho> ventasH) {
-		this.ventasH = ventasH;
-	}
-	public EtlEJB getEtljb() {
-		return etljb;
-	}
-	public void setEtljb(EtlEJB etljb) {
-		this.etljb = etljb;
-	}
-
-	
-	
-	/**
+    /**
 	 * 
 	 * @param codigo
 	 * @param navegador
@@ -206,11 +147,8 @@ public class ETLCargaController implements Serializable {
 	 * @param cliente
 	 * @param empleado
 	 */
-  public void insertaVentaH(int codigo, int totaldetalle, int cantidad, Date fechaventa, venta_dimension venta,
-			tiempo_dimension tiempo, producto_dimension producto, cliente_dimension cliente,
-			empleado_dimension empleado) {
-		venta_hecho v = new venta_hecho(codigo, totaldetalle, cantidad, fechaventa, venta, tiempo, producto, cliente, empleado);
-        etljb.insertarVentaH(v);
+  public void insertaVentaH(venta_hecho ven) {
+		        etljb.insertarVentaH(ven);
      }
 	/**
 	 * 
@@ -238,6 +176,8 @@ public class ETLCargaController implements Serializable {
 	@EJB
 	private AuditoriaEJB audEJB;
 	
+	
+	
 	public void carga() {
 		try{
 		procesoCarga();
@@ -249,13 +189,90 @@ public class ETLCargaController implements Serializable {
 	
     public void procesoCarga() {
 		
+    	//TIEMPOS
 		List<tiempo_dimension> ti = etljb.listarTiempo();
 		for (tiempo_dimension tiem : ti) {
 			tiempos.add(tiem);
 			insertaTiempo(tiem.getCodigo(), tiem.getTrimestre(), tiem.getMes());
-		}
 			
+	  
+	   //CLIENTE
+		List<cliente_dimension> cli = etljb.listarCliente();
+		for(cliente_dimension c: cli){
+			clientes.add(c);
+			insertaCliente(c.getCodigo(), c.getNombre(), c.getGenero());
+			
+	  //NAVEGADOR
+		List<navegador_dimension> na = etljb.listarNavegador();
+			for(navegador_dimension d: na){
+				navegador.add(d);
+				insertaNavegador(d.getCodigo(), d.getNavegador());
+			
+       //PRODUCTO
+		List<producto_dimension> po = etljb.listarProducto();
+				for(producto_dimension p: po){
+					productos.add(p);
+					insertaProducto(p.getCodigo(), p.getNombre(), p.getPrecio(), p.getFechaingreso(), p.getCantidad());
+					
+	   //VENTA DIMENSION
+		List<venta_dimension> ve = etljb.listarVentaD();
+				for(venta_dimension v: ve){
+					ventasD.add(v);
+					insertaVentaD(v.getCodigo(), v.getFecha(), v.getTotal(), v.getNombrevendedor(), v.getNombrecliente());
+				
+		//EMPLEADO
+		 List<empleado_dimension> em = etljb.listarEmpleado();
+				for(empleado_dimension e: em){
+					empleados.add(e);
+					insertaEmpleado(e.getCodigo(), e.getNombre(), e.getGenero(), e.getNombrecargo());
+								
+					 
+		//ORIGEN
+		List <origen_dimension> ori = etljb.listarOrigen();
+				for(origen_dimension og: ori){
+					origenes.add(og);
+					insertarOrigen(og.getCodigo(), og.getDispositivo());
+								
+		//AUDITORIA
+								
+	   //VENTA HECHO
+		List <venta_hecho> vh = etljb.listarVentaH();
+				for(venta_hecho g: vh){
+					
+										venta_hecho w = new venta_hecho();
+										w.setCodigo(g.getCodigo());
+										w.setTotaldetalle(g.getTotaldetalle());
+										w.setCantidad(g.getCantidad());
+										w.setFechaventa(g.getFechaventa());
+										w.setVenta(venHecEJB.buscarVentaDimension(g.getVenta().getCodigo()));
+										w.setTiempo(etljb.buscarPTiempoDimension(g.getTiempo().getCodigo()));
+										w.setProducto(venHecEJB.buscarProductoDimension(g.getProducto().getCodigo()));
+										w.setCliente(etljb.buscarClienteDimension(g.getCliente().getCodigo()));
+										w.setEmpleado(etljb.buscarEmpleadoDimension(g.getEmpleado().getCodigo()));
+										insertaVentaH(w);
+									
+										}
+								}
+							
+							
+								
+									}
+						    	}
+							}
+								
+							}
 		
-}
-}
+		
+	}
+			
+			
+		}
+    }
+    }
+
+
+
+		
+
+
 

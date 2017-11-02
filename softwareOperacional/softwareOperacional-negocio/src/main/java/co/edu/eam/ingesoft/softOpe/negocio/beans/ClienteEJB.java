@@ -9,9 +9,9 @@ import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import co.edu.eam.ingesoft.softOper.entidades.Area;
+
 import co.edu.eam.ingesoft.softOper.entidades.Cliente;
-import co.edu.eam.ingesoft.softOper.entidades.Empleado;
+
 import co.edu.eam.ingesoft.softOper.entidades.Municipio;
 
 

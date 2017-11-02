@@ -54,7 +54,7 @@ public class EtlEJB extends ConexionETL{
 	  */
 	 
 	 public void insertarProducto(producto_dimension pro) {
-	        String consulta = "insert into administrador(codigo,nombre,precio,fechaingreso,cantidad)"
+	        String consulta = "insert into producto_dimension(codigo,nombre,precio,fechaingreso,cantidad)"
 	                + "values('" + pro.getCodigo()+ "','" + pro.getNombre() + "','" + pro.getPrecio() + "','"
 	                + pro.getFechaingreso() + "','" + pro.getCantidad() + "')";
 	         super.ejecutar(consulta);
@@ -108,8 +108,8 @@ public class EtlEJB extends ConexionETL{
 	 public void insertarVentaH(venta_hecho ve) {
 	        String consulta = "insert into venta_hecho(codigo,totaldetalle,cantidad,fechaventa,venta,tiempo,producto,cliente,empleado)"
 	                + "values('" + ve.getCodigo() + "','" + ve.getTotaldetalle() + "','" + ve.getCantidad() + "','"
-	                + ve.getFechaventa() + "','" + ve.getVenta() + "','" + ve.getTiempo()+ "','"
-	                + ve.getProducto() + "','" + ve.getCliente() + "','" + ve.getEmpleado() + "')";
+	                + ve.getFechaventa() + "'," + ve.getVenta().getCodigo() + "," + ve.getTiempo().getCodigo() + ","
+	                + ve.getProducto().getCodigo() + "," + ve.getCliente().getCodigo() + "," + ve.getEmpleado().getCodigo() + ")";
 	       super.ejecutar(consulta);
 	    }
 	 
@@ -132,5 +132,91 @@ public class EtlEJB extends ConexionETL{
 			lista = em.createNamedQuery(tiempo_dimension.LISTAR_TIEMPO).getResultList();
 			return lista;
 		}
+	 /**
+	  * 
+	  * @return
+	  */
+	 
+	 public List<origen_dimension> listarOrigen() {
+			List<origen_dimension> lista;
+			lista = em.createNamedQuery(origen_dimension.LISTAR_ORIGEN_DIMENSION).getResultList();
+			return lista;
+		}
+	 /**
+	  * 
+	  * @return
+	  */
+	 public List<auditoria_hecho> listarAuditoria() {
+			List<auditoria_hecho> lista;
+			lista = em.createNamedQuery(auditoria_hecho.LISTAR_AUDITORIA_HECHO).getResultList();
+			return lista;
+		}
+	 /**
+	  * 
+	  * @return
+	  */
+	 public List<cliente_dimension> listarCliente() {
+			List<cliente_dimension> lista;
+			lista = em.createNamedQuery(cliente_dimension.LISTAR_CLIENTE_DIMENSION).getResultList();
+			return lista;
+		}
+	 /**
+	  * 
+	  * @return
+	  */
+	 public List<empleado_dimension> listarEmpleado() {
+			List<empleado_dimension> lista;
+			lista = em.createNamedQuery(empleado_dimension.LISTAR_EMPLEADO_DIMENSION).getResultList();
+			return lista;
+		}
+	 /**
+	  * 
+	  * @return
+	  */
+	 public List<navegador_dimension> listarNavegador() {
+			List<navegador_dimension> lista;
+			lista = em.createNamedQuery(navegador_dimension.LISTAR_NAVEGADOR_DIMENSION).getResultList();
+			return lista;
+		}
+	 /**
+	  * 
+	  * @return
+	  */
+	 public List<producto_dimension> listarProducto() {
+			List<producto_dimension> lista;
+			lista = em.createNamedQuery(producto_dimension.LISTAR_PRODUCTO_DIMENSION).getResultList();
+			return lista;
+		}
+	 /**
+	  * 
+	  * @return
+	  */
+	 public List<venta_dimension> listarVentaD() {
+			List<venta_dimension> lista;
+			lista = em.createNamedQuery(venta_dimension.LISTAR_VENTA_DIMENSION).getResultList();
+			return lista;
+		}
+	 /**
+	  * 
+	  * @return
+	  */
+	 public List<venta_hecho> listarVentaH() {
+			List<venta_hecho> lista;
+			lista = em.createNamedQuery(venta_hecho.LISTAR_VENTA_HECHO).getResultList();
+			return lista;
+		}
+	 
+	 public tiempo_dimension buscarPTiempoDimension(int codigo){
+			return em.find(tiempo_dimension.class, codigo);
+		}
+	 
+	 public cliente_dimension buscarClienteDimension(int codigo){
+			return em.find(cliente_dimension.class, codigo);
+		}
+	 
+	 public empleado_dimension buscarEmpleadoDimension(int codigo){
+			return em.find(empleado_dimension.class, codigo);
+		}
+
 	}
 

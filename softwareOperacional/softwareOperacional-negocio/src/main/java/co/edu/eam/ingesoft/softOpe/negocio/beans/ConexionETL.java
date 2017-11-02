@@ -5,12 +5,16 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+
 
 
 
@@ -21,8 +25,8 @@ public class ConexionETL {
 	  
 	    protected String datasources = "java:jboss/datasources/ETLDS";
 	    protected String user = "postgres"; //usuario de la base de datos
-	    protected String password = "admin"; //password de la base de datos
-	    protected Connection conexionDB; // variable que permite la conexion
+	    protected String password = ""; //password de la base de datos
+	    protected Connection conexionDB=null; // variable que permite la conexion
 	    protected Statement sentenciaSQL; //permite la ejecucion de sentencias SQL
 	    protected ResultSet resultadoDB;//almacena el resultado de una consulta
 	
@@ -32,12 +36,20 @@ public class ConexionETL {
 	    */
 	    public void conectar() {
 	        try {
-	           conexionDB = DriverManager.getConnection(datasources, user, password);//conexion a la base de datos
-	           sentenciaSQL = conexionDB.createStatement();//variable que permite ejecutar las sentencias SQL                                
+	        InitialContext ic = new InitialContext(); 
+	   		 DataSource ds = (DataSource)ic.lookup("java:jboss/datasources/ETLDS");
+	   		 conexionDB = ds.getConnection();
+	   		 sentenciaSQL = conexionDB.createStatement();                               
 	      } catch (SQLException e) {
 	            System.out.println(e.getMessage());
+	            
+	        } catch (NamingException ex){
+	        	System.out.println(ex.getMessage());
+	        	
 	        }
 	    }
+	    
+
 
 	    /**
 	     * Desconecta la conexion de la base de datos
