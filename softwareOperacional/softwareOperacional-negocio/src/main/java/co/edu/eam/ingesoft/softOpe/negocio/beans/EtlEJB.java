@@ -105,6 +105,7 @@ public class EtlEJB extends ConexionETL{
       * 
       * @param ve
       */
+	 
 	 public void insertarVentaH(venta_hecho ve) {
 	        String consulta = "insert into venta_hecho(codigo,totaldetalle,cantidad,fechaventa,venta,tiempo,producto,cliente,empleado)"
 	                + "values('" + ve.getCodigo() + "','" + ve.getTotaldetalle() + "','" + ve.getCantidad() + "','"
