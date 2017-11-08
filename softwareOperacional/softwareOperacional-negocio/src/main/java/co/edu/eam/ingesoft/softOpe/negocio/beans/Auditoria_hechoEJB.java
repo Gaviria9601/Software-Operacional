@@ -45,10 +45,28 @@ public class Auditoria_hechoEJB {
 	
 	/**
 	 * 
+	 * @param codigo
+	 * @return
+	 */
+	public origen_dimension buscarOrigen(int codigo){
+		return em.find(origen_dimension.class, codigo);
+	}
+	
+	/**
+	 * 
 	 * @param navDim
 	 */
 	public void ingresarNavegadorDimension(navegador_dimension navDim){
 		em.persist(navDim);
+	}
+	
+	/**
+	 * 
+	 * @param codigo
+	 * @return
+	 */
+	public navegador_dimension buscarNave(int codigo){
+		return em.find(navegador_dimension.class, codigo);
 	}
 	
 	/**

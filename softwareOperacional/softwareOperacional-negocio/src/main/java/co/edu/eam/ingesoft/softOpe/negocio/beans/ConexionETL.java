@@ -25,7 +25,7 @@ public class ConexionETL {
 	  
 	    protected String datasources = "java:jboss/datasources/ETLDS";
 	    protected String user = "postgres"; //usuario de la base de datos
-	    protected String password = ""; //password de la base de datos
+	    protected String password = "admin"; //password de la base de datos
 	    protected Connection conexionDB=null; // variable que permite la conexion
 	    protected Statement sentenciaSQL; //permite la ejecucion de sentencias SQL
 	    protected ResultSet resultadoDB;//almacena el resultado de una consulta
