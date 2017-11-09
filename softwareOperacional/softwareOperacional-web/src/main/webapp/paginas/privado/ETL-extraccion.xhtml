@@ -28,11 +28,11 @@
 					<p:commandButton value="Extraer Datos Auditoria" ajax="false"
 						update="tablaIdAuditorias,tablaIdVentas" class="btn btn-primary"
 						action="#{ETLExtraccionController.extraerAuditoria}" />
-						
+
 					<img src="#{request.contextPath}/dist/img/credit/etl.png"
 						alt="User Image" />
-						
-						
+
+
 					<p:commandButton value="Extraer Datos Ventas" ajax="false"
 						update="tablaIdAuditorias,tablaIdVentas" class="btn btn-primary"
 						action="#{ETLExtraccionController.extraerVenta}" />
@@ -52,6 +52,25 @@
 							emptyMessage="No se han extraido datos" border="1">
 							<f:facet name="header">
 							Tabla Hecho Auditoria
+							<h:commandLink>
+									<img src="#{request.contextPath}/dist/img/1.png" width="24" />
+									<p:dataExporter type="xls" target="tablaIdAuditorias" fileName="auditorias" />
+								</h:commandLink>
+
+								<h:commandLink>
+									<p:graphicImage name="/demo/images/pdf.png" width="24" />
+									<p:dataExporter type="pdf" target="tablaIdAuditorias" fileName="auditorias" />
+								</h:commandLink>
+
+								<h:commandLink>
+									<img src="#{request.contextPath}/dist/img/2.png" width="24" />
+									<p:dataExporter type="csv" target="tablaIdAuditorias" fileName="auditorias" />
+								</h:commandLink>
+
+								<h:commandLink>
+									<p:graphicImage name="/demo/images/xml.png" width="24" />
+									<p:dataExporter type="xml" target="tablaIdAuditorias" fileName="auditorias" />
+								</h:commandLink>
 							</f:facet>
 
 							<p:column headerText="Accion">
@@ -75,6 +94,8 @@
 								<h:outputLabel value="#{audi.origen.dispositivo}" />
 							</p:column>
 						</p:dataTable>
+
+
 					</section>
 
 					<section class="col-lg-6 connectedSortable">
