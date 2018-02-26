@@ -2,11 +2,16 @@ package co.edu.eam.ingesoft.softOpe.negocio.beans;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import co.edu.eam.ingesoft.softOper.entidades.AuditoriaWikieamHecho;
+import co.edu.eam.ingesoft.softOper.entidades.CambiosDimensionWikieam;
+import co.edu.eam.ingesoft.softOper.entidades.PaginaDimensionWikieam;
+import co.edu.eam.ingesoft.softOper.entidades.UsuarioDimensionWikieam;
 import co.edu.eam.ingesoft.softOper.entidades.auditoria_hecho;
 import co.edu.eam.ingesoft.softOper.entidades.cliente_dimension;
 import co.edu.eam.ingesoft.softOper.entidades.empleado_dimension;
@@ -23,6 +28,9 @@ public class EtlEJB extends ConexionETL {
 
 	@PersistenceContext(unitName = Conexion.OPCION)
 	private EntityManager em;
+
+	@EJB
+	private MediaWikiEJB mediWikiEJB;
 
 	/**
 	 * 
@@ -245,4 +253,5 @@ public class EtlEJB extends ConexionETL {
 		return em.find(empleado_dimension.class, codigo);
 	}
 
+	
 }

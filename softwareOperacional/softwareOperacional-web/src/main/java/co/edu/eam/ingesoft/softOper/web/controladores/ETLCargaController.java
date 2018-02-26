@@ -14,11 +14,7 @@ import org.omnifaces.util.Messages;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.AuditoriaEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.Auditoria_hechoEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.EtlEJB;
-import co.edu.eam.ingesoft.softOpe.negocio.beans.SeguridadEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.Ventas_hechoEJB;
-import co.edu.eam.ingesoft.softOper.entidades.Area;
-import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
-import co.edu.eam.ingesoft.softOper.entidades.Municipio;
 import co.edu.eam.ingesoft.softOper.entidades.auditoria_hecho;
 import co.edu.eam.ingesoft.softOper.entidades.cliente_dimension;
 import co.edu.eam.ingesoft.softOper.entidades.empleado_dimension;
@@ -32,6 +28,11 @@ import co.edu.eam.ingesoft.softOper.entidades.venta_hecho;
 @Named("ETLCargaController")
 @ViewScoped
 public class ETLCargaController implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	List<origen_dimension> origenes = new ArrayList<origen_dimension>();
 

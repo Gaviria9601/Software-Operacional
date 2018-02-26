@@ -1,22 +1,15 @@
 package co.edu.eam.ingesoft.softOpe.negocio.beans;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-
-
-
-
 
 @LocalBean
 @Stateless
@@ -83,14 +76,14 @@ public class ConexionETL {
 	      * Ejecuta una sentencia sql sin actualizar , pero si guardando informacion
 	      * @param sentencia , sentencia 
 	      */
-	    public void ejecutarRetorno(String sentencia) {
+	    public ResultSet ejecutarRetorno(String sentencia) {
 	        try {
 	            conectar();
 	            resultadoDB = sentenciaSQL.executeQuery(sentencia);
-	            desconectar();
 	        } catch (Exception e) {
 
 	        }
+	        return resultadoDB;
 	    }
 
 

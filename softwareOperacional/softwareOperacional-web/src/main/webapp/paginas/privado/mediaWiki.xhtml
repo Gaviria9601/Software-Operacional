@@ -1,0 +1,108 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateContenido.xhtml">
+
+	<ui:define name="cuerpo">
+		<h2>
+			Mediawiki<small> - Extracción y Carga de Datos</small>
+		</h2>
+		<br />
+
+		<div class="box box-primary">
+			<div class="box-header">
+				<h3 class="box-title">Mediawiki EAM- Software Operacional Gnome</h3>
+				<div class="pull-right hidden-xs">
+					<b>Fecha: </b>
+					<p:clock />
+				</div>
+			</div>
+
+			<h:form role="form">
+
+				<div class="login-logo">
+					<p:commandButton value="Extraer Datos" ajax="false"
+						update="tablaIdAuditorias,tablaIdVentas" class="btn btn-primary"
+						action="#{MediaWikiController.extraer}" />
+
+					<img src="#{request.contextPath}/dist/img/credit/etl.png"
+						alt="User Image" />
+
+
+					<p:commandButton value="Cargar Datos" ajax="false"
+						class="btn btn-primary" action="#{MediaWikiController.cargar}" />
+
+				</div>
+
+				<p:dataTable id="tablaIdAuditorias" var="audi"
+					value="#{MediaWikiController.auditorias}" widgetVar="audiTable"
+					multiViewState="true" rows="10" paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="10,30,50"
+					emptyMessage="No se han extraido datos" border="1">
+					<f:facet name="header">
+							 Auditoria WikiEAM
+						<h:commandLink>
+							<img src="#{request.contextPath}/dist/img/credit/csv.png"
+								width="34" />
+							<p:dataExporter type="csv" target="tablaIdAuditorias"
+								fileName="Auditoria-Wikieam" />
+						</h:commandLink>
+						<h:commandLink>
+							<img src="#{request.contextPath}/dist/img/credit/excel.png"
+								width="34" />
+							<p:dataExporter type="xls" target="tablaIdAuditorias"
+								fileName="Auditoria-Wikieam" />
+						</h:commandLink>
+					</f:facet>
+
+					<p:columnGroup type="header">
+						<p:row>
+							<p:column rowspan="2" headerText="Usuario" />
+							<p:column colspan="3" headerText="Contenido" />
+							<p:column rowspan="2" headerText="Fecha Creación" />
+							<p:column rowspan="2" headerText="Fecha Edición" />
+						</p:row>
+						<p:row>
+							<p:column headerText="Titulo Pagina" />
+							<p:column headerText="Número de Lineas Creación" />
+							<p:column headerText="Número de Lineas Edición" />
+						</p:row>
+					</p:columnGroup>
+
+					<p:column headerText="Usuario">
+						<h:outputLabel value="#{audi.usuario.nombreUsuario}" />
+					</p:column>
+
+					<p:column headerText="Titulo Pagina">
+						<h:outputLabel value="#{audi.pagina.tituloPagina}" />
+					</p:column>
+
+					<p:column headerText="Numero de lineas Creacion">
+						<h:outputLabel value="#{audi.cambio.numeroLineasC}" />
+					</p:column>
+
+					<p:column headerText="Numero de lineas Edicion">
+						<h:outputLabel value="#{audi.cambio.numeroLineasE}" />
+					</p:column>
+
+					<p:column headerText="Fecha Creacion">
+						<h:outputLabel value="#{audi.cambio.fechaC}">
+							<f:convertDateTime pattern="MM-dd-yyyy" />
+						</h:outputLabel>
+					</p:column>
+
+					<p:column headerText="Fecha Edicion">
+						<h:outputLabel value="#{audi.cambio.fechaE}">
+							<f:convertDateTime pattern="MM-dd-yyyy" />
+						</h:outputLabel>
+					</p:column>
+
+				</p:dataTable>
+			</h:form>
+		</div>
+	</ui:define>
+
+</ui:composition>

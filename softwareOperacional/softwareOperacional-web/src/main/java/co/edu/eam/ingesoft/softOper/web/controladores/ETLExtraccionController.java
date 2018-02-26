@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,13 +34,17 @@ import co.edu.eam.ingesoft.softOper.entidades.empleado_dimension;
 import co.edu.eam.ingesoft.softOper.entidades.navegador_dimension;
 import co.edu.eam.ingesoft.softOper.entidades.origen_dimension;
 import co.edu.eam.ingesoft.softOper.entidades.producto_dimension;
-import co.edu.eam.ingesoft.softOper.entidades.tiempo_dimension;
 import co.edu.eam.ingesoft.softOper.entidades.venta_dimension;
 import co.edu.eam.ingesoft.softOper.entidades.venta_hecho;
 
 @Named("ETLExtraccionController")
 @ViewScoped
 public class ETLExtraccionController implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	List<auditoria_hecho> auditorias;
 
@@ -166,28 +169,27 @@ public class ETLExtraccionController implements Serializable {
 			audiHecho.setFechaauditoria(auditoria.getFechaHora());
 			audiHecho.setTablaaccion(auditoria.getRegistroRealizoAccion());
 			if (verificaringresoNavegadorDimension(auditoria.getNavegador()) == 0) {
-			navegador_dimension navDim = new navegador_dimension();
-			navDim.setNavegador(auditoria.getNavegador());
-			audHecEJB.ingresarNavegadorDimension(navDim);
-			navegador_dimension navIng = audHecEJB.listarNavegadorDimension()
-					.get(audHecEJB.listarNavegadorDimension().size() - 1);
-			audiHecho.setNavegador(navIng);
-			}else{
+				navegador_dimension navDim = new navegador_dimension();
+				navDim.setNavegador(auditoria.getNavegador());
+				audHecEJB.ingresarNavegadorDimension(navDim);
+				navegador_dimension navIng = audHecEJB.listarNavegadorDimension()
+						.get(audHecEJB.listarNavegadorDimension().size() - 1);
+				audiHecho.setNavegador(navIng);
+			} else {
 				audiHecho.setNavegador(audHecEJB.buscarNavegadorDimension(auditoria.getNavegador()));
 			}
-			
+
 			if (verificaringresoOrigenDimension(auditoria.getOrigen()) == 0) {
-			origen_dimension oriDim = new origen_dimension();
-			oriDim.setDispositivo(auditoria.getOrigen());
-			audHecEJB.ingresarOrigenDimension(oriDim);
-			origen_dimension oriIng = audHecEJB.listarOrigenDimension()
-					.get(audHecEJB.listarOrigenDimension().size() - 1);
-			audiHecho.setOrigen(oriIng);
-			}else{
+				origen_dimension oriDim = new origen_dimension();
+				oriDim.setDispositivo(auditoria.getOrigen());
+				audHecEJB.ingresarOrigenDimension(oriDim);
+				origen_dimension oriIng = audHecEJB.listarOrigenDimension()
+						.get(audHecEJB.listarOrigenDimension().size() - 1);
+				audiHecho.setOrigen(oriIng);
+			} else {
 				audiHecho.setOrigen(audHecEJB.buscarOrigenDimension(auditoria.getOrigen()));
 			}
-			
-			
+
 			if (verificarIngresoAuditoria(audiHecho)) {
 				audHecEJB.ingresarAuditoriaHecho(audiHecho);
 			}
@@ -304,13 +306,13 @@ public class ETLExtraccionController implements Serializable {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * 
 	 * @param navegador
 	 * @return
 	 */
-	public int verificaringresoNavegadorDimension(String navegador){
+	public int verificaringresoNavegadorDimension(String navegador) {
 		List<navegador_dimension> navDimension = audHecEJB.listarNavegadorDimension();
 		int co = 0;
 		for (int i = 0; i < navDimension.size(); i++) {
@@ -320,13 +322,13 @@ public class ETLExtraccionController implements Serializable {
 		}
 		return co;
 	}
-	
+
 	/**
 	 * 
 	 * @param navegador
 	 * @return
 	 */
-	public int verificaringresoOrigenDimension(String dispositivo){
+	public int verificaringresoOrigenDimension(String dispositivo) {
 		List<origen_dimension> navDimension = audHecEJB.listarOrigenDimension();
 		int co = 0;
 		for (int i = 0; i < navDimension.size(); i++) {
