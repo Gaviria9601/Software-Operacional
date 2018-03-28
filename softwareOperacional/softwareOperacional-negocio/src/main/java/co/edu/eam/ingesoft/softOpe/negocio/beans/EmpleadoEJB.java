@@ -2,12 +2,10 @@ package co.edu.eam.ingesoft.softOpe.negocio.beans;
 
 import java.util.List;
 
-import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -15,9 +13,7 @@ import co.edu.eam.ingesoft.softOper.entidades.Cargo;
 import co.edu.eam.ingesoft.softOper.entidades.Departamento;
 import co.edu.eam.ingesoft.softOper.entidades.Empleado;
 import co.edu.eam.ingesoft.softOper.entidades.Municipio;
-import co.edu.eam.ingesoft.softOper.entidades.TipoUsuario;
 import co.edu.eam.ingesoft.softOper.entidades.Usuario;
-import co.edu.eam.ingesoft.softOper.entidades.Venta;
 
 @LocalBean
 @Stateless
@@ -76,9 +72,10 @@ public class EmpleadoEJB {
 
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public Empleado buscarEmpleado2(int id) {
-		System.out.println(id+"*****************************");
-		Empleado pa = em.find(Empleado.class, id);
-		System.out.println(pa.getApellido() + "************"+ pa.getNombre());
+		System.out.println(id + "*****************************");
+		List<Empleado> emp = em.createNamedQuery(Empleado.BUSQUEDA_USUARIO).setParameter(1, id).getResultList();
+		Empleado pa = emp.get(0);
+		System.out.println(pa.getApellido() + "************" + pa.getNombre());
 		return pa;
 	}
 
@@ -86,6 +83,13 @@ public class EmpleadoEJB {
 	public Usuario buscarUsuario(int id) {
 		Usuario pa = em.find(Usuario.class, id);
 		return pa;
+	}
+
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	public Usuario buscarUsuarioNombre(String nombre) {
+		List<Usuario> usuarios = em.createNamedQuery(Usuario.LISTA_BUSQUEDA_USUARIO).setParameter(1, nombre)
+				.getResultList();
+		return (Usuario) usuarios.get(0);
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)

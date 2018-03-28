@@ -1,10 +1,7 @@
 package co.edu.eam.ingesoft.softOper.web.controladores;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -12,7 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
-import org.primefaces.component.log.Log;
 
 import co.edu.eam.ingesoft.softOpe.negocio.beans.AuditoriaEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.Conexion;
@@ -20,7 +16,6 @@ import co.edu.eam.ingesoft.softOpe.negocio.beans.EmpleadoEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.SeguridadEJB;
 import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
 import co.edu.eam.ingesoft.softOper.entidades.Empleado;
-import co.edu.eam.ingesoft.softOper.entidades.TipoUsuario;
 import co.edu.eam.ingesoft.softOper.entidades.Usuario;
 
 @Named("sessionControl")
@@ -50,7 +45,7 @@ public class SessionController implements Serializable {
 	private String os;
 
 	private int numVisitas;
-	
+
 	private String conexion;
 
 	@EJB
@@ -61,7 +56,7 @@ public class SessionController implements Serializable {
 
 	@EJB
 	private AuditoriaEJB audEJB;
-	
+
 	@EJB
 	private Conexion conEJB;
 
@@ -144,7 +139,6 @@ public class SessionController implements Serializable {
 	public String getUser() {
 		return user;
 	}
-	
 
 	public String getConexion() {
 		return conexion;
@@ -245,7 +239,7 @@ public class SessionController implements Serializable {
 			audi.setAccion("Ingresando al Sistema");
 			audi.setRegistroRealizoAccion("Identificacion Usuario");
 			audi.setUsuario(usuario);
-			audEJB.registrarAuditoria(audi,browserDetails);
+			audEJB.registrarAuditoria(audi, browserDetails);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

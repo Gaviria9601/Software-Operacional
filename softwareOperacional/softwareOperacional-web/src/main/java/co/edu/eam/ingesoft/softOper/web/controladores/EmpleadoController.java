@@ -1,8 +1,8 @@
 package co.edu.eam.ingesoft.softOper.web.controladores;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -20,7 +20,6 @@ import org.primefaces.context.RequestContext;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.AuditoriaEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.EmpleadoEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.SeguridadEJB;
-import co.edu.eam.ingesoft.softOpe.negocio.beans.TipoUsuarioEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
 import co.edu.eam.ingesoft.softOper.entidades.Cargo;
@@ -268,7 +267,7 @@ public class EmpleadoController implements Serializable {
 			empleado.setGenero(genero);
 			empleado.setMunicipio(m);
 			empleado.setNombre(nombre);
-			empleado.setUsuario(null);
+			empleado.setUsuario(empleadoejb.buscarUsuarioNombre("Empleado"));
 			registrarAuditoriaEmpleado("Guardar");
 			empleadoejb.crearEmpleadosinUsuario(empleado);
 			limpiar();

@@ -31,7 +31,7 @@ import co.edu.eam.ingesoft.softOper.entidades.Usuario;
 @Named("clienteEditController")
 @ViewScoped
 public class ClienteEditController implements Serializable {
-	
+
 	@Pattern(regexp = "[A-Za-z ]*", message = "Solo Letras")
 	@Length(min = 3, max = 50, message = "longitud entre 3 y 15")
 	private String nombre;
@@ -64,7 +64,7 @@ public class ClienteEditController implements Serializable {
 
 	private List<Departamento> departamentos;
 
-    private Usuario usuario;
+	private Usuario usuario;
 
 	public String getNombre() {
 		return nombre;
@@ -185,7 +185,7 @@ public class ClienteEditController implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
+
 	@EJB
 	ClienteEJB cliEJB;
 
@@ -200,41 +200,43 @@ public class ClienteEditController implements Serializable {
 
 	@EJB
 	private AuditoriaEJB audEJB;
-	
-	
+
 	@Inject
 	private SessionController sesion;
-    
+
 	@PostConstruct
 	public void inicializar() {
 		clie = cliEJB.buscarCliente(DatosManager.getCodigoCliente());
-	
+
 		nombre = clie.getNombre();
 		apellido = clie.getApellido();
-	    fechanaci = clie.getFechaNacimiento();
+		fechanaci = clie.getFechaNacimiento();
 		cedula = clie.getCedula();
-	    genero = clie.getGenero();
+		genero = clie.getGenero();
+		idMuni = clie.getMunicipioId().getId();
+		departamento = clie.getMunicipioId().getDepartamento().getNombre();
 		departamentos = empleadoejb.listardepartamentos();
-	    idMuni = clie.getMunicipioId().getId();
+		muni = empleadoejb.listarMuniporDepto(departamento);
 	}
+
 	public void onDepartamentoChange() {
 		if (departamento != null && !departamento.equals(""))
 			muni = empleadoejb.listarMuniporDepto(departamento);
 	}
-	
+
 	public String editar() {
-		
+
 		if (nombre.isEmpty() || cedula.isEmpty() || apellido.isEmpty()) {
 			Messages.addFlashGlobalWarn("Digite los campos Obligatorios");
 		} else {
 			try {
-				
+
 				clie.setApellido(apellido);
 				clie.setNombre(nombre);
 				clie.setCedula(cedula);
-		        clie.setFechaNacimiento(fechanaci);
-		        clie.setGenero(genero);
-		        clie.setMunicipioId(municipio);
+				clie.setFechaNacimiento(fechanaci);
+				clie.setGenero(genero);
+				clie.setMunicipioId(municipio);
 				cliEJB.editar(clie);
 				Messages.addFlashGlobalInfo("El cliente ha sido Editado Correctamente");
 				registrarAuditoria("Editar");
@@ -260,6 +262,7 @@ public class ClienteEditController implements Serializable {
 			e.printStackTrace();
 		}
 	}
+
 	/**
 	 * 
 	 */
@@ -276,14 +279,10 @@ public class ClienteEditController implements Serializable {
 		limpiar();
 		return "/paginas/privado/verCliente.xhtml?faces-redirect=true";
 	}
-	
-    public void resetearFitrosTabla() {
+
+	public void resetearFitrosTabla() {
 		RequestContext requestContext = RequestContext.getCurrentInstance();
 		requestContext.execute("PF('audiTable').clearFilters()");
 	}
-	
-	
-
-	
 
 }

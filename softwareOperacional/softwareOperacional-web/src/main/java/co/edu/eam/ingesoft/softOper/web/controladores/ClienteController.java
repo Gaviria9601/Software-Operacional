@@ -22,14 +22,12 @@ import co.edu.eam.ingesoft.softOpe.negocio.beans.AuditoriaEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.ClienteEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.EmpleadoEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.SeguridadEJB;
-import co.edu.eam.ingesoft.softOpe.negocio.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.softOper.entidades.Area;
 import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
 import co.edu.eam.ingesoft.softOper.entidades.Cliente;
 import co.edu.eam.ingesoft.softOper.entidades.Departamento;
 import co.edu.eam.ingesoft.softOper.entidades.Empleado;
 import co.edu.eam.ingesoft.softOper.entidades.Municipio;
-import co.edu.eam.ingesoft.softOper.entidades.Producto;
 import co.edu.eam.ingesoft.softOper.entidades.Usuario;
 
 @Named("clienteControlador")
@@ -151,10 +149,8 @@ public class ClienteController implements Serializable {
 	private String browser;
 
 	private String os;
-	
+
 	private int clientesInfo;
-	
-	
 
 	public int getClientesInfo() {
 		return clientesInfo;
@@ -355,7 +351,7 @@ public class ClienteController implements Serializable {
 	}
 
 	public void crear() {
-		
+
 		if (nombre.isEmpty() || cedula.isEmpty() || apellido.isEmpty()) {
 			Messages.addFlashGlobalWarn("Digite los campos Obligatorios");
 		} else {
@@ -365,9 +361,10 @@ public class ClienteController implements Serializable {
 				c.setNombre(nombre);
 				c.setFechaNacimiento(fechanaci);
 				c.setApellido(apellido);
+				c.setCedula(cedula);
 				c.setGenero(genero);
 				c.setMunicipioId(m);
-			    cliEJB.crearCliente(clie);
+				cliEJB.crearCliente(c);
 				Messages.addFlashGlobalInfo("Cliente ingresando Correctamente");
 				registrarAuditoria("Crear");
 				limpiar();
@@ -375,13 +372,13 @@ public class ClienteController implements Serializable {
 				Messages.addFlashGlobalError(e.getMessage());
 			}
 		}
-		
+
 	}
-	
+
 	public void buscar() {
 		registrarAuditoria("Buscar");
 	}
-	
+
 	public String procederEditar(Cliente audi) {
 		DatosManager.setCodigoCliente(audi.getCodigo());
 		return "/paginas/privado/editarCliente.xhtml?faces-redirect=true";

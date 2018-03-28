@@ -1,5 +1,6 @@
 package co.edu.eam.ingesoft.softOpe.negocio.beans;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -8,10 +9,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import co.edu.eam.ingesoft.softOper.entidades.AuditoriaWikieamHecho;
-import co.edu.eam.ingesoft.softOper.entidades.CambiosDimensionWikieam;
-import co.edu.eam.ingesoft.softOper.entidades.PaginaDimensionWikieam;
-import co.edu.eam.ingesoft.softOper.entidades.UsuarioDimensionWikieam;
 import co.edu.eam.ingesoft.softOper.entidades.auditoria_hecho;
 import co.edu.eam.ingesoft.softOper.entidades.cliente_dimension;
 import co.edu.eam.ingesoft.softOper.entidades.empleado_dimension;
@@ -32,105 +29,185 @@ public class EtlEJB extends ConexionETL {
 	@EJB
 	private MediaWikiEJB mediWikiEJB;
 
-	/**
-	 * 
-	 * @param origen
-	 */
-	public void insertarOrigen(origen_dimension origen) {
-		String consulta = "insert into origen_dimension (codigo,dispositivo)" + "values('" + origen.getCodigo() + "','"
-				+ origen.getDispositivo() + "')";
-		super.ejecutar(consulta);
+	public void procesoCarga(List<tiempo_dimension> ti, List<cliente_dimension> cli, List<navegador_dimension> na,
+			List<producto_dimension> po, List<venta_dimension> ve, List<empleado_dimension> em,
+			List<origen_dimension> ori, List<auditoria_hecho> audi, List<venta_hecho> vh) {
+
+		// TIEMPOS
+		for (tiempo_dimension tiem : ti) {
+			insertaTiempo(tiem.getCodigo(), tiem.getTrimestre(), tiem.getMes());
+		}
+
+		// CLIENTE
+		for (cliente_dimension c : cli) {
+			insertaCliente(c.getCodigo(), c.getNombre(), c.getGenero());
+		}
+
+		// NAVEGADOR
+		for (navegador_dimension d : na) {
+			insertaNavegador(d.getCodigo(), d.getNavegador());
+		}
+
+		// PRODUCTO
+		for (producto_dimension p : po) {
+			insertaProducto(p.getCodigo(), p.getNombre(), p.getPrecio(), p.getFechaingreso(), p.getCantidad());
+		}
+
+		// VENTA DIMENSION
+		for (venta_dimension v : ve) {
+			insertaVentaD(v.getCodigo(), v.getFecha(), v.getTotal(), v.getNombrevendedor(), v.getNombrecliente());
+		}
+
+		// EMPLEADO
+		for (empleado_dimension e : em) {
+			insertaEmpleado(e.getCodigo(), e.getNombre(), e.getGenero(), e.getNombrecargo());
+		}
+
+		// ORIGEN
+		for (origen_dimension og : ori) {
+			insertarOrigen(og.getCodigo(), og.getDispositivo());
+		}
+
+		// AUDITORIA
+		for (auditoria_hecho a : audi) {
+			insertaAditoria(a.getCodigo(), a.getFechaauditoria(), a.getTablaaccion(), a.getAccion(), a.getNavegador(),
+					a.getOrigen(), a.getTiempo());
+		}
+
+		// VENTA HECHO
+		for (venta_hecho g : vh) {
+			insertaVentaH(g.getCodigo(), g.getTotaldetalle(), g.getCantidad(), g.getFechaventa(),
+					g.getVenta().getCodigo(), g.getTiempo(), g.getProducto().getCodigo(),
+					g.getCliente().getCodigo(), g.getEmpleado().getCodigo());
+
+		}
 	}
 
 	/**
 	 * 
+	 * @param codigo
 	 * @param navegador
 	 */
-	public void insertarNavegador(navegador_dimension navegador) {
-		String consulta = "insert into navegador_dimension(codigo,navegador)" + "values('" + navegador.getCodigo()
-				+ "','" + navegador.getNavegador() + "')";
-		super.ejecutar(consulta);
-	}
-
-	/**
-	 * 
-	 * @param pro
-	 */
-
-	public void insertarProducto(producto_dimension pro) {
-		String consulta = "insert into producto_dimension(codigo,nombre,precio,fechaingreso,cantidad)" + "values('"
-				+ pro.getCodigo() + "','" + pro.getNombre() + "','" + pro.getPrecio() + "','" + pro.getFechaingreso()
-				+ "','" + pro.getCantidad() + "')";
-		super.ejecutar(consulta);
-	}
-
-	/**
-	 * 
-	 * @param ven
-	 */
-	public void insertarVentaD(venta_dimension ven) {
-		String consulta = "insert into venta_dimension(codigo,fecha,total,nombrevendedor,nombrecliente)" + "values('"
-				+ ven.getCodigo() + "','" + ven.getFecha() + "','" + ven.getTotal() + "','" + ven.getNombrevendedor()
-				+ "','" + ven.getNombrecliente() + "')";
-		System.out.println(consulta);
-		super.ejecutar(consulta);
-	}
-
-	/**
-	 * 
-	 * @param cli
-	 */
-	public void insertarCliente(cliente_dimension cli) {
-		String consulta = "insert into cliente_dimension(codigo,nombre,genero)" + "values('" + cli.getCodigo() + "','"
-				+ cli.getNombre() + "','" + cli.getGenero() + "')";
-		super.ejecutar(consulta);
-	}
-
-	/**
-	 * 
-	 * @param emp
-	 */
-	public void insertarEmpleado(empleado_dimension emp) {
-		String consulta = "insert into empleado_dimension(codigo,nombre,genero,nombrecargo)" + "values('"
-				+ emp.getCodigo() + "','" + emp.getNombre() + "','" + emp.getGenero() + "','" + emp.getNombrecargo()
+	public void insertarOrigen(int codigo, String dispositivo) {
+		String consulta = "insert into origen_dimension (codigo,dispositivo)" + "values(" + codigo + ",'" + dispositivo
 				+ "')";
 		super.ejecutar(consulta);
 	}
 
 	/**
 	 * 
-	 * @param audi
+	 * @param codigo
+	 * @param navegador
 	 */
-
-	public void insertarAuditoria(auditoria_hecho audi) {
-		String consulta = "insert into auditoria_hecho(codigo,accion,fechaauditoria,tablaaccion,navegador,origen,tiempo)"
-				+ "values('" + audi.getCodigo() + "','" + audi.getAccion() + "','" + audi.getFechaauditoria() + "','"
-				+ audi.getTablaaccion() + audi.getNavegador() + "','" + audi.getTiempo() + "')";
+	public void insertaNavegador(int codigo, String navegador) {
+		String consulta = "insert into navegador_dimension(codigo,navegador)" + "values(" + codigo + ",'" + navegador
+				+ "')";
 		super.ejecutar(consulta);
 	}
 
 	/**
 	 * 
-	 * @param ve
+	 * @param codigo
+	 * @param nombre
+	 * @param precio
+	 * @param fechaingreso
+	 * @param cantidad
+	 */
+	public void insertaProducto(int codigo, String nombre, int precio, Date fechaingreso, int cantidad) {
+		String consulta = "insert into producto_dimension(codigo,nombre,precio,fechaingreso,cantidad)" + "values("
+				+ codigo + ",'" + nombre + "'," + precio + ",'" + fechaingreso + "'," + cantidad + ")";
+		super.ejecutar(consulta);
+	}
+
+	/**
+	 * 
+	 * @param codigo
+	 * @param nombre
+	 * @param genero
+	 */
+	public void insertaCliente(int codigo, String nombre, String genero) {
+		String consulta = "insert into cliente_dimension(codigo,nombre,genero)" + "values(" + codigo + ",'" + nombre
+				+ "','" + genero + "')";
+		super.ejecutar(consulta);
+	}
+
+	/**
+	 * 
+	 * @param codigo
+	 * @param nombre
+	 * @param genero
+	 * @param nombrecargo
+	 */
+	public void insertaEmpleado(int codigo, String nombre, String genero, String nombrecargo) {
+		String consulta = "insert into empleado_dimension(codigo,nombre,genero,nombrecargo)" + "values(" + codigo + ",'"
+				+ nombre + "','" + genero + "','" + nombrecargo + "')";
+		super.ejecutar(consulta);
+	}
+
+	/**
+	 * 
+	 * @param codigo
+	 * @param fecha
+	 * @param total
+	 * @param nombrevendedor
+	 * @param nombrecliente
 	 */
 
-	public void insertarVentaH(venta_hecho ve) {
+	public void insertaVentaD(int codigo, Date fecha, int total, String nombrevendedor, String nombrecliente) {
+		String consulta = "insert into venta_dimension(codigo,fecha,total,nombrevendedor,nombrecliente)" + "values("
+				+ codigo + ",'" + fecha + "'," + total + ",'" + nombrevendedor + "','" + nombrecliente + "')";
+		super.ejecutar(consulta);
+	}
+
+	/**
+	 * 
+	 * @param codigo
+	 * @param fechaauditoria
+	 * @param tablaaccion
+	 * @param accion
+	 * @param navegador
+	 * @param origen
+	 * @param tiempo
+	 */
+
+	public void insertaAditoria(int codigo, Date fechaauditoria, String tablaaccion, String accion,
+			navegador_dimension navegador, origen_dimension origen, tiempo_dimension tiempo) {
+		System.out.println(tiempo);
+		String consulta = "insert into auditoria_hecho(codigo,accion,fechaauditoria,tablaaccion,navegador,origen,tiempo) "
+				+ "values(" + codigo + ",'" + accion + "','" + fechaauditoria + "','" + tablaaccion + "',"
+				+ navegador.getCodigo() + "," + origen.getCodigo() + "," + (tiempo != null ? tiempo.getCodigo() : null)  + ")";
+		super.ejecutar(consulta);
+	}
+
+	/**
+	 * 
+	 * @param codigo
+	 * @param totaldetalle
+	 * @param cantidad
+	 * @param fechaventa
+	 * @param venta
+	 * @param tiempo
+	 * @param producto
+	 * @param cliente
+	 * @param empleado
+	 */
+	public void insertaVentaH(int codigo, int totalDetalle, int cantidad, Date fecha, int venta, tiempo_dimension tiempo,
+			int producto, int cliente, int empleado) {
 		String consulta = "insert into venta_hecho(codigo,totaldetalle,cantidad,fechaventa,venta,tiempo,producto,cliente,empleado) "
-				+ "values('" + ve.getCodigo() + "','" + ve.getTotaldetalle() + "','" + ve.getCantidad() + "','"
-				+ ve.getFechaventa() + "'," + ve.getVenta().getCodigo() + "," + ve.getTiempo().getCodigo() + ","
-				+ ve.getProducto().getCodigo() + "," + ve.getCliente().getCodigo() + "," + ve.getEmpleado().getCodigo()
-				+ ")";
-		System.out.println(consulta);
+				+ "values(" + codigo + "," + totalDetalle + "," + cantidad + ",'" + fecha + "'," + venta + "," + (tiempo != null ? tiempo.getCodigo() : null )
+				+ "," + producto + "," + cliente + "," + empleado + ")";
 		super.ejecutar(consulta);
 	}
 
 	/**
 	 * 
-	 * @param tiem
+	 * @param codigo
+	 * @param trimestre
+	 * @param mes
 	 */
-	public void insertarTiempo(tiempo_dimension tiem) {
-		String consulta = "insert into tiempo_dimension(codigo,trimestre,mes)" + "values('" + tiem.getCodigo() + "','"
-				+ tiem.getTrimestre() + "','" + tiem.getMes() + "')";
+	public void insertaTiempo(int codigo, String trimestre, String mes) {
+		String consulta = "insert into tiempo_dimension(codigo,trimestre,mes)" + "values('" + codigo + "','" + trimestre
+				+ "','" + mes + "')";
 		super.ejecutar(consulta);
 	}
 
@@ -253,5 +330,4 @@ public class EtlEJB extends ConexionETL {
 		return em.find(empleado_dimension.class, codigo);
 	}
 
-	
 }

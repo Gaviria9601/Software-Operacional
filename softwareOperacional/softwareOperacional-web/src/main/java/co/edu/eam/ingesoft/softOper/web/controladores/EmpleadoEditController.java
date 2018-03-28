@@ -78,18 +78,18 @@ public class EmpleadoEditController implements Serializable{
 	public void inicializar() {
 		empleado = empleadoejb.buscarEmpleado2(DatosManager.getCodigoEmpleado2());
 		// cargando datos del empleado a editar
-		System.out.println(empleado.getNombre()+"**************************************");
-		//nombre = empleado.getNombre();
-		//apellido = empleado.getApellido();
-		//cargo = empleado.getCargo().getId();
-		//cedula = empleado.getCedula();
-		//fechaIngreso = empleado.getFechaIngresoEmpresa();
-		//fechaNacimiento = empleado.getFechaNacimiento();
-		//genero = empleado.getGenero();
-		//municipio = empleado.getMunicipio().getId();
-
+		nombre = empleado.getNombre();
+		apellido = empleado.getApellido();
+		cargo = empleado.getCargo().getId();
+		cedula = empleado.getCedula();
+		fechaIngreso = empleado.getFechaIngresoEmpresa();
+		fechaNacimiento = empleado.getFechaNacimiento();
+		genero = empleado.getGenero();
+		municipio = empleado.getMunicipio().getId();
+		departamento = empleado.getMunicipio().getDepartamento().getNombre();
 		cargos = empleadoejb.listarCargos();
 		departamentos = empleadoejb.listardepartamentos();
+		municipios = empleadoejb.listarMuniporDepto(departamento);
 	}
 
 	public String cancelar() {

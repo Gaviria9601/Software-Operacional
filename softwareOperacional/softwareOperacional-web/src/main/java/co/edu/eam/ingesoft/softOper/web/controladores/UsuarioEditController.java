@@ -1,7 +1,6 @@
 package co.edu.eam.ingesoft.softOper.web.controladores;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -105,6 +104,7 @@ public class UsuarioEditController implements Serializable {
 		fechaIngreso = empleado.getFechaIngresoEmpresa();
 		fechaNacimiento = empleado.getFechaNacimiento();
 		genero = empleado.getGenero();
+		departamento = empleado.getMunicipio().getDepartamento().getNombre();
 		municipio = empleado.getMunicipio().getId();
 
 		usu = empleado.getUsuario();
@@ -114,6 +114,8 @@ public class UsuarioEditController implements Serializable {
 		cargos = empleadoejb.listarCargos();
 		tipos = tiposejb.listarTipoUsuario();
 		departamentos = empleadoejb.listardepartamentos();
+		municipios = empleadoejb.listarMuniporDepto(departamento);
+
 	}
 
 	public String cancelar() {
@@ -130,7 +132,7 @@ public class UsuarioEditController implements Serializable {
 		municipio = -1;
 		tipoUsuario = -1;
 		cargo = -1;
-		contrasenia= null;
+		contrasenia = null;
 	}
 
 	public String editar() {
