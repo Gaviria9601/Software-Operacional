@@ -1,5 +1,8 @@
 package co.edu.eam.ingesoft.softOpe.negocio.beans;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -28,6 +31,9 @@ public class EtlEJB extends ConexionETL {
 
 	@EJB
 	private MediaWikiEJB mediWikiEJB;
+
+	@EJB
+	private Auditoria_hechoEJB audiEJB;
 
 	public void procesoCarga(List<tiempo_dimension> ti, List<cliente_dimension> cli, List<navegador_dimension> na,
 			List<producto_dimension> po, List<venta_dimension> ve, List<empleado_dimension> em,
@@ -77,10 +83,49 @@ public class EtlEJB extends ConexionETL {
 		// VENTA HECHO
 		for (venta_hecho g : vh) {
 			insertaVentaH(g.getCodigo(), g.getTotaldetalle(), g.getCantidad(), g.getFechaventa(),
-					g.getVenta().getCodigo(), g.getTiempo(), g.getProducto().getCodigo(),
-					g.getCliente().getCodigo(), g.getEmpleado().getCodigo());
+					g.getVenta().getCodigo(), g.getTiempo(), g.getProducto().getCodigo(), g.getCliente().getCodigo(),
+					g.getEmpleado().getCodigo());
 
 		}
+	}
+
+	/**
+	 * Metodo encargado de eliminar los registro del Datawehouse
+	 *
+	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
+	 * @date 24/02/2018
+	 * @version 1.0
+	 *
+	 */
+	public void eliminarRegistros() {
+
+		String sentenciaAudi = "delete from auditoria_hecho";
+		super.ejecutar(sentenciaAudi);
+
+		String sentenciaVenHech = "delete from venta_hecho";
+		super.ejecutar(sentenciaVenHech);
+
+		String sentenciaClien = "delete from cliente_dimension";
+		super.ejecutar(sentenciaClien);
+
+		String sentenciaEmpl = "delete from empleado_dimension";
+		super.ejecutar(sentenciaEmpl);
+
+		String sentenciaNave = "delete from navegador_dimension";
+		super.ejecutar(sentenciaNave);
+
+		String sentenciaOri = "delete from origen_dimension";
+		super.ejecutar(sentenciaOri);
+
+		String sentenciaTiem = "delete from tiempo_dimension";
+		super.ejecutar(sentenciaTiem);
+
+		String sentenciaVenDim = "delete from venta_dimension";
+		super.ejecutar(sentenciaVenDim);
+
+		String sentenciaPro = "delete from producto_dimension";
+		super.ejecutar(sentenciaPro);
+
 	}
 
 	/**
@@ -172,10 +217,10 @@ public class EtlEJB extends ConexionETL {
 
 	public void insertaAditoria(int codigo, Date fechaauditoria, String tablaaccion, String accion,
 			navegador_dimension navegador, origen_dimension origen, tiempo_dimension tiempo) {
-		System.out.println(tiempo);
 		String consulta = "insert into auditoria_hecho(codigo,accion,fechaauditoria,tablaaccion,navegador,origen,tiempo) "
 				+ "values(" + codigo + ",'" + accion + "','" + fechaauditoria + "','" + tablaaccion + "',"
-				+ navegador.getCodigo() + "," + origen.getCodigo() + "," + (tiempo != null ? tiempo.getCodigo() : null)  + ")";
+				+ navegador.getCodigo() + "," + origen.getCodigo() + "," + (tiempo != null ? tiempo.getCodigo() : null)
+				+ ")";
 		super.ejecutar(consulta);
 	}
 
@@ -191,12 +236,61 @@ public class EtlEJB extends ConexionETL {
 	 * @param cliente
 	 * @param empleado
 	 */
-	public void insertaVentaH(int codigo, int totalDetalle, int cantidad, Date fecha, int venta, tiempo_dimension tiempo,
-			int producto, int cliente, int empleado) {
+	public void insertaVentaH(int codigo, int totalDetalle, int cantidad, Date fecha, int venta,
+			tiempo_dimension tiempo, int producto, int cliente, int empleado) {
 		String consulta = "insert into venta_hecho(codigo,totaldetalle,cantidad,fechaventa,venta,tiempo,producto,cliente,empleado) "
-				+ "values(" + codigo + "," + totalDetalle + "," + cantidad + ",'" + fecha + "'," + venta + "," + (tiempo != null ? tiempo.getCodigo() : null )
-				+ "," + producto + "," + cliente + "," + empleado + ")";
+				+ "values(" + codigo + "," + totalDetalle + "," + cantidad + ",'" + fecha + "'," + venta + ","
+				+ (tiempo != null ? tiempo.getCodigo() : null) + "," + producto + "," + cliente + "," + empleado + ")";
 		super.ejecutar(consulta);
+	}
+
+	/**
+	 * 
+	 * <Describir el Metodo>
+	 *
+	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
+	 * @date 24/02/2018
+	 * @version <Version del metodo>
+	 *
+	 */
+	public List<auditoria_hecho> listarAuditoriasDataWarehouse() {
+		List<auditoria_hecho> lista = new ArrayList<auditoria_hecho>();
+		try {
+			String consulta = "select codigo,fechaauditoria,tablaaccion,accion,navegador,origen,tiempo from auditoria_hecho";
+			ResultSet resultado = super.ejecutarRetorno(consulta);
+			while (resultado.next()) {
+				lista.add(new auditoria_hecho(resultado.getInt(1), resultado.getDate(2), resultado.getString(3),
+						resultado.getString(4), new navegador_dimension(resultado.getInt(5)),
+						new origen_dimension(resultado.getInt(6)), new tiempo_dimension(resultado.getInt(7))));
+			}
+		} catch (SQLException e) {
+		}
+		return lista;
+	}
+
+	/**
+	 * 
+	 * <Describir el Metodo>
+	 *
+	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
+	 * @date 24/02/2018
+	 * @version <Version del metodo>
+	 *
+	 */
+	public List<venta_hecho> listarVentaDataWarehouse() {
+		List<venta_hecho> lista = new ArrayList<venta_hecho>();
+		try {
+			String consulta = "select codigo,totaldetalle,cantidad,fechaventa,venta,tiempo,producto,cliente,empleado from venta_hecho";
+			ResultSet resultado = super.ejecutarRetorno(consulta);
+			while (resultado.next()) {
+				lista.add(new venta_hecho(resultado.getInt(1), resultado.getInt(2), resultado.getInt(3),
+						resultado.getDate(4), new venta_dimension(resultado.getInt(5)),
+						new tiempo_dimension(resultado.getInt(6)), new producto_dimension(resultado.getInt(7)),
+						new cliente_dimension(resultado.getInt(8)), new empleado_dimension(resultado.getInt(9))));
+			}
+		} catch (SQLException e) {
+		}
+		return lista;
 	}
 
 	/**

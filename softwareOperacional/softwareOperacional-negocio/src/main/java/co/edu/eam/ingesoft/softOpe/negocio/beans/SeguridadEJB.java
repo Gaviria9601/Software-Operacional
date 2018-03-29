@@ -2,10 +2,8 @@ package co.edu.eam.ingesoft.softOpe.negocio.beans;
 
 import java.util.List;
 
-import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -14,9 +12,9 @@ import co.edu.eam.ingesoft.softOper.entidades.Usuario;
 
 @LocalBean
 @Stateless
-public class SeguridadEJB{
+public class SeguridadEJB {
 
-	@PersistenceContext(unitName = Conexion.OPCION )
+	@PersistenceContext(unitName = Conexion.OPCION)
 	private EntityManager em;
 
 	/**

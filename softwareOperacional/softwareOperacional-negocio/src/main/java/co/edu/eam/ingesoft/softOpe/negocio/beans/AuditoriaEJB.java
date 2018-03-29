@@ -4,13 +4,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 
 import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
 
@@ -18,10 +15,9 @@ import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
 @Stateless
 public class AuditoriaEJB {
 
-		
 	@PersistenceContext(unitName = Conexion.OPCION)
 	private EntityManager em;
-	
+
 	private String browserDetails;
 
 	private String userAgent;
@@ -36,7 +32,7 @@ public class AuditoriaEJB {
 	 * 
 	 * @param auditoria
 	 */
-	public void registrarAuditoria(Auditoria auditoria,String browserDeta) {
+	public void registrarAuditoria(Auditoria auditoria, String browserDeta) {
 		this.browserDetails = browserDeta;
 		userAgent = browserDetails;
 		user2 = userAgent.toLowerCase();
@@ -46,7 +42,7 @@ public class AuditoriaEJB {
 		auditoria.setFechaHora(generarFechaActual());
 		em.persist(auditoria);
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -134,12 +130,12 @@ public class AuditoriaEJB {
 	public List<Auditoria> listarAuditoriasArea() {
 		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "Area").getResultList();
 	}
-	
+
 	/**
 	 * 
 	 * @return
 	 */
-	public List<Auditoria> listarAuditoriaVentas(){
+	public List<Auditoria> listarAuditoriaVentas() {
 		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "Venta").getResultList();
 	}
 
@@ -147,48 +143,48 @@ public class AuditoriaEJB {
 	 * 
 	 * @return
 	 */
-	public List<Auditoria> listarAuditoriaClientes(){
+	public List<Auditoria> listarAuditoriaClientes() {
 		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "Cliente").getResultList();
 	}
-	
+
 	/**
 	 * 
 	 * @return
 	 */
-	public List<Auditoria> listarAuditoriaEmpleados(){
+	public List<Auditoria> listarAuditoriaEmpleados() {
 		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "Empleado").getResultList();
 	}
-	
+
 	/**
 	 * 
 	 * @return
 	 */
-	public List<Auditoria> listarAuditoriaInventarios(){
+	public List<Auditoria> listarAuditoriaInventarios() {
 		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "Inventario").getResultList();
 	}
-	
+
 	/**
 	 * 
 	 * @return
 	 */
-	public List<Auditoria> listarAuditoriaTiposUsuarios(){
+	public List<Auditoria> listarAuditoriaTiposUsuarios() {
 		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "TipoUsuario").getResultList();
 	}
-	
+
 	/**
 	 * 
 	 * @return
 	 */
-	public List<Auditoria> listarAuditoriaUsuarios(){
+	public List<Auditoria> listarAuditoriaUsuarios() {
 		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "Usuario").getResultList();
 	}
-	
+
 	/**
 	 * 
 	 * @return
 	 */
-	public List<Auditoria> listarAuditoriaProcesosETL(){
+	public List<Auditoria> listarAuditoriaProcesosETL() {
 		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "ETL").getResultList();
 	}
-	
+
 }

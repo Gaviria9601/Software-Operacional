@@ -34,6 +34,18 @@ public class cliente_dimension implements Serializable{
 	public cliente_dimension() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+
+	/**
+	 * @param codigo
+	 */
+	public cliente_dimension(int codigo) {
+		super();
+		this.codigo = codigo;
+	}
+
+
 
 	public cliente_dimension(int codigo, String nombre, String genero) {
 		super();

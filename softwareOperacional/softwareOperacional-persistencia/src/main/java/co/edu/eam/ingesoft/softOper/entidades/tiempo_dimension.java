@@ -11,25 +11,31 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tiempo_dimension")
-@NamedQueries({
-	@NamedQuery(name=tiempo_dimension.LISTAR_TIEMPO,query="select t from tiempo_dimension t")
-})
-public class tiempo_dimension implements Serializable{
-	
+@NamedQueries({ @NamedQuery(name = tiempo_dimension.LISTAR_TIEMPO, query = "select t from tiempo_dimension t") })
+public class tiempo_dimension implements Serializable {
+
 	public static final String LISTAR_TIEMPO = "tiempo_dimension.listarTiempo";
 
 	@Id
-	@Column(name="codigo", nullable=false)
+	@Column(name = "codigo", nullable = false)
 	private int codigo;
-	
-	@Column(name="trimestre")
+
+	@Column(name = "trimestre")
 	private String trimestre;
-	
-	@Column(name="mes")
+
+	@Column(name = "mes")
 	private String mes;
-	
+
 	public tiempo_dimension() {
 		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @param codigo
+	 */
+	public tiempo_dimension(int codigo) {
+		super();
+		this.codigo = codigo;
 	}
 
 	public tiempo_dimension(int codigo, String trimestre, String mes) {
@@ -84,8 +90,5 @@ public class tiempo_dimension implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
-	
+
 }

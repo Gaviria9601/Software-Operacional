@@ -12,24 +12,31 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "origen_dimension")
 @NamedQueries({
-	@NamedQuery(name=origen_dimension.LISTAR_ORIGEN_DIMENSION,query="select ori from origen_dimension ori"),
-	@NamedQuery(name=origen_dimension.BUSCAR_NOMBRE,query="select ori from origen_dimension ori where ORI.dispositivo=?1")
-})
-public class origen_dimension implements Serializable{
-	
+		@NamedQuery(name = origen_dimension.LISTAR_ORIGEN_DIMENSION, query = "select ori from origen_dimension ori"),
+		@NamedQuery(name = origen_dimension.BUSCAR_NOMBRE, query = "select ori from origen_dimension ori where ORI.dispositivo=?1") })
+public class origen_dimension implements Serializable {
+
 	public static final String LISTAR_ORIGEN_DIMENSION = "Origen.ListarDimension";
-	
+
 	public static final String BUSCAR_NOMBRE = "Origen.buscarNombre";
 
 	@Id
-	@Column(name="codigo", nullable=false)
+	@Column(name = "codigo", nullable = false)
 	private int codigo;
-	
-	@Column(name="dispositivo")
+
+	@Column(name = "dispositivo")
 	private String dispositivo;
-	
+
 	public origen_dimension() {
 		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @param codigo
+	 */
+	public origen_dimension(int codigo) {
+		super();
+		this.codigo = codigo;
 	}
 
 	public origen_dimension(int codigo, String dispositivo) {
@@ -75,8 +82,5 @@ public class origen_dimension implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
-	
+
 }

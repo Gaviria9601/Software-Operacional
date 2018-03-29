@@ -7,7 +7,7 @@ import javax.ejb.Stateless;
 @LocalBean
 public class Conexion {
 
-	public static final String OPCION = "primary"; 
+	public static final String OPCION = "primary";
 
 	/**
 	 * 

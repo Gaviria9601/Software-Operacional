@@ -38,6 +38,18 @@ public class venta_dimension implements Serializable{
 	public venta_dimension() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+
+	/**
+	 * @param codigo
+	 */
+	public venta_dimension(int codigo) {
+		super();
+		this.codigo = codigo;
+	}
+
+
 
 	public venta_dimension(int codigo, Date fecha, int total, String nombrevendedor, String nombrecliente) {
 		super();

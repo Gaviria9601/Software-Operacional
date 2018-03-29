@@ -7,8 +7,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import co.edu.eam.ingesoft.softOpe.negocio.excepciones.ExcepcionNegocio;
-import co.edu.eam.ingesoft.softOper.entidades.auditoria_hecho;
 import co.edu.eam.ingesoft.softOper.entidades.cliente_dimension;
 import co.edu.eam.ingesoft.softOper.entidades.empleado_dimension;
 import co.edu.eam.ingesoft.softOper.entidades.producto_dimension;
@@ -37,16 +35,15 @@ public class Ventas_hechoEJB {
 	public void ingresarProductoDimension(producto_dimension proDim) {
 		em.persist(proDim);
 	}
-	
+
 	/**
 	 * 
 	 * @param codigo
 	 * @return
 	 */
-	public producto_dimension buscarProductoDimension(int codigo){
+	public producto_dimension buscarProductoDimension(int codigo) {
 		return em.find(producto_dimension.class, codigo);
 	}
-
 
 	/**
 	 * 
@@ -55,13 +52,13 @@ public class Ventas_hechoEJB {
 	public void ingresarventaDimension(venta_dimension venDim) {
 		em.persist(venDim);
 	}
-	
+
 	/**
 	 * 
 	 * @param codigo
 	 * @return
 	 */
-	public venta_dimension buscarVentaDimension(int codigo){
+	public venta_dimension buscarVentaDimension(int codigo) {
 		return em.find(venta_dimension.class, codigo);
 	}
 
@@ -72,14 +69,15 @@ public class Ventas_hechoEJB {
 	public void ingresarempleadoDimension(empleado_dimension empDim) {
 		em.persist(empDim);
 	}
-	
+
 	/**
 	 * 
 	 * @param nombre
 	 * @return
 	 */
-	public empleado_dimension buscarEmpleadoDimension (String nombre){
-		List<empleado_dimension> empDimen = em.createNamedQuery(empleado_dimension.BUSCAR_NOMBRE_EMPLEADO).setParameter(1, nombre).getResultList();
+	public empleado_dimension buscarEmpleadoDimension(String nombre) {
+		List<empleado_dimension> empDimen = em.createNamedQuery(empleado_dimension.BUSCAR_NOMBRE_EMPLEADO)
+				.setParameter(1, nombre).getResultList();
 		return empDimen.get(0);
 	}
 
@@ -90,17 +88,17 @@ public class Ventas_hechoEJB {
 	public void ingresarclienteDimension(cliente_dimension cliDim) {
 		em.persist(cliDim);
 	}
-	
+
 	/**
 	 * 
 	 * @param nombre
 	 * @return
 	 */
-	public cliente_dimension buscarClienteDimension (String nombre){
-		List<cliente_dimension> cliDimen = em.createNamedQuery(cliente_dimension.BUSCAR_NOMBRE_CLIENTE).setParameter(1, nombre).getResultList();
+	public cliente_dimension buscarClienteDimension(String nombre) {
+		List<cliente_dimension> cliDimen = em.createNamedQuery(cliente_dimension.BUSCAR_NOMBRE_CLIENTE)
+				.setParameter(1, nombre).getResultList();
 		return cliDimen.get(0);
 	}
-	
 
 	/**
 	 * 
@@ -141,28 +139,28 @@ public class Ventas_hechoEJB {
 	public List<cliente_dimension> listarClientes() {
 		return em.createNamedQuery(cliente_dimension.LISTAR_CLIENTE_DIMENSION).getResultList();
 	}
-	
+
 	public boolean borrarMenores0() {
-		try{
+		try {
 			System.out.println("entre aqui al metodo antes de la consulta");
-	em.createQuery("delete from producto_dimension p where p.precio<0").executeUpdate();
-	System.out.println("entre aqui, ejecute la consulta!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-	return true;
-		}catch (Exception e) {
+			em.createQuery("delete from producto_dimension p where p.precio<0").executeUpdate();
+			System.out.println("entre aqui, ejecute la consulta!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			return true;
+		} catch (Exception e) {
 			// TODO: handle exception
-		return false;
+			return false;
 		}
 	}
-	
+
 	public boolean borrarMenores20() {
-		try{
+		try {
 			System.out.println("entre aqui al metodo antes de la consulta(20)");
-	em.createQuery("delete from producto_dimension p where p.precio<20000").executeUpdate();
-	System.out.println("entre aqui, ejecute la consulta(20)!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-	return true;
-		}catch (Exception e) {
+			em.createQuery("delete from producto_dimension p where p.precio<20000").executeUpdate();
+			System.out.println("entre aqui, ejecute la consulta(20)!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			return true;
+		} catch (Exception e) {
 			// TODO: handle exception
-		return false;
+			return false;
 		}
 	}
 

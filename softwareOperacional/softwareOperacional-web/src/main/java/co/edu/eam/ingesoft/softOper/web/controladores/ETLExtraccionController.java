@@ -242,7 +242,7 @@ public class ETLExtraccionController implements Serializable {
 				venHec.setProducto(venHecEJB.buscarProductoDimension(productoVenta.getProducto_codigo().getCodigo()));
 			}
 
-			if (verificaringresoEmpleadoDimension(productoVenta.getVenta_codigo().getCliente().getNombre()) == 0) {
+			if (verificaringresoEmpleadoDimension(productoVenta.getVenta_codigo().getVendedor().getNombre()) == 0) {
 				empleado_dimension empDim = new empleado_dimension();
 				empDim.setNombre(productoVenta.getVenta_codigo().getVendedor().getNombre());
 				empDim.setGenero(productoVenta.getVenta_codigo().getVendedor().getGenero());

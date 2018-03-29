@@ -15,7 +15,7 @@
 			<p:panel id="basic" header="Reglas de negocio"
 				style="margin-bottom:20px">
 				<div class="form-group">
-					<label>descartar productos con valores negativos:</label>
+					<label>Descartar productos con valores negativos: </label>
 					<p:commandButton action="#{ETLtransformacionController.borrarMenores0}"
 						process="@this" value="Aplicar regla de negocio" update="tablaIdVentas"> 
 					</p:commandButton>
@@ -23,7 +23,7 @@
 				</div>
 
 				<div class="form-group">
-					<label>descartar productos con valores menores a $20.000:</label>
+					<label>Descartar productos con valores menores a $20.000: </label>
 					<p:commandButton action="#{ETLtransformacionController.borrarMenores20}"
 						process="@this" update="tablaIdVentas" value="Aplicar regla de negocio">
 					</p:commandButton>

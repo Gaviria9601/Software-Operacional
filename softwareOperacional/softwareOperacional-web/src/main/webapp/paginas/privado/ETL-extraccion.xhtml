@@ -23,7 +23,6 @@
 			<!-- /.box-header -->
 
 			<h:form role="form">
-
 				<div class="login-logo">
 					<p:commandButton value="Extraer Datos Auditoria" ajax="false"
 						update="tablaIdAuditorias,tablaIdVentas" class="btn btn-primary"
@@ -52,15 +51,6 @@
 							emptyMessage="No se han extraido datos" border="1">
 							<f:facet name="header">
 							Tabla Hecho Auditoria
-							
-
-								
-
-								<h:commandLink>
-									<img src="#{request.contextPath}/dist/img/credit/csv.png" width="24" />
-									<p:dataExporter type="csv" target="tablaIdAuditorias" fileName="auditorias" />
-								</h:commandLink>
-
 								
 							</f:facet>
 
@@ -98,11 +88,6 @@
 							emptyMessage="No se han extraido datos" border="1">
 							<f:facet name="header">
 							Tabla Hecho Detalle Venta
-							
-							<h:commandLink>
-									<img src="#{request.contextPath}/dist/img/credit/csv.png" width="24" />
-									<p:dataExporter type="csv" target="tablaIdVentas" fileName="ventas" />
-								</h:commandLink>
 							</f:facet>
 
 							<p:column headerText="Venta">

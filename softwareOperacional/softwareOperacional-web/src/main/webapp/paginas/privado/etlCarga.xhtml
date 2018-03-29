@@ -7,12 +7,11 @@
 
 	<ui:define name="cuerpo">
 		<h2>
-			Proceso ETL<small> - carga de Datos</small>
+			Proceso ETL<small> - Carga de Datos</small>
 		</h2>
 
 		<br />
-		
-       <h:form role="form">
+
 		<div class="box box-primary">
 			<div class="box-header">
 				<h3 class="box-title">ETL - Software Operacional Gnome</h3>
@@ -20,21 +19,134 @@
 					<b>Fecha: </b>
 					<p:clock />
 				</div>
-				
-				
-				<img src="#{request.contextPath}/dist/img/credit/etl.png"
-						alt="User Image" />
-						
-				<div class="box-footer">
-				<p:commandButton value="Cargar ETL" ajax="false"
-			       class="btn btn-primary" action="#{ETLCargaController.carga}" />
-
-							
-               </div>
 			</div>
-			
+			<h:form role="form">
+				<div class="login-logo">
+					<img src="#{request.contextPath}/dist/img/credit/etl.png"
+						alt="User Image" />
+
+					<p:commandButton value="Cargar ETL" ajax="false"
+						class="btn btn-primary" action="#{ETLCargaController.carga}" />
+				</div>
+
+				<div class="row">
+					<section class="col-lg-12 connectedSortable">
+						<p:dataTable id="tablaIdAuditorias" var="audi"
+							value="#{ETLCargaController.auditorias}" widgetVar="audiTable"
+							multiViewState="true" rows="10" paginator="true"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="10,30,50"
+							emptyMessage="No se han extraido datos" border="1">
+							<f:facet name="header">
+							Tabla Hecho Auditoria
+							
+								<h:commandLink>
+									<img src="#{request.contextPath}/dist/img/credit/csv.png"
+										width="24" />
+									<p:dataExporter type="csv" target="tablaIdAuditorias"
+										fileName="Auditorias" />
+								</h:commandLink>
+
+								<h:commandLink>
+									<img src="#{request.contextPath}/dist/img/credit/excel.png"
+										width="34" />
+									<p:dataExporter type="xls" target="tablaIdAuditorias"
+										fileName="Auditorias" />
+								</h:commandLink>
+
+
+							</f:facet>
+
+							<p:column headerText="Codigo">
+								<h:outputLabel value="#{audi.codigo}" />
+							</p:column>
+
+							<p:column headerText="Accion">
+								<h:outputLabel value="#{audi.accion}" />
+							</p:column>
+
+							<p:column headerText="Fecha">
+								<h:outputLabel value="#{audi.fechaauditoria}" />
+							</p:column>
+
+							<p:column headerText="Registro Tabla">
+								<h:outputLabel value="#{audi.tablaaccion}" />
+							</p:column>
+
+							<p:column headerText="Navegador">
+								<h:outputLabel value="#{audi.navegador.codigo}" />
+							</p:column>
+
+							<p:column headerText="Sistema Operativo">
+								<h:outputLabel value="#{audi.origen.codigo}" />
+							</p:column>
+						</p:dataTable>
+					</section>
+
+				</div>
+				<br />
+				<div class="row">
+					<section class="col-lg-12 connectedSortable">
+						<p:dataTable id="tablaIdVentas" var="ven"
+							value="#{ETLCargaController.ventas}" widgetVar="venTable"
+							multiViewState="true" rows="10" paginator="true"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="10,30,50"
+							emptyMessage="No se han extraido datos" border="1">
+							<f:facet name="header">
+							Tabla Hecho Detalle Venta
+							
+							<h:commandLink>
+									<img src="#{request.contextPath}/dist/img/credit/csv.png"
+										width="24" />
+									<p:dataExporter type="csv" target="tablaIdVentas"
+										fileName="Ventas" />
+								</h:commandLink>
+								<h:commandLink>
+									<img src="#{request.contextPath}/dist/img/credit/excel.png"
+										width="34" />
+									<p:dataExporter type="xls" target="tablaIdVentas"
+										fileName="Ventas" />
+								</h:commandLink>
+							</f:facet>
+
+							<p:column headerText="Codigo">
+								<h:outputLabel value="#{ven.codigo}" />
+							</p:column>
+
+							<p:column headerText="Total">
+								<h:outputLabel value="#{ven.totaldetalle}" />
+							</p:column>
+
+							<p:column headerText="Cantidad">
+								<h:outputLabel value="#{ven.cantidad}" />
+							</p:column>
+
+							<p:column headerText="Fecha">
+								<h:outputLabel value="#{ven.fechaventa}" />
+							</p:column>
+
+							<p:column headerText="Venta">
+								<h:outputLabel value="#{ven.venta.codigo}" />
+							</p:column>
+
+							<p:column headerText="Producto">
+								<h:outputLabel value="#{ven.producto.codigo}" />
+							</p:column>
+
+							<p:column headerText="Cliente">
+								<h:outputLabel value="#{ven.cliente.codigo}" />
+							</p:column>
+
+							<p:column headerText="Empleado">
+								<h:outputLabel value="#{ven.empleado.codigo}" />
+							</p:column>
+
+						</p:dataTable>
+					</section>
+				</div>
+			</h:form>
 		</div>
-      </h:form>
 
 	</ui:define>
 

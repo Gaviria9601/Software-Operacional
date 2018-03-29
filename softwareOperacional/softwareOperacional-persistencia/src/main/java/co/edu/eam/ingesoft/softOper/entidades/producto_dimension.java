@@ -13,30 +13,37 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "producto_dimension")
 @NamedQueries({
-	@NamedQuery(name=producto_dimension.LISTAR_PRODUCTO_DIMENSION,query="select proDim from producto_dimension proDim")
-})
+		@NamedQuery(name = producto_dimension.LISTAR_PRODUCTO_DIMENSION, query = "select proDim from producto_dimension proDim") })
 public class producto_dimension implements Serializable {
-	
+
 	public static final String LISTAR_PRODUCTO_DIMENSION = "ListarProductoDimension";
 
 	@Id
-	@Column(name="codigo", nullable=false)
+	@Column(name = "codigo", nullable = false)
 	private int codigo;
-	
-	@Column(name="nombre")
+
+	@Column(name = "nombre")
 	private String nombre;
-	
-	@Column(name="precio")
+
+	@Column(name = "precio")
 	private int precio;
-	
-	@Column(name="fechaingreso")
+
+	@Column(name = "fechaingreso")
 	private Date fechaingreso;
-	
-	@Column(name="cantidad")
+
+	@Column(name = "cantidad")
 	private int cantidad;
-	
+
 	public producto_dimension() {
 		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @param codigo
+	 */
+	public producto_dimension(int codigo) {
+		super();
+		this.codigo = codigo;
 	}
 
 	public producto_dimension(int codigo, String nombre, int precio, Date fechaingreso, int cantidad) {
@@ -109,8 +116,5 @@ public class producto_dimension implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
+
 }

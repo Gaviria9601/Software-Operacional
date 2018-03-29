@@ -38,6 +38,18 @@ public class empleado_dimension implements Serializable {
 	public empleado_dimension() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+
+	/**
+	 * @param codigo
+	 */
+	public empleado_dimension(int codigo) {
+		super();
+		this.codigo = codigo;
+	}
+
+
 
 	public empleado_dimension(int codigo, String nombre, String genero, String nombrecargo) {
 		super();
