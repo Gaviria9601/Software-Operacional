@@ -89,7 +89,7 @@ public class EtlEJB extends ConexionETL {
 	 * @param navegador
 	 */
 	public void insertarOrigen(int codigo, String dispositivo) {
-		String consulta = "insert into origen_dimension (codigo,dispositivo)" + "values(" + codigo + ",'" + dispositivo
+		String consulta = "insert into origen_dimension(codigo,dispositivo)" + "values(" + codigo + ",'" + dispositivo
 				+ "')";
 		super.ejecutar(consulta);
 	}
@@ -206,8 +206,8 @@ public class EtlEJB extends ConexionETL {
 	 * @param mes
 	 */
 	public void insertaTiempo(int codigo, String trimestre, String mes) {
-		String consulta = "insert into tiempo_dimension(codigo,trimestre,mes)" + "values('" + codigo + "','" + trimestre
-				+ "','" + mes + "')";
+		String consulta = "insert into tiempo_dimension(codigo,trimestre,mes)" + "values(" + codigo + "," + trimestre
+				+ "," + mes + ")";
 		super.ejecutar(consulta);
 	}
 

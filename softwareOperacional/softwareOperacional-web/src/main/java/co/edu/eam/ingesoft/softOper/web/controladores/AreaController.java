@@ -11,13 +11,13 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.Pattern;
 
-import org.hibernate.validator.constraints.Length;
+
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 import org.primefaces.context.RequestContext;
 
-
+import org.hibernate.validator.constraints.Length;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.AreaEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.AuditoriaEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.EmpleadoEJB;
@@ -35,11 +35,11 @@ import co.edu.eam.ingesoft.softOper.entidades.Usuario;
 public class AreaController implements Serializable {
 	
 	@Pattern(regexp="[A-Za-z ]*",message="solo Letras")
-	@Length(min=3,max=50,message="longitud entre 3 y 15")
+	@Length(min=6,max=30,message="longitud entre 6 y 30")
 	private String nombre;
 	
 	@Pattern(regexp="[A-Za-z ]*",message="solo Letras")
-	@Length(min=3,max=50,message="longitud entre 10 y 2000")
+	@Length(min=10,max=2000,message="longitud entre 10 y 2000")
 	private String des;
 	
 	private int id;
@@ -271,7 +271,7 @@ public class AreaController implements Serializable {
 				ar.setDescripcion(des);
 				
 				arEJB.crear(ar);
-				Messages.addFlashGlobalInfo("El area a sido ingresanda Correctamente");
+				Messages.addFlashGlobalInfo("El area a sido ingresada correctamente");
 				registrarAuditoria("Crear");
 				limpiar();
 			} catch (Exception e) {
@@ -321,7 +321,7 @@ public class AreaController implements Serializable {
 			resetearFitrosTabla();
 			registrarAuditoria("Eliminar");
 		} catch (Exception e) {
-			Messages.addFlashGlobalError("Error al eliminar la venta");
+			Messages.addFlashGlobalError("Error al eliminar el area");
 		}
 	}
 	
