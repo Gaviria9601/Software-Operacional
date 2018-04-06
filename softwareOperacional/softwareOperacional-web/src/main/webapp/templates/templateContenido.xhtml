@@ -166,7 +166,7 @@
 					<h:panelGroup rendered="#{sessionControl.sesionUsuario}">
 						<li class="active treeview"><a
 							href="#{request.contextPath}/paginas/privado/inicio.xhtml"> <i
-								class="fa fa-dashboard"></i> <span>Dashboard</span>
+								class="fa fa-home"></i> <span>Inicio</span>
 						</a></li>
 
 						<li class="treeview"><a href="#"> <i
@@ -192,8 +192,9 @@
 								<li><a
 									href="#{request.contextPath}/paginas/privado/nuevoEmpleado.xhtml"><i
 										class="fa fa-circle-o"></i> Nuevo Empleado</a></li>
-								<li><a href="#{request.contextPath}/paginas/privado/verEmpleado.xhtml"><i class="fa fa-circle-o"></i> Ver
-										Empleados</a></li>
+								<li><a
+									href="#{request.contextPath}/paginas/privado/verEmpleado.xhtml"><i
+										class="fa fa-circle-o"></i> Ver Empleados</a></li>
 								<li><a
 									href="#{request.contextPath}/paginas/privado/auditoriaEmpleado.xhtml"><i
 										class="fa fa-circle-o"></i> Ver Registro Auditoria</a></li>
@@ -212,6 +213,10 @@
 								<li><a
 									href="#{request.contextPath}/paginas/privado/auditoriaVenta.xhtml"><i
 										class="fa fa-circle-o"></i> Ver Registro Auditoria</a></li>
+								<li class="active treeview"><a
+									href="#{request.contextPath}/paginas/privado/dashboardVenta.xhtml">
+										<i class="fa fa-circle-o"></i> <span>Dashboard</span>
+								</a></li>
 							</ul></li>
 						<li class="treeview"><a href="#"> <i class="fa fa-laptop"></i>
 								<span>CRM</span> <i class="fa fa-angle-left pull-right"></i>
@@ -278,25 +283,37 @@
 									href="#{request.contextPath}/paginas/privado/auditoriaArea.xhtml"><i
 										class="fa fa-circle-o"></i> Ver Registro Auditoria</a></li>
 							</ul></li>
-						<li class="treeview"><a href="#"> <i
-								class="fa fa-cogs"></i> <span>Proceso ETL</span><i
-								class="fa fa-angle-left pull-right"></i>
+						<li class="treeview"><a href="#"> <i class="fa fa-cogs"></i>
+								<span>Proceso ETL</span><i class="fa fa-angle-left pull-right"></i>
 						</a>
 							<ul class="treeview-menu">
-								<li><a href="#{request.contextPath}/paginas/privado/ETL-extraccion.xhtml"><i class="fa fa-circle-o"></i>
-										Extracción de Datos</a></li>
-								<li><a href="#{request.contextPath}/paginas/privado/ETL-transformacion.xhtml"> <i class="fa fa-circle-o"></i>
-										Transformación de Datos
+								<li><a
+									href="#{request.contextPath}/paginas/privado/ETL-extraccion.xhtml"><i
+										class="fa fa-circle-o"></i> Extracción de Datos</a></li>
+								<li><a
+									href="#{request.contextPath}/paginas/privado/ETL-transformacion.xhtml">
+										<i class="fa fa-circle-o"></i> Transformación de Datos
 								</a></li>
-								<li><a href="#{request.contextPath}/paginas/privado/etlCarga.xhtml"><i class="fa fa-circle-o"></i> Carga
-										de Datos</a></li>
+								<li><a
+									href="#{request.contextPath}/paginas/privado/etlCarga.xhtml"><i
+										class="fa fa-circle-o"></i> Carga de Datos</a></li>
 								<li><a
 									href="#{request.contextPath}/paginas/privado/auditoriaETL.xhtml"><i
 										class="fa fa-circle-o"></i> Ver Registro Auditoria</a></li>
 							</ul></li>
-							<li class="treeview"><a
-							href="#{request.contextPath}/paginas/privado/mediaWiki.xhtml"> <i
-								class="fa fa-university"></i> <span>Mediawiki</span></a></li>
+						<li class="treeview"><a href="#"> <i class="fa fa-cogs"></i>
+								<span>Mediawiki</span><i class="fa fa-angle-left pull-right"></i>
+						</a>
+							<ul class="treeview-menu">
+								<li class="treeview"><a
+									href="#{request.contextPath}/paginas/privado/mediaWiki.xhtml">
+										<i class="fa fa-circle-o"></i> <span>Proceso ETL</span>
+								</a></li>
+								<li class="active treeview"><a
+									href="#{request.contextPath}/paginas/privado/dashboardWikieam.xhtml">
+										<i class="fa fa-circle-o"></i> <span>Dashboard</span>
+								</a></li>
+							</ul></li>
 					</h:panelGroup>
 
 				</ul>

@@ -1,0 +1,34 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateContenido.xhtml">
+
+	<ui:define name="cuerpo">
+		<h2>
+			Wikieam<small> - Dashboard</small>
+		</h2>
+
+		<br />
+
+		<div class="box box-primary">
+			<div class="box-header">
+				<h3 class="box-title">Dashboard - Software Operacional Gnome</h3>
+				<div class="pull-right hidden-xs">
+					<b>Fecha: </b>
+					<p:clock />
+				</div>
+			</div>
+			<h:form role="form">
+				<div class="row">
+					<div align="center">
+						<iframe width="933" height="700"
+							src="https://app.powerbi.com/view?r=eyJrIjoiOGViMjlkNWEtNmNhZC00NTUzLTljMjktZDNjZGM0ZDBkOTFjIiwidCI6IjVjZDI2YTJmLTE1NTAtNDk3ZS1iZDYzLTcxNDFjNzQ2OTg1YiIsImMiOjR9"
+							frameborder="0" allowFullScreen="true"></iframe>
+					</div>
+				</div>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

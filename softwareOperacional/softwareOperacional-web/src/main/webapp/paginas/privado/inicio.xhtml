@@ -19,7 +19,9 @@
 						<div class="icon">
 							<i class="ion ion-bag"></i>
 						</div>
-						<a href="#{request.contextPath}/paginas/privado/verInventario.xhtml" class="small-box-footer">Mas Información<i
+						<a
+							href="#{request.contextPath}/paginas/privado/verInventario.xhtml"
+							class="small-box-footer">Mas Información<i
 							class="fa fa-arrow-circle-right"></i></a>
 					</div>
 				</div>
@@ -35,7 +37,8 @@
 						<div class="icon">
 							<i class="ion ion-person-add"></i>
 						</div>
-						<a href="#{request.contextPath}/paginas/privado/verEmpleado.xhtml" class="small-box-footer">Mas Información<i
+						<a href="#{request.contextPath}/paginas/privado/verEmpleado.xhtml"
+							class="small-box-footer">Mas Información<i
 							class="fa fa-arrow-circle-right"></i></a>
 					</div>
 				</div>
@@ -49,7 +52,8 @@
 						<div class="icon">
 							<i class="ion ion-ios-cart-outline"></i>
 						</div>
-						<a href="#{request.contextPath}/paginas/privado/verVenta.xhtml" class="small-box-footer">Mas Información<i
+						<a href="#{request.contextPath}/paginas/privado/verVenta.xhtml"
+							class="small-box-footer">Mas Información<i
 							class="fa fa-arrow-circle-right"></i></a>
 						<!-- /.info-box-content -->
 					</div>
@@ -66,7 +70,8 @@
 						<div class="icon">
 							<i class="ion ion-ios-people-outline"></i>
 						</div>
-						<a href="#{request.contextPath}/paginas/privado/verCliente.xhtml" class="small-box-footer">Mas Información<i
+						<a href="#{request.contextPath}/paginas/privado/verCliente.xhtml"
+							class="small-box-footer">Mas Información<i
 							class="fa fa-arrow-circle-right"></i></a>
 						<!-- /.info-box -->
 					</div>
@@ -75,85 +80,30 @@
 			</div>
 			<!-- /.row -->
 			<!-- Main row -->
-			<div class="row">
-				<!-- Left col -->
-				<section class="col-lg-7 connectedSortable">
-					<!-- Custom tabs (Charts with tabs)-->
-					<div class="nav-tabs-custom">
-						<!-- Tabs within a box -->
-						<ul class="nav nav-tabs pull-right">
-							<li class="active"><a href="#revenue-chart"
-								data-toggle="tab">Area</a></li>
-							<li><a href="#sales-chart" data-toggle="tab">Donut</a></li>
-							<li class="pull-left header"><i class="fa fa-inbox"></i>
-								Sales</li>
-						</ul>
-						<div class="tab-content no-padding">
-							<!-- Morris chart - Sales -->
-							<div class="chart tab-pane active" id="revenue-chart"
-								style="position: relative; height: 300px;"></div>
-							<div class="chart tab-pane" id="sales-chart"
-								style="position: relative; height: 300px;"></div>
+				<div class="box box-solid bg-green-gradient">
+					<div class="box-header">
+						<i class="fa fa-calendar"></i>
+						<h3 class="box-title">Calendar</h3>
+						<!-- tools box -->
+						<div class="pull-right box-tools">
+							<!-- button with a dropdown -->
+
+							<button class="btn btn-success btn-sm" data-widget="collapse">
+								<i class="fa fa-minus"></i>
+							</button>
+							<button class="btn btn-success btn-sm" data-widget="remove">
+								<i class="fa fa-times"></i>
+							</button>
 						</div>
+						<!-- /. tools -->
 					</div>
-					<!-- /.nav-tabs-custom -->
-
-				</section>
-
-
-				<section class="col-lg-5 connectedSortable">
-
-					<!-- Map box -->
-					<div class="box box-solid bg-light-blue-gradient">
-						<div class="box-header">
-							<!-- tools box -->
-							<div class="pull-right box-tools">
-								<button class="btn btn-primary btn-sm daterange pull-right"
-									data-toggle="tooltip" title="Date range">
-									<i class="fa fa-calendar"></i>
-								</button>
-								<button class="btn btn-primary btn-sm pull-right"
-									data-widget='collapse' data-toggle="tooltip" title="Collapse"
-									style="margin-right: 5px;">
-									<i class="fa fa-minus"></i>
-								</button>
-							</div>
-							<!-- /. tools -->
-
-							<i class="fa fa-map-marker"></i>
-							<h3 class="box-title">Visitors</h3>
-						</div>
-						<div class="box-body">
-							<div id="world-map" style="height: 250px; width: 100%;"></div>
-						</div>
-						<!-- /.box-body-->
-						<div class="box-footer no-border">
-							<div class="row">
-								<div class="col-xs-4 text-center"
-									style="border-right: 1px solid #f4f4f4">
-									<div id="sparkline-1"></div>
-									<div class="knob-label">Visitors</div>
-								</div>
-								<!-- ./col -->
-								<div class="col-xs-4 text-center"
-									style="border-right: 1px solid #f4f4f4">
-									<div id="sparkline-2"></div>
-									<div class="knob-label">Online</div>
-								</div>
-								<!-- ./col -->
-								<div class="col-xs-4 text-center">
-									<div id="sparkline-3"></div>
-									<div class="knob-label">Exists</div>
-								</div>
-								<!-- ./col -->
-							</div>
-							<!-- /.row -->
-						</div>
+					<!-- /.box-header -->
+					<div class="box-body no-padding">
+						<!--The calendar -->
+						<div id="calendar" style="width: 100%; height: 300px"></div>
 					</div>
-
-				</section>
-
-			</div>
+					<!-- /.box-body -->
+				</div>
 		</h:panelGroup>
 
 		<h:panelGroup rendered="#{sessionControl.sesionAdmin}">
@@ -241,8 +191,7 @@
 							<i class="ion ion-ios-gear-outline"></i>
 						</div>
 						<!-- /.info-box-content -->
-						<a href="#"
-							class="small-box-footer">Mas Información<i
+						<a href="#" class="small-box-footer">Mas Información<i
 							class="fa fa-arrow-circle-right"></i></a>
 					</div>
 					<!-- /.info-box -->
@@ -252,32 +201,76 @@
 				<!-- /.col -->
 			</div>
 			<!-- /.row -->
+				<div class="box box-solid bg-green-gradient">
+					<div class="box-header">
+						<i class="fa fa-calendar"></i>
+						<h3 class="box-title">Calendar</h3>
+						<!-- tools box -->
+						<div class="pull-right box-tools">
+							<!-- button with a dropdown -->
 
-			<div class="box box-solid bg-green-gradient">
-				<div class="box-header">
-					<i class="fa fa-calendar"></i>
-					<h3 class="box-title">Calendar</h3>
-					<!-- tools box -->
-					<div class="pull-right box-tools">
-						<!-- button with a dropdown -->
-
-						<button class="btn btn-success btn-sm" data-widget="collapse">
-							<i class="fa fa-minus"></i>
-						</button>
-						<button class="btn btn-success btn-sm" data-widget="remove">
-							<i class="fa fa-times"></i>
-						</button>
+							<button class="btn btn-success btn-sm" data-widget="collapse">
+								<i class="fa fa-minus"></i>
+							</button>
+							<button class="btn btn-success btn-sm" data-widget="remove">
+								<i class="fa fa-times"></i>
+							</button>
+						</div>
+						<!-- /. tools -->
 					</div>
-					<!-- /. tools -->
+					<!-- /.box-header -->
+					<div class="box-body no-padding">
+						<!--The calendar -->
+						<div id="calendar" style="width: 100%; height: 300px"></div>
+					</div>
+					<!-- /.box-body -->
 				</div>
-				<!-- /.box-header -->
-				<div class="box-body no-padding">
-					<!--The calendar -->
-					<div id="calendar" style="width: 100%; height: 300px"></div>
+			<div class="row">
+				<div align="center">
+					<div class='tableauPlaceholder' id='viz1522957692750'
+						style='position: relative'>
+						<noscript>
+							<a href='#'><img alt='Dashboard 1 '
+								src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Au&#47;AuditoriaBi&#47;Dashboard1&#47;1_rss.png'
+								style='border: none' /></a>
+						</noscript>
+						<object class='tableauViz' style='display: none;'>
+							<param name='host_url'
+								value='https%3A%2F%2Fpublic.tableau.com%2F' />
+							<param name='embed_code_version' value='3' />
+							<param name='site_root' value='' />
+							<param name='name' value='AuditoriaBi&#47;Dashboard1' />
+							<param name='tabs' value='no' />
+							<param name='toolbar' value='yes' />
+							<param name='static_image'
+								value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Au&#47;AuditoriaBi&#47;Dashboard1&#47;1.png' />
+							<param name='animate_transition' value='yes' />
+							<param name='display_static_image' value='yes' />
+							<param name='display_spinner' value='yes' />
+							<param name='display_overlay' value='yes' />
+							<param name='display_count' value='yes' />
+						</object>
+					</div>
+					<script type='text/javascript'>
+						var divElement = document
+								.getElementById('viz1522957692750');
+						var vizElement = divElement
+								.getElementsByTagName('object')[0];
+						vizElement.style.minWidth = '420px';
+						vizElement.style.maxWidth = '650px';
+						vizElement.style.width = '100%';
+						vizElement.style.minHeight = '587px';
+						vizElement.style.maxHeight = '887px';
+						vizElement.style.height = (divElement.offsetWidth * 0.75)
+								+ 'px';
+						var scriptElement = document.createElement('script');
+						scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+						vizElement.parentNode.insertBefore(scriptElement,
+								vizElement);
+					</script>
 				</div>
-				<!-- /.box-body -->
-
 			</div>
+
 		</h:panelGroup>
 
 	</ui:define>
