@@ -10,7 +10,9 @@ import javax.inject.Named;
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Messages;
 
+import co.edu.eam.ingesoft.softOpe.negocio.beans.Auditoria_hechoEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.EtlEJB;
+import co.edu.eam.ingesoft.softOpe.negocio.beans.Ventas_hechoEJB;
 import co.edu.eam.ingesoft.softOper.entidades.auditoria_hecho;
 import co.edu.eam.ingesoft.softOper.entidades.venta_hecho;
 
@@ -32,6 +34,12 @@ public class ETLCargaController implements Serializable {
 	 */
 	@EJB
 	private EtlEJB etljb;
+	
+	@EJB
+	private Ventas_hechoEJB venEJB;
+	
+	@EJB
+	private Auditoria_hechoEJB audEJB;
 
 	@PostConstruct
 	public void inicializar() {
@@ -65,7 +73,7 @@ public class ETLCargaController implements Serializable {
 	 *
 	 */
 	private void listarAuditorias() {
-		auditorias = etljb.listarAuditoriasDataWarehouse();
+		auditorias = audEJB.listarAuditoriasHecho();
 
 	}
 
@@ -79,7 +87,7 @@ public class ETLCargaController implements Serializable {
 	 *
 	 */
 	private void listarVentas() {
-		ventas = etljb.listarVentaDataWarehouse();
+		ventas = venEJB.listarVentasHecho();
 	}
 
 	/**
