@@ -14,7 +14,7 @@ import javax.sql.DataSource;
 /**
  * 
  * Clase encargada de la logica del negocio para el EJB de la conexion al
- * proceso ETL
+ * proceso ETL.
  * 
  * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
  * @date 15/04/2018
@@ -89,13 +89,6 @@ public class ConexionETL {
 		}
 		return true;
 	}
-
-	/**
-	 * Ejecuta una sentencia sql sin actualizar , pero si guardando informacion
-	 * 
-	 * @param sentencia
-	 *            , sentencia
-	 */
 
 	/**
 	 * 

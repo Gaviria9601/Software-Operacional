@@ -29,7 +29,7 @@ public class ClienteEJB {
 
 	/**
 	 * 
-	 * Metodo encargado de  buscar el cliente por el codigo
+	 * Metodo encargado de buscar el cliente por el codigo
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
@@ -38,6 +38,7 @@ public class ClienteEJB {
 	public Cliente buscarCliente(int codigo) {
 		return em.find(Cliente.class, codigo);
 	}
+
 	/**
 	 * 
 	 * Metodo encargado de buscar el municipio
@@ -63,6 +64,7 @@ public class ClienteEJB {
 		em.persist(c);
 
 	}
+
 	/**
 	 * 
 	 * Metodo encargado de buscar el cliente por el codigo
@@ -89,9 +91,11 @@ public class ClienteEJB {
 	public void editar(Cliente clie) {
 		em.merge(clie);
 	}
+
 	/**
 	 * 
 	 * Metodo encargado de eliminar el cliente por su codigo
+	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
 	 * @version <Numero Version>
@@ -113,6 +117,7 @@ public class ClienteEJB {
 		return em.createNamedQuery(Cliente.LISTAR_CLIENTES).getResultList();
 
 	}
+
 	/**
 	 * 
 	 * Metodo encargado de listar los clientes
@@ -127,6 +132,7 @@ public class ClienteEJB {
 		lista = em.createNamedQuery(Cliente.LISTAR_CLIENTES).getResultList();
 		return lista;
 	}
+
 	/**
 	 * 
 	 * Metodo encargado de listar los municipios
