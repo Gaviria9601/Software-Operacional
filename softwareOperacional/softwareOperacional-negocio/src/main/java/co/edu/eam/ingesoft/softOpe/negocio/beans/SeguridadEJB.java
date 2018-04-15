@@ -10,6 +10,13 @@ import javax.persistence.PersistenceContext;
 import co.edu.eam.ingesoft.softOpe.negocio.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.softOper.entidades.Usuario;
 
+/**
+ * Descripcion de la clase
+ * 
+ * @author <Nombre y Apellido> Email: <Correo>
+ * @date 15/04/2018
+ * @version <Numero Version>
+ */
 @LocalBean
 @Stateless
 public class SeguridadEJB {
@@ -34,10 +41,11 @@ public class SeguridadEJB {
 	}
 
 	/**
-	 * Registra un usuario
-	 * PRUEBA
-	 * @param u,
-	 *            usuario a registrar
+	 * 
+	 * 
+	 * @author <Nombre y Apellido> Email: <Correo>
+	 * @date 15/04/2018
+	 * @version <>
 	 */
 	public void registrarUsuario(Usuario u) {
 		if (buscarUsuario(u.getNombre()) == null) {

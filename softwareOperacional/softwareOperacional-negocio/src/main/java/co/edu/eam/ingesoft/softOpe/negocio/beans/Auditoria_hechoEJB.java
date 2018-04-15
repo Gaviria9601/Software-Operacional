@@ -12,6 +12,14 @@ import co.edu.eam.ingesoft.softOper.entidades.navegador_dimension;
 import co.edu.eam.ingesoft.softOper.entidades.origen_dimension;
 import co.edu.eam.ingesoft.softOper.entidades.tiempo_dimension;
 
+/**
+ * 
+ * Clase encargada de la logica del negocio para el EJB para la auditoria hecho
+ * 
+ * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+ * @date 15/04/2018
+ * @version <Numero Version>
+ */
 @LocalBean
 @Stateless
 public class Auditoria_hechoEJB {
@@ -21,7 +29,11 @@ public class Auditoria_hechoEJB {
 
 	/**
 	 * 
-	 * @param aud
+	 * Metodo encargado de ingresar la auditoria hecho
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void ingresarAuditoriaHecho(auditoria_hecho aud) {
 		em.persist(aud);
@@ -29,7 +41,11 @@ public class Auditoria_hechoEJB {
 
 	/**
 	 * 
-	 * @param orDim
+	 * Metodo encargado de ingresar origen dimencion
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void ingresarOrigenDimension(origen_dimension orDim) {
 		em.persist(orDim);
@@ -37,7 +53,11 @@ public class Auditoria_hechoEJB {
 
 	/**
 	 * 
-	 * @param dispositivo
+	 * Metodo encargado de buscar el origen(Desde donde estan ingresando) dimension
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public origen_dimension buscarOrigenDimension(String dispositivo) {
 		return (origen_dimension) em.createNamedQuery(origen_dimension.BUSCAR_NOMBRE).setParameter(1, dispositivo)
@@ -46,8 +66,11 @@ public class Auditoria_hechoEJB {
 
 	/**
 	 * 
-	 * @param codigo
-	 * @return
+	 * Metodo encargado de buscar el origen (desde donde estan ingresando)
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public origen_dimension buscarOrigen(int codigo) {
 		return em.find(origen_dimension.class, codigo);
@@ -55,7 +78,11 @@ public class Auditoria_hechoEJB {
 
 	/**
 	 * 
-	 * @param navDim
+	 * Metodo encargado de ingresar el navegador dimension
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void ingresarNavegadorDimension(navegador_dimension navDim) {
 		em.persist(navDim);
@@ -63,8 +90,11 @@ public class Auditoria_hechoEJB {
 
 	/**
 	 * 
-	 * @param codigo
-	 * @return
+	 * Metodo encargado de buscar el navegador
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public navegador_dimension buscarNave(int codigo) {
 		return em.find(navegador_dimension.class, codigo);
@@ -72,7 +102,11 @@ public class Auditoria_hechoEJB {
 
 	/**
 	 * 
-	 * @param dispositivo
+	 * Metodo encargado de buscar el navegador dimension
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public navegador_dimension buscarNavegadorDimension(String navegador) {
 		return (navegador_dimension) em.createNamedQuery(navegador_dimension.BUSCAR_NOMBRE).setParameter(1, navegador)
@@ -81,7 +115,11 @@ public class Auditoria_hechoEJB {
 
 	/**
 	 * 
-	 * @return
+	 * Metodo encargado de listar la auditoria hecho
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public List<auditoria_hecho> listarAuditoriasHecho() {
 		return em.createNamedQuery(auditoria_hecho.LISTAR_AUDITORIA_HECHO).getResultList();
@@ -89,7 +127,11 @@ public class Auditoria_hechoEJB {
 
 	/**
 	 * 
-	 * @return
+	 * Metodo encargado de listar el navegador dimension
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public List<navegador_dimension> listarNavegadorDimension() {
 		return em.createNamedQuery(navegador_dimension.LISTAR_NAVEGADOR_DIMENSION).getResultList();
@@ -97,7 +139,11 @@ public class Auditoria_hechoEJB {
 
 	/**
 	 * 
-	 * @return
+	 * Metodo encargado de listar el origen dimension
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public List<origen_dimension> listarOrigenDimension() {
 		return em.createNamedQuery(origen_dimension.LISTAR_ORIGEN_DIMENSION).getResultList();
@@ -105,12 +151,11 @@ public class Auditoria_hechoEJB {
 
 	/**
 	 * 
-	 * <Describir el Metodo>
-	 *
-	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
-	 * @date 24/02/2018
-	 * @version <Version del metodo>
-	 *
+	 * Metodo encargado de buscar el tiempo dimension
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public tiempo_dimension buscarTiempoDimension(Integer codigo) {
 		return codigo != null ? em.find(tiempo_dimension.class, codigo) : null;

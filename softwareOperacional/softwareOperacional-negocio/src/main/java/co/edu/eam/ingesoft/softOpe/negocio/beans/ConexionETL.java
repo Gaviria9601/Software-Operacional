@@ -11,6 +11,15 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+/**
+ * 
+ * Clase encargada de la logica del negocio para el EJB de la conexion al
+ * proceso ETL
+ * 
+ * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+ * @date 15/04/2018
+ * @version <Numero Version>
+ */
 @LocalBean
 @Stateless
 public class ConexionETL {
@@ -23,7 +32,12 @@ public class ConexionETL {
 	protected ResultSet resultadoDB;// almacena el resultado de una consulta
 
 	/**
-	 * Permite la conexion de la base de datos
+	 * 
+	 * Metodo encargado de conectar a la base de datos
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void conectar() {
 		try {
@@ -41,7 +55,12 @@ public class ConexionETL {
 	}
 
 	/**
-	 * Desconecta la conexion de la base de datos
+	 * 
+	 * Metodo encargado de desconectar a la base de datos
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void desconectar() {
 		try {
@@ -53,11 +72,12 @@ public class ConexionETL {
 	}
 
 	/**
-	 * Ejecuta una sentencia sql actualizando la bd
 	 * 
-	 * @param sentencia,
-	 *            sentencia
-	 * @return true si es verdadera la accion de lo contrario false
+	 * Metodo encargado de Ejecuta una sentencia sql actualizando la base de datos
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public boolean ejecutar(String sentencia) {
 		try {
@@ -76,6 +96,17 @@ public class ConexionETL {
 	 * @param sentencia
 	 *            , sentencia
 	 */
+
+	/**
+	 * 
+	 * Metodo encargado de Ejecuta una sentencia sql sin actualizar , pero si
+	 * guardando informacion una sentencia sql actualizando la base de datos
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
+
 	public ResultSet ejecutarRetorno(String sentencia) {
 		try {
 			conectar();

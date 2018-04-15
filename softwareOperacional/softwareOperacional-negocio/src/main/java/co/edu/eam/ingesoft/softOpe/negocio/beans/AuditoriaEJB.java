@@ -11,6 +11,14 @@ import javax.persistence.PersistenceContext;
 
 import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
 
+/**
+ * 
+ * Clase encargada de la logica del negocio para el EJB de auditoria
+ * 
+ * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+ * @date 15/04/2018
+ * @version <Numero Version>
+ */
 @LocalBean
 @Stateless
 public class AuditoriaEJB {
@@ -30,7 +38,11 @@ public class AuditoriaEJB {
 
 	/**
 	 * 
-	 * @param auditoria
+	 * Metodo encargado de registrar las auditorias
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void registrarAuditoria(Auditoria auditoria, String browserDeta) {
 		this.browserDetails = browserDeta;
@@ -45,6 +57,12 @@ public class AuditoriaEJB {
 
 	/**
 	 * 
+	 * Metodo encargado de identificar el navegador por el que esta ingresando el
+	 * usuario
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void identificarNavegadorPeticion() {
 
@@ -96,7 +114,11 @@ public class AuditoriaEJB {
 
 	/**
 	 * 
-	 * @return
+	 * Metodo encargado de listar las auditorias por la identificacion del usuario
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public List<Auditoria> listarAuditoriasIdentificacionUsuarios() {
 		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA_ID_USUARIOS).setParameter(1, "Ingreso")
@@ -105,7 +127,11 @@ public class AuditoriaEJB {
 
 	/**
 	 * 
-	 * @return
+	 * Metodo encargado listar las auditorias de los usuarios
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public List<Auditoria> listarAuditoriasIdeUsuarios() {
 		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "Identificacion Usuario")
@@ -113,9 +139,12 @@ public class AuditoriaEJB {
 	}
 
 	/**
-	 * Genera la fecha actual del sistema
 	 * 
-	 * @return
+	 * Metodo encargado de generar la fecha actual
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public Date generarFechaActual() {
 		Calendar fechaHora = Calendar.getInstance();
@@ -125,7 +154,11 @@ public class AuditoriaEJB {
 
 	/**
 	 * 
-	 * @return
+	 * Metodo encargado de listar las auditorias de las areas
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public List<Auditoria> listarAuditoriasArea() {
 		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "Area").getResultList();
@@ -133,7 +166,11 @@ public class AuditoriaEJB {
 
 	/**
 	 * 
-	 * @return
+	 * Metodo encargado de listar las auditorias de las ventas
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public List<Auditoria> listarAuditoriaVentas() {
 		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "Venta").getResultList();
@@ -141,7 +178,11 @@ public class AuditoriaEJB {
 
 	/**
 	 * 
-	 * @return
+	 * Metodo encargado de listar las auditorias de los clientes
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public List<Auditoria> listarAuditoriaClientes() {
 		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "Cliente").getResultList();
@@ -149,7 +190,11 @@ public class AuditoriaEJB {
 
 	/**
 	 * 
-	 * @return
+	 * Metodo encargado de listar las auditorias de los empleados
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public List<Auditoria> listarAuditoriaEmpleados() {
 		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "Empleado").getResultList();
@@ -157,7 +202,11 @@ public class AuditoriaEJB {
 
 	/**
 	 * 
-	 * @return
+	 * Metodo encargado de listar las auditorias del inventario
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public List<Auditoria> listarAuditoriaInventarios() {
 		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "Inventario").getResultList();
@@ -165,7 +214,11 @@ public class AuditoriaEJB {
 
 	/**
 	 * 
-	 * @return
+	 * Metodo encargado de listar las auditorias del tipo de usuario
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public List<Auditoria> listarAuditoriaTiposUsuarios() {
 		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "TipoUsuario").getResultList();
@@ -173,7 +226,11 @@ public class AuditoriaEJB {
 
 	/**
 	 * 
-	 * @return
+	 * Metodo encargado de listar las auditorias los usuarios
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public List<Auditoria> listarAuditoriaUsuarios() {
 		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "Usuario").getResultList();
@@ -181,7 +238,11 @@ public class AuditoriaEJB {
 
 	/**
 	 * 
-	 * @return
+	 * Metodo encargado de listar la auditoria del proceso ETL
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public List<Auditoria> listarAuditoriaProcesosETL() {
 		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "ETL").getResultList();
