@@ -11,9 +11,10 @@ import co.edu.eam.ingesoft.softOpe.negocio.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.softOper.entidades.Usuario;
 
 /**
- * Descripcion de la clase
  * 
- * @author <Nombre y Apellido> Email: <Correo>
+ * Clase encargada de la logica del negocio para el EJB la seguridad
+ * 
+ * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
  * @date 15/04/2018
  * @version <Numero Version>
  */
@@ -25,10 +26,12 @@ public class SeguridadEJB {
 	private EntityManager em;
 
 	/**
-	 * Busca un Usuario para saber si esta registrado
 	 * 
-	 * @param user
-	 * @return
+	 * Metodo encargado de buscar los usuarios
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public Usuario buscarUsuario(String user) {
 		List<Usuario> usuario = em.createNamedQuery(Usuario.LISTA_BUSQUEDA_USUARIO).setParameter(1, user)
@@ -42,10 +45,11 @@ public class SeguridadEJB {
 
 	/**
 	 * 
+	 * Metodo encargado de registrar los usuarios
 	 * 
-	 * @author <Nombre y Apellido> Email: <Correo>
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <>
+	 * @version <Numero Version>
 	 */
 	public void registrarUsuario(Usuario u) {
 		if (buscarUsuario(u.getNombre()) == null) {

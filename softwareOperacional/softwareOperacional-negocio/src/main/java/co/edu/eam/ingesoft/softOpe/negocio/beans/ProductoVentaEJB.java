@@ -14,6 +14,15 @@ import co.edu.eam.ingesoft.softOper.entidades.ProductoVenta;
 import co.edu.eam.ingesoft.softOper.entidades.ProductoVentaPK;
 import co.edu.eam.ingesoft.softOper.entidades.Venta;
 
+/**
+ * 
+ * Clase encargada de la logica del negocio para el EJB de las ventas de las
+ * productos
+ * 
+ * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+ * @date 15/04/2018
+ * @version <Numero Version>
+ */
 @LocalBean
 @Stateless
 public class ProductoVentaEJB {
@@ -26,7 +35,11 @@ public class ProductoVentaEJB {
 
 	/**
 	 * 
-	 * @param proVen
+	 * Metodo encargado de agregar productos a la venta
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void agregarProductoVenta(Producto producto, Venta venta, int cantidad) {
 		Producto pro = em.find(Producto.class, producto.getCodigo());
@@ -49,8 +62,11 @@ public class ProductoVentaEJB {
 
 	/**
 	 * 
-	 * @param producto
-	 * @param venta
+	 * Metodo encargado de eliminar los productos de la video
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public int eliminarProductoVenta(int producto, int venta) {
 		int totalElim;
@@ -65,8 +81,11 @@ public class ProductoVentaEJB {
 
 	/**
 	 * 
-	 * @param codigo
-	 * @return
+	 * Metodo encargado de listar los productos de la venta
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public List<ProductoVenta> listarProductosVenta(int codigo) {
 		return em.createNamedQuery(ProductoVenta.LISTAR_PRODUCTOS_VENTA).setParameter(1, codigo).getResultList();
@@ -74,7 +93,11 @@ public class ProductoVentaEJB {
 
 	/**
 	 * 
-	 * @return
+	 * Metodo encargado de listar los productos de la venta
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public List<ProductoVenta> listarProductoVenta() {
 		return em.createNamedQuery(ProductoVenta.LISTAR_PRODUCTOS_VENTA_FULL).getResultList();

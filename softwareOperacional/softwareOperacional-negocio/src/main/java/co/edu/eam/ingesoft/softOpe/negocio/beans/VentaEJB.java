@@ -9,6 +9,14 @@ import javax.persistence.PersistenceContext;
 
 import co.edu.eam.ingesoft.softOper.entidades.Venta;
 
+/**
+ * 
+ * Clase encargada de la logica del negocio para el EJB de venta
+ * 
+ * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+ * @date 15/04/2018
+ * @version <Numero Version>
+ */
 @LocalBean
 @Stateless
 public class VentaEJB {
@@ -18,7 +26,11 @@ public class VentaEJB {
 
 	/**
 	 * 
-	 * @param venta
+	 * Metodo encargado de crear las ventas
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void crearVenta(Venta venta) {
 		em.persist(venta);
@@ -26,8 +38,11 @@ public class VentaEJB {
 
 	/**
 	 * 
-	 * @param codigo
-	 * @return
+	 * Metodo encargado de buscar las ventas
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public Venta buscarVenta(int codigo) {
 		return em.find(Venta.class, codigo);
@@ -35,7 +50,11 @@ public class VentaEJB {
 
 	/**
 	 * 
-	 * @param venta
+	 * Metodo encargado de editar las ventas
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void editarVenta(Venta venta) {
 		em.merge(venta);
@@ -43,7 +62,11 @@ public class VentaEJB {
 
 	/**
 	 * 
-	 * @param codigo
+	 * Metodo encargado de eliminar las ventas
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void eliminarVenta(Integer codigo) {
 		em.remove(em.find(Venta.class, codigo));
@@ -51,7 +74,11 @@ public class VentaEJB {
 
 	/**
 	 * 
-	 * @return
+	 * Metodo encargado de listar las ventas
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public List<Venta> listarVentas() {
 		return em.createNamedQuery(Venta.LISTAR_VENTAS).getResultList();

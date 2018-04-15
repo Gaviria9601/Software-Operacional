@@ -25,7 +25,7 @@ import co.edu.eam.ingesoft.softOper.entidades.UsuarioDimensionWikieam;
  *
  * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
  * @date 24/02/2018
- * @version <Version de la clase>
+ * @version 1.0
  *
  */
 @LocalBean

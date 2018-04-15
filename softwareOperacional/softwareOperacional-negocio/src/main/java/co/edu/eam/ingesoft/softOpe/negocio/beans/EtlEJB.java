@@ -22,6 +22,14 @@ import co.edu.eam.ingesoft.softOper.entidades.tiempo_dimension;
 import co.edu.eam.ingesoft.softOper.entidades.venta_dimension;
 import co.edu.eam.ingesoft.softOper.entidades.venta_hecho;
 
+/**
+ * 
+ * Clase encargada de la logica del negocio para el EJB para el proceso de ETL
+ * 
+ * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+ * @date 15/04/2018
+ * @version <Numero Version>
+ */
 @LocalBean
 @Stateless
 public class EtlEJB extends ConexionETL {
@@ -34,6 +42,15 @@ public class EtlEJB extends ConexionETL {
 
 	@EJB
 	private Auditoria_hechoEJB audiEJB;
+
+	/**
+	 * 
+	 * Metodo encargado de realizar el proceso de carga de la ETL
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 
 	public void procesoCarga(List<tiempo_dimension> ti, List<cliente_dimension> cli, List<navegador_dimension> na,
 			List<producto_dimension> po, List<venta_dimension> ve, List<empleado_dimension> em,
@@ -130,8 +147,11 @@ public class EtlEJB extends ConexionETL {
 
 	/**
 	 * 
-	 * @param codigo
-	 * @param navegador
+	 * Metodo encargado de insertar el origen en las tablas temporales
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void insertarOrigen(int codigo, String dispositivo) {
 		String consulta = "insert into origen_dimension(codigo,dispositivo)" + "values(" + codigo + ",'" + dispositivo
@@ -141,8 +161,11 @@ public class EtlEJB extends ConexionETL {
 
 	/**
 	 * 
-	 * @param codigo
-	 * @param navegador
+	 * Metodo encargado de insertar el navegador en las tablas temporales
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void insertaNavegador(int codigo, String navegador) {
 		String consulta = "insert into navegador_dimension(codigo,navegador)" + "values(" + codigo + ",'" + navegador
@@ -152,11 +175,11 @@ public class EtlEJB extends ConexionETL {
 
 	/**
 	 * 
-	 * @param codigo
-	 * @param nombre
-	 * @param precio
-	 * @param fechaingreso
-	 * @param cantidad
+	 * Metodo encargado de insertar los productos en las tablas temporales
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void insertaProducto(int codigo, String nombre, int precio, Date fechaingreso, int cantidad) {
 		String consulta = "insert into producto_dimension(codigo,nombre,precio,fechaingreso,cantidad)" + "values("
@@ -166,9 +189,11 @@ public class EtlEJB extends ConexionETL {
 
 	/**
 	 * 
-	 * @param codigo
-	 * @param nombre
-	 * @param genero
+	 * Metodo encargado de insertar los clientes en las tablas temporales
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void insertaCliente(int codigo, String nombre, String genero) {
 		String consulta = "insert into cliente_dimension(codigo,nombre,genero)" + "values(" + codigo + ",'" + nombre
@@ -178,10 +203,11 @@ public class EtlEJB extends ConexionETL {
 
 	/**
 	 * 
-	 * @param codigo
-	 * @param nombre
-	 * @param genero
-	 * @param nombrecargo
+	 * Metodo encargado de insertar los empleados en las tablas temporales
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void insertaEmpleado(int codigo, String nombre, String genero, String nombrecargo) {
 		String consulta = "insert into empleado_dimension(codigo,nombre,genero,nombrecargo)" + "values(" + codigo + ",'"
@@ -191,11 +217,11 @@ public class EtlEJB extends ConexionETL {
 
 	/**
 	 * 
-	 * @param codigo
-	 * @param fecha
-	 * @param total
-	 * @param nombrevendedor
-	 * @param nombrecliente
+	 * Metodo encargado de insertar las ventas dimension en las tablas temporales
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 
 	public void insertaVentaD(int codigo, Date fecha, int total, String nombrevendedor, String nombrecliente) {
@@ -206,13 +232,11 @@ public class EtlEJB extends ConexionETL {
 
 	/**
 	 * 
-	 * @param codigo
-	 * @param fechaauditoria
-	 * @param tablaaccion
-	 * @param accion
-	 * @param navegador
-	 * @param origen
-	 * @param tiempo
+	 * Metodo encargado de insertar las auditorias en las tablas temporales
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 
 	public void insertaAditoria(int codigo, Date fechaauditoria, String tablaaccion, String accion,
@@ -226,15 +250,11 @@ public class EtlEJB extends ConexionETL {
 
 	/**
 	 * 
-	 * @param codigo
-	 * @param totaldetalle
-	 * @param cantidad
-	 * @param fechaventa
-	 * @param venta
-	 * @param tiempo
-	 * @param producto
-	 * @param cliente
-	 * @param empleado
+	 * Metodo encargado de insertar las ventas de hecho en las tablas temporales
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void insertaVentaH(int codigo, int totalDetalle, int cantidad, Date fecha, int venta,
 			tiempo_dimension tiempo, int producto, int cliente, int empleado) {
@@ -246,7 +266,7 @@ public class EtlEJB extends ConexionETL {
 
 	/**
 	 * 
-	 * <Describir el Metodo>
+	 * Metodo que se encarga de listar las auditorias en el datawherehouse
 	 *
 	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
 	 * @date 24/02/2018
@@ -269,8 +289,8 @@ public class EtlEJB extends ConexionETL {
 	}
 
 	/**
+	 * Metodo que se encarga de listar las ventas en el datawherehouse
 	 * 
-	 * <Describir el Metodo>
 	 *
 	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
 	 * @date 24/02/2018
@@ -294,10 +314,13 @@ public class EtlEJB extends ConexionETL {
 	}
 
 	/**
+	 * Metodo que se encarga de insertar el tiempo
 	 * 
-	 * @param codigo
-	 * @param trimestre
-	 * @param mes
+	 *
+	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
+	 * @date 24/02/2018
+	 * @version <Version del metodo>
+	 *
 	 */
 	public void insertaTiempo(int codigo, String trimestre, String mes) {
 		String consulta = "insert into tiempo_dimension(codigo,trimestre,mes)" + "values(" + codigo + "," + trimestre
@@ -306,10 +329,14 @@ public class EtlEJB extends ConexionETL {
 	}
 
 	/**
+	 * Metodo que se encarga de listar el tiempo
 	 * 
-	 * @return
+	 *
+	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
+	 * @date 24/02/2018
+	 * @version <Version del metodo>
+	 *
 	 */
-
 	public List<tiempo_dimension> listarTiempo() {
 		List<tiempo_dimension> lista;
 		lista = em.createNamedQuery(tiempo_dimension.LISTAR_TIEMPO).getResultList();
@@ -317,8 +344,13 @@ public class EtlEJB extends ConexionETL {
 	}
 
 	/**
+	 * Metodo que se encarga de listar el origen
 	 * 
-	 * @return
+	 *
+	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
+	 * @date 24/02/2018
+	 * @version <Version del metodo>
+	 *
 	 */
 
 	public List<origen_dimension> listarOrigen() {
@@ -326,10 +358,14 @@ public class EtlEJB extends ConexionETL {
 		lista = em.createNamedQuery(origen_dimension.LISTAR_ORIGEN_DIMENSION).getResultList();
 		return lista;
 	}
-
 	/**
+	 * Metodo que se encarga de listar las auditorias
 	 * 
-	 * @return
+	 *
+	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
+	 * @date 24/02/2018
+	 * @version <Version del metodo>
+	 *
 	 */
 	public List<auditoria_hecho> listarAuditoria() {
 		List<auditoria_hecho> lista;
@@ -338,8 +374,13 @@ public class EtlEJB extends ConexionETL {
 	}
 
 	/**
+	 * Metodo que se encarga de listar el cliente
 	 * 
-	 * @return
+	 *
+	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
+	 * @date 24/02/2018
+	 * @version <Version del metodo>
+	 *
 	 */
 	public List<cliente_dimension> listarCliente() {
 		List<cliente_dimension> lista;
@@ -348,8 +389,13 @@ public class EtlEJB extends ConexionETL {
 	}
 
 	/**
+	 * Metodo que se encarga de listar los empleados
 	 * 
-	 * @return
+	 *
+	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
+	 * @date 24/02/2018
+	 * @version <Version del metodo>
+	 *
 	 */
 	public List<empleado_dimension> listarEmpleado() {
 		List<empleado_dimension> lista;
@@ -358,8 +404,13 @@ public class EtlEJB extends ConexionETL {
 	}
 
 	/**
+	 * Metodo que se encarga de listar los navegadores 
 	 * 
-	 * @return
+	 *
+	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
+	 * @date 24/02/2018
+	 * @version <Version del metodo>
+	 *
 	 */
 	public List<navegador_dimension> listarNavegador() {
 		List<navegador_dimension> lista;
@@ -368,8 +419,13 @@ public class EtlEJB extends ConexionETL {
 	}
 
 	/**
+	 * Metodo que se encarga de listar los productos
 	 * 
-	 * @return
+	 *
+	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
+	 * @date 24/02/2018
+	 * @version <Version del metodo>
+	 *
 	 */
 	public List<producto_dimension> listarProducto() {
 		List<producto_dimension> lista;
@@ -378,8 +434,12 @@ public class EtlEJB extends ConexionETL {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Metodo que se encarga de listar ventas dimension
+	 *
+	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
+	 * @date 24/02/2018
+	 * @version <Version del metodo>
+	 *
 	 */
 	public List<venta_dimension> listarVentaD() {
 		List<venta_dimension> lista;
@@ -388,37 +448,49 @@ public class EtlEJB extends ConexionETL {
 	}
 
 	/**
-	 * 
-	 * @return
-	 */
-	public List<venta_hecho> listarVentaH() {
+	 * Metodo que se encarga de listar ventas hecho
+	 *
+	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
+	 * @date 24/02/2018
+	 * @version <Version del metodo>
+	 *
+	 */	public List<venta_hecho> listarVentaH() {
 		List<venta_hecho> lista;
 		lista = em.createNamedQuery(venta_hecho.LISTAR_VENTA_HECHO).getResultList();
 		return lista;
 	}
 
-	/**
-	 * 
-	 * @param codigo
-	 * @return
-	 */
+	 /**
+		 * Metodo que se encarga de buscar tiempo dimension
+		 *
+		 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
+		 * @date 24/02/2018
+		 * @version <Version del metodo>
+		 *
+		 */
 	public tiempo_dimension buscarPTiempoDimension(int codigo) {
 		return em.find(tiempo_dimension.class, codigo);
 	}
 
 	/**
-	 * 
-	 * @param codigo
-	 * @return
+	 * Metodo que se encarga de buscar los clientes dimension
+	 *
+	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
+	 * @date 24/02/2018
+	 * @version <Version del metodo>
+	 *
 	 */
 	public cliente_dimension buscarClienteDimension(int codigo) {
 		return em.find(cliente_dimension.class, codigo);
 	}
 
 	/**
-	 * 
-	 * @param codigo
-	 * @return
+	 * Metodo que se encarga de buscar los empleados dimension
+	 *
+	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
+	 * @date 24/02/2018
+	 * @version <Version del metodo>
+	 *
 	 */
 	public empleado_dimension buscarEmpleadoDimension(int codigo) {
 		return em.find(empleado_dimension.class, codigo);

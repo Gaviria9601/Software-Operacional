@@ -63,7 +63,6 @@ public class EmpleadoEJB {
 				.getResultList();
 		if (usuario.get(0) != null) {
 			e.setUsuario(usuario.get(0));
-			System.out.println(usuario.get(0).getNombre() + "************************************");
 			em.persist(e);
 		} else {
 			System.out.println("error");
