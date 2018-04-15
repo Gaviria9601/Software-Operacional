@@ -3,10 +3,8 @@ package co.edu.eam.ingesoft.softOper.entidades;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,58 +16,55 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "Producto")
-@NamedQueries({
-	@NamedQuery(name=Producto.LISTAR_PRODUCTOS,query="select pro from Producto pro"),
-	@NamedQuery(name=Producto.LISTAR_PRODUCTOS_DIF,query="select pro from Producto pro where pro.codigo<>?1")
-})
+@NamedQueries({ @NamedQuery(name = Producto.LISTAR_PRODUCTOS, query = "select pro from Producto pro"),
+		@NamedQuery(name = Producto.LISTAR_PRODUCTOS_DIF, query = "select pro from Producto pro where pro.codigo<>?1") })
 public class Producto implements Serializable {
-	
+
 	public static final String LISTAR_PRODUCTOS = "ListarProductos";
-	
+
 	public static final String LISTAR_PRODUCTOS_DIF = "ListarProductosDif";
-	
-	
+
 	@Id
-	@Column(name="codigo", nullable=false)
+	@Column(name = "codigo", nullable = false)
 	private int codigo;
-	
-	@Column(name="nombre", length=30)
+
+	@Column(name = "nombre", length = 30)
 	private String nombre;
-	
-	@Column(name="descripcion", length=2000)
+
+	@Column(name = "descripcion", length = 2000)
 	private String descripcion;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="fechaIngreso",nullable = false)
+	@Column(name = "fechaIngreso", nullable = false)
 	private Date fechaIngreso;
-	
-	@Column(name="cantidad")
+
+	@Column(name = "cantidad")
 	private int cantidad;
 
-	@Column(name="codigoLote", length=20)
+	@Column(name = "codigoLote", length = 20)
 	private String codigoLote;
-	
-	@Column(name="peso")
+
+	@Column(name = "peso")
 	private String peso;
-	
-	@Column(name="dimensiones", length=30)
+
+	@Column(name = "dimensiones", length = 30)
 	private String dimensiones;
-	
-	@Column(name="valor")
+
+	@Column(name = "valor")
 	private int valor;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "empleado", nullable=false)
+	@JoinColumn(name = "empleado", nullable = false)
 	private Empleado empleado;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "tipoProducto", nullable=false)
+	@JoinColumn(name = "tipoProducto", nullable = false)
 	private TipoProducto tipoProducto;
-	
-	public Producto(){
-		
+
+	public Producto() {
+
 	}
-	
+
 	public Producto(int codigo, String nombre, String descripcion, Date fechaIngreso, int cantidad, String codigoLote,
 			String peso, String dimensiones, int valor, Empleado empleado, TipoProducto tipoProducto) {
 		super();
@@ -86,7 +81,6 @@ public class Producto implements Serializable {
 		this.tipoProducto = tipoProducto;
 	}
 
-
 	/**
 	 * @return the codigo
 	 */
@@ -95,7 +89,8 @@ public class Producto implements Serializable {
 	}
 
 	/**
-	 * @param codigo the codigo to set
+	 * @param codigo
+	 *            the codigo to set
 	 */
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
@@ -109,7 +104,8 @@ public class Producto implements Serializable {
 	}
 
 	/**
-	 * @param nombre the nombre to set
+	 * @param nombre
+	 *            the nombre to set
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
@@ -123,7 +119,8 @@ public class Producto implements Serializable {
 	}
 
 	/**
-	 * @param descripcion the descripcion to set
+	 * @param descripcion
+	 *            the descripcion to set
 	 */
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
@@ -137,7 +134,8 @@ public class Producto implements Serializable {
 	}
 
 	/**
-	 * @param fechaIngreso the fechaIngreso to set
+	 * @param fechaIngreso
+	 *            the fechaIngreso to set
 	 */
 	public void setFechaIngreso(Date fechaIngreso) {
 		this.fechaIngreso = fechaIngreso;
@@ -151,7 +149,8 @@ public class Producto implements Serializable {
 	}
 
 	/**
-	 * @param cantidad the cantidad to set
+	 * @param cantidad
+	 *            the cantidad to set
 	 */
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
@@ -165,7 +164,8 @@ public class Producto implements Serializable {
 	}
 
 	/**
-	 * @param codigoLote the codigoLote to set
+	 * @param codigoLote
+	 *            the codigoLote to set
 	 */
 	public void setCodigoLote(String codigoLote) {
 		this.codigoLote = codigoLote;
@@ -179,7 +179,8 @@ public class Producto implements Serializable {
 	}
 
 	/**
-	 * @param peso the peso to set
+	 * @param peso
+	 *            the peso to set
 	 */
 	public void setPeso(String peso) {
 		this.peso = peso;
@@ -193,7 +194,8 @@ public class Producto implements Serializable {
 	}
 
 	/**
-	 * @param dimensiones the dimensiones to set
+	 * @param dimensiones
+	 *            the dimensiones to set
 	 */
 	public void setDimensiones(String dimensiones) {
 		this.dimensiones = dimensiones;
@@ -207,13 +209,13 @@ public class Producto implements Serializable {
 	}
 
 	/**
-	 * @param valor the valor to set
+	 * @param valor
+	 *            the valor to set
 	 */
 	public void setValor(int valor) {
 		this.valor = valor;
 	}
 
-	
 	/**
 	 * @return the tipoProducto
 	 */
@@ -222,13 +224,16 @@ public class Producto implements Serializable {
 	}
 
 	/**
-	 * @param tipoProducto the tipoProducto to set
+	 * @param tipoProducto
+	 *            the tipoProducto to set
 	 */
 	public void setTipoProducto(TipoProducto tipoProducto) {
 		this.tipoProducto = tipoProducto;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -239,7 +244,9 @@ public class Producto implements Serializable {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -264,13 +271,11 @@ public class Producto implements Serializable {
 	}
 
 	/**
-	 * @param empleado the empleado to set
+	 * @param empleado
+	 *            the empleado to set
 	 */
 	public void setEmpleado(Empleado empleado) {
 		this.empleado = empleado;
 	}
 
-
-	
-	
 }

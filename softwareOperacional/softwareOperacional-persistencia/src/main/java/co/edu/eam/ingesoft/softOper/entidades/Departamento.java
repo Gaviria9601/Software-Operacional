@@ -10,23 +10,21 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Departamento")
-@NamedQueries({
-	@NamedQuery(name=Departamento.LISTAR_DEPTOS,query="select d from Departamento d")
-})
-public class Departamento implements Serializable{
-	
+@Table(name = "Departamento")
+@NamedQueries({ @NamedQuery(name = Departamento.LISTAR_DEPTOS, query = "select d from Departamento d") })
+public class Departamento implements Serializable {
+
 	public static final String LISTAR_DEPTOS = "listarDeptos";
 
 	@Id
-	@Column(name="id", nullable=false)
+	@Column(name = "id", nullable = false)
 	private int id;
-	
-	@Column(name="nombre", length=20)
+
+	@Column(name = "nombre", length = 20)
 	private String nombre;
-	
-	public Departamento(){
-		
+
+	public Departamento() {
+
 	}
 
 	/**
@@ -37,7 +35,8 @@ public class Departamento implements Serializable{
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(int id) {
 		this.id = id;
@@ -51,13 +50,16 @@ public class Departamento implements Serializable{
 	}
 
 	/**
-	 * @param nombre the nombre to set
+	 * @param nombre
+	 *            the nombre to set
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -68,7 +70,9 @@ public class Departamento implements Serializable{
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -84,6 +88,5 @@ public class Departamento implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
+
 }

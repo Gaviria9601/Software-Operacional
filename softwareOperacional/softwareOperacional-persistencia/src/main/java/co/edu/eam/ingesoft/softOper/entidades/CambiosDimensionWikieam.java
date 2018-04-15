@@ -19,7 +19,7 @@ import javax.persistence.Table;
 public class CambiosDimensionWikieam implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	public static final String LISTAR_CDW = "CambiosDimensionWikieam.Listarcde";
 
 	@Id
@@ -45,8 +45,6 @@ public class CambiosDimensionWikieam implements Serializable {
 		super();
 	}
 
-	
-
 	/**
 	 * @param codigo
 	 * @param fechaC
@@ -63,8 +61,6 @@ public class CambiosDimensionWikieam implements Serializable {
 		this.numeroLineasE = numeroLineasE;
 	}
 
-
-
 	/**
 	 * @return the codigo
 	 */
@@ -80,8 +76,6 @@ public class CambiosDimensionWikieam implements Serializable {
 		this.codigo = codigo;
 	}
 
-	
-	
 	/**
 	 * @return the fechaC
 	 */
@@ -89,16 +83,13 @@ public class CambiosDimensionWikieam implements Serializable {
 		return fechaC;
 	}
 
-
-
 	/**
-	 * @param fechaC the fechaC to set
+	 * @param fechaC
+	 *            the fechaC to set
 	 */
 	public void setFechaC(Date fechaC) {
 		this.fechaC = fechaC;
 	}
-
-
 
 	/**
 	 * @return the fechaE
@@ -107,16 +98,13 @@ public class CambiosDimensionWikieam implements Serializable {
 		return fechaE;
 	}
 
-
-
 	/**
-	 * @param fechaE the fechaE to set
+	 * @param fechaE
+	 *            the fechaE to set
 	 */
 	public void setFechaE(Date fechaE) {
 		this.fechaE = fechaE;
 	}
-
-
 
 	/**
 	 * @return the numeroLineasC
@@ -125,16 +113,13 @@ public class CambiosDimensionWikieam implements Serializable {
 		return numeroLineasC;
 	}
 
-
-
 	/**
-	 * @param numeroLineasC the numeroLineasC to set
+	 * @param numeroLineasC
+	 *            the numeroLineasC to set
 	 */
 	public void setNumeroLineasC(int numeroLineasC) {
 		this.numeroLineasC = numeroLineasC;
 	}
-
-
 
 	/**
 	 * @return the numeroLineasE
@@ -143,16 +128,13 @@ public class CambiosDimensionWikieam implements Serializable {
 		return numeroLineasE;
 	}
 
-
-
 	/**
-	 * @param numeroLineasE the numeroLineasE to set
+	 * @param numeroLineasE
+	 *            the numeroLineasE to set
 	 */
 	public void setNumeroLineasE(int numeroLineasE) {
 		this.numeroLineasE = numeroLineasE;
 	}
-
-
 
 	/*
 	 * (non-Javadoc)

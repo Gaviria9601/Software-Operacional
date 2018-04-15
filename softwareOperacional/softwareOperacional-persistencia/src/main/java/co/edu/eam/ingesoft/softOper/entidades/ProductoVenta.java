@@ -16,54 +16,47 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="ProductoVenta")
+@Table(name = "ProductoVenta")
 @IdClass(ProductoVentaPK.class)
 @NamedQueries({
-	@NamedQuery(name=ProductoVenta.LISTAR_PRODUCTOS_VENTA,query="select proVen from ProductoVenta proVen where proVen.venta_codigo.codigo=?1"),
-	@NamedQuery(name=ProductoVenta.LISTAR_PRODUCTOS_VENTA_FULL,query="select proVen from ProductoVenta proVen")
-})
-public class ProductoVenta implements Serializable{
-	
+		@NamedQuery(name = ProductoVenta.LISTAR_PRODUCTOS_VENTA, query = "select proVen from ProductoVenta proVen where proVen.venta_codigo.codigo=?1"),
+		@NamedQuery(name = ProductoVenta.LISTAR_PRODUCTOS_VENTA_FULL, query = "select proVen from ProductoVenta proVen") })
+public class ProductoVenta implements Serializable {
+
 	public static final String LISTAR_PRODUCTOS_VENTA = "ListarProductosVenta";
-	
+
 	public static final String LISTAR_PRODUCTOS_VENTA_FULL = "ListarProdcutosVentaFull";
 
 	@Id
 	@ManyToOne
-	@JoinColumn(name="producto")
+	@JoinColumn(name = "producto")
 	private Producto producto_codigo;
-	
+
 	@Id
 	@ManyToOne
-	@JoinColumn(name="venta")
+	@JoinColumn(name = "venta")
 	private Venta venta_codigo;
-	
-	@JoinColumn(name="cantidad")
+
+	@JoinColumn(name = "cantidad")
 	private int cantidad;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="fecha",nullable = false)
+	@Column(name = "fecha", nullable = false)
 	private Date fecha;
-	
-	@Column(name="total")
+
+	@Column(name = "total")
 	private int total;
 
-	public ProductoVenta(){
+	public ProductoVenta() {
 	}
 
-	
-	
 	public int getCantidad() {
 		return cantidad;
 	}
 
-
-
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
-
-
 
 	/**
 	 * @return the producto_codigo
@@ -73,7 +66,8 @@ public class ProductoVenta implements Serializable{
 	}
 
 	/**
-	 * @param producto_codigo the producto_codigo to set
+	 * @param producto_codigo
+	 *            the producto_codigo to set
 	 */
 	public void setProducto_codigo(Producto producto_codigo) {
 		this.producto_codigo = producto_codigo;
@@ -87,7 +81,8 @@ public class ProductoVenta implements Serializable{
 	}
 
 	/**
-	 * @param venta_codigo the venta_codigo to set
+	 * @param venta_codigo
+	 *            the venta_codigo to set
 	 */
 	public void setVenta_codigo(Venta venta_codigo) {
 		this.venta_codigo = venta_codigo;
@@ -101,7 +96,8 @@ public class ProductoVenta implements Serializable{
 	}
 
 	/**
-	 * @param fecha the fecha to set
+	 * @param fecha
+	 *            the fecha to set
 	 */
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
@@ -115,13 +111,16 @@ public class ProductoVenta implements Serializable{
 	}
 
 	/**
-	 * @param total the total to set
+	 * @param total
+	 *            the total to set
 	 */
 	public void setTotal(int total) {
 		this.total = total;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -133,7 +132,9 @@ public class ProductoVenta implements Serializable{
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -162,10 +163,4 @@ public class ProductoVenta implements Serializable{
 	 * @return the producto
 	 */
 
-	
-	
-	
-
 }
-
-

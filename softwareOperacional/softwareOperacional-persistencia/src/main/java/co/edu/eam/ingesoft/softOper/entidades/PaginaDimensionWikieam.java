@@ -57,8 +57,6 @@ public class PaginaDimensionWikieam implements Serializable {
 		this.tituloPagina = tituloPagina;
 	}
 
-	
-
 	/**
 	 * @return the codigo
 	 */
@@ -67,7 +65,8 @@ public class PaginaDimensionWikieam implements Serializable {
 	}
 
 	/**
-	 * @param codigo the codigo to set
+	 * @param codigo
+	 *            the codigo to set
 	 */
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
@@ -81,13 +80,16 @@ public class PaginaDimensionWikieam implements Serializable {
 	}
 
 	/**
-	 * @param tituloPagina the tituloPagina to set
+	 * @param tituloPagina
+	 *            the tituloPagina to set
 	 */
 	public void setTituloPagina(String tituloPagina) {
 		this.tituloPagina = tituloPagina;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -98,7 +100,9 @@ public class PaginaDimensionWikieam implements Serializable {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -114,8 +118,5 @@ public class PaginaDimensionWikieam implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
 
 }

@@ -3,10 +3,8 @@ package co.edu.eam.ingesoft.softOper.entidades;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,59 +18,58 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "Empleado")
 @NamedQueries({
-	@NamedQuery(name=Empleado.BUSQUEDA__POR_USUARIO,query="select emp from Empleado emp where emp.Usuario.id= ?1"),
-	@NamedQuery(name=Empleado.LISTAR_EMPLEADOS,query="select emp from Empleado emp"),
-	@NamedQuery(name=Empleado.BUSQUEDA_USUARIO,query="select emp from Empleado emp where emp.codigo=?1")
-})
+		@NamedQuery(name = Empleado.BUSQUEDA__POR_USUARIO, query = "select emp from Empleado emp where emp.Usuario.id= ?1"),
+		@NamedQuery(name = Empleado.LISTAR_EMPLEADOS, query = "select emp from Empleado emp"),
+		@NamedQuery(name = Empleado.BUSQUEDA_USUARIO, query = "select emp from Empleado emp where emp.codigo=?1") })
 public class Empleado implements Serializable {
 
 	public static final String BUSQUEDA__POR_USUARIO = "Empleado.BusquedaPorUsuario";
-	
+
 	public static final String LISTAR_EMPLEADOS = "Empleado.ListarEmpleados";
-	
+
 	public static final String BUSQUEDA_USUARIO = "Empleado.busarUsuario";
-	
+
 	@Id
-	@Column(name="codigo", nullable=false)
+	@Column(name = "codigo", nullable = false)
 	private int codigo;
-	
-	@Column(name="nombre", length=30)
+
+	@Column(name = "nombre", length = 30)
 	private String nombre;
-	
-	@Column(name="apellido", length=30)
+
+	@Column(name = "apellido", length = 30)
 	private String apellido;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="fechaNacimiento",nullable = false)
+	@Column(name = "fechaNacimiento", nullable = false)
 	private Date fechaNacimiento;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="fechaIngresoEmpresa",nullable = false)
+	@Column(name = "fechaIngresoEmpresa", nullable = false)
 	private Date fechaIngresoEmpresa;
 
-	@Column(name="cedula", length=10)
+	@Column(name = "cedula", length = 10)
 	private String cedula;
-	
-	@Column(name="genero", length=1)
+
+	@Column(name = "genero", length = 1)
 	private String genero;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "municipio", nullable=false)
+	@JoinColumn(name = "municipio", nullable = false)
 	private Municipio municipio;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "cargo", nullable=false)
+	@JoinColumn(name = "cargo", nullable = false)
 	private Cargo cargo;
 
 	@OneToOne
-	@JoinColumn(name = "usuario", nullable=false)
+	@JoinColumn(name = "usuario", nullable = false)
 	private Usuario Usuario;
 
-	public Empleado(){
+	public Empleado() {
 	}
-	
-	public Empleado(String nombre, String apellido, Date fechaNacimiento, Date fechaIngresoEmpresa,
-			String cedula, String genero, Municipio municipio, Cargo cargo, Usuario usuario) {
+
+	public Empleado(String nombre, String apellido, Date fechaNacimiento, Date fechaIngresoEmpresa, String cedula,
+			String genero, Municipio municipio, Cargo cargo, Usuario usuario) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -85,8 +82,6 @@ public class Empleado implements Serializable {
 		Usuario = usuario;
 	}
 
-
-
 	/**
 	 * @return the codigo
 	 */
@@ -95,7 +90,8 @@ public class Empleado implements Serializable {
 	}
 
 	/**
-	 * @param codigo the codigo to set
+	 * @param codigo
+	 *            the codigo to set
 	 */
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
@@ -109,7 +105,8 @@ public class Empleado implements Serializable {
 	}
 
 	/**
-	 * @param nombre the nombre to set
+	 * @param nombre
+	 *            the nombre to set
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
@@ -123,7 +120,8 @@ public class Empleado implements Serializable {
 	}
 
 	/**
-	 * @param apellido the apellido to set
+	 * @param apellido
+	 *            the apellido to set
 	 */
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
@@ -137,7 +135,8 @@ public class Empleado implements Serializable {
 	}
 
 	/**
-	 * @param fechaNacimiento the fechaNacimiento to set
+	 * @param fechaNacimiento
+	 *            the fechaNacimiento to set
 	 */
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
@@ -151,7 +150,8 @@ public class Empleado implements Serializable {
 	}
 
 	/**
-	 * @param fechaIngresoEmpresa the fechaIngresoEmpresa to set
+	 * @param fechaIngresoEmpresa
+	 *            the fechaIngresoEmpresa to set
 	 */
 	public void setFechaIngresoEmpresa(Date fechaIngresoEmpresa) {
 		this.fechaIngresoEmpresa = fechaIngresoEmpresa;
@@ -165,7 +165,8 @@ public class Empleado implements Serializable {
 	}
 
 	/**
-	 * @param cedula the cedula to set
+	 * @param cedula
+	 *            the cedula to set
 	 */
 	public void setCedula(String cedula) {
 		this.cedula = cedula;
@@ -179,14 +180,16 @@ public class Empleado implements Serializable {
 	}
 
 	/**
-	 * @param genero the genero to set
+	 * @param genero
+	 *            the genero to set
 	 */
 	public void setGenero(String genero) {
 		this.genero = genero;
 	}
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -197,7 +200,9 @@ public class Empleado implements Serializable {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -222,7 +227,8 @@ public class Empleado implements Serializable {
 	}
 
 	/**
-	 * @param municipio the municipio to set
+	 * @param municipio
+	 *            the municipio to set
 	 */
 	public void setMunicipio(Municipio municipio) {
 		this.municipio = municipio;
@@ -236,7 +242,8 @@ public class Empleado implements Serializable {
 	}
 
 	/**
-	 * @param cargo the cargo to set
+	 * @param cargo
+	 *            the cargo to set
 	 */
 	public void setCargo(Cargo cargo) {
 		this.cargo = cargo;
@@ -250,11 +257,11 @@ public class Empleado implements Serializable {
 	}
 
 	/**
-	 * @param usuario the usuario to set
+	 * @param usuario
+	 *            the usuario to set
 	 */
 	public void setUsuario(Usuario usuario) {
 		Usuario = usuario;
 	}
-	
-	
+
 }

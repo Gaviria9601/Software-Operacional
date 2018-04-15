@@ -1,7 +1,6 @@
 package co.edu.eam.ingesoft.softOper.entidades;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,33 +12,30 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "empleado_dimension")
 @NamedQueries({
-	@NamedQuery(name=empleado_dimension.LISTAR_EMPLEADO_DIMENSION,query="select emp from empleado_dimension emp"),
-	@NamedQuery(name=empleado_dimension.BUSCAR_NOMBRE_EMPLEADO,query="select emp from empleado_dimension emp where emp.nombre=?1")
-})
+		@NamedQuery(name = empleado_dimension.LISTAR_EMPLEADO_DIMENSION, query = "select emp from empleado_dimension emp"),
+		@NamedQuery(name = empleado_dimension.BUSCAR_NOMBRE_EMPLEADO, query = "select emp from empleado_dimension emp where emp.nombre=?1") })
 public class empleado_dimension implements Serializable {
-	
+
 	public static final String LISTAR_EMPLEADO_DIMENSION = "ListarEmpleadoDimension";
-	
+
 	public static final String BUSCAR_NOMBRE_EMPLEADO = "BuscarNombre";
 
 	@Id
-	@Column(name="codigo", nullable=false)
+	@Column(name = "codigo", nullable = false)
 	private int codigo;
-	
-	@Column(name="nombre")
+
+	@Column(name = "nombre")
 	private String nombre;
-	
-	@Column(name="genero")
+
+	@Column(name = "genero")
 	private String genero;
-	
-	@Column(name="nombrecargo")
+
+	@Column(name = "nombrecargo")
 	private String nombrecargo;
-	
+
 	public empleado_dimension() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
 
 	/**
 	 * @param codigo
@@ -48,8 +44,6 @@ public class empleado_dimension implements Serializable {
 		super();
 		this.codigo = codigo;
 	}
-
-
 
 	public empleado_dimension(int codigo, String nombre, String genero, String nombrecargo) {
 		super();
@@ -112,7 +106,5 @@ public class empleado_dimension implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
+
 }

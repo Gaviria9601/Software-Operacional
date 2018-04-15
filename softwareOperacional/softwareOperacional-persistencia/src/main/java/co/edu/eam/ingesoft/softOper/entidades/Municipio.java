@@ -13,30 +13,28 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Municipio")
-@NamedQueries({
-    @NamedQuery (name=Municipio.LISTAR_MUNI, query="select a from Municipio a"),
-    @NamedQuery (name=Municipio.LISTAR_MUNIPorDepto, query="select a from Municipio a where a.departamento.nombre = ?1")
-  
+@NamedQueries({ @NamedQuery(name = Municipio.LISTAR_MUNI, query = "select a from Municipio a"),
+		@NamedQuery(name = Municipio.LISTAR_MUNIPorDepto, query = "select a from Municipio a where a.departamento.nombre = ?1")
+
 })
-public class Municipio implements Serializable{
-	
-	
+public class Municipio implements Serializable {
+
 	public static final String LISTAR_MUNI = "ListarMunici";
 	public static final String LISTAR_MUNIPorDepto = "listatMunixDepto";
-	
+
 	@Id
-	@Column(name="id", nullable=false)
+	@Column(name = "id", nullable = false)
 	private int id;
-	
-	@Column(name="nombre", length=20)
+
+	@Column(name = "nombre", length = 20)
 	private String nombre;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "departamento", nullable=false)
+	@JoinColumn(name = "departamento", nullable = false)
 	private Departamento departamento;
-	
-	public Municipio(){
-		
+
+	public Municipio() {
+
 	}
 
 	/**
@@ -47,7 +45,8 @@ public class Municipio implements Serializable{
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(int id) {
 		this.id = id;
@@ -61,14 +60,16 @@ public class Municipio implements Serializable{
 	}
 
 	/**
-	 * @param nombre the nombre to set
+	 * @param nombre
+	 *            the nombre to set
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -79,7 +80,9 @@ public class Municipio implements Serializable{
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -104,7 +107,8 @@ public class Municipio implements Serializable{
 	}
 
 	/**
-	 * @param departamento the departamento to set
+	 * @param departamento
+	 *            the departamento to set
 	 */
 	public void setDepartamento(Departamento departamento) {
 		this.departamento = departamento;
