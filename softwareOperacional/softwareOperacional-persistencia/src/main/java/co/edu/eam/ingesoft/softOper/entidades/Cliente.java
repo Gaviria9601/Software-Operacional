@@ -16,54 +16,47 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "Cliente")
-@NamedQueries({
-	@NamedQuery(name=Cliente.LISTAR_CLIENTES,query="select c from Cliente c"),
-})
+@NamedQueries({ @NamedQuery(name = Cliente.LISTAR_CLIENTES, query = "select c from Cliente c"), })
 public class Cliente implements Serializable {
-	
+
 	public static final String LISTAR_CLIENTES = "ListarClientes";
-	
+
 	@Id
-	@Column(name="codigo", nullable=false)
+	@Column(name = "codigo", nullable = false)
 	private int codigo;
-	
-	@Column(name="nombre", length=30)
+
+	@Column(name = "nombre", length = 30)
 	private String nombre;
-	
-	@Column(name="apellido", length=30)
+
+	@Column(name = "apellido", length = 30)
 	private String apellido;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="fechaNacimiento",nullable = false)
+	@Column(name = "fechaNacimiento", nullable = false)
 	private Date fechaNacimiento;
 
-	@Column(name="cedula", length=10)
+	@Column(name = "cedula", length = 10)
 	private String cedula;
 
-
-	@Column(name="genero", length=1)
+	@Column(name = "genero", length = 1)
 	private String genero;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "municipioNacimiento", nullable=false)
+	@JoinColumn(name = "municipioNacimiento", nullable = false)
 	private Municipio municipioId;
-	
-	public Cliente(){
-		
+
+	public Cliente() {
+
 	}
-	
-	
 
 	public static String getListarClientes() {
 		return LISTAR_CLIENTES;
 	}
 
-
-
 	public Cliente(String nombre, String apellido, Date fechaNacimiento, String cedula, String genero,
 			Municipio municipioId) {
 		super();
-		
+
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.fechaNacimiento = fechaNacimiento;
@@ -71,8 +64,6 @@ public class Cliente implements Serializable {
 		this.genero = genero;
 		this.municipioId = municipioId;
 	}
-
-
 
 	/**
 	 * @return the codigo
@@ -82,7 +73,8 @@ public class Cliente implements Serializable {
 	}
 
 	/**
-	 * @param codigo the codigo to set
+	 * @param codigo
+	 *            the codigo to set
 	 */
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
@@ -96,7 +88,8 @@ public class Cliente implements Serializable {
 	}
 
 	/**
-	 * @param nombre the nombre to set
+	 * @param nombre
+	 *            the nombre to set
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
@@ -110,7 +103,8 @@ public class Cliente implements Serializable {
 	}
 
 	/**
-	 * @param apellido the apellido to set
+	 * @param apellido
+	 *            the apellido to set
 	 */
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
@@ -124,7 +118,8 @@ public class Cliente implements Serializable {
 	}
 
 	/**
-	 * @param fechaNacimiento the fechaNacimiento to set
+	 * @param fechaNacimiento
+	 *            the fechaNacimiento to set
 	 */
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
@@ -138,7 +133,8 @@ public class Cliente implements Serializable {
 	}
 
 	/**
-	 * @param cedula the cedula to set
+	 * @param cedula
+	 *            the cedula to set
 	 */
 	public void setCedula(String cedula) {
 		this.cedula = cedula;
@@ -152,7 +148,8 @@ public class Cliente implements Serializable {
 	}
 
 	/**
-	 * @param genero the genero to set
+	 * @param genero
+	 *            the genero to set
 	 */
 	public void setGenero(String genero) {
 		this.genero = genero;
@@ -166,13 +163,16 @@ public class Cliente implements Serializable {
 	}
 
 	/**
-	 * @param municipioId the municipioId to set
+	 * @param municipioId
+	 *            the municipioId to set
 	 */
 	public void setMunicipioId(Municipio municipioId) {
 		this.municipioId = municipioId;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -183,7 +183,9 @@ public class Cliente implements Serializable {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -199,7 +201,5 @@ public class Cliente implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
 
 }

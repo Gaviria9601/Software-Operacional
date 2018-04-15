@@ -8,35 +8,25 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.Pattern;
-
-import org.hibernate.validator.constraints.Length;
-
-
 
 @Entity
-@Table(name="Area")
-@NamedQueries({
-    @NamedQuery (name=Area.LISTAR_AREA, query="select a from Area a"),
-  
-})
-public class Area implements Serializable{
+@Table(name = "Area")
+@NamedQueries({ @NamedQuery(name = Area.LISTAR_AREA, query = "select a from Area a"),
 
-	
+})
+public class Area implements Serializable {
+
 	public static final String LISTAR_AREA = "ListarArea";
 
 	@Id
-	@Column(name="id", nullable=false)
-    private int id;
-	
-	@Column(name="nombre", length=15)
-	private String nombre;
-	
-	@Column(name="descripcion", length=2000)
-	private String des;
-	
-	
+	@Column(name = "id", nullable = false)
+	private int id;
 
+	@Column(name = "nombre", length = 15)
+	private String nombre;
+
+	@Column(name = "descripcion", length = 2000)
+	private String des;
 
 	public Area(String nombre, String descripcion) {
 		super();
@@ -44,12 +34,10 @@ public class Area implements Serializable{
 		this.des = descripcion;
 	}
 
-
 	public Area() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	 
+
 	/**
 	 * @return the id
 	 */
@@ -58,7 +46,8 @@ public class Area implements Serializable{
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(Integer id) {
 		this.id = id;
@@ -72,7 +61,8 @@ public class Area implements Serializable{
 	}
 
 	/**
-	 * @param nombre the nombre to set
+	 * @param nombre
+	 *            the nombre to set
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
@@ -86,15 +76,16 @@ public class Area implements Serializable{
 	}
 
 	/**
-	 * @param descripcion the descripcion to set
+	 * @param descripcion
+	 *            the descripcion to set
 	 */
 	public void setDescripcion(String descripcion) {
 		this.des = descripcion;
 	}
 
-
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -105,9 +96,9 @@ public class Area implements Serializable{
 		return result;
 	}
 
-
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -124,5 +115,4 @@ public class Area implements Serializable{
 		return true;
 	}
 
-	
 }

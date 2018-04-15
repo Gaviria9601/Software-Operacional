@@ -12,30 +12,27 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "cliente_dimension")
 @NamedQueries({
-	@NamedQuery(name=cliente_dimension.BUSCAR_NOMBRE_CLIENTE,query="select cli from cliente_dimension cli where cli.nombre=?1"),
-	@NamedQuery(name=cliente_dimension.LISTAR_CLIENTE_DIMENSION,query="select cli from cliente_dimension cli")
-})
-public class cliente_dimension implements Serializable{
-	
+		@NamedQuery(name = cliente_dimension.BUSCAR_NOMBRE_CLIENTE, query = "select cli from cliente_dimension cli where cli.nombre=?1"),
+		@NamedQuery(name = cliente_dimension.LISTAR_CLIENTE_DIMENSION, query = "select cli from cliente_dimension cli") })
+public class cliente_dimension implements Serializable {
+
 	public static final String LISTAR_CLIENTE_DIMENSION = "ListarClienteDimension";
-	
+
 	public static final String BUSCAR_NOMBRE_CLIENTE = "BuscarNombreCliente";
 
 	@Id
-	@Column(name="codigo", nullable=false)
+	@Column(name = "codigo", nullable = false)
 	private int codigo;
-	
-	@Column(name="nombre")
+
+	@Column(name = "nombre")
 	private String nombre;
-	
-	@Column(name="genero")
+
+	@Column(name = "genero")
 	private String genero;
-	
+
 	public cliente_dimension() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
 
 	/**
 	 * @param codigo
@@ -44,8 +41,6 @@ public class cliente_dimension implements Serializable{
 		super();
 		this.codigo = codigo;
 	}
-
-
 
 	public cliente_dimension(int codigo, String nombre, String genero) {
 		super();
@@ -99,6 +94,5 @@ public class cliente_dimension implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
+
 }

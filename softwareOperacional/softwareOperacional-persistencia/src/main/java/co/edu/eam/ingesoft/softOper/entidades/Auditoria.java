@@ -1,7 +1,6 @@
 package co.edu.eam.ingesoft.softOper.entidades;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -16,51 +15,48 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="Auditoria")
+@Table(name = "Auditoria")
 @NamedQueries({
-	@NamedQuery(name=Auditoria.LISTAR_AUDITORIA_ID_USUARIOS,query="select aud from Auditoria aud where aud.ingreso = ?1 and aud.registroRealizoAccion = ?2"),
-	@NamedQuery(name=Auditoria.LISTAR_AUDITORIA,query="select aud from Auditoria aud where aud.registroRealizoAccion = ?1")
-	
+		@NamedQuery(name = Auditoria.LISTAR_AUDITORIA_ID_USUARIOS, query = "select aud from Auditoria aud where aud.ingreso = ?1 and aud.registroRealizoAccion = ?2"),
+		@NamedQuery(name = Auditoria.LISTAR_AUDITORIA, query = "select aud from Auditoria aud where aud.registroRealizoAccion = ?1")
+
 })
-public class Auditoria implements Serializable{
-	
+public class Auditoria implements Serializable {
+
 	public static final String LISTAR_AUDITORIA_ID_USUARIOS = "Auditoria.listarAuditoriaIdUsuarios";
-	
+
 	public static final String LISTAR_AUDITORIA = "Auditoria.Listar";
-	
+
 	@Id
-	@Column(name="codigo", nullable=false)
+	@Column(name = "codigo", nullable = false)
 	private int codigo;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="fechaHora",nullable = false)
+	@Column(name = "fechaHora", nullable = false)
 	private Date fechaHora;
-	
-	
-	@Column(name="ingreso", length=50)
+
+	@Column(name = "ingreso", length = 50)
 	private String ingreso;
-	
-	@Column(name="origen", length=50)
+
+	@Column(name = "origen", length = 50)
 	private String origen;
 
-	@Column(name="navegador", length=50)
+	@Column(name = "navegador", length = 50)
 	private String navegador;
-	
-	@Column(name="accion", length=20)
+
+	@Column(name = "accion", length = 20)
 	private String accion;
-	
-	@Column(name="registroRealizoAccion", length=20)
+
+	@Column(name = "registroRealizoAccion", length = 20)
 	private String registroRealizoAccion;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "usuario")
 	private Usuario usuario;
 
-	public Auditoria(){
+	public Auditoria() {
 	}
-	
-	
-	
+
 	public Auditoria(int codigo, Date fechaHora, String ingreso, String origen, String navegador, String accion,
 			String registroRealizoAccion, Usuario usuario) {
 		super();
@@ -74,8 +70,6 @@ public class Auditoria implements Serializable{
 		this.usuario = usuario;
 	}
 
-
-
 	/**
 	 * @return the codigo
 	 */
@@ -84,13 +78,13 @@ public class Auditoria implements Serializable{
 	}
 
 	/**
-	 * @param codigo the codigo to set
+	 * @param codigo
+	 *            the codigo to set
 	 */
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 
-	
 	/**
 	 * @return the ingreso
 	 */
@@ -99,7 +93,8 @@ public class Auditoria implements Serializable{
 	}
 
 	/**
-	 * @param ingreso the ingreso to set
+	 * @param ingreso
+	 *            the ingreso to set
 	 */
 	public void setIngreso(String ingreso) {
 		this.ingreso = ingreso;
@@ -113,7 +108,8 @@ public class Auditoria implements Serializable{
 	}
 
 	/**
-	 * @param origen the origen to set
+	 * @param origen
+	 *            the origen to set
 	 */
 	public void setOrigen(String origen) {
 		this.origen = origen;
@@ -127,7 +123,8 @@ public class Auditoria implements Serializable{
 	}
 
 	/**
-	 * @param navegador the navegador to set
+	 * @param navegador
+	 *            the navegador to set
 	 */
 	public void setNavegador(String navegador) {
 		this.navegador = navegador;
@@ -141,7 +138,8 @@ public class Auditoria implements Serializable{
 	}
 
 	/**
-	 * @param accion the accion to set
+	 * @param accion
+	 *            the accion to set
 	 */
 	public void setAccion(String accion) {
 		this.accion = accion;
@@ -155,13 +153,16 @@ public class Auditoria implements Serializable{
 	}
 
 	/**
-	 * @param usuario the usuario to set
+	 * @param usuario
+	 *            the usuario to set
 	 */
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -172,7 +173,9 @@ public class Auditoria implements Serializable{
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -197,7 +200,8 @@ public class Auditoria implements Serializable{
 	}
 
 	/**
-	 * @param fechaHora the fechaHora to set
+	 * @param fechaHora
+	 *            the fechaHora to set
 	 */
 	public void setFechaHora(Date fechaHora) {
 		this.fechaHora = fechaHora;
@@ -211,12 +215,11 @@ public class Auditoria implements Serializable{
 	}
 
 	/**
-	 * @param registroRealizoAccion the registroRealizoAccion to set
+	 * @param registroRealizoAccion
+	 *            the registroRealizoAccion to set
 	 */
 	public void setRegistroRealizoAccion(String registroRealizoAccion) {
 		this.registroRealizoAccion = registroRealizoAccion;
 	}
-
-	
 
 }

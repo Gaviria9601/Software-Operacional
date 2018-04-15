@@ -15,37 +15,36 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "auditoria_hecho")
 @NamedQueries({
-	@NamedQuery(name=auditoria_hecho.LISTAR_AUDITORIA_HECHO,query="select aud from auditoria_hecho aud")
-})
+		@NamedQuery(name = auditoria_hecho.LISTAR_AUDITORIA_HECHO, query = "select aud from auditoria_hecho aud") })
 public class auditoria_hecho implements Serializable {
 
 	public static final String LISTAR_AUDITORIA_HECHO = "auditoria_hecho.listarAuditoriaHecho";
-	
+
 	@Id
-	@Column(name="codigo", nullable=false)
+	@Column(name = "codigo", nullable = false)
 	private int codigo;
-	
-	@Column(name="fechaauditoria")
+
+	@Column(name = "fechaauditoria")
 	private Date fechaauditoria;
-	
-	@Column(name="tablaaccion")
+
+	@Column(name = "tablaaccion")
 	private String tablaaccion;
-	
-	@Column(name="accion")
+
+	@Column(name = "accion")
 	private String accion;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "navegador", nullable=false)
+	@JoinColumn(name = "navegador", nullable = false)
 	private navegador_dimension navegador;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "origen", nullable=false)
+	@JoinColumn(name = "origen", nullable = false)
 	private origen_dimension origen;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "tiempo", nullable=false)
+	@JoinColumn(name = "tiempo", nullable = false)
 	private tiempo_dimension tiempo;
-	
+
 	public auditoria_hecho() {
 		// TODO Auto-generated constructor stub
 	}
@@ -139,8 +138,5 @@ public class auditoria_hecho implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
+
 }

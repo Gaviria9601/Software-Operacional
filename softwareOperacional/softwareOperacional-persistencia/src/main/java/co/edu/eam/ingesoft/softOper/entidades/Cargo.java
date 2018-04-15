@@ -13,28 +13,26 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Cargo")
-@NamedQueries({
-    @NamedQuery (name=Cargo.LISTAR_CARGOS, query="select a from Cargo a")
-})
-public class Cargo implements Serializable{
-	
+@NamedQueries({ @NamedQuery(name = Cargo.LISTAR_CARGOS, query = "select a from Cargo a") })
+public class Cargo implements Serializable {
+
 	public static final String LISTAR_CARGOS = "ListarCargos";
 
 	@Id
-	@Column(name="id", nullable=false)
+	@Column(name = "id", nullable = false)
 	private int id;
-	
-	@Column(name="cargo", length=30)
+
+	@Column(name = "cargo", length = 30)
 	private String cargo;
-	
-	@Column(name="salario")
+
+	@Column(name = "salario")
 	private int salario;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "area", nullable=false)
+	@JoinColumn(name = "area", nullable = false)
 	private Area area;
-	
-	public Cargo(){
+
+	public Cargo() {
 	}
 
 	/**
@@ -45,7 +43,8 @@ public class Cargo implements Serializable{
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(int id) {
 		this.id = id;
@@ -59,7 +58,8 @@ public class Cargo implements Serializable{
 	}
 
 	/**
-	 * @param cargo the cargo to set
+	 * @param cargo
+	 *            the cargo to set
 	 */
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
@@ -73,7 +73,8 @@ public class Cargo implements Serializable{
 	}
 
 	/**
-	 * @param salario the salario to set
+	 * @param salario
+	 *            the salario to set
 	 */
 	public void setSalario(int salario) {
 		this.salario = salario;
@@ -83,8 +84,9 @@ public class Cargo implements Serializable{
 	 * @return the areaId
 	 */
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -95,7 +97,9 @@ public class Cargo implements Serializable{
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -120,7 +124,8 @@ public class Cargo implements Serializable{
 	}
 
 	/**
-	 * @param area the area to set
+	 * @param area
+	 *            the area to set
 	 */
 	public void setArea(Area area) {
 		this.area = area;
