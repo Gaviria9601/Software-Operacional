@@ -2,7 +2,6 @@ package co.edu.eam.ingesoft.softOper.web.controladores;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -11,49 +10,53 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.Pattern;
 
-
+import org.hibernate.validator.constraints.Length;
 import org.omnifaces.cdi.ViewScoped;
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 import org.primefaces.context.RequestContext;
 
-import org.hibernate.validator.constraints.Length;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.AreaEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.AuditoriaEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.EmpleadoEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.SeguridadEJB;
-import co.edu.eam.ingesoft.softOpe.negocio.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.softOper.entidades.Area;
 import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
 import co.edu.eam.ingesoft.softOper.entidades.Empleado;
-import co.edu.eam.ingesoft.softOper.entidades.Producto;
 import co.edu.eam.ingesoft.softOper.entidades.Usuario;
 
-
+/**
+ * 
+ * Clase encargada de la logica del  controlador para el area
+ * 
+ * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+ * @date 15/04/2018
+ * @version <Numero Version>
+ */
 @Named("areaControlador")
 @ViewScoped
 public class AreaController implements Serializable {
-	
-	@Pattern(regexp="[A-Za-z ]*",message="solo Letras")
-	@Length(min=6,max=30,message="longitud entre 6 y 30")
+
+	@Pattern(regexp = "[A-Za-z ]*", message = "solo Letras")
+	@Length(min = 6, max = 30, message = "longitud entre 6 y 30")
 	private String nombre;
-	
-	@Pattern(regexp="[A-Za-z ]*",message="solo Letras")
-	@Length(min=10,max=2000,message="longitud entre 10 y 2000")
+
+	@Pattern(regexp = "[A-Za-z ]*", message = "solo Letras")
+	@Length(min = 10, max = 2000, message = "longitud entre 10 y 2000")
 	private String des;
-	
+
 	private int id;
-	
+
 	private List<Area> areas;
-	
+
 	private ArrayList<Area> filtroArea = new ArrayList<Area>();
-	
+
 	private boolean busco = false;
-	
+
 	private Area ar;
-	
-	//auditoria
-	
+
+	// auditoria
+
 	private Usuario usuario;
 
 	private Empleado empleado;
@@ -69,8 +72,6 @@ public class AreaController implements Serializable {
 	private String browser;
 
 	private String os;
-
-	
 
 	@EJB
 	private SeguridadEJB segEJB;
@@ -92,7 +93,6 @@ public class AreaController implements Serializable {
 		this.usuario = usuario;
 	}
 
-	
 	public Empleado getEmpleado() {
 		return empleado;
 	}
@@ -148,8 +148,6 @@ public class AreaController implements Serializable {
 	public void setOs(String os) {
 		this.os = os;
 	}
-
-	
 
 	public SeguridadEJB getSegEJB() {
 		return segEJB;
@@ -226,8 +224,6 @@ public class AreaController implements Serializable {
 	public void setDes(String des) {
 		this.des = des;
 	}
-	
-	
 
 	public Integer getId() {
 		return id;
@@ -245,23 +241,24 @@ public class AreaController implements Serializable {
 		this.arEJB = arEJB;
 	}
 
-
 	@EJB
 	private AreaEJB arEJB;
-	
+
 	@PostConstruct
-	public void inicializador(){
+	public void inicializador() {
 		areas = arEJB.listarArea();
 	}
-	
+
 	/**
-	 * Metodo para crear el area de la empresa
+	 * 
+	 * Metodo encargado de crear el area
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
-	
-	
-	
-	
-	public void crear(){
+
+	public void crear() {
 		if (nombre.isEmpty()) {
 			Messages.addFlashGlobalWarn("Digite los campos Obligatorios");
 		} else {
@@ -269,7 +266,7 @@ public class AreaController implements Serializable {
 				Area ar = new Area();
 				ar.setNombre(nombre);
 				ar.setDescripcion(des);
-				
+
 				arEJB.crear(ar);
 				Messages.addFlashGlobalInfo("El area a sido ingresada correctamente");
 				registrarAuditoria("Crear");
@@ -278,42 +275,72 @@ public class AreaController implements Serializable {
 				Messages.addFlashGlobalError(e.getMessage());
 			}
 		}
-		}
-	
+	}
+
 	/**
-	 * Metodo para filtar en la tabla
-	 * @param id
+	 * 
+	 * Metodo encargado de modificar el area
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
-	
-	/**
-	 * Metodo para modificar
-	 * @param audi
-	 */
-	public void modificar (Area audi) {
+	public void modificar(Area audi) {
 		ar = audi;
 		nombre = audi.getNombre();
 		des = audi.getDescripcion();
 		busco = true;
 	}
-	
+
+	/**
+	 * 
+	 * Metodo encargado de buscar el area
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void buscar() {
 		registrarAuditoria("Buscar");
 	}
-	
+
+	/**
+	 * 
+	 * Metodo encargado de editar el area
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
+
 	public String procederEditar(Area audi) {
 		DatosManager.setIdArea(audi.getId());
 		return "/paginas/privado/editarArea.xhtml?faces-redirect=true";
 	}
-	
-    
 
+	/**
+	 * 
+	 * Metodo encargado de filtar en la tabla de area
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void resetearFitrosTabla() {
 		RequestContext requestContext = RequestContext.getCurrentInstance();
 		requestContext.execute("PF('audiTable').clearFilters()");
 	}
-	
+
+	/**
+	 * 
+	 * Metodo encargado de eliminar el area
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void eliminarA(Area venta) {
-		
+
 		try {
 			arEJB.eliminar(venta.getId());
 			areas = arEJB.listarArea();
@@ -324,15 +351,28 @@ public class AreaController implements Serializable {
 			Messages.addFlashGlobalError("Error al eliminar el area");
 		}
 	}
-	
+
 	/**
-	 * Metodo para limpiar los campos
+	 * 
+	 * Metodo encargado de limpiar los campos
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
-	public void limpiar(){
+	public void limpiar() {
 		nombre = "";
 		des = "";
 	}
-	
+
+	/**
+	 * 
+	 * Metodo encargado de registrar las auditorias en el area
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void registrarAuditoria(String accion) {
 		try {
 			Auditoria audi = new Auditoria();
@@ -340,11 +380,10 @@ public class AreaController implements Serializable {
 			audi.setAccion(accion);
 			audi.setRegistroRealizoAccion("Area");
 			audi.setUsuario(sesion.getUsuario());
-			audEJB.registrarAuditoria(audi,browserDetails);
+			audEJB.registrarAuditoria(audi, browserDetails);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
 
 }

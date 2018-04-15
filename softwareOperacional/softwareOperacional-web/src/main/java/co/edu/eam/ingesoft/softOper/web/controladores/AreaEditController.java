@@ -23,32 +23,39 @@ import co.edu.eam.ingesoft.softOpe.negocio.beans.SeguridadEJB;
 import co.edu.eam.ingesoft.softOper.entidades.Area;
 import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
 import co.edu.eam.ingesoft.softOper.entidades.Empleado;
-
 import co.edu.eam.ingesoft.softOper.entidades.Usuario;
 
+/**
+ * 
+ * Clase encargada de la logica del controlador para editar el area
+ * 
+ * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+ * @date 15/04/2018
+ * @version <Numero Version>
+ */
 @Named("areaEditController")
 @ViewScoped
-public class AreaEditController implements Serializable{
-	
-	@Pattern(regexp="[A-Za-z ]*",message="solo Letras")
-	@Length(min=3,max=50,message="longitud entre 3 y 15")
+public class AreaEditController implements Serializable {
+
+	@Pattern(regexp = "[A-Za-z ]*", message = "solo Letras")
+	@Length(min = 3, max = 50, message = "longitud entre 3 y 15")
 	private String nombre;
-	
-	@Pattern(regexp="[A-Za-z ]*",message="solo Letras")
-	@Length(min=3,max=50,message="longitud entre 10 y 2000")
+
+	@Pattern(regexp = "[A-Za-z ]*", message = "solo Letras")
+	@Length(min = 3, max = 50, message = "longitud entre 10 y 2000")
 	private String des;
-	
+
 	private int id;
-	
+
 	private List<Area> areas;
-	
+
 	private ArrayList<Area> filtroArea = new ArrayList<Area>();
-	
+
 	private boolean busco = false;
-	
+
 	private Area ar;
-	
-    private Usuario usuario;
+
+	private Usuario usuario;
 
 	private Empleado empleado;
 
@@ -64,8 +71,6 @@ public class AreaEditController implements Serializable{
 
 	private String os;
 
-	
-
 	@EJB
 	private SeguridadEJB segEJB;
 
@@ -74,7 +79,7 @@ public class AreaEditController implements Serializable{
 
 	@EJB
 	private AuditoriaEJB audEJB;
-	
+
 	@EJB
 	private AreaEJB arEJB;
 
@@ -241,13 +246,20 @@ public class AreaEditController implements Serializable{
 
 	}
 
-	
+	/**
+	 * 
+	 * Metodo encargado de editar el area
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public String editar() {
 		if (nombre.isEmpty()) {
 			Messages.addFlashGlobalWarn("Digite los campos Obligatorios");
 		} else {
 			try {
-				
+
 				ar.setDescripcion(des);
 				ar.setNombre(nombre);
 				arEJB.editarArea(ar);
@@ -265,18 +277,38 @@ public class AreaEditController implements Serializable{
 
 	/**
 	 * 
+	 * Metodo encargado de limpiar el area
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void limpiar() {
 		nombre = "";
 		des = "";
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de cancelar la edición
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public String cancelar() {
 		limpiar();
 		return "/paginas/privado/verArea.xhtml?faces-redirect=true";
 	}
-	
 
+	/**
+	 * 
+	 * Metodo encargado de registar la auditoria del area
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void registrarAuditoria(String accion) {
 		try {
 			Auditoria audi = new Auditoria();
@@ -289,14 +321,19 @@ public class AreaEditController implements Serializable{
 			e.printStackTrace();
 		}
 	}
-	
-	
+
+	/**
+	 * 
+	 * Metodo encargado de realizar los filtros en la tabla del area
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 
 	public void resetearFitrosTabla() {
 		RequestContext requestContext = RequestContext.getCurrentInstance();
 		requestContext.execute("PF('audiTable').clearFilters()");
 	}
-	
-	}
 
-
+}

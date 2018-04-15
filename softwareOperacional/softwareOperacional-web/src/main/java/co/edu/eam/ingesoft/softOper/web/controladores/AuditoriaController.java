@@ -1,11 +1,7 @@
 package co.edu.eam.ingesoft.softOper.web.controladores;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -17,6 +13,14 @@ import org.omnifaces.cdi.ViewScoped;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.AuditoriaEJB;
 import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
 
+/**
+ * 
+ * Clase encargada de la logica del controlador para la auditoria
+ * 
+ * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+ * @date 15/04/2018
+ * @version <Numero Version>
+ */
 @Named("auditoriaControl")
 @ViewScoped
 public class AuditoriaController implements Serializable {
@@ -25,27 +29,25 @@ public class AuditoriaController implements Serializable {
 	private AuditoriaEJB audEJB;
 
 	private List<Auditoria> auditorias;
-	
+
 	private List<Auditoria> areas;
-	
+
 	private List<Auditoria> ventas;
-	
+
 	private List<Auditoria> clientes;
-	
+
 	private List<Auditoria> empleados;
-	
+
 	private List<Auditoria> inventarios;
-	
+
 	private List<Auditoria> tipoUsuarios;
-	
+
 	private List<Auditoria> usuarios;
-	
+
 	private List<Auditoria> procesosETL;
 
 	private Auditoria selectedAudi;
-	
-	
-	
+
 	public List<Auditoria> getProcesosETL() {
 		return procesosETL;
 	}
@@ -71,9 +73,7 @@ public class AuditoriaController implements Serializable {
 	}
 
 	private ArrayList<Auditoria> filtroAuditoria = new ArrayList<Auditoria>();
-	
-	
-	
+
 	public List<Auditoria> getInventarios() {
 		return inventarios;
 	}
@@ -117,17 +117,17 @@ public class AuditoriaController implements Serializable {
 	@PostConstruct
 	public void inicializar() {
 		auditorias = audEJB.listarAuditoriasIdeUsuarios();
-	    areas = audEJB.listarAuditoriasArea();
-	    ventas = audEJB.listarAuditoriaVentas();
-	    clientes = audEJB.listarAuditoriaClientes();
-	    empleados = audEJB.listarAuditoriaEmpleados();
-	    inventarios = audEJB.listarAuditoriaInventarios();
-	    tipoUsuarios = audEJB.listarAuditoriaTiposUsuarios();
-	    usuarios = audEJB.listarAuditoriaUsuarios();
-	    procesosETL = audEJB.listarAuditoriaProcesosETL();
+		areas = audEJB.listarAuditoriasArea();
+		ventas = audEJB.listarAuditoriaVentas();
+		clientes = audEJB.listarAuditoriaClientes();
+		empleados = audEJB.listarAuditoriaEmpleados();
+		inventarios = audEJB.listarAuditoriaInventarios();
+		tipoUsuarios = audEJB.listarAuditoriaTiposUsuarios();
+		usuarios = audEJB.listarAuditoriaUsuarios();
+		procesosETL = audEJB.listarAuditoriaProcesosETL();
 
 	}
-	
+
 	public List<Auditoria> getAreas() {
 		return areas;
 	}
@@ -159,8 +159,5 @@ public class AuditoriaController implements Serializable {
 	public void setClientes(List<Auditoria> clientes) {
 		this.clientes = clientes;
 	}
-	
-	
-	
 
 }
