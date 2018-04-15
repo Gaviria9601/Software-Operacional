@@ -35,7 +35,7 @@ public class SeguridadEJB {
 
 	/**
 	 * Registra un usuario
-	 * 
+	 * PRUEBA
 	 * @param u,
 	 *            usuario a registrar
 	 */
