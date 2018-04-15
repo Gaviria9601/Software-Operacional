@@ -2,24 +2,20 @@ package co.edu.eam.ingesoft.softOper.entidades;
 
 import java.io.Serializable;
 
-public class ProductoVentaPK implements Serializable{
+public class ProductoVentaPK implements Serializable {
 
 	private int producto_codigo;
-	
+
 	private int venta_codigo;
-	
-	public ProductoVentaPK(){	
+
+	public ProductoVentaPK() {
 	}
-	
-	
 
 	public ProductoVentaPK(int producto_codigo, int venta_codigo) {
 		super();
 		this.producto_codigo = producto_codigo;
 		this.venta_codigo = venta_codigo;
 	}
-
-
 
 	/**
 	 * @return the producto_codigo
@@ -29,7 +25,8 @@ public class ProductoVentaPK implements Serializable{
 	}
 
 	/**
-	 * @param producto_codigo the producto_codigo to set
+	 * @param producto_codigo
+	 *            the producto_codigo to set
 	 */
 	public void setProducto_codigo(int producto_codigo) {
 		this.producto_codigo = producto_codigo;
@@ -43,13 +40,16 @@ public class ProductoVentaPK implements Serializable{
 	}
 
 	/**
-	 * @param venta_codigo the venta_codigo to set
+	 * @param venta_codigo
+	 *            the venta_codigo to set
 	 */
 	public void setVenta_codigo(int venta_codigo) {
 		this.venta_codigo = venta_codigo;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -61,7 +61,9 @@ public class ProductoVentaPK implements Serializable{
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -84,5 +86,4 @@ public class ProductoVentaPK implements Serializable{
 	 * @return the producto_codigo
 	 */
 
-	
 }

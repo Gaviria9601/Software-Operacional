@@ -12,56 +12,51 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.ManyToAny;
-
 @Entity
 @Table(name = "venta_hecho")
-@NamedQueries({
-	@NamedQuery(name=venta_hecho.LISTAR_VENTA_HECHO,query="select ven from venta_hecho ven"),
-	@NamedQuery(name=venta_hecho.borrar_productos_menores_0,query="delete from producto_dimension p where p.precio<0"),
-	@NamedQuery(name=venta_hecho.borrar_productos_menores_20,query="delete from producto_dimension p where p.precio<20000")
-	
-	
-	
+@NamedQueries({ @NamedQuery(name = venta_hecho.LISTAR_VENTA_HECHO, query = "select ven from venta_hecho ven"),
+		@NamedQuery(name = venta_hecho.borrar_productos_menores_0, query = "delete from producto_dimension p where p.precio<0"),
+		@NamedQuery(name = venta_hecho.borrar_productos_menores_20, query = "delete from producto_dimension p where p.precio<20000")
+
 })
-public class venta_hecho implements Serializable{
-	
+public class venta_hecho implements Serializable {
+
 	public static final String LISTAR_VENTA_HECHO = "venta_hecho.listarVentaHecho";
 	public static final String borrar_productos_menores_0 = "borrar_productos_menores_0";
 	public static final String borrar_productos_menores_20 = "borrar_productos_menores_20";
 	@Id
-	@Column(name="codigo", nullable=false)
+	@Column(name = "codigo", nullable = false)
 	private int codigo;
-	
-	@Column(name="totaldetalle")
+
+	@Column(name = "totaldetalle")
 	private int totaldetalle;
-	
-	@Column(name="cantidad")
+
+	@Column(name = "cantidad")
 	private int cantidad;
-	
-	@Column(name="fechaventa")
+
+	@Column(name = "fechaventa")
 	private Date fechaventa;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "venta", nullable=false)
+	@JoinColumn(name = "venta", nullable = false)
 	private venta_dimension venta;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "tiempo", nullable=false)
+	@JoinColumn(name = "tiempo", nullable = false)
 	private tiempo_dimension tiempo;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "producto", nullable=false)
+	@JoinColumn(name = "producto", nullable = false)
 	private producto_dimension producto;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "cliente", nullable=false)
+	@JoinColumn(name = "cliente", nullable = false)
 	private cliente_dimension cliente;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "empleado", nullable=false)
+	@JoinColumn(name = "empleado", nullable = false)
 	private empleado_dimension empleado;
-	
+
 	public venta_hecho() {
 		// TODO Auto-generated constructor stub
 	}
@@ -174,8 +169,5 @@ public class venta_hecho implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
-	
+
 }

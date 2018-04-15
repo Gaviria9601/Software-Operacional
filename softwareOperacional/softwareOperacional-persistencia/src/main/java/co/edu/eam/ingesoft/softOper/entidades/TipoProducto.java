@@ -10,25 +10,26 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="TipoProducto")
+@Table(name = "TipoProducto")
 @NamedQueries({
-	@NamedQuery(name=TipoProducto.LISTAR_TIPO_PRODUCTOS,query="select tipoPro from TipoProducto tipoPro")
-})
-public class TipoProducto implements Serializable{
+		@NamedQuery(name = TipoProducto.LISTAR_TIPO_PRODUCTOS, query = "select tipoPro from TipoProducto tipoPro") })
+public class TipoProducto implements Serializable {
 
 	public static final String LISTAR_TIPO_PRODUCTOS = "TipoProducto.listarTipoProducto";
-	
+
 	@Id
-	@Column(name="id", nullable=false)
+	@Column(name = "id", nullable = false)
 	private int id;
-	
-	@Column(name="nombre", length=15)
+
+	@Column(name = "nombre", length = 15)
 	private String nombre;
-	
-	public TipoProducto(){
+
+	public TipoProducto() {
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -39,7 +40,9 @@ public class TipoProducto implements Serializable{
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -64,7 +67,8 @@ public class TipoProducto implements Serializable{
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(int id) {
 		this.id = id;
@@ -78,10 +82,11 @@ public class TipoProducto implements Serializable{
 	}
 
 	/**
-	 * @param nombre the nombre to set
+	 * @param nombre
+	 *            the nombre to set
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
+
 }

@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "usuario_dimension_wikieam")
 @NamedQueries({
-	@NamedQuery(name = UsuarioDimensionWikieam.LISTAR_USW, query = "select usw from UsuarioDimensionWikieam usw")
+		@NamedQuery(name = UsuarioDimensionWikieam.LISTAR_USW, query = "select usw from UsuarioDimensionWikieam usw")
 
 })
 public class UsuarioDimensionWikieam implements Serializable {
@@ -21,7 +21,7 @@ public class UsuarioDimensionWikieam implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	public static final String LISTAR_USW = "UsuarioDimensionWikieam.listarusw";
 
 	@Id
@@ -53,8 +53,6 @@ public class UsuarioDimensionWikieam implements Serializable {
 		this.nombre = nombre;
 	}
 
-	
-
 	/**
 	 * @return the codigo
 	 */
@@ -63,7 +61,8 @@ public class UsuarioDimensionWikieam implements Serializable {
 	}
 
 	/**
-	 * @param codigo the codigo to set
+	 * @param codigo
+	 *            the codigo to set
 	 */
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
@@ -99,7 +98,9 @@ public class UsuarioDimensionWikieam implements Serializable {
 		this.nombre = nombre;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -110,7 +111,9 @@ public class UsuarioDimensionWikieam implements Serializable {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -129,8 +132,5 @@ public class UsuarioDimensionWikieam implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
 
 }

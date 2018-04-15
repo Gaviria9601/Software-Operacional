@@ -4,39 +4,34 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name="TipoUsuario")
-@NamedQueries({
-@NamedQuery (name=TipoUsuario.listar_tipos, query="select a from TipoUsuario a")
-})
-public class TipoUsuario implements Serializable{
-	
-	
+@Table(name = "TipoUsuario")
+@NamedQueries({ @NamedQuery(name = TipoUsuario.listar_tipos, query = "select a from TipoUsuario a") })
+public class TipoUsuario implements Serializable {
+
 	public static final String listar_tipos = "ListarTipoUsuario";
-	
+
 	@Id
-	@Column(name="id", nullable=false)
+	@Column(name = "id", nullable = false)
 	private int id;
-	
-	
-	@Column(name="nombre", length=15)
+
+	@Column(name = "nombre", length = 15)
 	private String nombre;
-	
-	@Column(name="descripcion", length=2000)
+
+	@Column(name = "descripcion", length = 2000)
 	private String descripcion;
 
-	 public TipoUsuario() {
+	public TipoUsuario() {
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -47,7 +42,9 @@ public class TipoUsuario implements Serializable{
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -78,12 +75,12 @@ public class TipoUsuario implements Serializable{
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(int id) {
 		this.id = id;
 	}
-
 
 	public String getNombre() {
 		return nombre;
@@ -101,11 +98,11 @@ public class TipoUsuario implements Serializable{
 	}
 
 	/**
-	 * @param descripcion the descripcion to set
+	 * @param descripcion
+	 *            the descripcion to set
 	 */
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-
 
 }
