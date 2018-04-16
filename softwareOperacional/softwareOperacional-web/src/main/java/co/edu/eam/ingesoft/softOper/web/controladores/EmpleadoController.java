@@ -1,5 +1,13 @@
 package co.edu.eam.ingesoft.softOper.web.controladores;
 
+/**
+ * 
+ * Clase encargada de la logica del controlador del empleado
+ * 
+ * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+ * @date 15/04/2018
+ * @version <Numero Version>
+ */
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -70,10 +78,8 @@ public class EmpleadoController implements Serializable {
 	private boolean busco = false;
 
 	private Empleado empleado;
-	
+
 	private int empleadosInfo;
-	
-	
 
 	public int getEmpleadosInfo() {
 		return empleadosInfo;
@@ -84,22 +90,28 @@ public class EmpleadoController implements Serializable {
 	}
 
 	/**
-	 * @return the nombre
+	 * 
+	 * Metodo encargado de obtener el nombre del empleado
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public String getNombre() {
 		return nombre;
 	}
 
-	/**
-	 * @param nombre
-	 *            the nombre to set
-	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
 	/**
-	 * @return the apellido
+	 * 
+	 * Metodo encargado de obtener el apellido del empleado
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public String getApellido() {
 		return apellido;
@@ -114,7 +126,12 @@ public class EmpleadoController implements Serializable {
 	}
 
 	/**
-	 * @return the cedula
+	 * 
+	 * Metodo encargado de obtener la cedula del empleado
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public String getCedula() {
 		return cedula;
@@ -129,7 +146,12 @@ public class EmpleadoController implements Serializable {
 	}
 
 	/**
-	 * @return the fechaNacimiento
+	 * 
+	 * Metodo encargado de obtener la fecha de nacimiento del empleado
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public Date getFechaNacimiento() {
 		return fechaNacimiento;
@@ -144,7 +166,12 @@ public class EmpleadoController implements Serializable {
 	}
 
 	/**
-	 * @return the fechaIngreso
+	 * 
+	 * Metodo encargado de obtener la fecha de ingreso del empleado
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public Date getFechaIngreso() {
 		return fechaIngreso;
@@ -159,7 +186,12 @@ public class EmpleadoController implements Serializable {
 	}
 
 	/**
-	 * @return the genero
+	 * 
+	 * Metodo encargado de obtener el genero del empleado
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public String getGenero() {
 		return genero;
@@ -174,7 +206,12 @@ public class EmpleadoController implements Serializable {
 	}
 
 	/**
-	 * @return the empleados
+	 * 
+	 * Metodo encargado de listar los empleados
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public List<Empleado> getEmpleados() {
 		return empleados;
@@ -254,6 +291,14 @@ public class EmpleadoController implements Serializable {
 		empleados = empleadoejb.listarEmpleados();
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de crear los empleados
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void crear() {
 		try {
 			Cargo c = empleadoejb.buscarCargo(cargo);
@@ -276,26 +321,66 @@ public class EmpleadoController implements Serializable {
 			Messages.addGlobalError(e.getMessage());
 		}
 	}
-	
+
+	/**
+	 * 
+	 * Metodo encargado de registar la accion de buscar en la auditoria
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void buscar() {
 		registrarAuditoriaEmpleado("Buscar");
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de cambiar de municipio dependiendo del departamento
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void onDepartamentoChange() {
 		if (departamento != null && !departamento.equals(""))
 			municipios = empleadoejb.listarMuniporDepto(departamento);
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de editar los empleados
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public String procederEditar(Empleado audi) {
 		DatosManager.setCodigoEmpleado2(audi.getCodigo());
 		return "/paginas/privado/editarEmpleado.xhtml?faces-redirect=true";
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de realizar los filtros en la tabla de empleado
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void resetearFitrosTabla() {
 		RequestContext requestContext = RequestContext.getCurrentInstance();
 		requestContext.execute("PF('audiTable').clearFilters()");
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de registrar la auditoria en empleadoss
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void registrarAuditoriaEmpleado(String accion) {
 		try {
 			Auditoria audi = new Auditoria();
@@ -309,6 +394,14 @@ public class EmpleadoController implements Serializable {
 		}
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de limpiar los empleados
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void limpiar() {
 		nombre = null;
 		apellido = null;
@@ -320,7 +413,12 @@ public class EmpleadoController implements Serializable {
 	}
 
 	/**
-	 * @return the municipios
+	 * 
+	 * Metodo encargado de listar los municipios
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public List<Municipio> getMunicipios() {
 		return municipios;
@@ -335,7 +433,12 @@ public class EmpleadoController implements Serializable {
 	}
 
 	/**
-	 * @return the departamentos
+	 * 
+	 * Metodo encargado de listar los departamentos
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public List<Departamento> getDepartamentos() {
 		return departamentos;
@@ -358,7 +461,12 @@ public class EmpleadoController implements Serializable {
 	}
 
 	/**
-	 * @return the cargos
+	 * 
+	 * Metodo encargado de listar los cargos
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public List<Cargo> getCargos() {
 		return cargos;

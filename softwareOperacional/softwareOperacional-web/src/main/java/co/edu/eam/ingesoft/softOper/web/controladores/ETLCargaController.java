@@ -16,6 +16,14 @@ import co.edu.eam.ingesoft.softOpe.negocio.beans.Ventas_hechoEJB;
 import co.edu.eam.ingesoft.softOper.entidades.auditoria_hecho;
 import co.edu.eam.ingesoft.softOper.entidades.venta_hecho;
 
+/**
+ * 
+ * Clase encargada de la logica del controlador para el proceso de ETL
+ * 
+ * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+ * @date 15/04/2018
+ * @version <Numero Version>
+ */
 @Named("ETLCargaController")
 @ViewScoped
 public class ETLCargaController implements Serializable {
@@ -34,10 +42,10 @@ public class ETLCargaController implements Serializable {
 	 */
 	@EJB
 	private EtlEJB etljb;
-	
+
 	@EJB
 	private Ventas_hechoEJB venEJB;
-	
+
 	@EJB
 	private Auditoria_hechoEJB audEJB;
 
@@ -47,6 +55,14 @@ public class ETLCargaController implements Serializable {
 		listarVentas();
 	}
 
+	/**
+	 * 
+	 * Metodo que se encarga del realizar la carga en el proceso de ETL
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void carga() {
 		try {
 
@@ -65,7 +81,7 @@ public class ETLCargaController implements Serializable {
 
 	/**
 	 * 
-	 * <Describir el Metodo>
+	 * Metodo que se encarga listar las auditorias
 	 *
 	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
 	 * @date 24/02/2018
@@ -79,7 +95,7 @@ public class ETLCargaController implements Serializable {
 
 	/**
 	 * 
-	 * <Describir el Metodo>
+	 * Metodo que se encarga listar las ventas
 	 *
 	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
 	 * @date 24/02/2018
@@ -91,7 +107,13 @@ public class ETLCargaController implements Serializable {
 	}
 
 	/**
-	 * @return the auditorias
+	 * 
+	 * Metodo que se encarga listar las las auditorias hecho *
+	 * 
+	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
+	 * @date 24/02/2018
+	 * @version <Version del metodo>
+	 *
 	 */
 	public List<auditoria_hecho> getAuditorias() {
 		return auditorias;

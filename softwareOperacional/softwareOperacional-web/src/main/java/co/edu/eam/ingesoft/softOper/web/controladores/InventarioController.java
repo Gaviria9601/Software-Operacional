@@ -3,11 +3,10 @@ package co.edu.eam.ingesoft.softOper.web.controladores;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.Pattern;
@@ -25,8 +24,15 @@ import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
 import co.edu.eam.ingesoft.softOper.entidades.Empleado;
 import co.edu.eam.ingesoft.softOper.entidades.Producto;
 import co.edu.eam.ingesoft.softOper.entidades.TipoProducto;
-import co.edu.eam.ingesoft.softOper.entidades.Venta;
 
+/**
+ * 
+ * Clase encargada de la logica del controlador para el inventario
+ * 
+ * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+ * @date 15/04/2018
+ * @version <Numero Version>
+ */
 @Named("inventarioController")
 @ViewScoped
 public class InventarioController implements Serializable {
@@ -47,10 +53,9 @@ public class InventarioController implements Serializable {
 	@Length(min = 0, max = 20, message = "Longitud entre 0 y 20")
 	private String codigoLote;
 
-	
 	@Length(min = 0, max = 20, message = "longitud entre 0 y 20")
-	private String peso="0";
-	
+	private String peso = "0";
+
 	private String pesoOpcion;
 
 	@Length(min = 0, max = 30, message = "Longitud entre 0 y 30")
@@ -60,18 +65,15 @@ public class InventarioController implements Serializable {
 
 	@Pattern(regexp = "[0-9]*", message = "Solo numeros")
 	@Length(min = 0, max = 10, message = "longitud entre 0 y 10")
-	private String valor="0";
+	private String valor = "0";
 
 	private List<TipoProducto> tipoproductos;
 
 	private List<Producto> productos;
 
 	private ArrayList<Producto> filtroProducto = new ArrayList<Producto>();
-	
+
 	private int productosInfo;
-	
-	
-	
 
 	public int getProductosInfo() {
 		return productosInfo;
@@ -188,7 +190,6 @@ public class InventarioController implements Serializable {
 	@EJB
 	private EmpleadoEJB empEJB;
 
-
 	@EJB
 	private AuditoriaEJB audEJB;
 
@@ -200,8 +201,11 @@ public class InventarioController implements Serializable {
 
 	/**
 	 * 
-	 * @param query
-	 * @return
+	 * Metodo encargado de listar los empleados
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public List<Empleado> completeTheme(String query) {
 		List<Empleado> allThemes = empEJB.listarEmpleados();
@@ -226,6 +230,11 @@ public class InventarioController implements Serializable {
 
 	/**
 	 * 
+	 * Metodo encargado de crear el inventario
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void crear() {
 		if (nombre.isEmpty() || fechaIngreso == null || cantidadProducto == 0 || codigoLote.isEmpty()
@@ -253,10 +262,14 @@ public class InventarioController implements Serializable {
 			}
 		}
 	}
-	
+
 	/**
 	 * 
-	 * @param venta
+	 * Metodo encargado de limpiar los productos del inventario
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void eliminar(Producto pro) {
 		try {
@@ -269,10 +282,14 @@ public class InventarioController implements Serializable {
 			Messages.addFlashGlobalError("Error al eliminar el Producto");
 		}
 	}
-	
+
 	/**
 	 * 
-	 * @param id
+	 * Metodo encargado de resetear los filtros de la tabla
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void resetearFitrosTabla() {
 		RequestContext requestContext = RequestContext.getCurrentInstance();
@@ -281,6 +298,11 @@ public class InventarioController implements Serializable {
 
 	/**
 	 * 
+	 * Metodo encargado de limpiar los inventarios
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void limpiar() {
 		nombre = null;
@@ -296,6 +318,14 @@ public class InventarioController implements Serializable {
 		pesoOpcion = "";
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de regisrar las auditorias
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void registrarAuditoria(String accion) {
 		try {
 			Auditoria audi = new Auditoria();
@@ -311,6 +341,11 @@ public class InventarioController implements Serializable {
 
 	/**
 	 * 
+	 * Metodo encargado de registrar la accion de buscar en la auditoria
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void buscar() {
 		registrarAuditoria("Buscar");
@@ -318,7 +353,11 @@ public class InventarioController implements Serializable {
 
 	/**
 	 * 
-	 * @return
+	 * Metodo encargado de editar los inventarios
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public String procederEditar(Producto pro) {
 		DatosManager.setCodigoProducto(pro.getCodigo());

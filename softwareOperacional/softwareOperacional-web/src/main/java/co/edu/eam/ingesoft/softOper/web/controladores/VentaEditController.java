@@ -3,11 +3,9 @@ package co.edu.eam.ingesoft.softOper.web.controladores;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -29,6 +27,14 @@ import co.edu.eam.ingesoft.softOper.entidades.Producto;
 import co.edu.eam.ingesoft.softOper.entidades.ProductoVenta;
 import co.edu.eam.ingesoft.softOper.entidades.Venta;
 
+/**
+ * 
+ * Clase encargada de la logica del controlador para la edicion de la venta
+ * 
+ * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+ * @date 15/04/2018
+ * @version <Numero Version>
+ */
 @Named("ventaEditController")
 @ViewScoped
 public class VentaEditController implements Serializable {
@@ -166,7 +172,11 @@ public class VentaEditController implements Serializable {
 
 	/**
 	 * 
-	 * @param event
+	 * Metodo encargado de seleccionar el producto para la venta
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void onSelect(SelectEvent event) {
 		Producto pro = (Producto) event.getObject();
@@ -228,7 +238,13 @@ public class VentaEditController implements Serializable {
 
 	/**
 	 * 
+	 * Metodo encargado de editar la venta
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
+
 	public String editar() {
 		List<Producto> produc = productos.getTarget();
 		for (int i = 0; i < produc.size(); i++) {
@@ -249,15 +265,23 @@ public class VentaEditController implements Serializable {
 
 	/**
 	 * 
-	 * @return
+	 * Metodo encargado de cancelar la edicion
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
-	public String cancelar(){
+	public String cancelar() {
 		return "/paginas/privado/verVenta.xhtml?faces-redirect=true";
 	}
-	
+
 	/**
 	 * 
-	 * @param accion
+	 * Metodo encargado de registrar la auditoria
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void registrarAuditoria(String accion) {
 		try {

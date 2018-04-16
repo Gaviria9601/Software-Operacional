@@ -3,13 +3,10 @@ package co.edu.eam.ingesoft.softOper.web.controladores;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -30,9 +27,16 @@ import co.edu.eam.ingesoft.softOpe.negocio.beans.VentaEJB;
 import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
 import co.edu.eam.ingesoft.softOper.entidades.Cliente;
 import co.edu.eam.ingesoft.softOper.entidades.Producto;
-import co.edu.eam.ingesoft.softOper.entidades.ProductoVenta;
 import co.edu.eam.ingesoft.softOper.entidades.Venta;
 
+/**
+ * 
+ * Clase encargada de la logica del controlador para la venta
+ * 
+ * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+ * @date 15/04/2018
+ * @version <Numero Version>
+ */
 @Named("ventaController")
 @ViewScoped
 public class VentaController implements Serializable {
@@ -86,7 +90,7 @@ public class VentaController implements Serializable {
 
 	@Inject
 	private SessionController sesion;
-	
+
 	@Inject
 	private VentaEditController ventEdi;
 
@@ -231,6 +235,11 @@ public class VentaController implements Serializable {
 
 	/**
 	 * 
+	 * Metodo encargado de terminar la venta
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void terminar() {
 		List<Producto> produc = productos.getTarget();
@@ -252,6 +261,11 @@ public class VentaController implements Serializable {
 
 	/**
 	 * 
+	 * Metodo encargado deempezar la venta
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void empezarVenta() {
 		if (cliente != null) {
@@ -271,12 +285,24 @@ public class VentaController implements Serializable {
 
 	/**
 	 * 
-	 * @return
+	 * Metodo encargado de generar la fecha actual
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public Date generarFechaActual() {
 		return audEJB.generarFechaActual();
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de direccionar la pagina a editar
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	/**
 	 * 
 	 * @return
@@ -285,13 +311,14 @@ public class VentaController implements Serializable {
 		DatosManager.setCodigoVenta(ven.getCodigo());
 		return "/paginas/privado/editarVenta.xhtml?faces-redirect=true";
 	}
-	
-
 
 	/**
 	 * 
-	 * @param query
-	 * @return
+	 * Metodo encargado de listar los clientes
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public List<Cliente> completeTheme(String query) {
 		List<Cliente> allThemes = cliEJB.listarClientes();
@@ -371,7 +398,11 @@ public class VentaController implements Serializable {
 
 	/**
 	 * 
-	 * @param venta
+	 * Metodo encargado de eliminar la venta
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void eliminar(Venta venta) {
 		System.out.println(venta.getTotalVenta());
@@ -388,6 +419,11 @@ public class VentaController implements Serializable {
 
 	/**
 	 * 
+	 * Metodo encargado de registrar la accion de buscar en la auditoria
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void buscar() {
 		registrarAuditoria("Buscar");
@@ -395,13 +431,25 @@ public class VentaController implements Serializable {
 
 	/**
 	 * 
-	 * @param id
+	 * Metodo encargado de resetear el filtro de la tabla
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void resetearFitrosTabla() {
 		RequestContext requestContext = RequestContext.getCurrentInstance();
 		requestContext.execute("PF('ventaTable').clearFilters()");
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de registrar e la auditoria
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void registrarAuditoria(String accion) {
 		try {
 			Auditoria audi = new Auditoria();

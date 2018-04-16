@@ -30,6 +30,14 @@ import co.edu.eam.ingesoft.softOper.entidades.Empleado;
 import co.edu.eam.ingesoft.softOper.entidades.Municipio;
 import co.edu.eam.ingesoft.softOper.entidades.Usuario;
 
+/**
+ * 
+ * Clase encargada de la logica del controlador para el cliente
+ * 
+ * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+ * @date 15/04/2018
+ * @version <Numero Version>
+ */
 @Named("clienteControlador")
 @ViewScoped
 public class ClienteController implements Serializable {
@@ -334,6 +342,14 @@ public class ClienteController implements Serializable {
 
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de listar los municipios
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public List<Municipio> getMuni() {
 		return muni;
 	}
@@ -350,6 +366,14 @@ public class ClienteController implements Serializable {
 		this.sesion = sesion;
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de crear el cliente
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void crear() {
 
 		if (nombre.isEmpty() || cedula.isEmpty() || apellido.isEmpty()) {
@@ -375,20 +399,52 @@ public class ClienteController implements Serializable {
 
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de registrar la accion de buscar en la auditoria
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void buscar() {
 		registrarAuditoria("Buscar");
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de realizar la edición al cliente
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public String procederEditar(Cliente audi) {
 		DatosManager.setCodigoCliente(audi.getCodigo());
 		return "/paginas/privado/editarCliente.xhtml?faces-redirect=true";
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de resear en la tabla del cliente
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void resetearFitrosTabla() {
 		RequestContext requestContext = RequestContext.getCurrentInstance();
 		requestContext.execute("PF('audiTable').clearFilters()");
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de limpiar en el cliente
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void limpiar() {
 		nombre = "";
 		apellido = "";
@@ -400,11 +456,27 @@ public class ClienteController implements Serializable {
 
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de cambiar el municipio dependiendo del departamento
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void onDepartamentoChange() {
 		if (departamento != null && !departamento.equals(""))
 			muni = empleadoejb.listarMuniporDepto(departamento);
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de eliminar el cliente
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void eliminar(Cliente venta) {
 
 		try {
@@ -418,6 +490,14 @@ public class ClienteController implements Serializable {
 		}
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de registrar la auditoria en el cliente
+	 * 
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void registrarAuditoria(String accion) {
 		try {
 			Auditoria audi = new Auditoria();

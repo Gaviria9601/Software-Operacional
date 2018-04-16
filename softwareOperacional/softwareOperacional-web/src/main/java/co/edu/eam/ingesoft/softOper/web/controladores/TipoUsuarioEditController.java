@@ -18,6 +18,14 @@ import co.edu.eam.ingesoft.softOpe.negocio.beans.TipoUsuarioEJB;
 import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
 import co.edu.eam.ingesoft.softOper.entidades.TipoUsuario;
 
+/**
+ * 
+ * Clase encargada de la logica del controlador para el tipo de usuario editar
+ * 
+ * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+ * @date 15/04/2018
+ * @version <Numero Version>
+ */
 @Named("edittipoUsuariocontrolador")
 @ViewScoped
 public class TipoUsuarioEditController implements Serializable {
@@ -29,56 +37,87 @@ public class TipoUsuarioEditController implements Serializable {
 	@Pattern(regexp = "[A-Za-z ]*", message = "solo Letras")
 	@Length(min = 10, max = 2000, message = "longitud entre 10 y 2000")
 	private String des;
-	
+
 	TipoUsuario tipoUsuario;
-	
+
 	@EJB
 	private TipoUsuarioEJB tipousuejb;
-	
+
 	@EJB
 	private AuditoriaEJB audEJB;
-	
+
 	@Inject
 	private SessionController sesion;
-	
+
 	@PostConstruct
 	public void inicializar() {
 		tipoUsuario = tipousuejb.buscarTipoUsuario(DatosManager.getCodigoTipoUsuario());
 		nombre = tipoUsuario.getNombre();
 		des = tipoUsuario.getDescripcion();
 	}
-	
+
+	/**
+	 * 
+	 * Metodo encargado de cancelar la edicion del tipo de usuario
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public String cancelar() {
 		limpiar();
 		return "/paginas/privado/verTipoUsuario.xhtml?faces-redirect=true";
 	}
-	
-	public void limpiar(){
+
+	/**
+	 * 
+	 * Metodo encargado de limpiar el tipo de usuario en la edicion
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
+	public void limpiar() {
 		nombre = null;
 		des = null;
 	}
-	
-	
-		public String editar() {
-			if (nombre.isEmpty() || des.isEmpty()) {
-				Messages.addFlashGlobalWarn("Digite los campos Obligatorios");
-			} else {
-				try {
-					tipoUsuario.setNombre(nombre);
-					tipoUsuario.setDescripcion(des);
-					tipousuejb.editar(tipoUsuario);
-					Messages.addFlashGlobalInfo("tipo de usuario Editado Correctamente");
-					registrarAuditoria("Editar");
-					limpiar();
-					return "/paginas/privado/verTipoUsuario.xhtml?faces-redirect=true";
-				} catch (Exception e) {
-					Messages.addFlashGlobalError(e.getMessage());
-				}
 
+	/**
+	 * 
+	 * Metodo encargado de editar
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
+	public String editar() {
+		if (nombre.isEmpty() || des.isEmpty()) {
+			Messages.addFlashGlobalWarn("Digite los campos Obligatorios");
+		} else {
+			try {
+				tipoUsuario.setNombre(nombre);
+				tipoUsuario.setDescripcion(des);
+				tipousuejb.editar(tipoUsuario);
+				Messages.addFlashGlobalInfo("tipo de usuario Editado Correctamente");
+				registrarAuditoria("Editar");
+				limpiar();
+				return "/paginas/privado/verTipoUsuario.xhtml?faces-redirect=true";
+			} catch (Exception e) {
+				Messages.addFlashGlobalError(e.getMessage());
 			}
-			return null;
-		}
 
+		}
+		return null;
+	}
+
+	/**
+	 * 
+	 * Metodo encargado de registrar la auditoria
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void registrarAuditoria(String accion) {
 		try {
 			Auditoria audi = new Auditoria();
@@ -100,7 +139,8 @@ public class TipoUsuarioEditController implements Serializable {
 	}
 
 	/**
-	 * @param nombre the nombre to set
+	 * @param nombre
+	 *            the nombre to set
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
@@ -114,7 +154,8 @@ public class TipoUsuarioEditController implements Serializable {
 	}
 
 	/**
-	 * @param des the des to set
+	 * @param des
+	 *            the des to set
 	 */
 	public void setDes(String des) {
 		this.des = des;
@@ -128,7 +169,8 @@ public class TipoUsuarioEditController implements Serializable {
 	}
 
 	/**
-	 * @param tipoUsuario the tipoUsuario to set
+	 * @param tipoUsuario
+	 *            the tipoUsuario to set
 	 */
 	public void setTipoUsuario(TipoUsuario tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
@@ -142,7 +184,8 @@ public class TipoUsuarioEditController implements Serializable {
 	}
 
 	/**
-	 * @param sesion the sesion to set
+	 * @param sesion
+	 *            the sesion to set
 	 */
 	public void setSesion(SessionController sesion) {
 		this.sesion = sesion;

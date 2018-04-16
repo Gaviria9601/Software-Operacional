@@ -27,7 +27,14 @@ import co.edu.eam.ingesoft.softOper.entidades.Cliente;
 import co.edu.eam.ingesoft.softOper.entidades.Departamento;
 import co.edu.eam.ingesoft.softOper.entidades.Municipio;
 import co.edu.eam.ingesoft.softOper.entidades.Usuario;
-
+/**
+ * 
+ * Clase encargada de la logica del  controlador del cliente
+ * 
+ * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+ * @date 15/04/2018
+ * @version <Numero Version>
+ */
 @Named("clienteEditController")
 @ViewScoped
 public class ClienteEditController implements Serializable {

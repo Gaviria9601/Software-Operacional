@@ -27,6 +27,14 @@ import co.edu.eam.ingesoft.softOper.entidades.Municipio;
 import co.edu.eam.ingesoft.softOper.entidades.TipoUsuario;
 import co.edu.eam.ingesoft.softOper.entidades.Usuario;
 
+/**
+ * 
+ * Clase encargada de la logica del controlador para editar los ausuarios
+ * 
+ * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+ * @date 15/04/2018
+ * @version <Numero Version>
+ */
 @Named("usuarioeditController")
 @ViewScoped
 public class UsuarioEditController implements Serializable {
@@ -118,11 +126,27 @@ public class UsuarioEditController implements Serializable {
 
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de cancelar el proceso de edicion
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public String cancelar() {
 		limpiar();
 		return "/paginas/privado/verEmpleadoUsuario.xhtml?faces-redirect=true";
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de limpiar la edicion de los usuarios
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void limpiar() {
 		nombre = null;
 		apellido = null;
@@ -135,6 +159,14 @@ public class UsuarioEditController implements Serializable {
 		contrasenia = null;
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de editar los usuarios
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public String editar() {
 		try {
 			empleado.setNombre(nombre);
@@ -166,11 +198,27 @@ public class UsuarioEditController implements Serializable {
 		return null;
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de cambiar de municipio dependiendo del departamento
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void onDepartamentoChange() {
 		if (departamento != null && !departamento.equals(""))
 			municipios = empleadoejb.listarMuniporDepto(departamento);
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de registrar la auditoria del empleado
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void registrarAuditoriaEmpleado(String accion) {
 		try {
 			Auditoria audi = new Auditoria();
@@ -184,6 +232,14 @@ public class UsuarioEditController implements Serializable {
 		}
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de registrar la auditori del usuarios
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void registrarAuditoriaUsuario(String accion) {
 		try {
 			Auditoria audi = new Auditoria();

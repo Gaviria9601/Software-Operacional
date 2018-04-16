@@ -16,6 +16,14 @@ import co.edu.eam.ingesoft.softOpe.negocio.beans.Ventas_hechoEJB;
 import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
 import co.edu.eam.ingesoft.softOper.entidades.venta_hecho;
 
+/**
+ * 
+ * Clase encargada de la logica del controlador para el area
+ * 
+ * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+ * @date 15/04/2018
+ * @version <Numero Version>
+ */
 @Named("ETLtransformacionController")
 @ViewScoped
 public class ETLTransformacionController implements Serializable {
@@ -32,10 +40,10 @@ public class ETLTransformacionController implements Serializable {
 
 	@EJB
 	private Ventas_hechoEJB venHecEJB;
-	
+
 	@Inject
 	private SessionController sesion;
-	
+
 	@EJB
 	private AuditoriaEJB audEJB;
 
@@ -45,21 +53,41 @@ public class ETLTransformacionController implements Serializable {
 
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de borrar los valores menos de 0
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void borrarMenores0() {
 		venHecEJB.borrarMenores0();
 		ventas = venHecEJB.listarVentasHecho();
 		registrarAuditoria("Aplicación RN <0");
 	}
-	
-	public void borrarMenores20(){
+
+	/**
+	 * 
+	 * Metodo encargado de borrar los valores menos de 20
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
+	public void borrarMenores20() {
 		venHecEJB.borrarMenores20();
 		ventas = venHecEJB.listarVentasHecho();
 		registrarAuditoria("Aplicación RN < 20000");
 	}
-	
+
 	/**
 	 * 
-	 * @param accion
+	 * Metodo encargado de registrar la auditoria
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void registrarAuditoria(String accion) {
 		try {
@@ -73,6 +101,5 @@ public class ETLTransformacionController implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
 
 }

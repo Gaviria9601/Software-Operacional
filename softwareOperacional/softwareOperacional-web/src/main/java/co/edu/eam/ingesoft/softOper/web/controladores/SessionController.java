@@ -17,7 +17,14 @@ import co.edu.eam.ingesoft.softOpe.negocio.beans.SeguridadEJB;
 import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
 import co.edu.eam.ingesoft.softOper.entidades.Empleado;
 import co.edu.eam.ingesoft.softOper.entidades.Usuario;
-
+/**
+ * 
+ * Clase encargada de la logica del controlar la sesion
+ * 
+ * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+ * @date 15/04/2018
+ * @version <Numero Version>
+ */
 @Named("sessionControl")
 @SessionScoped
 public class SessionController implements Serializable {
@@ -61,7 +68,12 @@ public class SessionController implements Serializable {
 	private Conexion conEJB;
 
 	/**
-	 * Logea un usuario al sistema
+	 * 
+	 * Metodo encargado realizar el login
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public String login() {
 		try {
@@ -102,7 +114,11 @@ public class SessionController implements Serializable {
 
 	/**
 	 * 
-	 * @return
+	 * Metodo encargado de cerrar sesion
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public String cerrarSesion() {
 		usuario = null;
@@ -227,6 +243,11 @@ public class SessionController implements Serializable {
 
 	/**
 	 * 
+	 * Metodo encargado de registrar la audiroia 
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void registrarAuditoria() {
 		try {
@@ -247,6 +268,11 @@ public class SessionController implements Serializable {
 
 	/**
 	 * 
+	 * Metodo encargado de identificar el navegador del usuario
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void identificarNavegadorPeticion() {
 

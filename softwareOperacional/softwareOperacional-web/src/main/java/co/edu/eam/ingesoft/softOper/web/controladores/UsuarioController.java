@@ -1,8 +1,8 @@
 package co.edu.eam.ingesoft.softOper.web.controladores;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -24,13 +24,20 @@ import co.edu.eam.ingesoft.softOpe.negocio.beans.TipoUsuarioEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
 import co.edu.eam.ingesoft.softOper.entidades.Cargo;
-import co.edu.eam.ingesoft.softOper.entidades.Cliente;
 import co.edu.eam.ingesoft.softOper.entidades.Departamento;
 import co.edu.eam.ingesoft.softOper.entidades.Empleado;
 import co.edu.eam.ingesoft.softOper.entidades.Municipio;
 import co.edu.eam.ingesoft.softOper.entidades.TipoUsuario;
 import co.edu.eam.ingesoft.softOper.entidades.Usuario;
 
+/**
+ * 
+ * Clase encargada de la logica del controlador para usuarios
+ * 
+ * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+ * @date 15/04/2018
+ * @version <Numero Version>
+ */
 @Named("usuarioController")
 @ViewScoped
 public class UsuarioController implements Serializable {
@@ -290,13 +297,12 @@ public class UsuarioController implements Serializable {
 
 	@EJB
 	private SeguridadEJB seguridadejb;
-	
+
 	@EJB
 	private AuditoriaEJB audEJB;
 
 	@Inject
 	private SessionController sesion;
-
 
 	@PostConstruct
 	public void inicializador() {
@@ -306,6 +312,15 @@ public class UsuarioController implements Serializable {
 		departamentos = empleadoejb.listardepartamentos();
 		empleados = empleadoejb.listarEmpleados();
 	}
+
+	/**
+	 * 
+	 * Metodo encargado de crear los usuarios
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 
 	public void crear() {
 		try {
@@ -320,7 +335,7 @@ public class UsuarioController implements Serializable {
 			empleado.setGenero(genero);
 			empleado.setMunicipio(m);
 			empleado.setNombre(nombre);
-			System.out.println(c.getId()+"************"+m.getId());
+			System.out.println(c.getId() + "************" + m.getId());
 			registrarAuditoriaEmpleado("Guardar");
 			empleadoejb.crear(empleado, nickname);
 			limpiar();
@@ -329,12 +344,28 @@ public class UsuarioController implements Serializable {
 			Messages.addGlobalError(e.getMessage());
 		}
 	}
-	
+
+	/**
+	 * 
+	 * Metodo encargado de buscar los usuarios
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void buscar() {
 		registrarAuditoriaUsuario("Buscar");
 		registrarAuditoriaEmpleado("Buscar");
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de crear los usuarios
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void crearUsuario() {
 		try {
 			if (seguridadejb.buscarUsuario(nickname) == null) {
@@ -350,21 +381,54 @@ public class UsuarioController implements Serializable {
 		}
 	}
 
+	/**
+	 * 
+	 * Metodo encargado encargado de cambiar de municipo dependiendo del
+	 * departamento
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void onDepartamentoChange() {
 		if (departamento != null && !departamento.equals(""))
 			municipios = empleadoejb.listarMuniporDepto(departamento);
 	}
-	
+
+	/**
+	 * 
+	 * Metodo encargado de rediccionar la pagina a la edicion
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public String procederEditar(Empleado audi) {
 		DatosManager.setCodigoEmpleado(audi.getCodigo());
 		return "/paginas/privado/editarEmpleadoUsuario.xhtml?faces-redirect=true";
 	}
-	
+
+	/**
+	 * 
+	 * Metodo encargado de resetear los filtros
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void resetearFitrosTabla() {
 		RequestContext requestContext = RequestContext.getCurrentInstance();
 		requestContext.execute("PF('audiTable').clearFilters()");
 	}
-	
+
+	/**
+	 * 
+	 * Metodo encargado de eliminar los usuarios
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void eliminar(Empleado emp) {
 
 		try {
@@ -380,6 +444,14 @@ public class UsuarioController implements Serializable {
 		}
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de registrar la auditoria para empleado
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void registrarAuditoriaEmpleado(String accion) {
 		try {
 			Auditoria audi = new Auditoria();
@@ -392,7 +464,15 @@ public class UsuarioController implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * 
+	 * Metodo encargado de registrar la auditoria para los usuarios
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void registrarAuditoriaUsuario(String accion) {
 		try {
 			Auditoria audi = new Auditoria();
@@ -405,7 +485,15 @@ public class UsuarioController implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * 
+	 * Metodo encargado de limpiar los usuarios
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void limpiar() {
 		nombre = null;
 		apellido = null;
@@ -415,7 +503,7 @@ public class UsuarioController implements Serializable {
 		municipio = -1;
 		tipoUsuario = -1;
 		cargo = -1;
-		contrasenia= null;
+		contrasenia = null;
 		nickname = null;
 	}
 

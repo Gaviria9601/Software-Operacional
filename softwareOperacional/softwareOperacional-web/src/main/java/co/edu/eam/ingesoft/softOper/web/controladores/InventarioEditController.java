@@ -22,6 +22,14 @@ import co.edu.eam.ingesoft.softOper.entidades.Empleado;
 import co.edu.eam.ingesoft.softOper.entidades.Producto;
 import co.edu.eam.ingesoft.softOper.entidades.TipoProducto;
 
+/**
+ * 
+ * Clase encargada de la logica del controlador para editar el inventario
+ * 
+ * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+ * @date 15/04/2018
+ * @version <Numero Version>
+ */
 @Named("inventarioEditController")
 @ViewScoped
 public class InventarioEditController implements Serializable {
@@ -157,7 +165,6 @@ public class InventarioEditController implements Serializable {
 	@EJB
 	private EmpleadoEJB empEJB;
 
-
 	@EJB
 	private AuditoriaEJB audEJB;
 
@@ -184,9 +191,14 @@ public class InventarioEditController implements Serializable {
 		valor = pro.getValor() + "";
 
 	}
-	
+
 	/**
 	 * 
+	 * Metodo encargado de registrar la accion de buscar en la auditoria
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void buscar() {
 		registrarAuditoria("Buscar");
@@ -194,6 +206,11 @@ public class InventarioEditController implements Serializable {
 
 	/**
 	 * 
+	 * Metodo encargado de realizar la edicion en el inventario
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public String editar() {
 		if (nombre.isEmpty() || fechaIngreso == null || cantidadProducto == 0 || codigoLote.isEmpty()
@@ -226,6 +243,11 @@ public class InventarioEditController implements Serializable {
 
 	/**
 	 * 
+	 * Metodo encargado de limpiar la edicion en el inventario
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void limpiar() {
 		nombre = null;
@@ -241,11 +263,27 @@ public class InventarioEditController implements Serializable {
 		pesoOpcion = "";
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de cancelar la edicion en el inventario
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public String cancelar() {
 		limpiar();
 		return "/paginas/privado/verInventario.xhtml?faces-redirect=true";
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de registrar la auditoria
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void registrarAuditoria(String accion) {
 		try {
 			Auditoria audi = new Auditoria();

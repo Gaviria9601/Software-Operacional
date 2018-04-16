@@ -37,6 +37,15 @@ import co.edu.eam.ingesoft.softOper.entidades.producto_dimension;
 import co.edu.eam.ingesoft.softOper.entidades.venta_dimension;
 import co.edu.eam.ingesoft.softOper.entidades.venta_hecho;
 
+/**
+ * 
+ * Clase encargada de la logica del controlador para la extraccion del proceso
+ * de ETL
+ * 
+ * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+ * @date 15/04/2018
+ * @version <Numero Version>
+ */
 @Named("ETLExtraccionController")
 @ViewScoped
 public class ETLExtraccionController implements Serializable {
@@ -90,6 +99,11 @@ public class ETLExtraccionController implements Serializable {
 
 	/**
 	 * 
+	 * Metodo encargado de extraer la auditoria
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void extraerAuditoria() {
 		try {
@@ -103,6 +117,11 @@ public class ETLExtraccionController implements Serializable {
 
 	/**
 	 * 
+	 * Metodo encargado de extraer la venta
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void extraerVenta() {
 		try {
@@ -116,6 +135,11 @@ public class ETLExtraccionController implements Serializable {
 
 	/**
 	 * 
+	 * Metodo encargado de extraer la auditoria hecho
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void extraerTablaAuditoriaHecho() {
 
@@ -201,6 +225,11 @@ public class ETLExtraccionController implements Serializable {
 
 	/**
 	 * 
+	 * Metodo encargado de extraer la venta hecho
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void extraerTablaVentaHecho() {
 		List<ProductoVenta> productoVentas = proVenEJB.listarProductoVenta();
@@ -278,8 +307,11 @@ public class ETLExtraccionController implements Serializable {
 
 	/**
 	 * 
-	 * @param venHe
-	 * @return
+	 * Metodo encargado de verificar el ingreso de la venta
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public boolean verificarIngresoVenta(venta_hecho venHe) {
 		List<venta_hecho> ven = venHecEJB.listarVentasHecho();
@@ -294,8 +326,11 @@ public class ETLExtraccionController implements Serializable {
 
 	/**
 	 * 
-	 * @param venHe
-	 * @return
+	 * Metodo encargado de verificar el ingreso de la auditoria *
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public boolean verificarIngresoAuditoria(auditoria_hecho audHe) {
 		List<auditoria_hecho> ven = audHecEJB.listarAuditoriasHecho();
@@ -309,8 +344,11 @@ public class ETLExtraccionController implements Serializable {
 
 	/**
 	 * 
-	 * @param navegador
-	 * @return
+	 * Metodo encargado de verificar el ingreso del navegador dimension
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public int verificaringresoNavegadorDimension(String navegador) {
 		List<navegador_dimension> navDimension = audHecEJB.listarNavegadorDimension();
@@ -325,8 +363,11 @@ public class ETLExtraccionController implements Serializable {
 
 	/**
 	 * 
-	 * @param navegador
-	 * @return
+	 * Metodo encargado de verificar el origen dimension
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public int verificaringresoOrigenDimension(String dispositivo) {
 		List<origen_dimension> navDimension = audHecEJB.listarOrigenDimension();
@@ -341,8 +382,11 @@ public class ETLExtraccionController implements Serializable {
 
 	/**
 	 * 
-	 * @param nombre
-	 * @return
+	 * Metodo encargado de verificar el ingreso del empleado dimension
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public int verificaringresoEmpleadoDimension(String nombre) {
 		List<empleado_dimension> empDimension = venHecEJB.listarEmpleados();
@@ -357,8 +401,11 @@ public class ETLExtraccionController implements Serializable {
 
 	/**
 	 * 
-	 * @param nombre
-	 * @return
+	 * Metodo encargado de verificar el ingreso del cliente dimension
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public int verificaringresoClienteDimension(String nombre) {
 		List<cliente_dimension> cliDimension = venHecEJB.listarClientes();
@@ -373,8 +420,11 @@ public class ETLExtraccionController implements Serializable {
 
 	/**
 	 * 
-	 * @param venHecho
-	 * @return
+	 * Metodo encargado de verificar el ingreso del producto dimension
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public int verificaringresoProductoDimension(int proDim) {
 		List<producto_dimension> proDimensiones = venHecEJB.listarProductos();
@@ -389,8 +439,11 @@ public class ETLExtraccionController implements Serializable {
 
 	/**
 	 * 
-	 * @param venHecho
-	 * @return
+	 * Metodo encargado de verificar el ingreso de la venta dimension
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public int verificaringresoVentaDimension(int venDim) {
 		List<venta_dimension> venDimensiones = venHecEJB.listarVentas();
@@ -403,6 +456,14 @@ public class ETLExtraccionController implements Serializable {
 		return co;
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de conectar a la base de datos
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void conectar() {
 		Connection con = null;
 		try {
@@ -434,7 +495,11 @@ public class ETLExtraccionController implements Serializable {
 
 	/**
 	 * 
-	 * @param accion
+	 * Metodo encargado de registrar las auditorias
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
 	 */
 	public void registrarAuditoria(String accion) {
 		try {

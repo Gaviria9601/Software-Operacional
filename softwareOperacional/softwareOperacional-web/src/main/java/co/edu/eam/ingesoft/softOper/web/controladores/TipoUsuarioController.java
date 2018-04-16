@@ -21,8 +21,15 @@ import co.edu.eam.ingesoft.softOpe.negocio.beans.TipoUsuarioEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.excepciones.ExcepcionNegocio;
 import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
 import co.edu.eam.ingesoft.softOper.entidades.TipoUsuario;
-import co.edu.eam.ingesoft.softOper.entidades.Venta;
 
+/**
+ * 
+ * Clase encargada de la logica del controlador para el tipo de usuario
+ * 
+ * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+ * @date 15/04/2018
+ * @version <Numero Version>
+ */
 @Named("tipoUsuariocontrolador")
 @ViewScoped
 public class TipoUsuarioController implements Serializable {
@@ -164,6 +171,14 @@ public class TipoUsuarioController implements Serializable {
 		tipos = tipousuejb.listarTipoUsuario();
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de crear el tipo de usuario
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void crear() {
 		try {
 
@@ -181,6 +196,14 @@ public class TipoUsuarioController implements Serializable {
 		}
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de eliminar el tipo de usuario
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void eliminar(TipoUsuario tipo) {
 		try {
 			tipousuejb.eliminarTipoUsuario(tipo.getId());
@@ -194,21 +217,53 @@ public class TipoUsuarioController implements Serializable {
 
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de resetear los filtros de la tabla
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void resetearFitrosTabla(String id) {
 		RequestContext requestContext = RequestContext.getCurrentInstance();
 		requestContext.execute("PF('vtWidget').clearFilters()");
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de editar
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public String procederEditar(TipoUsuario tip) {
 		DatosManager.setCodigoTipoUsuario(tip.getId());
 		return "/paginas/privado/editarTipoUsuario.xhtml?faces-redirect=true";
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de resetear los filtros de la tabla
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void resetearFitrosTabla() {
 		RequestContext requestContext = RequestContext.getCurrentInstance();
 		requestContext.execute("PF('audiTable').clearFilters()");
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de registrar la auditoria
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void registrarAuditoria(String accion) {
 		try {
 			Auditoria audi = new Auditoria();
@@ -222,6 +277,14 @@ public class TipoUsuarioController implements Serializable {
 		}
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de limpiar el tipo de usuarios
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void limpiar() {
 		nombre = null;
 		des = null;

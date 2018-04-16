@@ -24,9 +24,17 @@ import co.edu.eam.ingesoft.softOper.entidades.Departamento;
 import co.edu.eam.ingesoft.softOper.entidades.Empleado;
 import co.edu.eam.ingesoft.softOper.entidades.Municipio;
 
+/**
+ * 
+ * Clase encargada de la logica del controlador para editar los empleados
+ * 
+ * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+ * @date 15/04/2018
+ * @version <Numero Version>
+ */
 @Named("empleadoeditController")
 @ViewScoped
-public class EmpleadoEditController implements Serializable{
+public class EmpleadoEditController implements Serializable {
 
 	@Pattern(regexp = "[A-Za-z ]*", message = "solo Letras")
 	@Length(min = 3, max = 30, message = "longitud entre 3 y 15")
@@ -92,6 +100,14 @@ public class EmpleadoEditController implements Serializable{
 		municipios = empleadoejb.listarMuniporDepto(departamento);
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de cancelar el registro
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public String cancelar() {
 		limpiar();
 		return "/paginas/privado/verEmpleado.xhtml?faces-redirect=true";
@@ -107,6 +123,14 @@ public class EmpleadoEditController implements Serializable{
 		cargo = -1;
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de editar el empleado
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public String editar() {
 		try {
 			empleado.setNombre(nombre);
@@ -131,11 +155,27 @@ public class EmpleadoEditController implements Serializable{
 		return null;
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de cambiar el municipio dependiendo del departamento
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void onDepartamentoChange() {
 		if (departamento != null && !departamento.equals(""))
 			municipios = empleadoejb.listarMuniporDepto(departamento);
 	}
 
+	/**
+	 * 
+	 * Metodo encargado de registrar la auditoria del empleado
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @date 15/04/2018
+	 * @version <Numero Version>
+	 */
 	public void registrarAuditoriaEmpleado(String accion) {
 		try {
 			Auditoria audi = new Auditoria();
@@ -148,7 +188,6 @@ public class EmpleadoEditController implements Serializable{
 			e.printStackTrace();
 		}
 	}
-
 
 	/**
 	 * @return the nombre
