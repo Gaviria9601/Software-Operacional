@@ -495,6 +495,7 @@ public class ETLExtraccionController implements Serializable {
 			Logger.getLogger(ETLExtraccionController.class.getName()).log(Level.SEVERE, null, ex);
 		} finally {
 			try {
+				con.close();
 				rs.close();
 				st.close();
 			} catch (SQLException e) {

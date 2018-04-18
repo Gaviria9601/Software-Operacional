@@ -169,20 +169,7 @@ public class UsuarioEditController implements Serializable {
 	 */
 	public String editar() {
 		try {
-			empleado.setNombre(nombre);
-			empleado.setApellido(apellido);
-			Cargo c = empleadoejb.buscarCargo(cargo);
-			empleado.setCargo(c);
-			empleado.setCedula(cedula);
-			empleado.setFechaIngresoEmpresa(fechaIngreso);
-			empleado.setFechaNacimiento(fechaNacimiento);
-			empleado.setGenero(genero);
-			Municipio m = empleadoejb.buscarMunicipio(municipio);
-			empleado.setMunicipio(m);
-			TipoUsuario tipo = tiposejb.buscarTipoUsuario(tipoUsuario);
-			usu.setContrasenia(contrasenia);
-			usu.setTipoUsuario(tipo);
-			empleadoejb.editarEmpleado(empleado);
+			empleadoejb.editarEmpleado(modificar(empleado));
 			empleadoejb.editarUsuario(usu);
 			Messages.addFlashGlobalInfo("usuario Editado Correctamente");
 			registrarAuditoriaEmpleado("Editar");
@@ -193,6 +180,28 @@ public class UsuarioEditController implements Serializable {
 			Messages.addFlashGlobalError(e.getMessage());
 		}
 		return null;
+	}
+	
+	/**
+	 * 
+	 * @param empleado
+	 * @return
+	 */
+	public Empleado modificar(Empleado empleado) {
+		empleado.setNombre(nombre);
+		empleado.setApellido(apellido);
+		Cargo c = empleadoejb.buscarCargo(cargo);
+		empleado.setCargo(c);
+		empleado.setCedula(cedula);
+		empleado.setFechaIngresoEmpresa(fechaIngreso);
+		empleado.setFechaNacimiento(fechaNacimiento);
+		empleado.setGenero(genero);
+		Municipio m = empleadoejb.buscarMunicipio(municipio);
+		empleado.setMunicipio(m);
+		TipoUsuario tipo = tiposejb.buscarTipoUsuario(tipoUsuario);
+		usu.setContrasenia(contrasenia);
+		usu.setTipoUsuario(tipo);
+		return empleado;
 	}
 
 	/**
