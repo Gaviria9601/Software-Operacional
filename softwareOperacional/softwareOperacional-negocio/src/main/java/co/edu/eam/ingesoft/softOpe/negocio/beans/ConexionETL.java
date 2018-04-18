@@ -27,20 +27,13 @@ public class ConexionETL {
 
 	private Logger logger = Logger.getLogger(ConexionETL.class.getName());
 
-	Contrasenia contrasenia;
 	protected String datasources = "java:jboss/datasources/ETLDS";
 	protected String user = "postgres"; // usuario de la base de datos
-	protected String password = contrasenia.getPassword("C:\\Users\\alejo\\git\\"
-			+ "Software-Operacional\\softwareOperacional\\bd_credenciales_postgres.txt"); // password de la base de datos
-  //protected String password = getPassword();
+    protected String password = getPassword();
 	protected Connection conexionDB = null; // variable que permite la conexion
 	protected Statement sentenciaSQL; // permite la ejecucion de sentencias SQL
 	protected ResultSet resultadoDB;// almacena el resultado de una consulta
 
-	public ConexionETL() {
-		// TODO Auto-generated constructor stub
-		contrasenia = new Contrasenia();
-	}
 
 	/**
 	 * 
