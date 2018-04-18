@@ -15,7 +15,6 @@ import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import org.omnifaces.cdi.ViewScoped;
@@ -456,46 +455,7 @@ public class ETLExtraccionController implements Serializable {
 		return co;
 	}
 
-	/**
-	 * 
-	 * Metodo encargado de conectar a la base de datos
-	 * 
-	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
-	 * @date 15/04/2018
-	 * @version 1.0
-	 */
-	public void conectar() {
-		Connection con = null;
-		Statement st = null;
-		ResultSet rs = null;
-		try {
-			InitialContext ic = new InitialContext();
-			// en esta parte es donde // ponemos el Nombre // // de
-			// JNDI para que traiga el datasource
-			DataSource ds = (DataSource) ic.lookup("java:jboss/datasources/ETLDS");
-			con = ds.getConnection();
-			st = con.createStatement();
-			Messages.addFlashGlobalInfo("Se ha realizado con exito la conexión a Postgres");
-			// el // encargado de traer los datos de la consulta
-			rs = st.executeQuery("select * from cliente_dimension");
-			while (rs.next()) {
-				Logger.getLogger(" " + rs.getString(1) + " " + rs.getString(2));
-			}
-		} catch (Exception ex) {
-			Logger.getLogger(ETLExtraccionController.class.getName()).log(Level.SEVERE, null, ex);
-		} finally {
-			try {
-				rs.close();
-				st.close();
-				con.close();
-				Logger.getLogger("Conexion Cerrada con Exito...");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 
-	}
 
 	/**
 	 * 
