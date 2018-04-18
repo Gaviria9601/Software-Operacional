@@ -16,6 +16,8 @@ import javax.persistence.Table;
 		@NamedQuery(name = navegador_dimension.BUSCAR_NOMBRE, query = "select nav from navegador_dimension nav where nav.navegador=?1") })
 public class navegador_dimension implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	public static final String LISTAR_NAVEGADOR_DIMENSION = "Navegador.ListarNavegadorDimension";
 
 	public static final String BUSCAR_NOMBRE = "BuscarNombreNavegador";
@@ -28,7 +30,7 @@ public class navegador_dimension implements Serializable {
 	private String navegador;
 
 	public navegador_dimension() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	/**

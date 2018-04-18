@@ -22,7 +22,7 @@ import co.edu.eam.ingesoft.softOper.entidades.venta_hecho;
  * 
  * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
  * @date 15/04/2018
- * @version <Numero Version>
+ * @version 1.0
  */
 @Named("ETLCargaController")
 @ViewScoped
@@ -61,7 +61,7 @@ public class ETLCargaController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void carga() {
 		try {

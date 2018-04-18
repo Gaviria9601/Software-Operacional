@@ -18,12 +18,14 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "Empleado")
 @NamedQueries({
-		@NamedQuery(name = Empleado.BUSQUEDA__POR_USUARIO, query = "select emp from Empleado emp where emp.Usuario.id= ?1"),
+		@NamedQuery(name = Empleado.BUSQUEDA_POR_USUARIO, query = "select emp from Empleado emp where emp.Usuario.id= ?1"),
 		@NamedQuery(name = Empleado.LISTAR_EMPLEADOS, query = "select emp from Empleado emp"),
 		@NamedQuery(name = Empleado.BUSQUEDA_USUARIO, query = "select emp from Empleado emp where emp.codigo=?1") })
 public class Empleado implements Serializable {
 
-	public static final String BUSQUEDA__POR_USUARIO = "Empleado.BusquedaPorUsuario";
+	private static final long serialVersionUID = 1L;
+
+	public static final String BUSQUEDA_POR_USUARIO = "Empleado.BusquedaPorUsuario";
 
 	public static final String LISTAR_EMPLEADOS = "Empleado.ListarEmpleados";
 
@@ -66,6 +68,7 @@ public class Empleado implements Serializable {
 	private Usuario Usuario;
 
 	public Empleado() {
+		super();
 	}
 
 	public Empleado(String nombre, String apellido, Date fechaNacimiento, Date fechaIngresoEmpresa, String cedula,

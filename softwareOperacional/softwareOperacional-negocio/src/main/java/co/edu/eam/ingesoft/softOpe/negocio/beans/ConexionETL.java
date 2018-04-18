@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Logger;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -18,11 +19,13 @@ import javax.sql.DataSource;
  * 
  * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
  * @date 15/04/2018
- * @version <Numero Version>
+ * @version 1.0
  */
 @LocalBean
 @Stateless
 public class ConexionETL {
+
+	private Logger logger = Logger.getLogger(ConexionETL.class.getName());
 
 	protected String datasources = "java:jboss/datasources/ETLDS";
 	protected String user = "postgres"; // usuario de la base de datos
@@ -37,7 +40,7 @@ public class ConexionETL {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void conectar() {
 		try {
@@ -46,10 +49,10 @@ public class ConexionETL {
 			conexionDB = ds.getConnection();
 			sentenciaSQL = conexionDB.createStatement();
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			logger.info(e.getMessage());
 
 		} catch (NamingException ex) {
-			System.out.println(ex.getMessage());
+			logger.info(ex.getMessage());
 
 		}
 	}
@@ -60,14 +63,14 @@ public class ConexionETL {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void desconectar() {
 		try {
 			// sentenciaSQL.close();//cierra la consulta
 			conexionDB.close();// cierra conexion
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			logger.info(e.getMessage());
 		}
 	}
 
@@ -77,7 +80,7 @@ public class ConexionETL {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public boolean ejecutar(String sentencia) {
 		try {
@@ -97,7 +100,7 @@ public class ConexionETL {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 
 	public ResultSet ejecutarRetorno(String sentencia) {

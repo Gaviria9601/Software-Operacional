@@ -17,7 +17,7 @@ import co.edu.eam.ingesoft.softOper.entidades.Area;
  * 
  * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
  * @date 15/04/2018
- * @version <Numero Version>
+ * @version 1.0
  */
 @Stateless
 @LocalBean
@@ -32,7 +32,7 @@ public class AreaEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void crear(Area a) {
@@ -45,7 +45,7 @@ public class AreaEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public Area buscarArea(String nombre) {
@@ -59,7 +59,7 @@ public class AreaEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 
 	public Area buscarArea(int id) {
@@ -72,7 +72,7 @@ public class AreaEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void editarArea(Area ar) {
@@ -85,7 +85,7 @@ public class AreaEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void eliminar(int id) {
@@ -98,9 +98,10 @@ public class AreaEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 
+	@SuppressWarnings("unchecked")
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public List<Area> listarArea() {
 		List<Area> lista;

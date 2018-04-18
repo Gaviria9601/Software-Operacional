@@ -40,6 +40,8 @@ public class MediaWikiEJB extends ConexionWikieam {
 	@PersistenceContext(unitName = Conexion.OPCION)
 	private EntityManager em;
 
+	private static final String COMP_WHERE = " where codigo = ";
+
 	@EJB
 	private ConexionETL conexionETL;
 
@@ -52,6 +54,7 @@ public class MediaWikiEJB extends ConexionWikieam {
 	 *
 	 */
 	public void extraerDatos() {
+		logger.info("MediaWikiEJB: extraerDatos() - Inicio");
 		try {
 
 			// Se realiza la consulta a la bd de wikieam para obtener los usuarios.
@@ -95,6 +98,7 @@ public class MediaWikiEJB extends ConexionWikieam {
 		} catch (Exception e) {
 			logger.info("MediaWikiEJB: extraerDatos() - Exception General: " + e.getMessage());
 		}
+		logger.info("MediaWikiEJB: extraerDatos() - Fin");
 
 	}
 
@@ -107,6 +111,7 @@ public class MediaWikiEJB extends ConexionWikieam {
 	 *
 	 */
 	private void extraerDatosDimensionUsuario() {
+		logger.info("MediaWikiEJB: extraerDatosDimensionUsuario() - Inicio");
 
 		try {
 
@@ -140,6 +145,7 @@ public class MediaWikiEJB extends ConexionWikieam {
 		} catch (SQLException e) {
 			logger.info("MediaWikiEJB: extraerDatosDimensionUsuario() - Exception General: " + e.getMessage());
 		}
+		logger.info("MediaWikiEJB: extraerDatosDimensionUsuario() - Fin");
 
 	}
 
@@ -152,6 +158,8 @@ public class MediaWikiEJB extends ConexionWikieam {
 	 *
 	 */
 	private void extraerDatosDimensionPaginas() {
+		logger.info("MediaWikiEJB: extraerDatosDimensionPaginas() - Inicio");
+
 		try {
 
 			StringBuilder consultaPag = new StringBuilder();
@@ -179,6 +187,7 @@ public class MediaWikiEJB extends ConexionWikieam {
 		} catch (SQLException e) {
 			logger.info("MediaWikiEJB: extraerDatosDimensionPaginas() - Exception General: " + e.getMessage());
 		}
+		logger.info("MediaWikiEJB: extraerDatosDimensionPaginas() - Fin");
 
 	}
 
@@ -191,6 +200,8 @@ public class MediaWikiEJB extends ConexionWikieam {
 	 *
 	 */
 	private void extraerDatosDimensionCambios() {
+		logger.info("MediaWikiEJB: extraerDatosDimensionCambios() - Inicio");
+
 		try {
 
 			StringBuilder consultaCambios = new StringBuilder();
@@ -203,40 +214,58 @@ public class MediaWikiEJB extends ConexionWikieam {
 			consultaCambios.append("rc_old_len,rc_new_len FROM wikieam.recentchanges ");
 
 			ResultSet resultCambios = super.ejecutarRetorno(consultaCambios.toString());
+			extraerDatosDimCambiosComp(resultCambios);
 
-			while (resultCambios.next()) {
-				CambiosDimensionWikieam cdw = new CambiosDimensionWikieam();
-
-				Integer id = resultCambios.getInt(1);
-				if (id != null) {
-					cdw.setCodigo(id);
-				}
-				Date fechaC = resultCambios.getDate(2);
-				if (fechaC != null) {
-					cdw.setFechaC(fechaC);
-				}
-				Date fechaE = resultCambios.getDate(3);
-				if (fechaE != null) {
-					cdw.setFechaE(fechaE);
-				}
-				int numeroLineasC = resultCambios.getInt(4);
-				if (numeroLineasC > -1) {
-					cdw.setNumeroLineasC(numeroLineasC);
-				}
-				int numeroLineasE = resultCambios.getInt(5);
-				if (numeroLineasE > -1) {
-					cdw.setNumeroLineasE(numeroLineasE);
-				}
-				CambiosDimensionWikieam cdwTemp = em.find(CambiosDimensionWikieam.class, cdw.getCodigo());
-				if (cdwTemp != null && cdwTemp.getCodigo() != null) {
-					em.merge(cdw);
-				} else {
-					em.persist(cdw);
-				}
-			}
 		} catch (SQLException e) {
 			logger.info("MediaWikiEJB: extraerDatosDimensionCambios() - Exception General: " + e.getMessage());
 		}
+		logger.info("MediaWikiEJB: extraerDatosDimensionCambios() - Fin");
+
+	}
+
+	/**
+	 * Metodo complementario de extraer los datos de dimension de cambios.
+	 *
+	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
+	 * @date 24/02/2018
+	 * @version 1.0
+	 *
+	 */
+	private void extraerDatosDimCambiosComp(ResultSet resultCambios) throws SQLException {
+		logger.info("MediaWikiEJB: extraerDatos() - Inicio");
+
+		while (resultCambios.next()) {
+			CambiosDimensionWikieam cdw = new CambiosDimensionWikieam();
+
+			Integer id = resultCambios.getInt(1);
+			if (id != null) {
+				cdw.setCodigo(id);
+			}
+			Date fechaC = resultCambios.getDate(2);
+			if (fechaC != null) {
+				cdw.setFechaC(fechaC);
+			}
+			Date fechaE = resultCambios.getDate(3);
+			if (fechaE != null) {
+				cdw.setFechaE(fechaE);
+			}
+			int numeroLineasC = resultCambios.getInt(4);
+			if (numeroLineasC > -1) {
+				cdw.setNumeroLineasC(numeroLineasC);
+			}
+			int numeroLineasE = resultCambios.getInt(5);
+			if (numeroLineasE > -1) {
+				cdw.setNumeroLineasE(numeroLineasE);
+			}
+			CambiosDimensionWikieam cdwTemp = em.find(CambiosDimensionWikieam.class, cdw.getCodigo());
+			if (cdwTemp != null && cdwTemp.getCodigo() != null) {
+				em.merge(cdw);
+			} else {
+				em.persist(cdw);
+			}
+		}
+		logger.info("MediaWikiEJB: extraerDatosDimCambiosComp() - Fin");
+
 	}
 
 	/**
@@ -249,121 +278,194 @@ public class MediaWikiEJB extends ConexionWikieam {
 	 */
 	public void cargarDatos(List<UsuarioDimensionWikieam> usuarios, List<PaginaDimensionWikieam> paginas,
 			List<CambiosDimensionWikieam> cambios, List<AuditoriaWikieamHecho> auditorias) {
+		logger.info("MediaWikiEJB: cargarDatos() - Inicio");
+
 		try {
-			for (UsuarioDimensionWikieam usuarioDimensionWikieam : usuarios) {
-				ResultSet res = conexionETL
-						.ejecutarRetorno("select codigo from usuario_dimension_wikieam where codigo = "
-								+ usuarioDimensionWikieam.getCodigo());
-				Integer codigo = -1;
-				while (res.next()) {
-					codigo = res.getInt(1);
-				}
-				StringBuilder sql = new StringBuilder();
-				if (codigo != -1) {
-					sql.append("update usuario_dimension_wikieam set nombreusuario='")
-							.append(usuarioDimensionWikieam.getNombreUsuario());
-					sql.append("',nombre='").append(usuarioDimensionWikieam.getNombre());
-					sql.append(" where codigo = " + codigo);
-				} else {
-					sql.append("insert into usuario_dimension_wikieam(codigo,nombreusuario,nombre) values(");
-					sql.append(usuarioDimensionWikieam.getCodigo());
-					sql.append(",'").append(usuarioDimensionWikieam.getNombreUsuario()).append("'");
-					sql.append(",'").append(usuarioDimensionWikieam.getNombre()).append("')");
-					System.out.println("Consulta " + sql.toString());
-					conexionETL.ejecutarRetorno(sql.toString());
-				}
 
-			}
+			cargarDatosUsuario(usuarios);
+			cargarDatosPagina(paginas);
+			cargarDatosCambio(cambios);
+			cargarDatosAuditoria(auditorias);
 
-			for (PaginaDimensionWikieam paginaDimensionWikieam : paginas) {
-				ResultSet res = conexionETL
-						.ejecutarRetorno("select codigo from pagina_dimension_wikieam where codigo = "
-								+ paginaDimensionWikieam.getCodigo());
-				Integer codigo = -1;
-				while (res.next()) {
-					codigo = res.getInt(1);
-				}
-				StringBuilder sql = new StringBuilder();
-				if (codigo != -1) {
-					sql.append("update pagina_dimension_wikieam set titulopagina='")
-							.append(paginaDimensionWikieam.getTituloPagina());
-					sql.append(" where codigo = " + codigo);
-				} else {
-					sql.append("insert into pagina_dimension_wikieam(codigo,titulopagina) values(");
-					sql.append(paginaDimensionWikieam.getCodigo());
-					sql.append(",'").append(paginaDimensionWikieam.getTituloPagina()).append("')");
-					System.out.println("Consulta " + sql.toString());
-					conexionETL.ejecutar(sql.toString());
-				}
-
-			}
-
-			for (CambiosDimensionWikieam cambiosDimensionWikieam : cambios) {
-				ResultSet res = conexionETL.ejecutarRetorno("select codigo from cambios_dimension_wikieam where codigo="
-						+ cambiosDimensionWikieam.getCodigo());
-				Integer codigo = -1;
-				while (res.next()) {
-					codigo = res.getInt(1);
-				}
-				StringBuilder sql = new StringBuilder();
-				if (codigo != -1) {
-					sql.append("update cambios_dimension_wikieam set fechac='")
-							.append(cambiosDimensionWikieam.getFechaC());
-					sql.append("',fechae='").append(cambiosDimensionWikieam.getFechaE());
-					sql.append(",numerolineasc='").append(cambiosDimensionWikieam.getNumeroLineasC());
-					sql.append(",numerolineasc='").append(cambiosDimensionWikieam.getNumeroLineasE());
-					sql.append(" where codigo = " + codigo);
-				} else {
-					sql.append(
-							"insert into cambios_dimension_wikieam(codigo,fechac,fechae,numerolineasc,numerolinease) values(");
-					sql.append(cambiosDimensionWikieam.getCodigo());
-					if (cambiosDimensionWikieam.getFechaC() != null) {
-						sql.append(",'").append(cambiosDimensionWikieam.getFechaC()).append("'");
-					} else {
-						sql.append(",").append(cambiosDimensionWikieam.getFechaC());
-					}
-					if (cambiosDimensionWikieam.getFechaE() != null) {
-						sql.append(",'").append(cambiosDimensionWikieam.getFechaE()).append("'");
-					} else {
-						sql.append(",").append(cambiosDimensionWikieam.getFechaE());
-					}
-					sql.append(",").append(cambiosDimensionWikieam.getNumeroLineasC());
-					sql.append(",").append(cambiosDimensionWikieam.getNumeroLineasE()).append(")");
-					System.out.println("Consulta " + sql.toString());
-					conexionETL.ejecutar(sql.toString());
-				}
-
-			}
-			for (AuditoriaWikieamHecho auditoriaWikieamHecho : auditorias) {
-				ResultSet res = conexionETL.ejecutarRetorno(
-						"select codigo from auditoria_wikieam_hecho where codigo=" + auditoriaWikieamHecho.getCodigo());
-				Integer codigo = -1;
-				while (res.next()) {
-					codigo = res.getInt(1);
-				}
-				StringBuilder sql = new StringBuilder();
-				if (codigo != -1) {
-					sql.append("update usuario_dimension_wikieam set cambiosrecientes=")
-							.append(auditoriaWikieamHecho.getCambio().getCodigo());
-					sql.append(",usuario=").append(auditoriaWikieamHecho.getUsuario().getCodigo());
-					sql.append(",pagina=").append(auditoriaWikieamHecho.getPagina().getCodigo());
-					sql.append(" where codigo = " + codigo);
-				} else {
-					sql.append("insert into auditoria_wikieam_hecho(codigo,cambiosrecientes,usuario,pagina) values(");
-					sql.append(auditoriaWikieamHecho.getCodigo()).append(",");
-					sql.append(auditoriaWikieamHecho.getCambio().getCodigo()).append(",");
-					sql.append(auditoriaWikieamHecho.getUsuario().getCodigo()).append(",");
-					sql.append(auditoriaWikieamHecho.getPagina().getCodigo()).append(")");
-					System.out.println("Consulta " + sql.toString());
-					conexionETL.ejecutar(sql.toString());
-				}
-
-			}
 		} catch (
 
 		SQLException e) {
 			logger.info("MediaWikiEJB: cargarDatos() - SQLException: " + e.getMessage());
 		}
+		logger.info("MediaWikiEJB: cargarDatos() - Fin");
+
+	}
+
+	/**
+	 * Metodo encargado cargar los datos de los Usuarios.
+	 *
+	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
+	 * @date 24/02/2018
+	 * @version 1.0
+	 * @throws SQLException
+	 *             , en caso de que se presente una excepcion.
+	 *
+	 */
+	private void cargarDatosUsuario(List<UsuarioDimensionWikieam> usuarios) throws SQLException {
+		logger.info("MediaWikiEJB: cargarDatosUsuario() - Inicio");
+
+		for (UsuarioDimensionWikieam usuarioDimensionWikieam : usuarios) {
+			ResultSet res = conexionETL.ejecutarRetorno("select codigo from usuario_dimension_wikieam where codigo = "
+					+ usuarioDimensionWikieam.getCodigo());
+			Integer codigo = -1;
+			while (res.next()) {
+				codigo = res.getInt(1);
+			}
+			StringBuilder sql = new StringBuilder();
+			if (codigo != -1) {
+				sql.append("update usuario_dimension_wikieam set nombreusuario='")
+						.append(usuarioDimensionWikieam.getNombreUsuario());
+				sql.append("',nombre='").append(usuarioDimensionWikieam.getNombre());
+				sql.append(COMP_WHERE + codigo);
+			} else {
+				sql.append("insert into usuario_dimension_wikieam(codigo,nombreusuario,nombre) values(");
+				sql.append(usuarioDimensionWikieam.getCodigo());
+				sql.append(",'").append(usuarioDimensionWikieam.getNombreUsuario()).append("'");
+				sql.append(",'").append(usuarioDimensionWikieam.getNombre()).append("')");
+				conexionETL.ejecutarRetorno(sql.toString());
+			}
+
+		}
+		logger.info("MediaWikiEJB: cargarDatosUsuario() - Fin");
+
+	}
+
+	/**
+	 * Metodo encargado cargar los datos de las paginas.
+	 *
+	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
+	 * @date 24/02/2018
+	 * @version 1.0
+	 * @throws SQLException
+	 *             , en caso de que se presente una excepcion.
+	 *
+	 */
+	private void cargarDatosPagina(List<PaginaDimensionWikieam> paginas) throws SQLException {
+		logger.info("MediaWikiEJB: cargarDatosPagina() - Inicio");
+
+		for (PaginaDimensionWikieam paginaDimensionWikieam : paginas) {
+			ResultSet res = conexionETL.ejecutarRetorno(
+					"select codigo from pagina_dimension_wikieam where codigo = " + paginaDimensionWikieam.getCodigo());
+			Integer codigo = -1;
+			while (res.next()) {
+				codigo = res.getInt(1);
+			}
+			StringBuilder sql = new StringBuilder();
+			if (codigo != -1) {
+				sql.append("update pagina_dimension_wikieam set titulopagina='")
+						.append(paginaDimensionWikieam.getTituloPagina());
+				sql.append(COMP_WHERE + codigo);
+			} else {
+				sql.append("insert into pagina_dimension_wikieam(codigo,titulopagina) values(");
+				sql.append(paginaDimensionWikieam.getCodigo());
+				sql.append(",'").append(paginaDimensionWikieam.getTituloPagina()).append("')");
+				conexionETL.ejecutar(sql.toString());
+			}
+
+		}
+		logger.info("MediaWikiEJB: cargarDatosPagina() - Fin");
+
+	}
+
+	/**
+	 * Metodo encargado de cargar los cambios.
+	 * 
+	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
+	 * @param cambios
+	 *            cambios a cargar
+	 * @throws SQLException
+	 *             en caso de que se presente una excepcion.
+	 * @date 24/02/2018
+	 * @version 1.0
+	 *
+	 */
+	private void cargarDatosCambio(List<CambiosDimensionWikieam> cambios) throws SQLException {
+		logger.info("MediaWikiEJB: cargarDatosCambio() - Inicio");
+
+		for (CambiosDimensionWikieam cambiosDimensionWikieam : cambios) {
+			ResultSet res = conexionETL.ejecutarRetorno(
+					"select codigo from cambios_dimension_wikieam where codigo=" + cambiosDimensionWikieam.getCodigo());
+			Integer codigo = -1;
+			while (res.next()) {
+				codigo = res.getInt(1);
+			}
+			StringBuilder sql = new StringBuilder();
+			if (codigo != -1) {
+				sql.append("update cambios_dimension_wikieam set fechac='").append(cambiosDimensionWikieam.getFechaC());
+				sql.append("',fechae='").append(cambiosDimensionWikieam.getFechaE());
+				sql.append(",numerolineasc='").append(cambiosDimensionWikieam.getNumeroLineasC());
+				sql.append(",numerolineasc='").append(cambiosDimensionWikieam.getNumeroLineasE());
+				sql.append(COMP_WHERE + codigo);
+			} else {
+				sql.append(
+						"insert into cambios_dimension_wikieam(codigo,fechac,fechae,numerolineasc,numerolinease) values(");
+				sql.append(cambiosDimensionWikieam.getCodigo());
+				if (cambiosDimensionWikieam.getFechaC() != null) {
+					sql.append(",'").append(cambiosDimensionWikieam.getFechaC()).append("'");
+				} else {
+					sql.append(",").append(cambiosDimensionWikieam.getFechaC());
+				}
+				if (cambiosDimensionWikieam.getFechaE() != null) {
+					sql.append(",'").append(cambiosDimensionWikieam.getFechaE()).append("'");
+				} else {
+					sql.append(",").append(cambiosDimensionWikieam.getFechaE());
+				}
+				sql.append(",").append(cambiosDimensionWikieam.getNumeroLineasC());
+				sql.append(",").append(cambiosDimensionWikieam.getNumeroLineasE()).append(")");
+				conexionETL.ejecutar(sql.toString());
+			}
+
+		}
+		logger.info("MediaWikiEJB: cargarDatosCambio() - Fin");
+
+	}
+
+	/**
+	 * Metodo encargado de cargar las auditorias
+	 *
+	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
+	 * @param auditorias
+	 *            auditorias a cargar
+	 * @throws SQLException
+	 *             en caso de que se presente una excepcion.
+	 * @date 24/02/2018
+	 * @version 1.0
+	 *
+	 */
+	private void cargarDatosAuditoria(List<AuditoriaWikieamHecho> auditorias) throws SQLException {
+		logger.info("MediaWikiEJB: cargarDatosAuditoria() - Inicio");
+
+		for (AuditoriaWikieamHecho auditoriaWikieamHecho : auditorias) {
+			ResultSet res = conexionETL.ejecutarRetorno(
+					"select codigo from auditoria_wikieam_hecho where codigo=" + auditoriaWikieamHecho.getCodigo());
+			Integer codigo = -1;
+			while (res.next()) {
+				codigo = res.getInt(1);
+			}
+			StringBuilder sql = new StringBuilder();
+			if (codigo != -1) {
+				sql.append("update usuario_dimension_wikieam set cambiosrecientes=")
+						.append(auditoriaWikieamHecho.getCambio().getCodigo());
+				sql.append(",usuario=").append(auditoriaWikieamHecho.getUsuario().getCodigo());
+				sql.append(",pagina=").append(auditoriaWikieamHecho.getPagina().getCodigo());
+				sql.append(COMP_WHERE + codigo);
+			} else {
+				sql.append("insert into auditoria_wikieam_hecho(codigo,cambiosrecientes,usuario,pagina) values(");
+				sql.append(auditoriaWikieamHecho.getCodigo()).append(",");
+				sql.append(auditoriaWikieamHecho.getCambio().getCodigo()).append(",");
+				sql.append(auditoriaWikieamHecho.getUsuario().getCodigo()).append(",");
+				sql.append(auditoriaWikieamHecho.getPagina().getCodigo()).append(")");
+				conexionETL.ejecutar(sql.toString());
+			}
+
+		}
+		logger.info("MediaWikiEJB: cargarDatosAuditoria() - Fin");
+
 	}
 
 	/**

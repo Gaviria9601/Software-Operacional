@@ -28,7 +28,7 @@ import co.edu.eam.ingesoft.softOper.entidades.venta_hecho;
  * 
  * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
  * @date 15/04/2018
- * @version <Numero Version>
+ * @version 1.0
  */
 @LocalBean
 @Stateless
@@ -43,13 +43,15 @@ public class EtlEJB extends ConexionETL {
 	@EJB
 	private Auditoria_hechoEJB audiEJB;
 
+	private static final String VALUES = "values(";
+
 	/**
 	 * 
 	 * Metodo encargado de realizar el proceso de carga de la ETL
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 
 	public void procesoCarga(List<tiempo_dimension> ti, List<cliente_dimension> cli, List<navegador_dimension> na,
@@ -151,10 +153,10 @@ public class EtlEJB extends ConexionETL {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void insertarOrigen(int codigo, String dispositivo) {
-		String consulta = "insert into origen_dimension(codigo,dispositivo)" + "values(" + codigo + ",'" + dispositivo
+		String consulta = "insert into origen_dimension(codigo,dispositivo)" + VALUES + codigo + ",'" + dispositivo
 				+ "')";
 		super.ejecutar(consulta);
 	}
@@ -165,10 +167,10 @@ public class EtlEJB extends ConexionETL {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void insertaNavegador(int codigo, String navegador) {
-		String consulta = "insert into navegador_dimension(codigo,navegador)" + "values(" + codigo + ",'" + navegador
+		String consulta = "insert into navegador_dimension(codigo,navegador)" + VALUES + codigo + ",'" + navegador
 				+ "')";
 		super.ejecutar(consulta);
 	}
@@ -179,11 +181,11 @@ public class EtlEJB extends ConexionETL {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void insertaProducto(int codigo, String nombre, int precio, Date fechaingreso, int cantidad) {
-		String consulta = "insert into producto_dimension(codigo,nombre,precio,fechaingreso,cantidad)" + "values("
-				+ codigo + ",'" + nombre + "'," + precio + ",'" + fechaingreso + "'," + cantidad + ")";
+		String consulta = "insert into producto_dimension(codigo,nombre,precio,fechaingreso,cantidad)" + VALUES + codigo
+				+ ",'" + nombre + "'," + precio + ",'" + fechaingreso + "'," + cantidad + ")";
 		super.ejecutar(consulta);
 	}
 
@@ -193,10 +195,10 @@ public class EtlEJB extends ConexionETL {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void insertaCliente(int codigo, String nombre, String genero) {
-		String consulta = "insert into cliente_dimension(codigo,nombre,genero)" + "values(" + codigo + ",'" + nombre
+		String consulta = "insert into cliente_dimension(codigo,nombre,genero)" + VALUES + codigo + ",'" + nombre
 				+ "','" + genero + "')";
 		super.ejecutar(consulta);
 	}
@@ -207,10 +209,10 @@ public class EtlEJB extends ConexionETL {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void insertaEmpleado(int codigo, String nombre, String genero, String nombrecargo) {
-		String consulta = "insert into empleado_dimension(codigo,nombre,genero,nombrecargo)" + "values(" + codigo + ",'"
+		String consulta = "insert into empleado_dimension(codigo,nombre,genero,nombrecargo)" + VALUES + codigo + ",'"
 				+ nombre + "','" + genero + "','" + nombrecargo + "')";
 		super.ejecutar(consulta);
 	}
@@ -221,11 +223,11 @@ public class EtlEJB extends ConexionETL {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 
 	public void insertaVentaD(int codigo, Date fecha, int total, String nombrevendedor, String nombrecliente) {
-		String consulta = "insert into venta_dimension(codigo,fecha,total,nombrevendedor,nombrecliente)" + "values("
+		String consulta = "insert into venta_dimension(codigo,fecha,total,nombrevendedor,nombrecliente)" + VALUES
 				+ codigo + ",'" + fecha + "'," + total + ",'" + nombrevendedor + "','" + nombrecliente + "')";
 		super.ejecutar(consulta);
 	}
@@ -236,13 +238,13 @@ public class EtlEJB extends ConexionETL {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 
 	public void insertaAditoria(int codigo, Date fechaauditoria, String tablaaccion, String accion,
 			navegador_dimension navegador, origen_dimension origen, tiempo_dimension tiempo) {
 		String consulta = "insert into auditoria_hecho(codigo,accion,fechaauditoria,tablaaccion,navegador,origen,tiempo) "
-				+ "values(" + codigo + ",'" + accion + "','" + fechaauditoria + "','" + tablaaccion + "',"
+				+ VALUES + codigo + ",'" + accion + "','" + fechaauditoria + "','" + tablaaccion + "',"
 				+ navegador.getCodigo() + "," + origen.getCodigo() + "," + (tiempo != null ? tiempo.getCodigo() : null)
 				+ ")";
 		super.ejecutar(consulta);
@@ -254,12 +256,12 @@ public class EtlEJB extends ConexionETL {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void insertaVentaH(int codigo, int totalDetalle, int cantidad, Date fecha, int venta,
 			tiempo_dimension tiempo, int producto, int cliente, int empleado) {
 		String consulta = "insert into venta_hecho(codigo,totaldetalle,cantidad,fechaventa,venta,tiempo,producto,cliente,empleado) "
-				+ "values(" + codigo + "," + totalDetalle + "," + cantidad + ",'" + fecha + "'," + venta + ","
+				+ VALUES + codigo + "," + totalDetalle + "," + cantidad + ",'" + fecha + "'," + venta + ","
 				+ (tiempo != null ? tiempo.getCodigo() : null) + "," + producto + "," + cliente + "," + empleado + ")";
 		super.ejecutar(consulta);
 	}
@@ -323,8 +325,8 @@ public class EtlEJB extends ConexionETL {
 	 *
 	 */
 	public void insertaTiempo(int codigo, String trimestre, String mes) {
-		String consulta = "insert into tiempo_dimension(codigo,trimestre,mes)" + "values(" + codigo + "," + trimestre
-				+ "," + mes + ")";
+		String consulta = "insert into tiempo_dimension(codigo,trimestre,mes)" + VALUES + codigo + "," + trimestre + ","
+				+ mes + ")";
 		super.ejecutar(consulta);
 	}
 
@@ -358,6 +360,7 @@ public class EtlEJB extends ConexionETL {
 		lista = em.createNamedQuery(origen_dimension.LISTAR_ORIGEN_DIMENSION).getResultList();
 		return lista;
 	}
+
 	/**
 	 * Metodo que se encarga de listar las auditorias
 	 * 
@@ -404,7 +407,7 @@ public class EtlEJB extends ConexionETL {
 	}
 
 	/**
-	 * Metodo que se encarga de listar los navegadores 
+	 * Metodo que se encarga de listar los navegadores
 	 * 
 	 *
 	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
@@ -454,20 +457,21 @@ public class EtlEJB extends ConexionETL {
 	 * @date 24/02/2018
 	 * @version <Version del metodo>
 	 *
-	 */	public List<venta_hecho> listarVentaH() {
+	 */
+	public List<venta_hecho> listarVentaH() {
 		List<venta_hecho> lista;
 		lista = em.createNamedQuery(venta_hecho.LISTAR_VENTA_HECHO).getResultList();
 		return lista;
 	}
 
-	 /**
-		 * Metodo que se encarga de buscar tiempo dimension
-		 *
-		 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
-		 * @date 24/02/2018
-		 * @version <Version del metodo>
-		 *
-		 */
+	/**
+	 * Metodo que se encarga de buscar tiempo dimension
+	 *
+	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
+	 * @date 24/02/2018
+	 * @version <Version del metodo>
+	 *
+	 */
 	public tiempo_dimension buscarPTiempoDimension(int codigo) {
 		return em.find(tiempo_dimension.class, codigo);
 	}

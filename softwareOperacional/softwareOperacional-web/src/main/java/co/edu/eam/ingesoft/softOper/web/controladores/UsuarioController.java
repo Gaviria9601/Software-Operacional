@@ -36,11 +36,13 @@ import co.edu.eam.ingesoft.softOper.entidades.Usuario;
  * 
  * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
  * @date 15/04/2018
- * @version <Numero Version>
+ * @version 1.0
  */
 @Named("usuarioController")
 @ViewScoped
 public class UsuarioController implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Pattern(regexp = "[A-Za-z ]*", message = "solo Letras")
 	@Length(min = 3, max = 30, message = "longitud entre 3 y 15")
@@ -319,7 +321,7 @@ public class UsuarioController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 
 	public void crear() {
@@ -335,7 +337,6 @@ public class UsuarioController implements Serializable {
 			empleado.setGenero(genero);
 			empleado.setMunicipio(m);
 			empleado.setNombre(nombre);
-			System.out.println(c.getId() + "************" + m.getId());
 			registrarAuditoriaEmpleado("Guardar");
 			empleadoejb.crear(empleado, nickname);
 			limpiar();
@@ -351,7 +352,7 @@ public class UsuarioController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void buscar() {
 		registrarAuditoriaUsuario("Buscar");
@@ -364,7 +365,7 @@ public class UsuarioController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void crearUsuario() {
 		try {
@@ -388,7 +389,7 @@ public class UsuarioController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void onDepartamentoChange() {
 		if (departamento != null && !departamento.equals(""))
@@ -401,7 +402,7 @@ public class UsuarioController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public String procederEditar(Empleado audi) {
 		DatosManager.setCodigoEmpleado(audi.getCodigo());
@@ -414,7 +415,7 @@ public class UsuarioController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void resetearFitrosTabla() {
 		RequestContext requestContext = RequestContext.getCurrentInstance();
@@ -427,7 +428,7 @@ public class UsuarioController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void eliminar(Empleado emp) {
 
@@ -450,7 +451,7 @@ public class UsuarioController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void registrarAuditoriaEmpleado(String accion) {
 		try {
@@ -471,7 +472,7 @@ public class UsuarioController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void registrarAuditoriaUsuario(String accion) {
 		try {
@@ -492,7 +493,7 @@ public class UsuarioController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void limpiar() {
 		nombre = null;

@@ -15,7 +15,7 @@ import co.edu.eam.ingesoft.softOper.entidades.Venta;
  * 
  * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
  * @date 15/04/2018
- * @version <Numero Version>
+ * @version 1.0
  */
 @LocalBean
 @Stateless
@@ -30,7 +30,7 @@ public class VentaEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void crearVenta(Venta venta) {
 		em.persist(venta);
@@ -42,7 +42,7 @@ public class VentaEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public Venta buscarVenta(int codigo) {
 		return em.find(Venta.class, codigo);
@@ -54,7 +54,7 @@ public class VentaEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void editarVenta(Venta venta) {
 		em.merge(venta);
@@ -66,7 +66,7 @@ public class VentaEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void eliminarVenta(Integer codigo) {
 		em.remove(em.find(Venta.class, codigo));
@@ -78,7 +78,7 @@ public class VentaEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public List<Venta> listarVentas() {
 		return em.createNamedQuery(Venta.LISTAR_VENTAS).getResultList();

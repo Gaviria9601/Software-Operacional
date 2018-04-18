@@ -23,6 +23,8 @@ import javax.persistence.TemporalType;
 })
 public class Auditoria implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	public static final String LISTAR_AUDITORIA_ID_USUARIOS = "Auditoria.listarAuditoriaIdUsuarios";
 
 	public static final String LISTAR_AUDITORIA = "Auditoria.Listar";
@@ -55,6 +57,7 @@ public class Auditoria implements Serializable {
 	private Usuario usuario;
 
 	public Auditoria() {
+		super();
 	}
 
 	public Auditoria(int codigo, Date fechaHora, String ingreso, String origen, String navegador, String accion,

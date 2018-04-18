@@ -33,11 +33,13 @@ import co.edu.eam.ingesoft.softOper.entidades.Venta;
  * 
  * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
  * @date 15/04/2018
- * @version <Numero Version>
+ * @version 1.0
  */
 @Named("ventaEditController")
 @ViewScoped
 public class VentaEditController implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private int cantidadProducto;
 
@@ -176,7 +178,7 @@ public class VentaEditController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void onSelect(SelectEvent event) {
 		Producto pro = (Producto) event.getObject();
@@ -242,7 +244,7 @@ public class VentaEditController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 
 	public String editar() {
@@ -269,7 +271,7 @@ public class VentaEditController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public String cancelar() {
 		return "/paginas/privado/verVenta.xhtml?faces-redirect=true";
@@ -281,7 +283,7 @@ public class VentaEditController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void registrarAuditoria(String accion) {
 		try {

@@ -16,6 +16,8 @@ import javax.persistence.Table;
 @NamedQueries({ @NamedQuery(name = Cargo.LISTAR_CARGOS, query = "select a from Cargo a") })
 public class Cargo implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	public static final String LISTAR_CARGOS = "ListarCargos";
 
 	@Id
@@ -33,6 +35,7 @@ public class Cargo implements Serializable {
 	private Area area;
 
 	public Cargo() {
+		super();
 	}
 
 	/**

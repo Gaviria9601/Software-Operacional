@@ -6,7 +6,7 @@ package co.edu.eam.ingesoft.softOper.web.controladores;
  * 
  * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
  * @date 15/04/2018
- * @version <Numero Version>
+ * @version 1.0
  */
 public class DatosManager {
 
@@ -30,7 +30,7 @@ public class DatosManager {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public static int getCodigoProducto() {
 		return codigoProducto;
@@ -46,7 +46,7 @@ public class DatosManager {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public static int getCodigoVenta() {
 		return codigoVenta;
@@ -62,7 +62,7 @@ public class DatosManager {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public static int getCodigoTipoUsuario() {
 		return codigoTipoUsuario;
@@ -78,7 +78,7 @@ public class DatosManager {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public static int getCodigoCliente() {
 		return codigoCliente;
@@ -94,7 +94,7 @@ public class DatosManager {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public static int getIdArea() {
 		return IdArea;
@@ -110,7 +110,7 @@ public class DatosManager {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public static int getCodigoEmpleado() {
 		return codigoEmpleado;
@@ -130,7 +130,7 @@ public class DatosManager {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public static int getCodigoEmpleado2() {
 		return codigoEmpleado2;

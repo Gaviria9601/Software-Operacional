@@ -44,20 +44,22 @@ import co.edu.eam.ingesoft.softOper.entidades.venta_hecho;
  * 
  * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
  * @date 15/04/2018
- * @version <Numero Version>
+ * @version 1.0
  */
 @Named("ETLExtraccionController")
 @ViewScoped
 public class ETLExtraccionController implements Serializable {
+
+	private Logger logger = Logger.getLogger(ETLExtraccionController.class.getName());
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	List<auditoria_hecho> auditorias;
+	private List<auditoria_hecho> auditorias;
 
-	List<venta_hecho> ventas;
+	private List<venta_hecho> ventas;
 
 	public List<venta_hecho> getVentas() {
 		return ventas;
@@ -103,7 +105,7 @@ public class ETLExtraccionController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void extraerAuditoria() {
 		try {
@@ -121,7 +123,7 @@ public class ETLExtraccionController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void extraerVenta() {
 		try {
@@ -139,7 +141,7 @@ public class ETLExtraccionController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void extraerTablaAuditoriaHecho() {
 
@@ -229,7 +231,7 @@ public class ETLExtraccionController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void extraerTablaVentaHecho() {
 		List<ProductoVenta> productoVentas = proVenEJB.listarProductoVenta();
@@ -311,7 +313,7 @@ public class ETLExtraccionController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public boolean verificarIngresoVenta(venta_hecho venHe) {
 		List<venta_hecho> ven = venHecEJB.listarVentasHecho();
@@ -330,7 +332,7 @@ public class ETLExtraccionController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public boolean verificarIngresoAuditoria(auditoria_hecho audHe) {
 		List<auditoria_hecho> ven = audHecEJB.listarAuditoriasHecho();
@@ -348,7 +350,7 @@ public class ETLExtraccionController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public int verificaringresoNavegadorDimension(String navegador) {
 		List<navegador_dimension> navDimension = audHecEJB.listarNavegadorDimension();
@@ -367,7 +369,7 @@ public class ETLExtraccionController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public int verificaringresoOrigenDimension(String dispositivo) {
 		List<origen_dimension> navDimension = audHecEJB.listarOrigenDimension();
@@ -386,7 +388,7 @@ public class ETLExtraccionController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public int verificaringresoEmpleadoDimension(String nombre) {
 		List<empleado_dimension> empDimension = venHecEJB.listarEmpleados();
@@ -405,7 +407,7 @@ public class ETLExtraccionController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public int verificaringresoClienteDimension(String nombre) {
 		List<cliente_dimension> cliDimension = venHecEJB.listarClientes();
@@ -424,7 +426,7 @@ public class ETLExtraccionController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public int verificaringresoProductoDimension(int proDim) {
 		List<producto_dimension> proDimensiones = venHecEJB.listarProductos();
@@ -443,7 +445,7 @@ public class ETLExtraccionController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public int verificaringresoVentaDimension(int venDim) {
 		List<venta_dimension> venDimensiones = venHecEJB.listarVentas();
@@ -462,7 +464,7 @@ public class ETLExtraccionController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void conectar() {
 		Connection con = null;
@@ -477,7 +479,7 @@ public class ETLExtraccionController implements Serializable {
 			// el // encargado de traer los datos de la consulta
 			ResultSet rs = st.executeQuery("select * from cliente_dimension");
 			while (rs.next()) {
-				System.out.println(" " + rs.getString(1) + " " + rs.getString(2));
+				logger.info(" " + rs.getString(1) + " " + rs.getString(2));
 			}
 		} catch (SQLException ex) {
 			Logger.getLogger(ETLExtraccionController.class.getName()).log(Level.SEVERE, null, ex);
@@ -486,7 +488,7 @@ public class ETLExtraccionController implements Serializable {
 		} finally {
 			try {
 				con.close();
-				System.out.println("Conexion Cerrada con Exito...");
+				logger.info("Conexion Cerrada con Exito...");
 			} catch (SQLException ex) {
 				Logger.getLogger(ETLExtraccionController.class.getName()).log(Level.SEVERE, null, ex);
 			}
@@ -499,7 +501,7 @@ public class ETLExtraccionController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void registrarAuditoria(String accion) {
 		try {

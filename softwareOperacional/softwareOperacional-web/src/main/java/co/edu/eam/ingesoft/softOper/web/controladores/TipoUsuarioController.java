@@ -28,11 +28,13 @@ import co.edu.eam.ingesoft.softOper.entidades.TipoUsuario;
  * 
  * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
  * @date 15/04/2018
- * @version <Numero Version>
+ * @version 1.0
  */
 @Named("tipoUsuariocontrolador")
 @ViewScoped
 public class TipoUsuarioController implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Pattern(regexp = "[A-Za-z ]*", message = "solo Letras")
 	@Length(min = 3, max = 50, message = "longitud entre 3 y 15")
@@ -177,16 +179,13 @@ public class TipoUsuarioController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void crear() {
 		try {
 
 			TipoUsuario a = new TipoUsuario(nombre, des);
 			tipousuejb.crear(a);
-			System.out.println(id);
-			System.out.println(nombre);
-			System.out.println(des);
 			registrarAuditoria("Guardar");
 			limpiar();
 			Messages.addFlashGlobalInfo("Tipo de usuario ingresado Correctamente");
@@ -202,7 +201,7 @@ public class TipoUsuarioController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void eliminar(TipoUsuario tipo) {
 		try {
@@ -223,7 +222,7 @@ public class TipoUsuarioController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void resetearFitrosTabla(String id) {
 		RequestContext requestContext = RequestContext.getCurrentInstance();
@@ -236,7 +235,7 @@ public class TipoUsuarioController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public String procederEditar(TipoUsuario tip) {
 		DatosManager.setCodigoTipoUsuario(tip.getId());
@@ -249,7 +248,7 @@ public class TipoUsuarioController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void resetearFitrosTabla() {
 		RequestContext requestContext = RequestContext.getCurrentInstance();
@@ -262,7 +261,7 @@ public class TipoUsuarioController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void registrarAuditoria(String accion) {
 		try {
@@ -283,7 +282,7 @@ public class TipoUsuarioController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void limpiar() {
 		nombre = null;

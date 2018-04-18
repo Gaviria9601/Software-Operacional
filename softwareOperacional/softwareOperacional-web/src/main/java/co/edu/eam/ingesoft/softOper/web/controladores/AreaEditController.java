@@ -31,11 +31,13 @@ import co.edu.eam.ingesoft.softOper.entidades.Usuario;
  * 
  * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
  * @date 15/04/2018
- * @version <Numero Version>
+ * @version 1.0
  */
 @Named("areaEditController")
 @ViewScoped
 public class AreaEditController implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Pattern(regexp = "[A-Za-z ]*", message = "solo Letras")
 	@Length(min = 3, max = 50, message = "longitud entre 3 y 15")
@@ -252,7 +254,7 @@ public class AreaEditController implements Serializable {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public String editar() {
 		if (nombre.isEmpty()) {
@@ -281,7 +283,7 @@ public class AreaEditController implements Serializable {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void limpiar() {
 		nombre = "";
@@ -294,7 +296,7 @@ public class AreaEditController implements Serializable {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public String cancelar() {
 		limpiar();
@@ -307,7 +309,7 @@ public class AreaEditController implements Serializable {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void registrarAuditoria(String accion) {
 		try {
@@ -328,7 +330,7 @@ public class AreaEditController implements Serializable {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 
 	public void resetearFitrosTabla() {

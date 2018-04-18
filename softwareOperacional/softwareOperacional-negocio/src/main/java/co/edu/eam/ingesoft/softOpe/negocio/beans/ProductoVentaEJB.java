@@ -21,7 +21,7 @@ import co.edu.eam.ingesoft.softOper.entidades.Venta;
  * 
  * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
  * @date 15/04/2018
- * @version <Numero Version>
+ * @version 1.0
  */
 @LocalBean
 @Stateless
@@ -39,7 +39,7 @@ public class ProductoVentaEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void agregarProductoVenta(Producto producto, Venta venta, int cantidad) {
 		Producto pro = em.find(Producto.class, producto.getCodigo());
@@ -66,7 +66,7 @@ public class ProductoVentaEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public int eliminarProductoVenta(int producto, int venta) {
 		int totalElim;
@@ -85,7 +85,7 @@ public class ProductoVentaEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public List<ProductoVenta> listarProductosVenta(int codigo) {
 		return em.createNamedQuery(ProductoVenta.LISTAR_PRODUCTOS_VENTA).setParameter(1, codigo).getResultList();
@@ -97,7 +97,7 @@ public class ProductoVentaEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public List<ProductoVenta> listarProductoVenta() {
 		return em.createNamedQuery(ProductoVenta.LISTAR_PRODUCTOS_VENTA_FULL).getResultList();

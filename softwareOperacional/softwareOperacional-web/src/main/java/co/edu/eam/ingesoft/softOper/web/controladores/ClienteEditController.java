@@ -33,11 +33,13 @@ import co.edu.eam.ingesoft.softOper.entidades.Usuario;
  * 
  * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
  * @date 15/04/2018
- * @version <Numero Version>
+ * @version 1.0
  */
 @Named("clienteEditController")
 @ViewScoped
 public class ClienteEditController implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Pattern(regexp = "[A-Za-z ]*", message = "Solo Letras")
 	@Length(min = 3, max = 50, message = "longitud entre 3 y 15")

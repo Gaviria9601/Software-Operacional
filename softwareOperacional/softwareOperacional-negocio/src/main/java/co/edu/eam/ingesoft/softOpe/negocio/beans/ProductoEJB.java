@@ -17,7 +17,7 @@ import co.edu.eam.ingesoft.softOper.entidades.TipoProducto;
  * 
  * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
  * @date 15/04/2018
- * @version <Numero Version>
+ * @version 1.0
  */
 @LocalBean
 @Stateless
@@ -32,7 +32,7 @@ public class ProductoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 
 	public void crearProducto(Producto pro) {
@@ -45,7 +45,7 @@ public class ProductoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void editarProducto(Producto pro) {
 		em.merge(pro);
@@ -57,7 +57,7 @@ public class ProductoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public Producto buscarProduto(int codigo) {
 		return em.find(Producto.class, codigo);
@@ -69,7 +69,7 @@ public class ProductoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public TipoProducto buscarTipoProducto(int codigo) {
 		return em.find(TipoProducto.class, codigo);
@@ -81,7 +81,7 @@ public class ProductoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void eliminarProducto(int codigo) {
 		em.remove(em.find(Producto.class, codigo));
@@ -93,7 +93,7 @@ public class ProductoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public List<Producto> listarProductos() {
 		return em.createNamedQuery(Producto.LISTAR_PRODUCTOS).getResultList();
@@ -106,7 +106,7 @@ public class ProductoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public List<TipoProducto> listarTipoProducto() {
 		return em.createNamedQuery(TipoProducto.LISTAR_TIPO_PRODUCTOS).getResultList();
@@ -118,7 +118,7 @@ public class ProductoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public List<Producto> listarProductosDif(List<Producto> productosVenta) {
 		List<Producto> productos = new ArrayList<Producto>();

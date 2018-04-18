@@ -16,6 +16,8 @@ import javax.persistence.Table;
 		@NamedQuery(name = cliente_dimension.LISTAR_CLIENTE_DIMENSION, query = "select cli from cliente_dimension cli") })
 public class cliente_dimension implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	public static final String LISTAR_CLIENTE_DIMENSION = "ListarClienteDimension";
 
 	public static final String BUSCAR_NOMBRE_CLIENTE = "BuscarNombreCliente";
@@ -31,7 +33,7 @@ public class cliente_dimension implements Serializable {
 	private String genero;
 
 	public cliente_dimension() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	/**

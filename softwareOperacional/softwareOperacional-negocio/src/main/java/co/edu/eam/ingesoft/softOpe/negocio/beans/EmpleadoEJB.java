@@ -21,7 +21,7 @@ import co.edu.eam.ingesoft.softOper.entidades.Usuario;
  * 
  * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
  * @date 15/04/2018
- * @version <Numero Version>
+ * @version 1.0
  */
 @LocalBean
 @Stateless
@@ -36,11 +36,11 @@ public class EmpleadoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public Empleado buscarEmpleado(int usuario) {
-		List<Empleado> empleado = em.createNamedQuery(Empleado.BUSQUEDA__POR_USUARIO).setParameter(1, usuario)
+		List<Empleado> empleado = em.createNamedQuery(Empleado.BUSQUEDA_POR_USUARIO).setParameter(1, usuario)
 				.getResultList();
 		if (!empleado.isEmpty()) {
 			return empleado.get(0);
@@ -55,7 +55,7 @@ public class EmpleadoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void crear(Empleado e, String nickname) {
@@ -64,8 +64,6 @@ public class EmpleadoEJB {
 		if (usuario.get(0) != null) {
 			e.setUsuario(usuario.get(0));
 			em.persist(e);
-		} else {
-			System.out.println("error");
 		}
 	}
 
@@ -75,7 +73,7 @@ public class EmpleadoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void crearEmpleadosinUsuario(Empleado e) {
@@ -88,7 +86,7 @@ public class EmpleadoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void editarEmpleado(Empleado e) {
@@ -101,7 +99,7 @@ public class EmpleadoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	/**
 	 * 
@@ -109,7 +107,7 @@ public class EmpleadoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void editarUsuario(Usuario t) {
@@ -122,7 +120,7 @@ public class EmpleadoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void crearUsuario(Usuario usu) {
@@ -135,14 +133,12 @@ public class EmpleadoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public Empleado buscarEmpleado2(int id) {
-		System.out.println(id + "*****************************");
 		List<Empleado> emp = em.createNamedQuery(Empleado.BUSQUEDA_USUARIO).setParameter(1, id).getResultList();
 		Empleado pa = emp.get(0);
-		System.out.println(pa.getApellido() + "************" + pa.getNombre());
 		return pa;
 	}
 
@@ -152,7 +148,7 @@ public class EmpleadoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public Usuario buscarUsuario(int id) {
@@ -166,7 +162,7 @@ public class EmpleadoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public Usuario buscarUsuarioNombre(String nombre) {
@@ -181,7 +177,7 @@ public class EmpleadoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -195,7 +191,7 @@ public class EmpleadoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void eliminarUsuario(Usuario a) {
@@ -208,7 +204,7 @@ public class EmpleadoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public List<Departamento> listardepartamentos() {
@@ -221,11 +217,11 @@ public class EmpleadoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public List<Municipio> listarMuniporDepto(String depto) {
-		return em.createNamedQuery(Municipio.LISTAR_MUNIPorDepto).setParameter(1, depto).getResultList();
+		return em.createNamedQuery(Municipio.LISTAR_MUNI_POR_DEPTO).setParameter(1, depto).getResultList();
 	}
 
 	/**
@@ -234,7 +230,7 @@ public class EmpleadoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public List<Cargo> listarCargos() {
@@ -247,8 +243,9 @@ public class EmpleadoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Empleado> listarEmpleados() {
 		return em.createNamedQuery(Empleado.LISTAR_EMPLEADOS).getResultList();
 	}
@@ -259,7 +256,7 @@ public class EmpleadoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public Municipio buscarMunicipio(int id) {
@@ -272,7 +269,7 @@ public class EmpleadoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)

@@ -2,7 +2,9 @@ package co.edu.eam.ingesoft.softOpe.negocio.beans;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -17,7 +19,7 @@ import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
  * 
  * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
  * @date 15/04/2018
- * @version <Numero Version>
+ * @version 1.0
  */
 @LocalBean
 @Stateless
@@ -25,8 +27,6 @@ public class AuditoriaEJB {
 
 	@PersistenceContext(unitName = Conexion.OPCION)
 	private EntityManager em;
-
-	private String browserDetails;
 
 	private String userAgent;
 
@@ -36,17 +36,18 @@ public class AuditoriaEJB {
 
 	private String os;
 
+	private Map<String, String> userAgents = new HashMap<String, String>();
+
 	/**
 	 * 
 	 * Metodo encargado de registrar las auditorias
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void registrarAuditoria(Auditoria auditoria, String browserDeta) {
-		this.browserDetails = browserDeta;
-		userAgent = browserDetails;
+		userAgent = browserDeta;
 		user2 = userAgent.toLowerCase();
 		identificarNavegadorPeticion();
 		auditoria.setOrigen(os);
@@ -56,30 +57,41 @@ public class AuditoriaEJB {
 	}
 
 	/**
-	 * 
 	 * Metodo encargado de identificar el navegador por el que esta ingresando el
-	 * usuario
+	 * usuario.
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void identificarNavegadorPeticion() {
 
-		if (userAgent.toLowerCase().indexOf("windows") >= 0) {
-			os = "Windows";
-		} else if (userAgent.toLowerCase().indexOf("mac") >= 0) {
-			os = "Mac";
-		} else if (userAgent.toLowerCase().indexOf("x11") >= 0) {
-			os = "Unix";
-		} else if (userAgent.toLowerCase().indexOf("android") >= 0) {
-			os = "Android";
-		} else if (userAgent.toLowerCase().indexOf("iphone") >= 0) {
-			os = "IPhone";
-		} else {
+		userAgents.put("windows", "Windows");
+		userAgents.put("mac", "Mac");
+		userAgents.put("x11", "Unix");
+		userAgents.put("android", "Android");
+		userAgents.put("iphone", "IPhone");
+		os = userAgents.get(userAgent.toLowerCase());
+		if (os.isEmpty()) {
 			os = "UnKnown, More-Info: " + userAgent;
+
 		}
+
 		// ===============Browser===========================
+		brower();
+
+	}
+
+	/**
+	 * 
+	 * <Describir el Metodo>
+	 *
+	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
+	 * @date 24/02/2018
+	 * @version 1.0
+	 *
+	 */
+	private void brower() {
 		if (user2.contains("msie")) {
 			String substring = userAgent.substring(userAgent.indexOf("MSIE")).split(";")[0];
 			browser = substring.split(" ")[0].replace("MSIE", "IE") + "-" + substring.split(" ")[1];
@@ -98,14 +110,11 @@ public class AuditoriaEJB {
 		} else if ((user2.indexOf("mozilla/7.0") > -1) || (user2.indexOf("netscape6") != -1)
 				|| (user2.indexOf("mozilla/4.7") != -1) || (user2.indexOf("mozilla/4.78") != -1)
 				|| (user2.indexOf("mozilla/4.08") != -1) || (user2.indexOf("mozilla/3") != -1)) {
-			// browser=(userAgent.substring(userAgent.indexOf("MSIE")).split("
-			// ")[0]).replace("/", "-");
 			browser = "Netscape-?";
-
 		} else if (user2.contains("firefox")) {
 			browser = (userAgent.substring(userAgent.indexOf("Firefox")).split(" ")[0]).replace("/", "-");
 		} else if (user2.contains("rv")) {
-			browser = "IE-" + user2.substring(user2.indexOf("rv") + 3, user2.indexOf(")"));
+			browser = "IE-" + user2.substring(user2.indexOf("rv") + 3, user2.indexOf(')'));
 		} else {
 			browser = "UnKnown, More-Info: " + userAgent;
 		}
@@ -118,8 +127,9 @@ public class AuditoriaEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Auditoria> listarAuditoriasIdentificacionUsuarios() {
 		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA_ID_USUARIOS).setParameter(1, "Ingreso")
 				.setParameter(2, "Identificacion Usuario").getResultList();
@@ -131,8 +141,9 @@ public class AuditoriaEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Auditoria> listarAuditoriasIdeUsuarios() {
 		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "Identificacion Usuario")
 				.getResultList();
@@ -144,12 +155,11 @@ public class AuditoriaEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public Date generarFechaActual() {
 		Calendar fechaHora = Calendar.getInstance();
-		Date fecha = fechaHora.getTime();
-		return fecha;
+		return fechaHora.getTime();
 	}
 
 	/**
@@ -158,8 +168,9 @@ public class AuditoriaEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Auditoria> listarAuditoriasArea() {
 		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "Area").getResultList();
 	}
@@ -170,8 +181,9 @@ public class AuditoriaEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Auditoria> listarAuditoriaVentas() {
 		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "Venta").getResultList();
 	}
@@ -182,8 +194,9 @@ public class AuditoriaEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Auditoria> listarAuditoriaClientes() {
 		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "Cliente").getResultList();
 	}
@@ -194,8 +207,9 @@ public class AuditoriaEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Auditoria> listarAuditoriaEmpleados() {
 		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "Empleado").getResultList();
 	}
@@ -206,8 +220,9 @@ public class AuditoriaEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Auditoria> listarAuditoriaInventarios() {
 		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "Inventario").getResultList();
 	}
@@ -218,8 +233,9 @@ public class AuditoriaEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Auditoria> listarAuditoriaTiposUsuarios() {
 		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "TipoUsuario").getResultList();
 	}
@@ -230,8 +246,9 @@ public class AuditoriaEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Auditoria> listarAuditoriaUsuarios() {
 		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "Usuario").getResultList();
 	}
@@ -242,8 +259,9 @@ public class AuditoriaEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Auditoria> listarAuditoriaProcesosETL() {
 		return em.createNamedQuery(Auditoria.LISTAR_AUDITORIA).setParameter(1, "ETL").getResultList();
 	}

@@ -23,6 +23,8 @@ import javax.persistence.TemporalType;
 		@NamedQuery(name = ProductoVenta.LISTAR_PRODUCTOS_VENTA_FULL, query = "select proVen from ProductoVenta proVen") })
 public class ProductoVenta implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	public static final String LISTAR_PRODUCTOS_VENTA = "ListarProductosVenta";
 
 	public static final String LISTAR_PRODUCTOS_VENTA_FULL = "ListarProdcutosVentaFull";
@@ -48,6 +50,7 @@ public class ProductoVenta implements Serializable {
 	private int total;
 
 	public ProductoVenta() {
+		super();
 	}
 
 	public int getCantidad() {

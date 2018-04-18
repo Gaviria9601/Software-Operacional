@@ -1,6 +1,8 @@
 package co.edu.eam.ingesoft.softOper.web.controladores;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -17,17 +19,22 @@ import co.edu.eam.ingesoft.softOpe.negocio.beans.SeguridadEJB;
 import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
 import co.edu.eam.ingesoft.softOper.entidades.Empleado;
 import co.edu.eam.ingesoft.softOper.entidades.Usuario;
+
 /**
  * 
  * Clase encargada de la logica del controlar la sesion
  * 
  * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
  * @date 15/04/2018
- * @version <Numero Version>
+ * @version 1.0
  */
 @Named("sessionControl")
 @SessionScoped
 public class SessionController implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	private static final String ADMINISTRADOR = "Administrador";
 
 	private String user;
 
@@ -35,7 +42,7 @@ public class SessionController implements Serializable {
 
 	private Usuario usuario;
 
-	private String tipoUsuario = "Administrador";
+	private String tipoUsuario = ADMINISTRADOR;
 
 	private Empleado empleado;
 
@@ -55,6 +62,8 @@ public class SessionController implements Serializable {
 
 	private String conexion;
 
+	private Map<String, String> userAgents = new HashMap<String, String>();
+
 	@EJB
 	private SeguridadEJB segEJB;
 
@@ -73,7 +82,7 @@ public class SessionController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public String login() {
 		try {
@@ -118,7 +127,7 @@ public class SessionController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public String cerrarSesion() {
 		usuario = null;
@@ -133,11 +142,11 @@ public class SessionController implements Serializable {
 	}
 
 	public boolean isSesionAdmin() {
-		return tipoUsuario.equals("Administrador") && usuario != null;
+		return tipoUsuario.equals(ADMINISTRADOR) && usuario != null;
 	}
 
 	public boolean isSesionUsuario() {
-		return !tipoUsuario.equals("Administrador") && usuario != null;
+		return !tipoUsuario.equals(ADMINISTRADOR) && usuario != null;
 	}
 
 	public boolean isSesionVendedora() {
@@ -243,11 +252,11 @@ public class SessionController implements Serializable {
 
 	/**
 	 * 
-	 * Metodo encargado de registrar la audiroia 
+	 * Metodo encargado de registrar la audiroia
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void registrarAuditoria() {
 		try {
@@ -267,29 +276,41 @@ public class SessionController implements Serializable {
 	}
 
 	/**
+	 * Metodo encargado de identificar el navegador por el que esta ingresando el
+	 * usuario.
 	 * 
-	 * Metodo encargado de identificar el navegador del usuario
-	 * 
-	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
+	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void identificarNavegadorPeticion() {
 
-		if (userAgent.toLowerCase().indexOf("windows") >= 0) {
-			os = "Windows";
-		} else if (userAgent.toLowerCase().indexOf("mac") >= 0) {
-			os = "Mac";
-		} else if (userAgent.toLowerCase().indexOf("x11") >= 0) {
-			os = "Unix";
-		} else if (userAgent.toLowerCase().indexOf("android") >= 0) {
-			os = "Android";
-		} else if (userAgent.toLowerCase().indexOf("iphone") >= 0) {
-			os = "IPhone";
-		} else {
+		userAgents.put("windows", "Windows");
+		userAgents.put("mac", "Mac");
+		userAgents.put("x11", "Unix");
+		userAgents.put("android", "Android");
+		userAgents.put("iphone", "IPhone");
+		os = userAgents.get(userAgent.toLowerCase());
+		if (os.isEmpty()) {
 			os = "UnKnown, More-Info: " + userAgent;
+
 		}
+
 		// ===============Browser===========================
+		brower();
+
+	}
+
+	/**
+	 * 
+	 * <Describir el Metodo>
+	 *
+	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
+	 * @date 24/02/2018
+	 * @version 1.0
+	 *
+	 */
+	private void brower() {
 		if (user2.contains("msie")) {
 			String substring = userAgent.substring(userAgent.indexOf("MSIE")).split(";")[0];
 			browser = substring.split(" ")[0].replace("MSIE", "IE") + "-" + substring.split(" ")[1];
@@ -308,14 +329,11 @@ public class SessionController implements Serializable {
 		} else if ((user2.indexOf("mozilla/7.0") > -1) || (user2.indexOf("netscape6") != -1)
 				|| (user2.indexOf("mozilla/4.7") != -1) || (user2.indexOf("mozilla/4.78") != -1)
 				|| (user2.indexOf("mozilla/4.08") != -1) || (user2.indexOf("mozilla/3") != -1)) {
-			// browser=(userAgent.substring(userAgent.indexOf("MSIE")).split("
-			// ")[0]).replace("/", "-");
 			browser = "Netscape-?";
-
 		} else if (user2.contains("firefox")) {
 			browser = (userAgent.substring(userAgent.indexOf("Firefox")).split(" ")[0]).replace("/", "-");
 		} else if (user2.contains("rv")) {
-			browser = "IE-" + user2.substring(user2.indexOf("rv") + 3, user2.indexOf(")"));
+			browser = "IE-" + user2.substring(user2.indexOf("rv") + 3, user2.indexOf(')'));
 		} else {
 			browser = "UnKnown, More-Info: " + userAgent;
 		}

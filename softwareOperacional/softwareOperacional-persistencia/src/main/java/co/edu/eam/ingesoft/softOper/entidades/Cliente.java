@@ -19,6 +19,8 @@ import javax.persistence.TemporalType;
 @NamedQueries({ @NamedQuery(name = Cliente.LISTAR_CLIENTES, query = "select c from Cliente c"), })
 public class Cliente implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	public static final String LISTAR_CLIENTES = "ListarClientes";
 
 	@Id
@@ -46,7 +48,7 @@ public class Cliente implements Serializable {
 	private Municipio municipioId;
 
 	public Cliente() {
-
+		super();
 	}
 
 	public static String getListarClientes() {

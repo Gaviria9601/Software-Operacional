@@ -17,6 +17,8 @@ import javax.persistence.Table;
 })
 public class venta_dimension implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	public static final String LISTAR_VENTA_DIMENSION = "ListarVentaDimension";
 
 	@Id
@@ -36,7 +38,7 @@ public class venta_dimension implements Serializable{
 	private String nombrecliente;
 	
 	public venta_dimension() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 	
 	

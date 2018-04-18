@@ -28,11 +28,13 @@ import co.edu.eam.ingesoft.softOper.entidades.TipoProducto;
  * 
  * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
  * @date 15/04/2018
- * @version <Numero Version>
+ * @version 1.0
  */
 @Named("inventarioEditController")
 @ViewScoped
 public class InventarioEditController implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Pattern(regexp = "[A-Za-z ]*", message = "Solo Letras")
 	@Length(min = 0, max = 30, message = "Longitud entre 0 y 30")
@@ -198,7 +200,7 @@ public class InventarioEditController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void buscar() {
 		registrarAuditoria("Buscar");
@@ -210,7 +212,7 @@ public class InventarioEditController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public String editar() {
 		if (nombre.isEmpty() || fechaIngreso == null || cantidadProducto == 0 || codigoLote.isEmpty()
@@ -247,7 +249,7 @@ public class InventarioEditController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void limpiar() {
 		nombre = null;
@@ -269,7 +271,7 @@ public class InventarioEditController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public String cancelar() {
 		limpiar();
@@ -282,7 +284,7 @@ public class InventarioEditController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void registrarAuditoria(String accion) {
 		try {

@@ -16,6 +16,8 @@ import javax.persistence.Table;
 		@NamedQuery(name = producto_dimension.LISTAR_PRODUCTO_DIMENSION, query = "select proDim from producto_dimension proDim") })
 public class producto_dimension implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	public static final String LISTAR_PRODUCTO_DIMENSION = "ListarProductoDimension";
 
 	@Id
@@ -35,7 +37,7 @@ public class producto_dimension implements Serializable {
 	private int cantidad;
 
 	public producto_dimension() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	/**

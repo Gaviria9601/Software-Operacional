@@ -22,13 +22,15 @@ import co.edu.eam.ingesoft.softOper.entidades.venta_hecho;
  * 
  * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
  * @date 15/04/2018
- * @version <Numero Version>
+ * @version 1.0
  */
 @Named("ETLtransformacionController")
 @ViewScoped
 public class ETLTransformacionController implements Serializable {
 
-	List<venta_hecho> ventas;
+	private static final long serialVersionUID = 1L;
+
+	private List<venta_hecho> ventas;
 
 	public List<venta_hecho> getVentas() {
 		return ventas;
@@ -59,7 +61,7 @@ public class ETLTransformacionController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void borrarMenores0() {
 		venHecEJB.borrarMenores0();
@@ -73,7 +75,7 @@ public class ETLTransformacionController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void borrarMenores20() {
 		venHecEJB.borrarMenores20();
@@ -87,7 +89,7 @@ public class ETLTransformacionController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void registrarAuditoria(String accion) {
 		try {

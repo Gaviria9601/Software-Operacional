@@ -36,11 +36,13 @@ import co.edu.eam.ingesoft.softOper.entidades.Usuario;
  * 
  * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
  * @date 15/04/2018
- * @version <Numero Version>
+ * @version 1.0
  */
 @Named("clienteControlador")
 @ViewScoped
 public class ClienteController implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Pattern(regexp = "[A-Za-z ]*", message = "Solo Letras")
 	@Length(min = 3, max = 50, message = "longitud entre 3 y 15")
@@ -348,7 +350,7 @@ public class ClienteController implements Serializable {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public List<Municipio> getMuni() {
 		return muni;
@@ -372,7 +374,7 @@ public class ClienteController implements Serializable {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void crear() {
 
@@ -405,7 +407,7 @@ public class ClienteController implements Serializable {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void buscar() {
 		registrarAuditoria("Buscar");
@@ -417,7 +419,7 @@ public class ClienteController implements Serializable {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public String procederEditar(Cliente audi) {
 		DatosManager.setCodigoCliente(audi.getCodigo());
@@ -430,7 +432,7 @@ public class ClienteController implements Serializable {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void resetearFitrosTabla() {
 		RequestContext requestContext = RequestContext.getCurrentInstance();
@@ -443,7 +445,7 @@ public class ClienteController implements Serializable {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void limpiar() {
 		nombre = "";
@@ -462,7 +464,7 @@ public class ClienteController implements Serializable {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void onDepartamentoChange() {
 		if (departamento != null && !departamento.equals(""))
@@ -475,7 +477,7 @@ public class ClienteController implements Serializable {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void eliminar(Cliente venta) {
 
@@ -496,7 +498,7 @@ public class ClienteController implements Serializable {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void registrarAuditoria(String accion) {
 		try {

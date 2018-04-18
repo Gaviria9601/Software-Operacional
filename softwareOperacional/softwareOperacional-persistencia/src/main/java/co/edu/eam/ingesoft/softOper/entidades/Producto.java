@@ -20,6 +20,8 @@ import javax.persistence.TemporalType;
 		@NamedQuery(name = Producto.LISTAR_PRODUCTOS_DIF, query = "select pro from Producto pro where pro.codigo<>?1") })
 public class Producto implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	public static final String LISTAR_PRODUCTOS = "ListarProductos";
 
 	public static final String LISTAR_PRODUCTOS_DIF = "ListarProductosDif";
@@ -62,7 +64,7 @@ public class Producto implements Serializable {
 	private TipoProducto tipoProducto;
 
 	public Producto() {
-
+		super();
 	}
 
 	public Producto(int codigo, String nombre, String descripcion, Date fechaIngreso, int cantidad, String codigoLote,

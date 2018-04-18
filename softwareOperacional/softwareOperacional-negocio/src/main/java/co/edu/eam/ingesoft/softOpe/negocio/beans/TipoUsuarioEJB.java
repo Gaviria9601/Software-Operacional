@@ -17,7 +17,7 @@ import co.edu.eam.ingesoft.softOper.entidades.TipoUsuario;
  * 
  * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
  * @date 15/04/2018
- * @version <Numero Version>
+ * @version 1.0
  */
 @Stateless
 @LocalBean
@@ -32,7 +32,7 @@ public class TipoUsuarioEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void crear(TipoUsuario t) {
@@ -46,7 +46,7 @@ public class TipoUsuarioEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void editar(TipoUsuario t) {
@@ -59,7 +59,7 @@ public class TipoUsuarioEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public TipoUsuario buscarTipoUsuario(int id) {
 		TipoUsuario pa = em.find(TipoUsuario.class, id);
@@ -72,7 +72,7 @@ public class TipoUsuarioEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void eliminarTipoUsuario(Integer codigo) {
@@ -85,12 +85,12 @@ public class TipoUsuarioEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public List<TipoUsuario> listarTipoUsuario() {
 		List<TipoUsuario> lista;
-		lista = em.createNamedQuery(TipoUsuario.listar_tipos).getResultList();
+		lista = em.createNamedQuery(TipoUsuario.LISTAR_TIPOS).getResultList();
 		return lista;
 	}
 

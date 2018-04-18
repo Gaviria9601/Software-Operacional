@@ -19,7 +19,7 @@ import co.edu.eam.ingesoft.softOper.entidades.venta_hecho;
  * 
  * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
  * @date 15/04/2018
- * @version <Numero Version>
+ * @version 1.0
  */
 @LocalBean
 @Stateless
@@ -34,7 +34,7 @@ public class Ventas_hechoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void ingresarVentaHecho(venta_hecho venHecho) {
 		em.persist(venHecho);
@@ -46,7 +46,7 @@ public class Ventas_hechoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void ingresarProductoDimension(producto_dimension proDim) {
 		em.persist(proDim);
@@ -58,7 +58,7 @@ public class Ventas_hechoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public producto_dimension buscarProductoDimension(int codigo) {
 		return em.find(producto_dimension.class, codigo);
@@ -78,7 +78,7 @@ public class Ventas_hechoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public venta_dimension buscarVentaDimension(int codigo) {
 		return em.find(venta_dimension.class, codigo);
@@ -90,7 +90,7 @@ public class Ventas_hechoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void ingresarempleadoDimension(empleado_dimension empDim) {
 		em.persist(empDim);
@@ -102,7 +102,7 @@ public class Ventas_hechoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public empleado_dimension buscarEmpleadoDimension(String nombre) {
 		List<empleado_dimension> empDimen = em.createNamedQuery(empleado_dimension.BUSCAR_NOMBRE_EMPLEADO)
@@ -116,7 +116,7 @@ public class Ventas_hechoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void ingresarclienteDimension(cliente_dimension cliDim) {
 		em.persist(cliDim);
@@ -128,7 +128,7 @@ public class Ventas_hechoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public cliente_dimension buscarClienteDimension(String nombre) {
 		List<cliente_dimension> cliDimen = em.createNamedQuery(cliente_dimension.BUSCAR_NOMBRE_CLIENTE)
@@ -142,7 +142,7 @@ public class Ventas_hechoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public List<venta_hecho> listarVentasHecho() {
 		return em.createNamedQuery(venta_hecho.LISTAR_VENTA_HECHO).getResultList();
@@ -154,7 +154,7 @@ public class Ventas_hechoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public List<producto_dimension> listarProductos() {
 		return em.createNamedQuery(producto_dimension.LISTAR_PRODUCTO_DIMENSION).getResultList();
@@ -166,7 +166,7 @@ public class Ventas_hechoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public List<venta_dimension> listarVentas() {
 		return em.createNamedQuery(venta_dimension.LISTAR_VENTA_DIMENSION).getResultList();
@@ -178,7 +178,7 @@ public class Ventas_hechoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public List<empleado_dimension> listarEmpleados() {
 		return em.createNamedQuery(empleado_dimension.LISTAR_EMPLEADO_DIMENSION).getResultList();
@@ -190,7 +190,7 @@ public class Ventas_hechoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public List<cliente_dimension> listarClientes() {
 		return em.createNamedQuery(cliente_dimension.LISTAR_CLIENTE_DIMENSION).getResultList();
@@ -202,7 +202,7 @@ public class Ventas_hechoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public boolean borrarMenores0() {
 		try {
@@ -220,7 +220,7 @@ public class Ventas_hechoEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public boolean borrarMenores20() {
 		try {

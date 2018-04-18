@@ -14,6 +14,8 @@ import javax.persistence.Table;
 @NamedQueries({ @NamedQuery(name = Departamento.LISTAR_DEPTOS, query = "select d from Departamento d") })
 public class Departamento implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	public static final String LISTAR_DEPTOS = "listarDeptos";
 
 	@Id
@@ -24,7 +26,7 @@ public class Departamento implements Serializable {
 	private String nombre;
 
 	public Departamento() {
-
+		super();
 	}
 
 	/**

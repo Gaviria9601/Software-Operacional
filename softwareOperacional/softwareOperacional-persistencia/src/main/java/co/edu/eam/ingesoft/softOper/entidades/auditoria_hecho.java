@@ -18,6 +18,8 @@ import javax.persistence.Table;
 		@NamedQuery(name = auditoria_hecho.LISTAR_AUDITORIA_HECHO, query = "select aud from auditoria_hecho aud") })
 public class auditoria_hecho implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	public static final String LISTAR_AUDITORIA_HECHO = "auditoria_hecho.listarAuditoriaHecho";
 
 	@Id
@@ -46,7 +48,7 @@ public class auditoria_hecho implements Serializable {
 	private tiempo_dimension tiempo;
 
 	public auditoria_hecho() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	public auditoria_hecho(int codigo, Date fechaauditoria, String tablaaccion, String accion,

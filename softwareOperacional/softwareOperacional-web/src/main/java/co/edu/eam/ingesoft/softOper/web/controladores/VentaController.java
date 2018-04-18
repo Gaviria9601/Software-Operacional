@@ -35,11 +35,13 @@ import co.edu.eam.ingesoft.softOper.entidades.Venta;
  * 
  * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
  * @date 15/04/2018
- * @version <Numero Version>
+ * @version 1.0
  */
 @Named("ventaController")
 @ViewScoped
 public class VentaController implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private Venta selectedVenta;
 
@@ -239,7 +241,7 @@ public class VentaController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void terminar() {
 		List<Producto> produc = productos.getTarget();
@@ -265,7 +267,7 @@ public class VentaController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void empezarVenta() {
 		if (cliente != null) {
@@ -289,7 +291,7 @@ public class VentaController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public Date generarFechaActual() {
 		return audEJB.generarFechaActual();
@@ -301,7 +303,7 @@ public class VentaController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	/**
 	 * 
@@ -318,7 +320,7 @@ public class VentaController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public List<Cliente> completeTheme(String query) {
 		List<Cliente> allThemes = cliEJB.listarClientes();
@@ -402,10 +404,9 @@ public class VentaController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void eliminar(Venta venta) {
-		System.out.println(venta.getTotalVenta());
 		try {
 			venEJB.eliminarVenta(venta.getCodigo());
 			ventas = venEJB.listarVentas();
@@ -423,7 +424,7 @@ public class VentaController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void buscar() {
 		registrarAuditoria("Buscar");
@@ -435,7 +436,7 @@ public class VentaController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void resetearFitrosTabla() {
 		RequestContext requestContext = RequestContext.getCurrentInstance();
@@ -448,7 +449,7 @@ public class VentaController implements Serializable {
 	 * 
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void registrarAuditoria(String accion) {
 		try {

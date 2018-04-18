@@ -4,11 +4,14 @@ import java.io.Serializable;
 
 public class ProductoVentaPK implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	private int producto_codigo;
 
 	private int venta_codigo;
 
 	public ProductoVentaPK() {
+		super();
 	}
 
 	public ProductoVentaPK(int producto_codigo, int venta_codigo) {

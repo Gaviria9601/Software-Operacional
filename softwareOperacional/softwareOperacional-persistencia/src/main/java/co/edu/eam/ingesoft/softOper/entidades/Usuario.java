@@ -14,10 +14,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Usuario")
 @NamedQueries({
-@NamedQuery(name=Usuario.LISTA_BUSQUEDA_USUARIO,query="select usu from Usuario usu where usu.nombre= ?1")
-})
+		@NamedQuery(name = Usuario.LISTA_BUSQUEDA_USUARIO, query = "select usu from Usuario usu where usu.nombre= ?1") })
 public class Usuario implements Serializable {
-	
+
+	private static final long serialVersionUID = 1L;
+
 	public static final String LISTA_BUSQUEDA_USUARIO = "Usuario.ListaBusquedaUsuario";
 
 	@Id
@@ -35,20 +36,15 @@ public class Usuario implements Serializable {
 	private TipoUsuario tipoUsuario;
 
 	public Usuario() {
+		super();
 	}
-	
-	
 
-	
 	public Usuario(String nombre, String contrasenia, TipoUsuario tipoUsuario) {
 		super();
 		this.nombre = nombre;
 		this.contrasenia = contrasenia;
 		this.tipoUsuario = tipoUsuario;
 	}
-
-
-
 
 	/**
 	 * @return the id

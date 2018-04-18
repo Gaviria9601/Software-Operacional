@@ -18,7 +18,7 @@ import co.edu.eam.ingesoft.softOper.entidades.Municipio;
  * 
  * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
  * @date 15/04/2018
- * @version <Numero Version>
+ * @version 1.0
  */
 @LocalBean
 @Stateless
@@ -33,7 +33,7 @@ public class ClienteEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public Cliente buscarCliente(int codigo) {
 		return em.find(Cliente.class, codigo);
@@ -45,7 +45,7 @@ public class ClienteEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public Municipio buscarMunicipio(int id) {
 		return em.find(Municipio.class, id);
@@ -57,7 +57,7 @@ public class ClienteEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void crearCliente(Cliente c) {
@@ -71,7 +71,7 @@ public class ClienteEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public Cliente buscar(int codigo) {
@@ -85,7 +85,7 @@ public class ClienteEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void editar(Cliente clie) {
@@ -98,7 +98,7 @@ public class ClienteEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void eliminar(Integer codigo) {
@@ -111,8 +111,9 @@ public class ClienteEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Cliente> listarClientes() {
 		return em.createNamedQuery(Cliente.LISTAR_CLIENTES).getResultList();
 
@@ -124,8 +125,9 @@ public class ClienteEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
+	@SuppressWarnings("unchecked")
 	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
 	public List<Cliente> listarCli() {
 		List<Cliente> lista;
@@ -139,8 +141,9 @@ public class ClienteEJB {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
+	@SuppressWarnings("unchecked")
 	public List<Municipio> listarMuni() {
 		return em.createNamedQuery(Municipio.LISTAR_MUNI).getResultList();
 

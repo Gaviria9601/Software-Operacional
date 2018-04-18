@@ -14,13 +14,14 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Municipio")
 @NamedQueries({ @NamedQuery(name = Municipio.LISTAR_MUNI, query = "select a from Municipio a"),
-		@NamedQuery(name = Municipio.LISTAR_MUNIPorDepto, query = "select a from Municipio a where a.departamento.nombre = ?1")
+		@NamedQuery(name = Municipio.LISTAR_MUNI_POR_DEPTO, query = "select a from Municipio a where a.departamento.nombre = ?1")
 
 })
 public class Municipio implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	public static final String LISTAR_MUNI = "ListarMunici";
-	public static final String LISTAR_MUNIPorDepto = "listatMunixDepto";
+	public static final String LISTAR_MUNI_POR_DEPTO = "listatMunixDepto";
 
 	@Id
 	@Column(name = "id", nullable = false)
@@ -34,7 +35,7 @@ public class Municipio implements Serializable {
 	private Departamento departamento;
 
 	public Municipio() {
-
+		super();
 	}
 
 	/**

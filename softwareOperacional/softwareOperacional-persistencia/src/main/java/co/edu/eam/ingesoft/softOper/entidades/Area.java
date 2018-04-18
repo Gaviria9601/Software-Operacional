@@ -16,6 +16,8 @@ import javax.persistence.Table;
 })
 public class Area implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	public static final String LISTAR_AREA = "ListarArea";
 
 	@Id
@@ -35,7 +37,7 @@ public class Area implements Serializable {
 	}
 
 	public Area() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	/**

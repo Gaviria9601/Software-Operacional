@@ -16,33 +16,34 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "Venta")
-@NamedQueries({
-	@NamedQuery(name=Venta.LISTAR_VENTAS,query="select ven from Venta ven")
-})
+@NamedQueries({ @NamedQuery(name = Venta.LISTAR_VENTAS, query = "select ven from Venta ven") })
 public class Venta implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	public static final String LISTAR_VENTAS = "ListarVentas";
-	
+
 	@Id
-	@Column(name="codigo", nullable=false)
+	@Column(name = "codigo", nullable = false)
 	private int codigo;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="fecha",nullable = false)
+	@Column(name = "fecha", nullable = false)
 	private Date fecha;
-	
-	@Column(name="totalVenta")
+
+	@Column(name = "totalVenta")
 	private int totalVenta;
 
 	@ManyToOne
-	@JoinColumn(name = "vendedor", nullable=false)
+	@JoinColumn(name = "vendedor", nullable = false)
 	private Empleado vendedor;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "cliente", nullable=false)
+	@JoinColumn(name = "cliente", nullable = false)
 	private Cliente cliente;
-	
-	public Venta(){
+
+	public Venta() {
+		super();
 	}
 
 	/**
@@ -53,7 +54,8 @@ public class Venta implements Serializable {
 	}
 
 	/**
-	 * @param codigo the codigo to set
+	 * @param codigo
+	 *            the codigo to set
 	 */
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
@@ -67,7 +69,8 @@ public class Venta implements Serializable {
 	}
 
 	/**
-	 * @param fecha the fecha to set
+	 * @param fecha
+	 *            the fecha to set
 	 */
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
@@ -81,7 +84,8 @@ public class Venta implements Serializable {
 	}
 
 	/**
-	 * @param totalVenta the totalVenta to set
+	 * @param totalVenta
+	 *            the totalVenta to set
 	 */
 	public void setTotalVenta(int totalVenta) {
 		this.totalVenta = totalVenta;
@@ -90,7 +94,6 @@ public class Venta implements Serializable {
 	/**
 	 * @return the empleado
 	 */
-	
 
 	/**
 	 * @return the cliente
@@ -100,13 +103,16 @@ public class Venta implements Serializable {
 	}
 
 	/**
-	 * @param cliente the cliente to set
+	 * @param cliente
+	 *            the cliente to set
 	 */
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -117,7 +123,9 @@ public class Venta implements Serializable {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -142,12 +150,11 @@ public class Venta implements Serializable {
 	}
 
 	/**
-	 * @param vendedor the vendedor to set
+	 * @param vendedor
+	 *            the vendedor to set
 	 */
 	public void setVendedor(Empleado vendedor) {
 		this.vendedor = vendedor;
 	}
-	
-	
-	
+
 }

@@ -16,6 +16,8 @@ import javax.persistence.Table;
 		@NamedQuery(name = empleado_dimension.BUSCAR_NOMBRE_EMPLEADO, query = "select emp from empleado_dimension emp where emp.nombre=?1") })
 public class empleado_dimension implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	public static final String LISTAR_EMPLEADO_DIMENSION = "ListarEmpleadoDimension";
 
 	public static final String BUSCAR_NOMBRE_EMPLEADO = "BuscarNombre";
@@ -34,7 +36,7 @@ public class empleado_dimension implements Serializable {
 	private String nombrecargo;
 
 	public empleado_dimension() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	/**

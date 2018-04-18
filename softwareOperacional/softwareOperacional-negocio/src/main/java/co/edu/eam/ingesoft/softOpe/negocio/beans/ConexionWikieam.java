@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Logger;
 
 /**
  * Clase encargada de la conexion con la bd wikieam.
@@ -20,6 +21,8 @@ import java.sql.Statement;
  *
  */
 public class ConexionWikieam {
+
+	private Logger logger = Logger.getLogger(ConexionWikieam.class.getName());
 
 	protected String driver = "com.mysql.jdbc.Driver"; // nombre del driver
 	protected String connectString = "jdbc:mysql://localhost:3306/wikieam"; // ubicacion de la base de datos, para
@@ -36,7 +39,7 @@ public class ConexionWikieam {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void conectar() {
 		try {
@@ -44,9 +47,9 @@ public class ConexionWikieam {
 			conexionDB = DriverManager.getConnection(connectString, user, password);// conexion a la base de datos
 			sentenciaSQL = conexionDB.createStatement();// variable que permite ejecutar las sentencias SQL
 		} catch (ClassNotFoundException e) {
-			System.out.println(e.getMessage());
+			logger.info(e.getMessage());
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			logger.info(e.getMessage());
 		}
 	}
 
@@ -56,14 +59,14 @@ public class ConexionWikieam {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public void desconectar() {
 		try {
 			// sentenciaSQL.close();//cierra la consulta
 			conexionDB.close();// cierra conexion
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			logger.info(e.getMessage());
 		}
 	}
 
@@ -73,7 +76,7 @@ public class ConexionWikieam {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public boolean ejecutar(String sentencia) {
 		try {
@@ -93,7 +96,7 @@ public class ConexionWikieam {
 	 * 
 	 * @author <Paula castaño aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
-	 * @version <Numero Version>
+	 * @version 1.0
 	 */
 	public ResultSet ejecutarRetorno(String sentencia) {
 		try {

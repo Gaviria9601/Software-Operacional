@@ -11,10 +11,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "TipoUsuario")
-@NamedQueries({ @NamedQuery(name = TipoUsuario.listar_tipos, query = "select a from TipoUsuario a") })
+@NamedQueries({ @NamedQuery(name = TipoUsuario.LISTAR_TIPOS, query = "select a from TipoUsuario a") })
 public class TipoUsuario implements Serializable {
 
-	public static final String listar_tipos = "ListarTipoUsuario";
+	private static final long serialVersionUID = 1L;
+
+	public static final String LISTAR_TIPOS = "ListarTipoUsuario";
 
 	@Id
 	@Column(name = "id", nullable = false)
@@ -27,6 +29,7 @@ public class TipoUsuario implements Serializable {
 	private String descripcion;
 
 	public TipoUsuario() {
+		super();
 	}
 
 	/*

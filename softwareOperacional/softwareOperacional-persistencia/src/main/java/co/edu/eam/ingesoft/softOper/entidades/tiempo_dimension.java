@@ -14,6 +14,8 @@ import javax.persistence.Table;
 @NamedQueries({ @NamedQuery(name = tiempo_dimension.LISTAR_TIEMPO, query = "select t from tiempo_dimension t") })
 public class tiempo_dimension implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	public static final String LISTAR_TIEMPO = "tiempo_dimension.listarTiempo";
 
 	@Id
@@ -27,7 +29,7 @@ public class tiempo_dimension implements Serializable {
 	private String mes;
 
 	public tiempo_dimension() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	/**

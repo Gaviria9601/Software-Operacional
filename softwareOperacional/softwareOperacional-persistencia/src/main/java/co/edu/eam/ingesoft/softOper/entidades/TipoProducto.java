@@ -15,6 +15,8 @@ import javax.persistence.Table;
 		@NamedQuery(name = TipoProducto.LISTAR_TIPO_PRODUCTOS, query = "select tipoPro from TipoProducto tipoPro") })
 public class TipoProducto implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	public static final String LISTAR_TIPO_PRODUCTOS = "TipoProducto.listarTipoProducto";
 
 	@Id
@@ -25,6 +27,7 @@ public class TipoProducto implements Serializable {
 	private String nombre;
 
 	public TipoProducto() {
+		super();
 	}
 
 	/*

@@ -16,6 +16,8 @@ import javax.persistence.Table;
 		@NamedQuery(name = origen_dimension.BUSCAR_NOMBRE, query = "select ori from origen_dimension ori where ORI.dispositivo=?1") })
 public class origen_dimension implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	public static final String LISTAR_ORIGEN_DIMENSION = "Origen.ListarDimension";
 
 	public static final String BUSCAR_NOMBRE = "Origen.buscarNombre";
@@ -28,7 +30,7 @@ public class origen_dimension implements Serializable {
 	private String dispositivo;
 
 	public origen_dimension() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	/**

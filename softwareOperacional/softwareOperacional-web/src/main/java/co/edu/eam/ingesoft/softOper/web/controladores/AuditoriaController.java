@@ -19,11 +19,13 @@ import co.edu.eam.ingesoft.softOper.entidades.Auditoria;
  * 
  * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
  * @date 15/04/2018
- * @version <Numero Version>
+ * @version 1.0
  */
 @Named("auditoriaControl")
 @ViewScoped
 public class AuditoriaController implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@EJB
 	private AuditoriaEJB audEJB;
