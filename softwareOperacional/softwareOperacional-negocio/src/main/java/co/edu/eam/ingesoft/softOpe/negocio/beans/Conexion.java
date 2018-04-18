@@ -30,9 +30,9 @@ public class Conexion {
 	 * @version 1.0
 	 */
 	public String getConexion() {
-		conexiones.put("primary", "Oracle");
+		conexiones.put(OPCION, "Oracle");
 		conexiones.put("secundary", "MySQL");
-		return conexiones.get("primary");
+		return conexiones.get(OPCION);
 	}
 
 }

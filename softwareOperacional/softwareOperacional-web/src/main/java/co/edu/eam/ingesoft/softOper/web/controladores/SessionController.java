@@ -62,7 +62,6 @@ public class SessionController implements Serializable {
 
 	private String conexion;
 
-	private Map<String, String> userAgents = new HashMap<String, String>();
 
 	@EJB
 	private SeguridadEJB segEJB;
@@ -285,15 +284,18 @@ public class SessionController implements Serializable {
 	 */
 	public void identificarNavegadorPeticion() {
 
-		userAgents.put("windows", "Windows");
-		userAgents.put("mac", "Mac");
-		userAgents.put("x11", "Unix");
-		userAgents.put("android", "Android");
-		userAgents.put("iphone", "IPhone");
-		os = userAgents.get(userAgent);
-		if (os.isEmpty()) {
+		if (userAgent.toLowerCase().indexOf("windows") >= 0) {
+			os = "Windows";
+		} else if (userAgent.toLowerCase().indexOf("mac") >= 0) {
+			os = "Mac";
+		} else if (userAgent.toLowerCase().indexOf("x11") >= 0) {
+			os = "Unix";
+		} else if (userAgent.toLowerCase().indexOf("android") >= 0) {
+			os = "Android";
+		} else if (userAgent.toLowerCase().indexOf("iphone") >= 0) {
+			os = "IPhone";
+		} else {
 			os = "UnKnown, More-Info: " + userAgent;
-
 		}
 
 		// ===============Browser===========================

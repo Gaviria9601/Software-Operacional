@@ -2,9 +2,7 @@ package co.edu.eam.ingesoft.softOpe.negocio.beans;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -36,7 +34,6 @@ public class AuditoriaEJB {
 
 	private String os;
 
-	private Map<String, String> userAgents = new HashMap<String, String>();
 
 	/**
 	 * 
@@ -66,15 +63,18 @@ public class AuditoriaEJB {
 	 */
 	public void identificarNavegadorPeticion() {
 
-		userAgents.put("windows", "Windows");
-		userAgents.put("mac", "Mac");
-		userAgents.put("x11", "Unix");
-		userAgents.put("android", "Android");
-		userAgents.put("iphone", "IPhone");
-		os = userAgents.get(userAgent.toLowerCase());
-		if (os.isEmpty()) {
+		if (userAgent.toLowerCase().indexOf("windows") >= 0) {
+			os = "Windows";
+		} else if (userAgent.toLowerCase().indexOf("mac") >= 0) {
+			os = "Mac";
+		} else if (userAgent.toLowerCase().indexOf("x11") >= 0) {
+			os = "Unix";
+		} else if (userAgent.toLowerCase().indexOf("android") >= 0) {
+			os = "Android";
+		} else if (userAgent.toLowerCase().indexOf("iphone") >= 0) {
+			os = "IPhone";
+		} else {
 			os = "UnKnown, More-Info: " + userAgent;
-
 		}
 
 		// ===============Browser===========================
