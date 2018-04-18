@@ -55,8 +55,6 @@ public class ETLExtraccionController implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Logger logger = Logger.getLogger(ETLExtraccionController.class.getName());
-
 	private List<auditoria_hecho> auditorias;
 
 	private List<venta_hecho> ventas;
@@ -479,7 +477,7 @@ public class ETLExtraccionController implements Serializable {
 			// el // encargado de traer los datos de la consulta
 			ResultSet rs = st.executeQuery("select * from cliente_dimension");
 			while (rs.next()) {
-				logger.info(" " + rs.getString(1) + " " + rs.getString(2));
+				Logger.getLogger(" " + rs.getString(1) + " " + rs.getString(2));
 			}
 		} catch (SQLException ex) {
 			Logger.getLogger(ETLExtraccionController.class.getName()).log(Level.SEVERE, null, ex);
@@ -488,7 +486,7 @@ public class ETLExtraccionController implements Serializable {
 		} finally {
 			try {
 				con.close();
-				logger.info("Conexion Cerrada con Exito...");
+				Logger.getLogger("Conexion Cerrada con Exito...");
 			} catch (SQLException ex) {
 				Logger.getLogger(ETLExtraccionController.class.getName()).log(Level.SEVERE, null, ex);
 			}

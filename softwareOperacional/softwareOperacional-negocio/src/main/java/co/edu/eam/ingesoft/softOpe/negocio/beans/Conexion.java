@@ -32,7 +32,7 @@ public class Conexion {
 	public String getConexion() {
 		conexiones.put("primary", "Oracle");
 		conexiones.put("secundary", "MySQL");
-		return conexiones.get(OPCION);
+		return conexiones.get("primary");
 	}
 
 }

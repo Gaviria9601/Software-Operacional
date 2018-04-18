@@ -290,7 +290,7 @@ public class SessionController implements Serializable {
 		userAgents.put("x11", "Unix");
 		userAgents.put("android", "Android");
 		userAgents.put("iphone", "IPhone");
-		os = userAgents.get(userAgent.toLowerCase());
+		os = userAgents.get(userAgent);
 		if (os.isEmpty()) {
 			os = "UnKnown, More-Info: " + userAgent;
 
