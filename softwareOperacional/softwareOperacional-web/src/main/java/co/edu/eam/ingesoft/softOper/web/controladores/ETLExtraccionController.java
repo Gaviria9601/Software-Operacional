@@ -466,16 +466,18 @@ public class ETLExtraccionController implements Serializable {
 	 */
 	public void conectar() {
 		Connection con = null;
+		Statement st = null;
+		ResultSet rs = null;
 		try {
 			InitialContext ic = new InitialContext();
 			// en esta parte es donde // ponemos el Nombre // // de
 			// JNDI para que traiga el datasource
 			DataSource ds = (DataSource) ic.lookup("java:jboss/datasources/ETLDS");
 			con = ds.getConnection();
-			Statement st = con.createStatement();
+			st = con.createStatement();
 			Messages.addFlashGlobalInfo("Se ha realizado con exito la conexión a Postgres");
 			// el // encargado de traer los datos de la consulta
-			ResultSet rs = st.executeQuery("select * from cliente_dimension");
+			rs = st.executeQuery("select * from cliente_dimension");
 			while (rs.next()) {
 				Logger.getLogger(" " + rs.getString(1) + " " + rs.getString(2));
 			}
@@ -485,17 +487,25 @@ public class ETLExtraccionController implements Serializable {
 			Logger.getLogger(ETLExtraccionController.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (NamingException ex) {
 			Logger.getLogger(ETLExtraccionController.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		try {
+			con.close();
+			Logger.getLogger("Conexion Cerrada con Exito...");
+		} catch (SQLException ex) {
+			Logger.getLogger(ETLExtraccionController.class.getName()).log(Level.SEVERE, null, ex);
 		} finally {
 			try {
-				con.close();
-				Logger.getLogger("Conexion Cerrada con Exito...");
-			} catch (SQLException ex) {
-				Logger.getLogger(ETLExtraccionController.class.getName()).log(Level.SEVERE, null, ex);
-			} finally {
-			
+				st.close();
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			
 		}
+
+	
+
 	}
 
 	/**
