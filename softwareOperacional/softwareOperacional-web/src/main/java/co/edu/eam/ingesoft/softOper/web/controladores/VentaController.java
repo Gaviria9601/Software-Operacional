@@ -250,6 +250,15 @@ public class VentaController implements Serializable {
 		}
 		ventaGeneral.setTotalVenta(totalVenta);
 		venEJB.editarVenta(ventaGeneral);
+		limpiarCampos();
+		Messages.addFlashGlobalInfo("Venta Terminada con Exito");
+		registrarAuditoria("Crear");
+	}
+
+	/**
+	 * encargado de limpiar campos al terminar una venta
+	 */
+	public void limpiarCampos() {
 		infoGeneral = "";
 		cantSobrantes = 0;
 		valorProducto = 0;
@@ -257,8 +266,19 @@ public class VentaController implements Serializable {
 		cantProductos = 0;
 		cliente = null;
 		empezar = false;
-		Messages.addFlashGlobalInfo("Venta Terminada con Exito");
-		registrarAuditoria("Crear");
+	}
+
+	/**
+	 * metodo encargado de editar los campos a la hora de empezar la venta
+	 * 
+	 * @param venta,
+	 *            venta que se inicia
+	 */
+	public void editarCamposEmpezarVenta(Venta venta) {
+		venta.setFecha(audEJB.generarFechaActual());
+		venta.setVendedor(sesion.buscarEmpleado(sesion.getUsuario().getId()));
+		venta.setCliente(cliente);
+		venta.setTotalVenta(totalVenta);
 	}
 
 	/**
@@ -272,10 +292,7 @@ public class VentaController implements Serializable {
 	public void empezarVenta() {
 		if (cliente != null) {
 			Venta venta = new Venta();
-			venta.setFecha(audEJB.generarFechaActual());
-			venta.setVendedor(sesion.buscarEmpleado(sesion.getUsuario().getId()));
-			venta.setCliente(cliente);
-			venta.setTotalVenta(totalVenta);
+			editarCamposEmpezarVenta(venta);
 			venEJB.crearVenta(venta);
 			ventaGeneral = venEJB.listarVentas().get(venEJB.listarVentas().size() - 1);
 			empezar = true;
@@ -325,7 +342,6 @@ public class VentaController implements Serializable {
 	public List<Cliente> completeTheme(String query) {
 		List<Cliente> allThemes = cliEJB.listarClientes();
 		List<Cliente> filteredThemes = new ArrayList<Cliente>();
-
 		for (int i = 0; i < allThemes.size(); i++) {
 			Cliente skin = allThemes.get(i);
 			if (skin.getNombre().toLowerCase().contains(query) || skin.getApellido().toLowerCase().contains(query)) {
@@ -362,18 +378,26 @@ public class VentaController implements Serializable {
 	 * 
 	 * @param event
 	 */
+	public void CantidadProductoMayorCero(TransferEvent event) {
+		for (Object item : event.getItems()) {
+			Producto pro = (Producto) item;
+			proVenEJB.agregarProductoVenta(pro, ventaGeneral, cantidadProducto);
+			int total = pro.getValor() * cantidadProducto;
+			totalVenta += total;
+			cantProductos = productos.getTarget().size();
+			Messages.addFlashGlobalInfo("Producto Agregado");
+		}
+	}
+
+	/**
+	 * 
+	 * @param event
+	 */
 	public void onTransfer(TransferEvent event) {
 		if (event.isAdd()) {
 			try {
 				if (cantidadProducto > 0) {
-					for (Object item : event.getItems()) {
-						Producto pro = (Producto) item;
-						proVenEJB.agregarProductoVenta(pro, ventaGeneral, cantidadProducto);
-						int total = pro.getValor() * cantidadProducto;
-						totalVenta += total;
-						cantProductos = productos.getTarget().size();
-						Messages.addFlashGlobalInfo("Producto Agregado");
-					}
+					CantidadProductoMayorCero(event);
 				} else {
 					event.isRemove();
 					Messages.addFlashGlobalError("La Cantidad de productos a agregar debe ser mayor que 0");

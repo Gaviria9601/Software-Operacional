@@ -140,7 +140,7 @@ public class ETLExtraccionController implements Serializable {
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
 	 * @version 1.0
-	 */
+	 */	
 	public void extraerTablaAuditoriaHecho() {
 
 		List<Auditoria> auditorias = new ArrayList<Auditoria>();

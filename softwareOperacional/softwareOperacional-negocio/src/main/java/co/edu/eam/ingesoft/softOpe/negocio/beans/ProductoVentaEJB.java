@@ -46,18 +46,29 @@ public class ProductoVentaEJB {
 		Venta ve = em.find(Venta.class, venta.getCodigo());
 		if (pro.getCantidad() >= cantidad) {
 			ProductoVenta proVen = new ProductoVenta();
-			proVen.setVenta_codigo(ve);
-			proVen.setProducto_codigo(pro);
-			proVen.setCantidad(cantidad);
-			proVen.setFecha(audiEJB.generarFechaActual());
-			int total = pro.getValor() * cantidad;
-			proVen.setTotal(total);
-			pro.setCantidad(pro.getCantidad() - cantidad);
-			em.merge(pro);
-			em.persist(proVen);
+			insertarProductos(proVen, pro, ve, cantidad);
 		} else {
 			throw new ExcepcionNegocio("No Existe la cantidad de inventario del Producto a agregar");
 		}
+	}
+	
+	/**
+	 * inserta producto a a la venta, complementando agregarProdutoVenta
+	 * @param proVen, ProductoVenta que se agregara
+	 * @param pro, producto que se agregara
+	 * @param ve, venta que se agregara el producto
+	 * @param cantidad cantidad de ese producto a agregar
+	 */
+	public void insertarProductos(ProductoVenta proVen, Producto pro, Venta ve, int cantidad) {
+		proVen.setVenta_codigo(ve);
+		proVen.setProducto_codigo(pro);
+		proVen.setCantidad(cantidad);
+		proVen.setFecha(audiEJB.generarFechaActual());
+		int total = pro.getValor() * cantidad;
+		proVen.setTotal(total);
+		pro.setCantidad(pro.getCantidad() - cantidad);
+		em.merge(pro);
+		em.persist(proVen);
 	}
 
 	/**

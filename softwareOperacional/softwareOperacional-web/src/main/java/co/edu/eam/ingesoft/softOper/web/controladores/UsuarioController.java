@@ -323,27 +323,36 @@ public class UsuarioController implements Serializable {
 	 * @date 15/04/2018
 	 * @version 1.0
 	 */
-
 	public void crear() {
 		try {
 			Cargo c = empleadoejb.buscarCargo(cargo);
 			Municipio m = empleadoejb.buscarMunicipio(municipio);
 			Empleado empleado = new Empleado();
-			empleado.setApellido(apellido);
-			empleado.setCargo(c);
-			empleado.setCedula(cedula);
-			empleado.setFechaIngresoEmpresa(fechaIngreso);
-			empleado.setFechaNacimiento(fechaNacimiento);
-			empleado.setGenero(genero);
-			empleado.setMunicipio(m);
-			empleado.setNombre(nombre);
+			insertarValoresCrear(empleado, m, c);
 			registrarAuditoriaEmpleado("Guardar");
-			empleadoejb.crear(empleado, nickname);
 			limpiar();
 			Messages.addFlashGlobalInfo("Usuario creado correctamente");
 		} catch (ExcepcionNegocio e) {
 			Messages.addGlobalError(e.getMessage());
 		}
+	}
+
+	/**
+	 * insertar los valores para crear el empleado
+	 * @param empleado, empleado al que se le insertaran valores
+	 * @param m, muninipio del empleado
+	 * @param c, cargo del empleado
+	 */
+	public void insertarValoresCrear(Empleado empleado, Municipio m, Cargo c) {
+		empleado.setApellido(apellido);
+		empleado.setCargo(c);
+		empleado.setCedula(cedula);
+		empleado.setFechaIngresoEmpresa(fechaIngreso);
+		empleado.setFechaNacimiento(fechaNacimiento);
+		empleado.setGenero(genero);
+		empleado.setMunicipio(m);
+		empleado.setNombre(nombre);
+		empleadoejb.crear(empleado, nickname);
 	}
 
 	/**
@@ -369,9 +378,8 @@ public class UsuarioController implements Serializable {
 	 */
 	public void crearUsuario() {
 		try {
-			if (seguridadejb.buscarUsuario(nickname) == null) {
-				Usuario usuariop = new Usuario(nickname, contrasenia, tiposejb.buscarTipoUsuario(tipoUsuario));
-				empleadoejb.crearUsuario(usuariop);
+			if (seguridadejb.buscarUsuario(nickname).equals(null)) {
+				empleadoejb.crearUsuario(new Usuario(nickname, contrasenia, tiposejb.buscarTipoUsuario(tipoUsuario)));
 				registrarAuditoriaUsuario("Guardar");
 				Messages.addFlashGlobalInfo("Nickname verificado");
 			} else {

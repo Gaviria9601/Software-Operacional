@@ -116,11 +116,9 @@ public class UsuarioEditController implements Serializable {
 		genero = empleado.getGenero();
 		departamento = empleado.getMunicipio().getDepartamento().getNombre();
 		municipio = empleado.getMunicipio().getId();
-
 		usu = empleado.getUsuario();
 		tipoUsuario = usu.getTipoUsuario().getId();
 		contrasenia = usu.getContrasenia();
-
 		cargos = empleadoejb.listarCargos();
 		tipos = tiposejb.listarTipoUsuario();
 		departamentos = empleadoejb.listardepartamentos();
@@ -172,7 +170,6 @@ public class UsuarioEditController implements Serializable {
 	public String editar() {
 		try {
 			empleado.setNombre(nombre);
-
 			empleado.setApellido(apellido);
 			Cargo c = empleadoejb.buscarCargo(cargo);
 			empleado.setCargo(c);
@@ -183,10 +180,8 @@ public class UsuarioEditController implements Serializable {
 			Municipio m = empleadoejb.buscarMunicipio(municipio);
 			empleado.setMunicipio(m);
 			TipoUsuario tipo = tiposejb.buscarTipoUsuario(tipoUsuario);
-
 			usu.setContrasenia(contrasenia);
 			usu.setTipoUsuario(tipo);
-
 			empleadoejb.editarEmpleado(empleado);
 			empleadoejb.editarUsuario(usu);
 			Messages.addFlashGlobalInfo("usuario Editado Correctamente");
