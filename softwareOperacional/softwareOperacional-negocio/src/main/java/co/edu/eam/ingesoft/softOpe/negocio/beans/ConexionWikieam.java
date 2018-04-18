@@ -28,7 +28,7 @@ public class ConexionWikieam {
 	protected String connectString = "jdbc:mysql://localhost:3306/wikieam"; // ubicacion de la base de datos, para
 																			// postgres esta es por defecto
 	protected String user = "root"; // usuario de la base de datos
-	protected String password = "admin"; // password de la base de datos
+	protected String password = getPassword(); // password de la base de datos
 	protected Connection conexionDB; // variable que permite la conexion
 	protected Statement sentenciaSQL; // permite la ejecucion de sentencias SQL
 	protected ResultSet resultadoDB;// almacena el resultado de una consulta
@@ -107,5 +107,10 @@ public class ConexionWikieam {
 		}
 		return resultadoDB;
 	}
+	
+	public String getPassword() {
+		return "admin";
+	}
+
 
 }
