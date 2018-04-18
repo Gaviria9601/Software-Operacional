@@ -140,7 +140,7 @@ public class ETLExtraccionController implements Serializable {
 	 * @author <Paula Castaño Aristizabal> Email: <paulaca.a8@gmail.com>
 	 * @date 15/04/2018
 	 * @version 1.0
-	 */	
+	 */
 	public void extraerTablaAuditoriaHecho() {
 
 		List<Auditoria> auditorias = new ArrayList<Auditoria>();
@@ -487,22 +487,17 @@ public class ETLExtraccionController implements Serializable {
 			Logger.getLogger(ETLExtraccionController.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (NamingException ex) {
 			Logger.getLogger(ETLExtraccionController.class.getName()).log(Level.SEVERE, null, ex);
-		}
-		try {
-			con.close();
-			Logger.getLogger("Conexion Cerrada con Exito...");
-		} catch (SQLException ex) {
-			Logger.getLogger(ETLExtraccionController.class.getName()).log(Level.SEVERE, null, ex);
 		} finally {
 			try {
 				rs.close();
 				st.close();
 				con.close();
+				Logger.getLogger("Conexion Cerrada con Exito...");
+
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
 		}
 
 	}
