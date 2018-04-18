@@ -1,5 +1,8 @@
 package co.edu.eam.ingesoft.softOpe.negocio.beans;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
@@ -17,6 +20,8 @@ public class Conexion {
 
 	public static final String OPCION = "primary";
 
+	private static final Map<String, String> conexiones = new HashMap<String,String>();
+
 	/**
 	 * Metodo encargado obtener la conexion
 	 * 
@@ -25,12 +30,9 @@ public class Conexion {
 	 * @version 1.0
 	 */
 	public String getConexion() {
-		if (OPCION.equals(OPCION)) {
-			return "Oracle";
-		} else {
-			return "MySQL";
-		}
-
+		conexiones.put("primary", "Oracle");
+		conexiones.put("secundary", "MySQL");
+		return conexiones.get(OPCION);
 	}
 
 }

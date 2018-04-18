@@ -90,8 +90,8 @@ public class SessionController implements Serializable {
 				Messages.addFlashGlobalWarn("Digite los datos para ingresar");
 			} else {
 				Usuario userTemp = segEJB.buscarUsuario(user);
-				tipoUsuario = userTemp.getTipoUsuario().getNombre();
 				if (userTemp != null) {
+					tipoUsuario = userTemp.getTipoUsuario().getNombre();
 					if (userTemp.getContrasenia().equals(pass)) {
 						usuario = userTemp;
 						empleado = buscarEmpleado(usuario.getId());

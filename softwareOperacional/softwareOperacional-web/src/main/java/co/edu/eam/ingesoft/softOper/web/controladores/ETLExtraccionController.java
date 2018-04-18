@@ -50,12 +50,12 @@ import co.edu.eam.ingesoft.softOper.entidades.venta_hecho;
 @ViewScoped
 public class ETLExtraccionController implements Serializable {
 
-	private Logger logger = Logger.getLogger(ETLExtraccionController.class.getName());
-
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	private Logger logger = Logger.getLogger(ETLExtraccionController.class.getName());
 
 	private List<auditoria_hecho> auditorias;
 
