@@ -481,11 +481,7 @@ public class ETLExtraccionController implements Serializable {
 			while (rs.next()) {
 				Logger.getLogger(" " + rs.getString(1) + " " + rs.getString(2));
 			}
-			rs.close();
-			st.close();
-		} catch (SQLException ex) {
-			Logger.getLogger(ETLExtraccionController.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (NamingException ex) {
+		} catch (Exception ex) {
 			Logger.getLogger(ETLExtraccionController.class.getName()).log(Level.SEVERE, null, ex);
 		} finally {
 			try {
@@ -493,7 +489,6 @@ public class ETLExtraccionController implements Serializable {
 				st.close();
 				con.close();
 				Logger.getLogger("Conexion Cerrada con Exito...");
-
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
