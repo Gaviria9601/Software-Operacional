@@ -25,6 +25,22 @@ public class AreaEJB {
 
 	@PersistenceContext(unitName = Conexion.OPCION)
 	private EntityManager em;
+	
+	
+
+	/**
+	 * @return the em
+	 */
+	public EntityManager getEm() {
+		return em;
+	}
+
+	/**
+	 * @param em the em to set
+	 */
+	public void setEm(EntityManager em) {
+		this.em = em;
+	}
 
 	/**
 	 * 
