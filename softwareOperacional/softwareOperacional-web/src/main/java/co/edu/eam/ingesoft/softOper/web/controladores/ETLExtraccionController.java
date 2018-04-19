@@ -144,46 +144,7 @@ public class ETLExtraccionController implements Serializable {
 
 		List<Auditoria> auditorias = new ArrayList<Auditoria>();
 
-		List<Auditoria> clientes = audEJB.listarAuditoriaClientes();
-		List<Auditoria> empleados = audEJB.listarAuditoriaEmpleados();
-		List<Auditoria> inventarios = audEJB.listarAuditoriaInventarios();
-		List<Auditoria> areas = audEJB.listarAuditoriasArea();
-		List<Auditoria> identificacionUsuarios = audEJB.listarAuditoriasIdeUsuarios();
-		List<Auditoria> tipoUsuarios = audEJB.listarAuditoriaTiposUsuarios();
-		List<Auditoria> usuarios = audEJB.listarAuditoriaUsuarios();
-		List<Auditoria> ventas = audEJB.listarAuditoriaVentas();
-
-		for (Auditoria cliente : clientes) {
-			auditorias.add(cliente);
-		}
-
-		for (Auditoria empleado : empleados) {
-			auditorias.add(empleado);
-		}
-
-		for (Auditoria inventario : inventarios) {
-			auditorias.add(inventario);
-		}
-
-		for (Auditoria area : areas) {
-			auditorias.add(area);
-		}
-
-		for (Auditoria idUsuario : identificacionUsuarios) {
-			auditorias.add(idUsuario);
-		}
-
-		for (Auditoria tipoUsuario : tipoUsuarios) {
-			auditorias.add(tipoUsuario);
-		}
-
-		for (Auditoria usuario : usuarios) {
-			auditorias.add(usuario);
-		}
-
-		for (Auditoria venta : ventas) {
-			auditorias.add(venta);
-		}
+		ingresarAuditorias(auditorias);
 
 		for (Auditoria auditoria : auditorias) {
 			auditoria_hecho audiHecho = new auditoria_hecho();
@@ -219,6 +180,38 @@ public class ETLExtraccionController implements Serializable {
 
 		}
 		this.auditorias = audHecEJB.listarAuditoriasHecho();
+
+	}
+
+	/**
+	 * 
+	 * <Describir el Metodo>
+	 *
+	 * @author EAM Santiago Gaviria Oliveros Email: sangav96@gmail.com
+	 * @param auditorias
+	 * @date 24/02/2018
+	 * @version <Version del metodo>
+	 *
+	 */
+	private void ingresarAuditorias(List<Auditoria> auditorias) {
+
+		List<Auditoria> clientes = audEJB.listarAuditoriaClientes();
+		List<Auditoria> empleados = audEJB.listarAuditoriaEmpleados();
+		List<Auditoria> inventarios = audEJB.listarAuditoriaInventarios();
+		List<Auditoria> areas = audEJB.listarAuditoriasArea();
+		List<Auditoria> identificacionUsuarios = audEJB.listarAuditoriasIdeUsuarios();
+		List<Auditoria> tipoUsuarios = audEJB.listarAuditoriaTiposUsuarios();
+		List<Auditoria> usuarios = audEJB.listarAuditoriaUsuarios();
+		List<Auditoria> ventas = audEJB.listarAuditoriaVentas();
+
+		auditorias.addAll(clientes);
+		auditorias.addAll(empleados);
+		auditorias.addAll(inventarios);
+		auditorias.addAll(areas);
+		auditorias.addAll(identificacionUsuarios);
+		auditorias.addAll(tipoUsuarios);
+		auditorias.addAll(usuarios);
+		auditorias.addAll(ventas);
 
 	}
 
@@ -454,8 +447,6 @@ public class ETLExtraccionController implements Serializable {
 		}
 		return co;
 	}
-
-
 
 	/**
 	 * 
