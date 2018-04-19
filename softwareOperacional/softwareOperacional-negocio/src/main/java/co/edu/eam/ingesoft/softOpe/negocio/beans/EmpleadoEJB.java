@@ -29,6 +29,16 @@ public class EmpleadoEJB {
 
 	@PersistenceContext(unitName = Conexion.OPCION)
 	private EntityManager em;
+	
+	
+
+	public EntityManager getEm() {
+		return em;
+	}
+
+	public void setEm(EntityManager em) {
+		this.em = em;
+	}
 
 	/**
 	 * 

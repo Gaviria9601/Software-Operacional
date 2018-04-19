@@ -15,9 +15,15 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import co.edu.eam.ingesoft.softOpe.negocio.beans.AreaEJB;
+import co.edu.eam.ingesoft.softOpe.negocio.beans.AuditoriaEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.ClienteEJB;
+import co.edu.eam.ingesoft.softOpe.negocio.beans.EmpleadoEJB;
+import co.edu.eam.ingesoft.softOpe.negocio.beans.ProductoEJB;
 import co.edu.eam.ingesoft.softOper.entidades.Area;
 import co.edu.eam.ingesoft.softOper.entidades.Cliente;
+import co.edu.eam.ingesoft.softOper.entidades.Empleado;
+import co.edu.eam.ingesoft.softOper.entidades.Producto;
+import junit.framework.Assert;
 
 public class PruebasUnitarias {
 
@@ -57,67 +63,38 @@ public class PruebasUnitarias {
 
 	}
 
+	// PRUEBA BUSCAR AREA POR IDENTIFICADOR
+
 	@Test
-	public void primerPrueba() {
+	public void pruebaBuscarAreaIdentificador() {
+
 		AreaEJB areaEJB = new AreaEJB();
 		areaEJB.setEm(this.em);
 		try {
-			Area area = areaEJB.buscarArea(1);
-            assertEquals("Tecnologia", area.getNombre());
+			Area area = areaEJB.buscarArea(2);
+			assertEquals("Contadoria", area.getNombre());
 		} catch (Exception e) {
 			System.out.println(" " + e);
 		}
 	}
 
-	// PRUEBA BUSCAR AREA POR IDENTIFICADOR
-	/**
-	 * @Test public void pruebaBuscarAreaIdentificador() {
-	 * 
-	 *       AreaEJB areaEJB = new AreaEJB(); areaEJB.setEm(this.em); try { Area
-	 *       area = areaEJB.buscarArea(2); assertEquals("Contadoria",
-	 *       area.getNombre()); } catch (Exception e) { System.out.println(" " + e);
-	 *       } }
-	 **/
-
 	// PRUEBA BUSCAR AREA QUE NO EXISTE
-	/**
-	 * @Test public void pruebaBuscarAreaNoExiste() {
-	 * 
-	 *       AreaEJB areaEJB = new AreaEJB(); areaEJB.setEm(this.em); try { Area
-	 *       area = areaEJB.buscarArea(7); assertEquals(null, area.getNombre()); }
-	 *       catch (Exception e) { System.out.println(" " + e); } }
-	 * 
-	 *       // PRUEBA PARA AGREGAR UN PRODUCTO A LA VENTA /**@Test public void
-	 *       pruebaBuscarArea() { Venta venta = new Venta(); venta.setCodigo(3);
-	 * 
-	 *       Producto producto = new Producto(); producto.setCodigo(37);
-	 * 
-	 *       ProductoVenta vp = new ProductoVenta();
-	 * 
-	 *       ProductoVentaEJB ventasPro = new ProductoVentaEJB();
-	 *       ventasPro.setEm(this.em);
-	 * 
-	 *       try {
-	 * 
-	 *       ventasPro.agregarProductoVenta(producto, venta, 5);
-	 *       vp.setVenta_codigo(venta); vp.setProducto_codigo(producto_codigo);
-	 * 
-	 * 
-	 * 
-	 * 
-	 *       assertEquals("Tecnologia", area.getNombre()); } catch (Exception e) {
-	 *       System.out.println(" " + e); } }
-	 **/
 
-	// PRUEBA LISTAR AREAS
-	/**
-	 * @Test public void pruebaListaAreas() {
-	 * 
-	 *       AreaEJB areaEJB = new AreaEJB(); areaEJB.setEm(this.em); try {
-	 *       List<Area> areas = areaEJB.listarArea(); assertEquals(areas, areas); }
-	 *       catch (Exception e) { System.out.println(" " + e); } }
-	 **/
+	@Test
+	public void pruebaBuscarAreaNoExiste() {
 
+		AreaEJB areaEJB = new AreaEJB();
+		areaEJB.setEm(this.em);
+		try {
+			Area area = areaEJB.buscarArea(7);
+			assertEquals(null, area.getNombre());
+		} catch (Exception e) {
+			System.out.println(" " + e);
+		}
+
+	}
+
+	// PRUEBA QUE LISTA LOS CLIENTES
 	@Test
 	public void pruebaListaClientes() {
 
@@ -130,5 +107,120 @@ public class PruebasUnitarias {
 			System.out.println(" " + e);
 		}
 	}
+
+	// PRUEBA EL REGISTRO DE UN CLIENTE
+	@Test
+	public void pruebaRegistrarCliente() {
+
+		AuditoriaEJB au = new AuditoriaEJB();
+		EmpleadoEJB emp = new EmpleadoEJB();
+		ClienteEJB clien = new ClienteEJB();
+		Cliente c = new Cliente();
+
+		c.setNombre("Veronica");
+		c.setApellido("Gómez Gil");
+		c.setCedula("5687");
+		c.setFechaNacimiento(au.generarFechaActual());
+		c.setGenero("f");
+		c.setMunicipioId(emp.buscarMunicipio(1));
+		clien.crearCliente(c);
+		Assert.assertNotNull(em.find(Cliente.class, c.getCedula()));
+		Assert.assertEquals(null, c.getCedula());
+
+	}
+
+	// PRUEBA EL REGISTRO DE UN CLIENTE
+	@Test
+	public void pruebaRegistrarClienteSinCampo() {
+
+		AuditoriaEJB au = new AuditoriaEJB();
+		EmpleadoEJB emp = new EmpleadoEJB();
+		ClienteEJB clien = new ClienteEJB();
+		Cliente c = new Cliente();
+
+		c.setNombre("");
+		c.setApellido("Gómez Gil");
+		c.setCedula("5687");
+		c.setFechaNacimiento(au.generarFechaActual());
+		c.setGenero("f");
+		c.setMunicipioId(emp.buscarMunicipio(1));
+		clien.crearCliente(c);
+		Assert.assertNotNull(em.find(Cliente.class, c.getCedula()));
+		Assert.assertEquals(null, c.getCedula());
+
+	}
+	
+	 //PRUEBA PARA BUSCAR CLIENTES
+	
+	@Test
+	public void pruebaBuscarCliente() {
+
+		ClienteEJB cliEJB = new ClienteEJB();
+		cliEJB.setEm(this.em);
+		try {
+			Cliente c = cliEJB.buscarCliente(7);
+			assertEquals("Tomas", c.getNombre());
+		} catch (Exception e) {
+			System.out.println(" " + e);
+		}
+	}
+	
+	 //PRUEBA PARA BUSCAR CLIENTE QUE NO EXISTE
+	@Test
+	public void pruebaBuscarClienteNoExiste() {
+
+		ClienteEJB cliEJB = new ClienteEJB();
+		cliEJB.setEm(this.em);
+		try {
+			Cliente c = cliEJB.buscarCliente(15);
+			assertEquals(null, c.getNombre());
+		} catch (Exception e) {
+			System.out.println(" " + e);
+		}
+	}
+	
+	
+	// PRUEBA EL REGISTRO DE UN CLIENTE
+		@Test
+		public void pruebaEliminarCliente() {
+
+		
+			EmpleadoEJB emp = new EmpleadoEJB();
+			Empleado e = new Empleado();
+			e.setCodigo(2);
+			emp.eliminarEmpleado(e);
+			
+			Assert.assertNotNull(em.find(Empleado.class,e.getCodigo()));
+			Assert.assertEquals(null, e.getCodigo());
+		
+		}
+		
+		 //PRUEBA PARA BUSCAR PRODUCTO EXISTENTE
+		@Test
+		public void pruebaBuscarProducto() {
+
+			ProductoEJB proEJB = new ProductoEJB();
+			proEJB.setEm(this.em);
+			try {
+				Producto c = proEJB.buscarProduto(3);
+				assertEquals(c.getCodigo(), c.getNombre());
+			} catch (Exception e) {
+				System.out.println(" " + e);
+			}
+		}
+		
+		 //PRUEBA PARA BUSCAR PRODUCTO  NO EXISTENTE
+		@Test
+		public void pruebaBuscarProductoNO() {
+
+			ProductoEJB proEJB = new ProductoEJB();
+			proEJB.setEm(this.em);
+			try {
+				Producto c = proEJB.buscarProduto(20);
+				assertEquals(null, c.getNombre());
+			} catch (Exception e) {
+				System.out.println(" " + e);
+			}
+		}
 
 }

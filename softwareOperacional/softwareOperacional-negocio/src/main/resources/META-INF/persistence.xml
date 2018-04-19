@@ -1,13 +1,19 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence"
 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 
-    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd" version="2.0">
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
 
-<persistence-unit name="primary">
-	
-	<class>co.edu.eam.ingesoft.softOper.entidades.Area</class>
-	
+	<persistence-unit name="primary">
+
+		<class>co.edu.eam.ingesoft.softOper.entidades.Area</class>
+		<class>co.edu.eam.ingesoft.softOper.entidades.Cliente</class>
+		<class>co.edu.eam.ingesoft.softOper.entidades.Empleado</class>
+		<class>co.edu.eam.ingesoft.softOper.entidades.Producto</class>
+		<class>co.edu.eam.ingesoft.softOper.entidades.Venta</class>
+
+
 		<properties>
 			<!-- Properties for Hibernate -->
 			<property name="hibernate.hbm2ddl.auto" value="none" />
