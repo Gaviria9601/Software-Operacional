@@ -26,6 +26,14 @@ public class TipoUsuarioEJB {
 	@PersistenceContext(unitName = Conexion.OPCION)
 	private EntityManager em;
 
+	public EntityManager getEm() {
+		return em;
+	}
+
+	public void setEm(EntityManager em) {
+		this.em = em;
+	}
+
 	/**
 	 * 
 	 * Metodo encargado de crear los tipo de usuarios

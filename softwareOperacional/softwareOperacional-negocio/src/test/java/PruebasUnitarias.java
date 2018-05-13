@@ -19,10 +19,15 @@ import co.edu.eam.ingesoft.softOpe.negocio.beans.AuditoriaEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.ClienteEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.EmpleadoEJB;
 import co.edu.eam.ingesoft.softOpe.negocio.beans.ProductoEJB;
+import co.edu.eam.ingesoft.softOpe.negocio.beans.TipoUsuarioEJB;
+import co.edu.eam.ingesoft.softOpe.negocio.beans.VentaEJB;
 import co.edu.eam.ingesoft.softOper.entidades.Area;
 import co.edu.eam.ingesoft.softOper.entidades.Cliente;
 import co.edu.eam.ingesoft.softOper.entidades.Empleado;
 import co.edu.eam.ingesoft.softOper.entidades.Producto;
+import co.edu.eam.ingesoft.softOper.entidades.TipoUsuario;
+import co.edu.eam.ingesoft.softOper.entidades.Usuario;
+import co.edu.eam.ingesoft.softOper.entidades.Venta;
 import junit.framework.Assert;
 
 public class PruebasUnitarias {
@@ -31,9 +36,13 @@ public class PruebasUnitarias {
 
 	private static final String PERSISTENCE_UNIT = "primary";
 	private static EntityManagerFactory emf;
+	private List<Cliente> clientes;
+	private List<Area> areas;
+	private List<Producto> productos;
+	private List<Venta> ventas;
+	private List<TipoUsuario> tiposUsu;
 
 	@BeforeClass
-
 	public static void setUpClass() {
 
 		log.debug("creating entity manager factory");
@@ -49,7 +58,6 @@ public class PruebasUnitarias {
 	private EntityManager em;
 
 	@Before
-
 	public void setUpp() throws Exception {
 		try {
 			log.debug("creating entity manager");
@@ -59,11 +67,16 @@ public class PruebasUnitarias {
 			System.out.println(" " + e);
 		}
 
-		// cleanup();
-
 	}
 
-	// PRUEBA BUSCAR AREA POR IDENTIFICADOR
+	/**
+	 * 
+	 * PRUEBA BUSCAR AREA POR IDENTIFICADOR
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <Paulaca.a8@gmail.com>
+	 * @date 12/05/2018
+	 * @version <>
+	 */
 
 	@Test
 	public void pruebaBuscarAreaIdentificador() {
@@ -78,7 +91,14 @@ public class PruebasUnitarias {
 		}
 	}
 
-	// PRUEBA BUSCAR AREA QUE NO EXISTE
+	/**
+	 * 
+	 * PRUEBA BUSCAR AREA QUE NO EXISTE
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <Paulaca.a8@gmail.com>
+	 * @date 12/05/2018
+	 * @version <>
+	 */
 
 	@Test
 	public void pruebaBuscarAreaNoExiste() {
@@ -94,7 +114,14 @@ public class PruebasUnitarias {
 
 	}
 
-	// PRUEBA QUE LISTA LOS CLIENTES
+	/**
+	 * 
+	 * PRUEBA QUE LISTA LOS CLIENTES
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <Paulaca.a8@gmail.com>
+	 * @date 12/05/2018
+	 * @version <>
+	 */
 	@Test
 	public void pruebaListaClientes() {
 
@@ -102,56 +129,21 @@ public class PruebasUnitarias {
 		cliEJB.setEm(this.em);
 		try {
 			List<Cliente> cli = cliEJB.listarClientes();
-			assertEquals(cli, cli);
+			assertEquals(clientes, cli);
 		} catch (Exception e) {
 			System.out.println(" " + e);
 		}
 	}
 
-	// PRUEBA EL REGISTRO DE UN CLIENTE
-	@Test
-	public void pruebaRegistrarCliente() {
+	/**
+	 * 
+	 * PRUEBA BUSCAR CLIENTES EXISTENTES
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <Paulaca.a8@gmail.com>
+	 * @date 12/05/2018
+	 * @version <>
+	 */
 
-		AuditoriaEJB au = new AuditoriaEJB();
-		EmpleadoEJB emp = new EmpleadoEJB();
-		ClienteEJB clien = new ClienteEJB();
-		Cliente c = new Cliente();
-
-		c.setNombre("Veronica");
-		c.setApellido("Gómez Gil");
-		c.setCedula("5687");
-		c.setFechaNacimiento(au.generarFechaActual());
-		c.setGenero("f");
-		c.setMunicipioId(emp.buscarMunicipio(1));
-		clien.crearCliente(c);
-		Assert.assertNotNull(em.find(Cliente.class, c.getCedula()));
-		Assert.assertEquals(null, c.getCedula());
-
-	}
-
-	// PRUEBA EL REGISTRO DE UN CLIENTE
-	@Test
-	public void pruebaRegistrarClienteSinCampo() {
-
-		AuditoriaEJB au = new AuditoriaEJB();
-		EmpleadoEJB emp = new EmpleadoEJB();
-		ClienteEJB clien = new ClienteEJB();
-		Cliente c = new Cliente();
-
-		c.setNombre("");
-		c.setApellido("Gómez Gil");
-		c.setCedula("5687");
-		c.setFechaNacimiento(au.generarFechaActual());
-		c.setGenero("f");
-		c.setMunicipioId(emp.buscarMunicipio(1));
-		clien.crearCliente(c);
-		Assert.assertNotNull(em.find(Cliente.class, c.getCedula()));
-		Assert.assertEquals(null, c.getCedula());
-
-	}
-	
-	 //PRUEBA PARA BUSCAR CLIENTES
-	
 	@Test
 	public void pruebaBuscarCliente() {
 
@@ -164,8 +156,15 @@ public class PruebasUnitarias {
 			System.out.println(" " + e);
 		}
 	}
-	
-	 //PRUEBA PARA BUSCAR CLIENTE QUE NO EXISTE
+
+	/**
+	 * 
+	 * PRUEBA BUSCAR CLIENTE QUE NO EXISTE
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <Paulaca.a8@gmail.com>
+	 * @date 12/05/2018
+	 * @version <>
+	 */
 	@Test
 	public void pruebaBuscarClienteNoExiste() {
 
@@ -178,49 +177,220 @@ public class PruebasUnitarias {
 			System.out.println(" " + e);
 		}
 	}
+
+	/**
+	 * 
+	 * PRUEBA BUSCAR PRODUCTO EXISTENTE
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <Paulaca.a8@gmail.com>
+	 * @date 12/05/2018
+	 * @version <>
+	 */
+	@Test
+	public void pruebaBuscarProducto() {
+
+		ProductoEJB proEJB = new ProductoEJB();
+		proEJB.setEm(this.em);
+		try {
+			Producto c = proEJB.buscarProduto(3);
+			assertEquals("fifa", c.getNombre());
+		} catch (Exception e) {
+			System.out.println(" " + e);
+		}
+	}
+
+	/**
+	 * 
+	 * PRUEBA BUSCAR CLIENTE QUE NO EXISTE
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <Paulaca.a8@gmail.com>
+	 * @date 12/05/2018
+	 * @version <>
+	 */
+	@Test
+	public void pruebaBuscarProductoNoExiste() {
+
+		ProductoEJB proEJB = new ProductoEJB();
+		proEJB.setEm(this.em);
+		try {
+			Producto c = proEJB.buscarProduto(20);
+			assertEquals(null, c.getNombre());
+		} catch (Exception e) {
+			System.out.println(" " + e);
+		}
+	}
+
+	/**
+	 * 
+	 * PRUEBA QUE LISTA LAS AREAS
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <Paulaca.a8@gmail.com>
+	 * @date 12/05/2018
+	 * @version <>
+	 */
+	@Test
+	public void pruebaListaAreas() {
+
+		AreaEJB areaEJB = new AreaEJB();
+		areaEJB.setEm(this.em);
+		try {
+			List<Area> a = areaEJB.listarArea();
+			assertEquals(areas, a);
+		} catch (Exception e) {
+			System.out.println(" " + e);
+		}
+	}
+
+	/**
+	 * 
+	 * PRUEBA QUE LISTA LOS PRODUCTOS
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <Paulaca.a8@gmail.com>
+	 * @date 12/05/2018
+	 * @version <>
+	 */
+	@Test
+	public void pruebaListaProductos() {
+
+		ProductoEJB proEJB = new ProductoEJB();
+		proEJB.setEm(this.em);
+		try {
+			List<Producto> pro = proEJB.listarProductos();
+
+			assertEquals(productos, pro);
+		} catch (Exception e) {
+			System.out.println(" " + e);
+		}
+	}
+
+	/**
+	 * 
+	 * PRUEBA QUE LISTA LAS VENTAS
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <Paulaca.a8@gmail.com>
+	 * @date 12/05/2018
+	 * @version <>
+	 */
+	@Test
+	public void pruebaListarVentas() {
+
+		VentaEJB veEJB = new VentaEJB();
+		veEJB.setEm(this.em);
+		try {
+			List<Venta> v = veEJB.listarVentas();
+
+			assertEquals(ventas, v);
+		} catch (Exception e) {
+			System.out.println(" " + e);
+		}
+	}
+
+	/**
+	 * 
+	 * PRUEBA QUE LISTA LOS TIPOS DE USUARIOS
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <Paulaca.a8@gmail.com>
+	 * @date 12/05/2018
+	 * @version <>
+	 */
+	@Test
+	public void pruebaListarTiposUsuarios() {
+
+		TipoUsuarioEJB tipoEJB = new TipoUsuarioEJB();
+		tipoEJB.setEm(this.em);
+		try {
+			List<TipoUsuario> tu = tipoEJB.listarTipoUsuario();
+
+			assertEquals(tiposUsu, tu);
+		} catch (Exception e) {
+			System.out.println(" " + e);
+		}
+	}
+
+	/**
+	 * 
+	 * PRUEBA QUE BUSCA EMPLEADOS
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <Paulaca.a8@gmail.com>
+	 * @date 12/05/2018
+	 * @version <>
+	 */
+
+	@Test
+	public void pruebaBuscarEmpleado() {
+
+		EmpleadoEJB emEJB = new EmpleadoEJB();
+		emEJB.setEm(this.em);
+		try {
+			Empleado e = emEJB.buscarEmpleado2(5);
+			assertEquals("santiago", e.getNombre());
+		} catch (Exception e) {
+			System.out.println(" " + e);
+		}
+	}
+	/**
+	 * 
+	 * PRUEBA QUE BUSCA EMPLEADOS QUE NO EXISTEN
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <Paulaca.a8@gmail.com>
+	 * @date 12/05/2018
+	 * @version <>
+	 */
+	@Test
+	public void pruebaBuscarEmpleadoNoExiste() {
+
+		EmpleadoEJB emEJB = new EmpleadoEJB();
+		emEJB.setEm(this.em);
+		try {
+			Empleado e = emEJB.buscarEmpleado2(25);
+			assertEquals(null, e.getNombre());
+		} catch (Exception e) {
+			System.out.println(" " + e);
+		}
+	}
 	
-	
-	// PRUEBA EL REGISTRO DE UN CLIENTE
-		@Test
-		public void pruebaEliminarCliente() {
+	/**
+	 * 
+	 * PRUEBA QUE BUSCA USUARIOS
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <Paulaca.a8@gmail.com>
+	 * @date 12/05/2018
+	 * @version <>
+	 */
 
-		
-			EmpleadoEJB emp = new EmpleadoEJB();
-			Empleado e = new Empleado();
-			e.setCodigo(2);
-			emp.eliminarEmpleado(e);
-			
-			Assert.assertNotNull(em.find(Empleado.class,e.getCodigo()));
-			Assert.assertEquals(null, e.getCodigo());
-		
-		}
-		
-		 //PRUEBA PARA BUSCAR PRODUCTO EXISTENTE
-		@Test
-		public void pruebaBuscarProducto() {
+	@Test
+	public void pruebaBuscarUsuarios() {
 
-			ProductoEJB proEJB = new ProductoEJB();
-			proEJB.setEm(this.em);
-			try {
-				Producto c = proEJB.buscarProduto(3);
-				assertEquals(c.getCodigo(), c.getNombre());
-			} catch (Exception e) {
-				System.out.println(" " + e);
-			}
+		EmpleadoEJB emEJB = new EmpleadoEJB();
+		emEJB.setEm(this.em);
+		try {
+			Usuario e = emEJB.buscarUsuario(1);
+			assertEquals("Paula", e.getNombre());
+		} catch (Exception e) {
+			System.out.println(" " + e);
 		}
-		
-		 //PRUEBA PARA BUSCAR PRODUCTO  NO EXISTENTE
-		@Test
-		public void pruebaBuscarProductoNO() {
+	}
+	/**
+	 * 
+	 * PRUEBA QUE BUSCA USUARIOS QUE NO EXISTE
+	 * 
+	 * @author <Paula Castaño Aristizabal> Email: <Paulaca.a8@gmail.com>
+	 * @date 12/05/2018
+	 * @version <>
+	 */
 
-			ProductoEJB proEJB = new ProductoEJB();
-			proEJB.setEm(this.em);
-			try {
-				Producto c = proEJB.buscarProduto(20);
-				assertEquals(null, c.getNombre());
-			} catch (Exception e) {
-				System.out.println(" " + e);
-			}
+	@Test
+	public void pruebaBuscarUsuariosNoExiste() {
+
+		EmpleadoEJB emEJB = new EmpleadoEJB();
+		emEJB.setEm(this.em);
+		try {
+			Usuario e = emEJB.buscarUsuario(40);
+			assertEquals(null, e.getNombre());
+		} catch (Exception e) {
+			System.out.println(" " + e);
 		}
+	}
+
 
 }
