@@ -30,9 +30,9 @@ import co.edu.eam.ingesoft.softOper.entidades.Usuario;
 import co.edu.eam.ingesoft.softOper.entidades.Venta;
 import junit.framework.Assert;
 
-public class PruebasUnitarias {
+public class PruebasUnitariasTest {
 
-	private static Log log = LogFactory.getLog(PruebasUnitarias.class);
+	private static Log log = LogFactory.getLog(PruebasUnitariasTest.class);
 
 	private static final String PERSISTENCE_UNIT = "primary";
 	private static EntityManagerFactory emf;
