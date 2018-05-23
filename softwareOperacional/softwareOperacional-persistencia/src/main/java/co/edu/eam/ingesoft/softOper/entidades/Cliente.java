@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -43,7 +44,7 @@ public class Cliente implements Serializable {
 	@Column(name = "genero", length = 1)
 	private String genero;
 
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "municipioNacimiento", nullable = false)
 	private Municipio municipioId;
 
