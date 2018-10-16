@@ -1,0 +1,74 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateContenido.xhtml">
+
+	<ui:define name="cuerpo">
+		<h2>
+			Ventas C3<small> - Dashboard</small>
+		</h2>
+
+		<br />
+
+		<div class="box box-primary">
+			<div class="box-header">
+				<h3 class="box-title">Dashboard C3 - Software Operacional Gnome</h3>
+				<div class="pull-right hidden-xs">
+					<b>Fecha: </b>
+					<p:clock />
+				</div>
+			</div>
+			<br />
+			<div class="row" style="margin-left: 12%">
+				<div class="col-lg-6 col-xs-6">
+					<label for="cbpro">Productos</label> <br></br>
+					<h:selectOneMenu id="pro" value="" style="width:250px">
+						<f:selectItem itemLabel="Seleccione el Producto" itemValue="-1"
+							noSelectionOption="true" />
+						<f:selectItems value="#{ETLExtraccionController.productos}"
+							var="pro" itemValue="#{pro.codigo}" itemLabel="#{pro.nombre}" />
+					</h:selectOneMenu>
+				</div>
+				<div class="col-lg-3 col-xs-6">
+					<label for="cbcli">Clientes</label> <br></br>
+					<h:selectOneMenu id="cli" value="" style="width:250px">
+						<f:selectItem itemLabel="Seleccione el Cliente" itemValue="-1"
+							noSelectionOption="true" />
+						<f:selectItems value="#{ETLExtraccionController.clientes}"
+							var="cli" itemValue="#{cli.codigo}" itemLabel="#{cli.nombre}" />
+					</h:selectOneMenu>
+				</div>
+			</div>
+			<br />
+			<div class="row">
+				<div style="margin-left: 45%">
+					<p:commandButton value="Filtrar" class="btn btn-primary" />
+				</div>
+			</div>
+			<br />
+			<div class="row" style="margin-left: 5%">
+				<div class="col-lg-6 col-xs-6">
+					<h5>PROMEDIO DE VENTA POR PRODUCTO</h5>
+					<div id="chart"></div>
+				</div>
+				<div class="col-lg-6 col-xs-6">
+					<h5>CANTIDAD VENDIDA POR PRODUCTO</h5>
+					<div id="chart2"></div>
+				</div>
+			</div>
+			<div class="row" style="margin-left: 5%">
+				<div class="col-lg-6 col-xs-6">
+					<h5>PROMEDIO DE VENTA POR CLIENTE-EMPLEADO</h5>
+					<div id="chart3"></div>
+				</div>
+				<div class="col-lg-6 col-xs-6">
+					<h5>PROMEDIO DE VENTA POR FECHA</h5>
+					<div id="chart4"></div>
+				</div>
+			</div>
+
+		</div>
+	</ui:define>
+</ui:composition>
