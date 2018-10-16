@@ -49,6 +49,40 @@ public class ETLExtraccionController implements Serializable {
 	List<auditoria_hecho> auditorias;
 
 	List<venta_hecho> ventas;
+	
+	List<producto_dimension> productos;
+	
+	List<cliente_dimension> clientes;
+	
+	
+
+	/**
+	 * @return the productos
+	 */
+	public List<producto_dimension> getProductos() {
+		return productos;
+	}
+
+	/**
+	 * @param productos the productos to set
+	 */
+	public void setProductos(List<producto_dimension> productos) {
+		this.productos = productos;
+	}
+
+	/**
+	 * @return the clientes
+	 */
+	public List<cliente_dimension> getClientes() {
+		return clientes;
+	}
+
+	/**
+	 * @param clientes the clientes to set
+	 */
+	public void setClientes(List<cliente_dimension> clientes) {
+		this.clientes = clientes;
+	}
 
 	public List<venta_hecho> getVentas() {
 		return ventas;
@@ -85,6 +119,8 @@ public class ETLExtraccionController implements Serializable {
 	public void inicializador() {
 		auditorias = audHecEJB.listarAuditoriasHecho();
 		ventas = venHecEJB.listarVentasHecho();
+		productos = venHecEJB.listarProductos();
+		clientes = venHecEJB.listarClientes();
 
 	}
 
