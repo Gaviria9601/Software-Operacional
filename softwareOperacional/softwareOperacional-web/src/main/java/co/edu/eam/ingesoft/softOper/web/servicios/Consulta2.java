@@ -1,12 +1,12 @@
 package co.edu.eam.ingesoft.softOper.web.servicios;
 
-public class Consulta {
+public class Consulta2 {
 
 	private String producto;
 
-	private double venta;
+	private int cantidad;
 
-	public Consulta() {
+	public Consulta2() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -26,18 +26,18 @@ public class Consulta {
 	}
 
 	/**
-	 * @return the venta
+	 * @return the cantidad
 	 */
-	public double getventa() {
-		return venta;
+	public int getCantidad() {
+		return cantidad;
 	}
 
 	/**
-	 * @param venta
-	 *            the venta to set
+	 * @param cantidad
+	 *            the cantidad to set
 	 */
-	public void setventa(double venta) {
-		this.venta = venta;
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
 	}
 
 }

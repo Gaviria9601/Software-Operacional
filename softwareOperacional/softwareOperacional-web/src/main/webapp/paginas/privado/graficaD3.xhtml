@@ -4,8 +4,26 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	template="/templates/templateContenido.xhtml">
-
 	<ui:define name="cuerpo">
+		<script src="https://d3js.org/d3.v4.min.js"></script>
+		<link href="#{request.contextPath}/plugins/Framework/c3-0.4.17/c3.css"
+			rel="stylesheet" type="text/css" />
+		<style type="text/css">
+.links line {
+	stroke: #999;
+	stroke-opacity: 0.6;
+}
+
+.nodes circle {
+	stroke: #fff;
+	stroke-width: 1.5px;
+}
+
+svg {
+	position: relative;
+	left: -40%;
+}
+</style>
 		<h2>
 			Auditoria D3<small> - Dashboard</small>
 		</h2>
@@ -19,6 +37,11 @@
 					<b>Fecha: </b>
 					<p:clock />
 				</div>
+			</div>
+			<br />
+			<div align="center">
+				<h5>GRAFICA 1</h5>
+				<svg width="2000" height="800"></svg>
 			</div>
 		</div>
 	</ui:define>

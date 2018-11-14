@@ -1,0 +1,262 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/templateContenido.xhtml">
+	<ui:define name="cuerpo">
+		<script src="http://d3js.org/d3.v3.min.js"></script>
+		<style type="text/css">
+.ui-widget-content {
+	color: #3c8dbc;
+}
+
+.node circle {
+	fill: #fff;
+	stroke: steelblue;
+	stroke-width: 3px;
+}
+
+.node text {
+	font: 12px sans-serif;
+}
+
+.link {
+	fill: none;
+	stroke: #ccc;
+	stroke-width: 2px;
+}
+</style>
+		<h:form enctype="multipart/form-data">
+
+			<p:fileUpload value="#{wekaController.file}" mode="simple"
+				skinSimple="true" />
+
+			<p:commandButton value="Subir" ajax="false"
+				actionListener="#{wekaController.upload}" />
+
+			<p:commandButton value="Aplicar Mineria" ajax="false"
+				actionListener="#{wekaController.mineria}" />
+
+			<p:panel id="basic" header="Data" footer="Data Details"
+				style="margin-bottom:20px">
+				<p:inputTextarea id="dataFull" value="#{wekaController.data}"
+					rows="5" cols="115" maxlength="10" autoResize="false" />
+			</p:panel>
+
+			<h3 style="margin-top: 0">Mineria</h3>
+			<p:tabView>
+				<p:tab title="Asociación Apriori">
+					<h:outputText itemEscaped="false" escape="false"
+						value="#{wekaController.resData}" />
+				</p:tab>
+				<p:tab title="Cluster">
+					<svg id="chart" width="2000" height="800"></svg>
+					<script type="text/javascript">
+					var parametro = {
+						    datos: jQuery("[id$='dataFull']").val()
+						};
+
+						$
+						    .ajax({
+						        data: parametro,
+						        url: 'http://localhost:8081/softwareOperacional-web/rest/consultas/cluster',
+						        type: 'GET',
+						        dataType: 'json'
+						    })
+						    .done(
+						        function(data1) {
+						            console.log(JSON
+							                .stringify(data1));
+
+						            var response = JSON
+						                .stringify(data1);
+
+	}).fail(function() {
+console.log("Error al cargar los datos");
+});
+						
+			            
+			            var diameter = 960,
+			            format = d3.format(",d"),
+			            color = d3.scale.category20c();
+
+			        var bubble = d3.layout.pack()
+			            .sort(null)
+			            .size([diameter, diameter])
+			            .padding(1.5);
+
+			        var svg = d3.select("#chart")
+			            .attr("width", diameter)
+			            .attr("height", diameter)
+			            .attr("class", "bubble");
+			            
+			        var tooltip = d3.select("body")
+			            .append("div")
+			            .style("position", "absolute")
+			            .style("z-index", "10")
+			            .style("visibility", "hidden")
+			            .style("color", "white")
+			            .style("padding", "8px")
+			            .style("background-color", "rgba(0, 0, 0, 0.75)")
+			            .style("border-radius", "6px")
+			            .style("font", "12px sans-serif")
+			            .text("tooltip");
+
+			        d3.json("flare.json", function(error, root) {
+			          var node = svg.selectAll(".node")
+			              .data(bubble.nodes(classes(root))
+			              .filter(function(d) { return !d.children; }))
+			            .enter().append("g")
+			              .attr("class", "node")
+			              .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+			          node.append("circle")
+			              .attr("r", function(d) { return d.r; })
+			              .style("fill", function(d) { return color(d.packageName); })
+			              .on("mouseover", function(d) {
+			                      tooltip.text(d.className + ": " + format(d.value));
+			                      tooltip.style("visibility", "visible");
+			              })
+			              .on("mousemove", function() {
+			                  return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
+			              })
+			              .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
+
+			          node.append("text")
+			              .attr("dy", ".3em")
+			              .style("text-anchor", "middle")
+			              .style("pointer-events", "none")
+			              .text(function(d) { return d.className.substring(0, d.r / 3); });
+			        });
+
+			        // Returns a flattened hierarchy containing all leaf nodes under the root.
+			        function classes(root) {
+			          var classes = [];
+
+			          function recurse(name, node) {
+			            if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });
+			            else classes.push({packageName: name, className: node.name, value: node.size});
+			          }
+
+			          recurse(null, root);
+			          return {children: classes};
+			        }
+
+			        d3.select(self.frameElement).style("height", diameter + "px");
+			            
+			            
+						
+					</script>
+
+				</p:tab>
+				<p:tab title="Arbol">
+					<h:outputText itemEscaped="false" escape="false"
+						value="#{wekaController.dataArbol}" />
+					<svg id="chart2" width="2000" height="800"></svg>
+					<script>
+					var data = [
+					    { "name" : "Level 2: A", "parent":"Top Level" },
+					    { "name" : "Top Level", "parent":"null" },
+					    { "name" : "Son of A", "parent":"Level 2: A" },
+					    { "name" : "Daughter of A", "parent":"Level 2: A" },
+					    { "name" : "Level 2: B", "parent":"Top Level" }
+					    ];
+
+					// *********** Convert flat data into a nice tree ***************
+					// create a name: node map
+					var dataMap = data.reduce(function(map, node) {
+						map[node.name] = node;
+						return map;
+					}, {});
+
+					// create the tree array
+					var treeData = [];
+					data.forEach(function(node) {
+						// add to parent
+						var parent = dataMap[node.parent];
+						if (parent) {
+							// create child array if it doesn't exist
+							(parent.children || (parent.children = []))
+								// add node to child array
+								.push(node);
+						} else {
+							// parent is null or missing
+							treeData.push(node);
+						}
+					});
+
+					// ************** Generate the tree diagram	 *****************
+					var margin = {top: 20, right: 120, bottom: 20, left: 120},
+						width = 960 - margin.right - margin.left,
+						height = 500 - margin.top - margin.bottom;
+						
+					var i = 0;
+
+					var tree = d3.layout.tree()
+						.size([height, width]);
+
+					var diagonal = d3.svg.diagonal()
+						.projection(function(d) { return [d.y, d.x]; });
+
+					var svg = d3.select("#chart2")
+						.attr("width", width + margin.right + margin.left)
+						.attr("height", height + margin.top + margin.bottom)
+					  .append("g")
+						.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+					root = treeData[0];
+					  
+					update(root);
+
+					function update(source) {
+
+					  // Compute the new tree layout.
+					  var nodes = tree.nodes(root).reverse(),
+						  links = tree.links(nodes);
+
+					  // Normalize for fixed-depth.
+					  nodes.forEach(function(d) { d.y = d.depth * 180; });
+
+					  // Declare the nodes…
+					  var node = svg.selectAll("g.node")
+						  .data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+					  // Enter the nodes.
+					  var nodeEnter = node.enter().append("g")
+						  .attr("class", "node")
+						  .attr("transform", function(d) { 
+							  return "translate(" + d.y + "," + d.x + ")"; });
+
+					  nodeEnter.append("circle")
+						  .attr("r", 10)
+						  .style("fill", "#fff");
+
+					  nodeEnter.append("text")
+						  .attr("x", function(d) { 
+							  return d.children || d._children ? -13 : 13; })
+						  .attr("dy", ".35em")
+						  .attr("text-anchor", function(d) { 
+							  return d.children || d._children ? "end" : "start"; })
+						  .text(function(d) { return d.name; })
+						  .style("fill-opacity", 1);
+
+					  // Declare the links…
+					  var link = svg.selectAll("path.link")
+						  .data(links, function(d) { return d.target.id; });
+
+					  // Enter the links.
+					  link.enter().insert("path", "g")
+						  .attr("class", "link")
+						  .attr("d", diagonal);
+
+					}
+					</script>
+
+				</p:tab>
+			</p:tabView>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
